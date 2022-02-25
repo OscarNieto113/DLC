@@ -11,6 +11,8 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Chart js for pretty graphs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 
     <title>Chart test webpage!</title>
 </head>
@@ -24,7 +26,16 @@
                 Here we might add a card
             </div>
             <div class="col-sm-4">
-                <canvas id="myChart"></canvas>
+                <div class="relative">
+                    <canvas id="myChart"></canvas>      
+                    <div class="absolute-center text-center">
+                      <div class="row">
+                          <h1>72</h1>
+                      </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
                 <script>
                     const ctx = document.getElementById('myChart').getContext('2d');
                     const myChart = new Chart(ctx, {

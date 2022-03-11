@@ -14,41 +14,14 @@ const path = require('path');
 //const Referidos = require('../models/referidos');
 //const Vacaciones = require('../models/vacaciones');
 
-//Ventana principal de Natgas
-//exports.listar = (request, response, next) => {
-//    response.sendFile(path.join(__dirname, '..', 'views', 'lista.ejs'));
-//};
-
-
 //'GET /dlc/aVacaciones' = Lo que aparece en la consola
 // aVacaciones = Archivo que va a renderizar
 exports.vacaciones = (request, response, next) => {
     console.log('GET /dlc/vacaciones');
     response.render('vacaciones');
-};
-
+}
 
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
     response.render('main');
-};
-
-
-
-// exports.get_nuevo = (request, response, next) => {
-//     console.log('GET /capybaras/nuevo');
-//     response.render('nuevo', {nombre: 'Lalo'});
-// };
-
-// exports.post_nuevo = (request, response, next) => {
-//     console.log('POST /capybaras/nuevo');
-//     console.log(request.body);
-//     const capybara = new Capybara(request.body.nombre);
-//     capybara.save();
-//     response.redirect('/capybaras');
-// };
-
-// exports.listar = (request, response, next) => {
-//     console.log('Ruta /capybaras');
-//     response.render('lista', {capybaras: Capybara.fetchAll()});
-// }
+}

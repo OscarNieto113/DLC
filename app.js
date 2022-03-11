@@ -13,13 +13,13 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(session({
-    secret: 'esteesuntesCÁMBIAMEPORFA',
-    resave: false,
-    saveUninitialized: false,
-}));
 
 app.use('/natgas', rutas_natgas);
+
+//Middleware
+app.use((request, response, next) => {
+    console.log('Refresh');
+    next(); //Le permite a la petición avanzar hacia el siguiente middleware
+});
 
 app.listen(3000);

@@ -15,10 +15,14 @@ const path = require('path');
 //const Vacaciones = require('../models/vacaciones');
 
 //Ventana principal de Natgas
-exports.main = (request, response, next) => {
-    response.sendFile(path.join(__dirname, '..', 'views', 'index.ejs'));
-};
+//exports.listar = (request, response, next) => {
+//    response.sendFile(path.join(__dirname, '..', 'views', 'lista.ejs'));
+//};
 
+exports.listar = (request, response, next) => {
+    console.log('Ruta /DLC');
+    response.render('lista');
+}
 
 // exports.get_nuevo = (request, response, next) => {
 //     console.log('GET /capybaras/nuevo');

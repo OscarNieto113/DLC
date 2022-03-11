@@ -1,0 +1,14 @@
+npm init
+
+npm install --save-dev nodemon        servidor
+npm install --save express            Rutas
+npm install --save body-parser        Manipular datos de las peticiones
+npm install --save ejs                 HTML dinamico
+npm install --save cookie-parser
+npm install --save express-session
+npm install --save bootstrap
+npm install --save bootstrap-icons
+
+
+
+http://localhost:3000/natgas/DLC   Pagina PRINCIPAL

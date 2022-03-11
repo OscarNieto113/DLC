@@ -1,0 +1,32 @@
+{
+  "name": "natgas-alpha",
+  "version": "0.0.1",
+  "description": "Web app for natgas",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felix-rojas/proto-web.git"
+  },
+  "keywords": [
+    "natgas",
+    "bootstrap",
+    "webapp"
+  ],
+  "author": "Felix",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/felix-rojas/proto-web/issues"
+  },
+  "homepage": "https://github.com/felix-rojas/proto-web#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.8.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}

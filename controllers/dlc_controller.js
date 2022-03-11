@@ -14,12 +14,13 @@ const path = require('path');
 //const Referidos = require('../models/referidos');
 //const Vacaciones = require('../models/vacaciones');
 
-//'GET /dlc/aVacaciones' = Lo que aparece en la consola
-// aVacaciones = Archivo que va a renderizar
+//'GET /dlc/vacaciones' = Lo que aparece en la consola
+// vacaciones = Archivo que va a renderizar
 exports.vacaciones = (request, response, next) => {
-    console.log('GET /dlc/vacaciones');
+    console.log('Ruta /dlc/vacaciones');
     response.render('vacaciones');
 }
+
 
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');

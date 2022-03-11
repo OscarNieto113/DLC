@@ -1,26 +1,26 @@
 {
-  "name": "natgas-alpha",
+  "name": "DLC-alpha",
   "version": "0.0.1",
   "description": "Web app for natgas",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/felix-rojas/proto-web.git"
+    "url": "git+https://github.com/OscarNieto113/DLC"
   },
   "keywords": [
     "natgas",
     "bootstrap",
     "webapp"
   ],
-  "author": "Felix",
+  "author": "Felix, Cris, Diego, Lalo, Oscar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/felix-rojas/proto-web/issues"
+    "url": "https://github.com/OscarNieto113/DLC"
   },
-  "homepage": "https://github.com/felix-rojas/proto-web#readme",
+  "homepage": "https://github.com/OscarNieto113/DLC",
   "dependencies": {
     "body-parser": "^1.19.2",
     "bootstrap": "^5.1.3",

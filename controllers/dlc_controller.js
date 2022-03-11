@@ -19,10 +19,21 @@ const path = require('path');
 //    response.sendFile(path.join(__dirname, '..', 'views', 'lista.ejs'));
 //};
 
+
+//'GET /dlc/aVacaciones' = Lo que aparece en la consola
+// aVacaciones = Archivo que va a renderizar
+exports.vacaciones = (request, response, next) => {
+    console.log('GET /dlc/vacaciones');
+    response.render('vacaciones');
+};
+
+
 exports.listar = (request, response, next) => {
-    console.log('Ruta /DLC');
-    response.render('lista');
-}
+    console.log('Ruta /dlc');
+    response.render('main');
+};
+
+
 
 // exports.get_nuevo = (request, response, next) => {
 //     console.log('GET /capybaras/nuevo');

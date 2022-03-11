@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const rutas_natgas = require('./routes/natgas.routes');
+const rutas_dlc = require('./routes/dlc.routes');
 const path = require('path');
 
 const app = express();
@@ -14,12 +14,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/natgas', rutas_natgas);
+app.use('/dlc', rutas_dlc);
 
 //Middleware
 app.use((request, response, next) => {
-    console.log('Refresh');
-    next(); //Le permite a la petición avanzar hacia el siguiente middleware
+    console.log('Test2 middleware!');
+    response.send('Next and previous worked!');
 });
 
 app.listen(3000);

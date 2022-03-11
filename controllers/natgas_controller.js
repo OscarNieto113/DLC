@@ -7,7 +7,7 @@ exports.cerveza = (request, response, next) => {
 
 // exports.get_nuevo = (request, response, next) => {
 //     console.log('GET /capybaras/nuevo');
-//     response.render('nuevo', {nombre: 'Lalo'}); 
+//     response.render('nuevo', {nombre: 'Lalo'});
 // };
 
 // exports.post_nuevo = (request, response, next) => {
@@ -20,5 +20,5 @@ exports.cerveza = (request, response, next) => {
 
 // exports.listar = (request, response, next) => {
 //     console.log('Ruta /capybaras');
-//     response.render('lista', {capybaras: Capybara.fetchAll()}); 
+//     response.render('lista', {capybaras: Capybara.fetchAll()});
 // }

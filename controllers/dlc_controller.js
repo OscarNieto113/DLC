@@ -22,7 +22,8 @@ exports.vacaciones = (request, response, next) => {
 }
 
 
+//funciona
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
-    response.render('main');
+    response.render('vacaciones');
 }

@@ -18,7 +18,7 @@ const Vacaciones = require('../models/vacaciones');
 // vacaciones = Archivo que va a renderizar
 exports.vacaciones = (request, response, next) => {
     console.log('Ruta /dlc/vacaciones');
-    response.render('vacaciones');
+    response.render('prueba');
 }
 
 

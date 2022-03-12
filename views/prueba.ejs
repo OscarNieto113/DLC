@@ -29,15 +29,22 @@
             <td><%= vacaciones1.responsable_ausencia %></td>
             <td><%= vacaciones1.observaciones %></td>
             <td><button type="button" class="btn btn-primary btn-sm">Visualizar</button></td>
-            <td><div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" unchecked>
-                <label class="form-check-label" for="flexCheckChecked">
-                </label>
-              </div></td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Pendiente
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdown MenuButton">
+                  <a class="Pendiente" href="#">Aprobado<br></a>
+                  <a class="Pendiente" href="#">Rechazado<br></a>
+                  <a class="Pendiente" href="#">Pendiente<br></a>
+                </div>
+              </div>
+            </td>
           </tr>
         <% } %>
     <% } else { %>
-        <h1>Hasta ahora no haz leido ninguno de esta saga.</h1>
+        <h1>No hay ninguna solicitud pendiente.</h1>
     <% } %>
       </tbody>
     </table>

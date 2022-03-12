@@ -3,12 +3,13 @@
 <%- include('includes/sidebar.ejs') %>
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
+
     <div class="container">
       <section class="container">
-          <h3 class="pt-4 pb-2">Bootstrap Datepicker</h3>
+          <h3 class="pt-4 pb-2">Solicitud de NG Block</h3>
           <form>
               <div class="row form-group">
-                  <label for="date" class="col-sm-1 col-form-label">Date</label>
+                  <label for="date" class="col-sm-1 col-form-label">Elige la fecha</label>
                   <div class="col-sm-4">
                       <div class="input-group date" id="datepicker">
                           <input type="text" class="form-control">
@@ -21,6 +22,28 @@
                   </div>
               </div>
           </form>
+          <form>
+            <div class="dropdown">
+              <label for="botton" class="col-sm-1 col-form-label">Elige el turno</label>
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ...
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdown MenuButton">
+                <a class="Pendiente" href="#">Matutino<br></a>
+                <a class="Pendiente" href="#">Vespertino<br></a>
+              </div>
+            </div>
+          </form>
+          <form>
+            <div class="text">
+              <br>
+              <h6> Motivo de uso </h6>
+              <input class="text" type="text" class="controls" id="texto2" name="texto2" value="">
+            </div>
+          </form>
+          <br>
+          <button id="boton1" class="boton" onclick="">Enviar Solicitud</button>
+          <button id="boton1" class="boton" onclick="">Cancelar Solicitud</button>
       </section>
 
 

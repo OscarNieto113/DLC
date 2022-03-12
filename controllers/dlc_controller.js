@@ -12,7 +12,7 @@ const path = require('path');
 //const Prestaciones = require('../models/prestaciones');
 //const Publicacion = require('../models/publicacion');
 //const Referidos = require('../models/referidos');
-//const Vacaciones = require('../models/vacaciones');
+const Vacaciones = require('../models/vacaciones');
 
 //'GET /dlc/vacaciones' = Lo que aparece en la consola
 // vacaciones = Archivo que va a renderizar
@@ -25,5 +25,10 @@ exports.vacaciones = (request, response, next) => {
 //funciona
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
-    response.render('vacaciones');
+    response.render('prueba', {vacaciones: Vacaciones.fetchAll()});
 }
+
+//exports.listar = (request, response, next) => {
+//    console.log('Ruta /capybaras');
+//    response.render('lista', {capybaras: Capybara.fetchAll()});
+//}

@@ -1,0 +1,59 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+<div class="col py-3">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Aprobar vacaciones</h1>
+
+      <br>
+      <br>
+      <a>Solicitudes de vacaciones</a>
+      <br>
+      <br>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Documento formal</th>
+            <th scope="col">Firma</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% if (vacaciones.length > 0) { %>
+        <% for (let vacaciones1 of vacaciones) { %>
+          <tr>
+            <td><%= vacaciones1.responsable_ausencia %></td>
+            <td><%= vacaciones1.observaciones %></td>
+            <td><button type="button" class="btn btn-primary btn-sm">Visualizar</button></td>
+            <td><div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" unchecked>
+                <label class="form-check-label" for="flexCheckChecked">
+                </label>
+              </div></td>
+          </tr>
+        <% } %>
+    <% } else { %>
+        <h1>Hasta ahora no haz leido ninguno de esta saga.</h1>
+    <% } %>
+      </tbody>
+    </table>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-primary" type="button">Realizar cambios</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%- include('includes/foot.ejs') %>

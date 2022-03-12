@@ -26,7 +26,7 @@ exports.vacaciones = (request, response, next) => {
 //funciona
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
-    response.render('main', {noticia: Noticia.fetchAll()});
+    response.render('vacaciones', {noticia: Noticia.fetchAll()});
 }
 
 //exports.listar = (request, response, next) => {

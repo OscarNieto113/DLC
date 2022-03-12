@@ -8,6 +8,7 @@ npm install --save cookie-parser
 npm install --save express-session
 npm install --save bootstrap
 npm install --save bootstrap-icons
+npm install --save-dev vanillajs-datepicker 
 
 
 

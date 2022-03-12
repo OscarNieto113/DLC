@@ -6,16 +6,17 @@ const path = require('path');
 //const Empleado = require('../models/empleado');
 //const Evento = require('../models/evento');
 //const Ng_Block = require('../models/ng_Block');
-//const Noticia = require('../models/noticia');
+const Noticia = require('../models/noticia');
 //const Objetivo = require('../models/objetivo');
 //const Permiso_informal = require('../models/permiso_informal');
 //const Prestaciones = require('../models/prestaciones');
 //const Publicacion = require('../models/publicacion');
 //const Referidos = require('../models/referidos');
-const Vacaciones = require('../models/vacaciones');
+//const Vacaciones = require('../models/vacaciones');
 
 //'GET /dlc/vacaciones' = Lo que aparece en la consola
 // vacaciones = Archivo que va a renderizar
+
 exports.vacaciones = (request, response, next) => {
     console.log('Ruta /dlc/vacaciones');
     response.render('prueba');
@@ -25,7 +26,7 @@ exports.vacaciones = (request, response, next) => {
 //funciona
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
-    response.render('prueba', {vacaciones: Vacaciones.fetchAll()});
+    response.render('main', {noticia: Noticia.fetchAll()});
 }
 
 //exports.listar = (request, response, next) => {

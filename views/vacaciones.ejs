@@ -7,9 +7,12 @@
     <div class="container">
       <section class="container">
           <h3 class="pt-4 pb-2">Solicitud de NG Block</h3>
+          <br>
+          <br>
+
           <form>
               <div class="row form-group">
-                  <label for="date" class="col-sm-1 col-form-label">Elige la fecha</label>
+                  <label for="date" class="col-sm-3 col-form-label">Elige la fecha</label>
                   <div class="col-sm-4">
                       <div class="input-group date" id="datepicker">
                           <input type="text" class="form-control">
@@ -23,10 +26,10 @@
               </div>
           </form>
           <form>
-            <div class="dropdown">
-              <label for="botton" class="col-sm-1 col-form-label">Elige el turno</label>
+            <div class="row form-group">
+              <label for="botton" class="col-sm-4 col-form-label">Elige el turno</label>
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ...
+                Elige turno del día
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdown MenuButton">
                 <a class="Pendiente" href="#">Matutino<br></a>
@@ -38,12 +41,20 @@
             <div class="text">
               <br>
               <h6> Motivo de uso </h6>
-              <input class="text" type="text" class="controls" id="texto2" name="texto2" value="">
+              <input class="text" type="text" class="controls" id="texto2" name="texto2" value="" style="height:150px; width:650px">
             </div>
           </form>
           <br>
-          <button id="boton1" class="boton" onclick="">Enviar Solicitud</button>
-          <button id="boton1" class="boton" onclick="">Cancelar Solicitud</button>
+
+          <button id="boton1" class="btn btn-primary" onclick="" style="text-align: left;">Enviar Solicitud</button>
+          <br>
+          <br>
+
+          <div style="text-align: center;">
+            <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" >Cancelar Solicitud</button>
+          </div>
+
+
       </section>
 
 

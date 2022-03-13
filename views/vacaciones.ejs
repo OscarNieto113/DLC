@@ -10,10 +10,10 @@
           <br>
           <br>
 
-          <form>
+          <form action="/dlc/solicitud_ng_block" method="POST">
               <div class="row form-group">
                   <label for="date" class="col-sm-3 col-form-label">Elige la fecha</label>
-                  <div class="col-sm-4">
+                  <div class="col-sm-3s">
                       <div class="input-group date" id="datepicker">
                           <input type="text" class="form-control">
                           <span class="input-group-append">
@@ -24,41 +24,37 @@
                       </div>
                   </div>
               </div>
-          </form>
-          <form>
+
             <div class="row form-group">
-              <label for="botton" class="col-sm-4 col-form-label">Elige el turno</label>
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Elige turno del día
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdown MenuButton">
-                <a class="Pendiente" href="#">Matutino<br></a>
-                <a class="Pendiente" href="#">Vespertino<br></a>
-              </div>
+              <label for="botton" class="col-sm-3 col-form-label">Elige el turno</label>
+
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Elige turno del día</option>
+                <option value="Matutino">Matutino</option>
+                <option value="Vespertino">Vespertino</option>
+              </select>
+
             </div>
-          </form>
-          <form>
+
             <div class="text">
               <br>
               <h6> Motivo de uso </h6>
-              <input class="text" type="text" class="controls" id="texto2" name="texto2" value="" style="height:150px; width:650px">
+              <input id="descripcion_ng_block" class="text" type="text" class="controls" value="" style="height:150px; width:650px">
             </div>
+            <br>
+            <input type="submit" value="Enviar Solicitud" class="btn btn-primary">
           </form>
-          <br>
 
-          <button id="boton1" class="btn btn-primary" onclick="" style="text-align: left;">Enviar Solicitud</button>
           <br>
           <br>
 
           <div style="text-align: center;">
-            <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" >Cancelar Solicitud</button>
+            <a href="/dlc">
+              <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" href="/dlc">Cancelar Solicitud</button>
+            </a>
           </div>
 
-
       </section>
-
-
-
     </div>
   </div>
 </div>

@@ -11,7 +11,8 @@
           <br>
 
           <form action="/dlc/solicitud_ng_block" method="POST">
-              <div class="row form-group">
+            <div id="current_date"></p>
+            <div class="row form-group">
                   <label for="date" class="col-sm-3 col-form-label">Elige la fecha</label>
                   <div class="col-sm-3s">
                       <div class="input-group date" id="datepicker">
@@ -43,12 +44,14 @@
             </div>
             <br>
             <input type="submit" value="Enviar Solicitud" class="btn btn-primary">
+
+
           </form>
 
           <br>
           <br>
 
-          <div style="text-align: center;">
+          <div style="text-align: right;">
             <a href="/dlc">
               <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" href="/dlc">Cancelar Solicitud</button>
             </a>

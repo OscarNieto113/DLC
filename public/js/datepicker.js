@@ -1,6 +1,7 @@
 $(function() {
     $('#datepicker').datepicker({
-      format: 'yyyy-mm-dd'
+      format: 'yyyy-mm-dd',
+      orientation: "bottom left"
     });
 });
 

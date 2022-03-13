@@ -24,10 +24,10 @@ exports.vacaciones = (request, response, next) => {
 
 
 //funciona
-//exports.listar = (request, response, next) => {
-//    console.log('Ruta /dlc');
-//    response.render('main', {noticia: Noticia.fetchAll()});
-//}
+exports.listar = (request, response, next) => {
+    console.log('Ruta /dlc');
+    response.render('main', {noticia: Noticia.fetchAll()});
+}
 
 
 //Ya funciona
@@ -37,7 +37,7 @@ exports.vacaciones = (request, response, next) => {
 //}
 
 //funciona
-exports.listar = (request, response, next) => {
-    console.log('Ruta /dlc');
-    response.render('vacaciones');
-}
+//exports.listar = (request, response, next) => {
+    //console.log('Ruta /dlc');
+    //response.render('vacaciones');
+//}

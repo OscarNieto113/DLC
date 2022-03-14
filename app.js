@@ -6,6 +6,9 @@ const session = require('express-session');
 //const bootstrap_icons = require('bootstrap-icons');
 const rutas_dlc = require('./routes/dlc.routes');
 const rutas_users = require('./routes/user.routes');
+const csrf = require('csurf');
+const csrfProtection = crsf();
+
 
 const path = require('path');
 

@@ -1,5 +1,5 @@
 {
-  "name": "DLC",
+  "name": "dlc",
   "version": "0.0.1",
   "description": "Web app for natgas",
   "main": "app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OscarNieto113/DLC"
+    "url": "git+https://github.com/OscarNieto113/DLC.git"
   },
   "keywords": [
     "natgas",

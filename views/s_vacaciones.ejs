@@ -1,0 +1,55 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+<div class="col py-3">
+  <div class="jumbotron jumbotron-fluid">
+
+    <div class="container">
+      <section class="container">
+          <h3 class="pt-4 pb-2">Solicitud de Vacaciones</h3>
+          <br>
+          <br>
+
+          <form action="/dlc/solicitud_ng_block" method="POST">
+            <div class="bootstrap-iso">
+             <div class="container-fluid">
+              <div class="row">
+               <div class="col-md-6 col-sm-6 col-xs-12">
+
+                <!-- Form code begins -->
+                  <div class="form-group"> <!-- Date input -->
+                    <label class="control-label" for="date">Date</label>
+                    <input class="form-control" id="myrosterdate" name="myrosterdate" placeholder="MM/DD/YYY" type="text"/>
+                  </div>
+                 <!-- Form code ends -->
+                </div>
+              </div>
+             </div>
+            </div>
+
+            <div class="text">
+              <br>
+              <h6> Responsable durante tu ausencia </h6>
+              <textarea name="comentario" rows="6" cols="60"></textarea>
+            </div>
+            <br>
+            <input type="submit" value="Enviar Solicitud" class="btn btn-primary">
+
+
+          </form>
+
+          <br>
+          <br>
+
+          <div style="text-align: right;">
+            <a href="/dlc">
+              <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" href="/dlc">Cancelar Solicitud</button>
+            </a>
+          </div>
+
+      </section>
+    </div>
+  </div>
+</div>
+
+<%- include('includes/foot.ejs') %>

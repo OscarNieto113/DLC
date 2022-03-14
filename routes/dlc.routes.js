@@ -3,8 +3,15 @@ const router = express.Router();
 
 const dlc_controller = require('../controllers/dlc_controller');
 
-router.use('/', dlc_controller.listar); //Main Index
 
-router.use('/vacaciones', dlc_controller.vacaciones);
+//Solicitar NG BLOCK
+router.get('/s_ng_block', dlc_controller.get_s_ng_block);
+router.post('/s_ng_block', dlc_controller.post_s_ng_block);
+
+//Aprobar NG BLOCK
+router.get('/a_ng_block', dlc_controller.get_a_ng_block);
+router.post('/a_ng_block', dlc_controller.post_a_ng_block);
+
+router.use('/', dlc_controller.listar); //Main Index
 
 module.exports = router;

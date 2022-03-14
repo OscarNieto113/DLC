@@ -14,21 +14,44 @@ const Noticia = require('../models/noticia');
 //const Referidos = require('../models/referidos');
 const Vacaciones = require('../models/vacaciones');
 
-//'GET /dlc/vacaciones' = Lo que aparece en la consola
-// vacaciones = Archivo que va a renderizar
+//------------------------Solicitar NG Block--------------------------------
+exports.get_s_ng_block = (request, response, next) => {
+    console.log('GET /dlc/s_ng_block');
+    response.render('s_ng_block');
+};
 
-exports.vacaciones = (request, response, next) => {
-    console.log('Ruta /dlc/vacaciones');
-    response.render('prueba');
+exports.post_s_ng_block = (request, response, next) => {
+    console.log('POST /dlc/s_ng_block');
+    console.log(request.body);
+    const ng_block =
+        new Ng_Block(request.body.id_ng_block, request.body.turno_ng_block, request.body.descripcion_ng_block, request.body.fecha_uso_ng_block, request.body.fecha_solicitud_ng_block, request.body.estatus_ng_block, request.body.no_empleado);
+    ng_block.save();
+    response.redirect('/dlc');
+};
+//------------------------Solicitar NG Block--------------------------------
+
+//------------------------Aprobar NG Block--------------------------------
+exports.get_a_ng_block = (request, response, next) => {
+    console.log('GET /dlc/a_ng_block');
+    response.render('a_ng_block', {ng_block: Ng_Block.fetchAll()});
+};
+
+exports.post_a_ng_block = (request, response, next) => {
+    console.log('POST /dlc/s_ng_block');
+    console.log(request.body);
+    const ng_block =
+        new Ng_Block(request.body.estatus_ng_block);
+    ng_block.save();
+    response.redirect('/dlc');
+};
+//------------------------Aprobar NG Block--------------------------------
+
+//------------------------Main--------------------------------
+exports.listar = (request, response, next) => {
+    console.log('Ruta /dlc');
+    response.render('main', {noticia: Noticia.fetchAll()});
 }
-
-
-//funciona
-//exports.listar = (request, response, next) => {
-//    console.log('Ruta /dlc');
-//    response.render('main', {noticia: Noticia.fetchAll()});
-//}
-
+//------------------------Main--------------------------------
 
 //Ya funciona
 //exports.listar = (request, response, next) => {
@@ -37,7 +60,7 @@ exports.vacaciones = (request, response, next) => {
 //}
 
 //funciona
-exports.listar = (request, response, next) => {
-    console.log('Ruta /dlc');
-    response.render('s_ng_block');
-}
+//exports.listar = (request, response, next) => {
+//    console.log('Ruta /dlc');
+//    response.render('s_ng_block');
+//}

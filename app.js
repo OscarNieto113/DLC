@@ -7,7 +7,7 @@ const session = require('express-session');
 const rutas_dlc = require('./routes/dlc.routes');
 const rutas_users = require('./routes/user.routes');
 const csrf = require('csurf');
-const csrfProtection = crsf();
+const csrfProtection = csrf();
 
 
 const path = require('path');
@@ -27,11 +27,18 @@ app.use(session({
     saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
 }));
 
+/* csrf protection through token
+ app.use(csrfProtection);
+ app.use((request, response, next) => {
+    response.locals.csrfToken = request.csrfToken();
+    next();
+});
+*/
+
 //ruta url
 app.use('/dlc', rutas_dlc);
 app.use('/users', rutas_users);
 
 //Middleware
-
 
 app.listen(3000);

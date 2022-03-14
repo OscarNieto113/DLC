@@ -1,3 +1,4 @@
+const path = require('path');
 const User = require('../models/user');
 
 exports.get_login = (request, response, next) => {

@@ -48,7 +48,6 @@ exports.post_a_ng_block = (request, response, next) => {
 
 
 //------------------------Solicitar Vacaciones--------------------------------
-/*
 exports.get_s_vacaciones = (request, response, next) => {
     console.log('GET /dlc/s_vacaciones');
     response.render('s_vacaciones');
@@ -58,10 +57,10 @@ exports.post_s_vacaciones = (request, response, next) => {
     console.log('POST /dlc/s_vacaciones');
     console.log(request.body);
     const vacaciones =
-        new Vacaciones(request.body.id_ng_block, request.body.turno_ng_block, request.body.descripcion_ng_block, request.body.fecha_uso_ng_block, request.body.fecha_solicitud_ng_block, request.body.estatus_ng_block, request.body.no_empleado);
-    ng_block.save();
+        new Vacaciones(request.body.folio, request.body.responsable_ausencia, request.body.reanudacion_labores, request.body.primer_dia, request.body.ultimo_dia, request.body.fecha_solicitud, request.body.no_empleado);
+    vacaciones.save();
     response.redirect('/dlc');
-};*/
+};
 //------------------------Solicitar Vacaciones--------------------------------
 
 //------------------------Aprobar Vacaciones--------------------------------
@@ -82,15 +81,11 @@ exports.post_a_vacaciones = (request, response, next) => {
 
 
 //------------------------Main--------------------------------
-//exports.listar = (request, response, next) => {
-//    console.log('Ruta /dlc');
-//    response.render('main', {noticia: Noticia.fetchAll()});
-//}
-
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
-    response.render('s_vacaciones');
+    response.render('main', {noticia: Noticia.fetchAll()});
 }
+
 //------------------------Main--------------------------------
 
 //Ya funciona

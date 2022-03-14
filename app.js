@@ -17,9 +17,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/dlc', rutas_dlc);
 
 //Middleware
-app.use((request, response, next) => {
-    console.log('Test2 middleware!');
-    response.send('Next and previous worked!');
-});
+
 
 app.listen(3000);

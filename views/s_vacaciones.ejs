@@ -10,32 +10,30 @@
           <br>
           <br>
 
-          <form action="/dlc/solicitud_ng_block" method="POST">
-            <div class="bootstrap-iso">
+          <form action="/dlc/solicitud_s_vacaciones" method="POST">
+
              <div class="container-fluid">
               <div class="row">
                <div class="col-md-6 col-sm-6 col-xs-12">
 
                 <!-- Form code begins -->
                   <div class="form-group"> <!-- Date input -->
-                    <label class="control-label" for="date">Date</label>
-                    <input class="form-control" id="myrosterdate" name="myrosterdate" placeholder="MM/DD/YYY" type="text"/>
+                    <label class="control-label" for="date"><b>Date</b></label>
+                    <input class="form-control" id="myrosterdate" name="myrosterdate" placeholder="YYYYMM/DD" type="text"/>
                   </div>
                  <!-- Form code ends -->
                 </div>
               </div>
-             </div>
-            </div>
 
-            <div class="text">
+              <div class="text">
+                <br>
+                <h6> Responsable durante tu ausencia </h6>
+                <textarea name="comentario" rows="6" cols="60"></textarea>
+              </div>
+                <p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
               <br>
-              <h6> Responsable durante tu ausencia </h6>
-              <textarea name="comentario" rows="6" cols="60"></textarea>
-            </div>
-            <br>
-            <input type="submit" value="Enviar Solicitud" class="btn btn-primary">
-
-
+              <input type="submit" value="Enviar Solicitud" class="btn btn-primary">
+             </div>
           </form>
 
           <br>
@@ -46,7 +44,6 @@
               <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" href="/dlc">Cancelar Solicitud</button>
             </a>
           </div>
-
       </section>
     </div>
   </div>

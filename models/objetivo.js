@@ -1,8 +1,8 @@
-const Objetivo = [
+const objetivo = [
     {id_objetivo: "1", nombre_objetivo: "Litros vendidos Enero 2020", descripcion_objetivo: "El objetivo de este mes es vender 200,000 litros en Querétaro"},
     {id_objetivo: "2", nombre_objetivo: "Litros vendidos Febrero 2020", descripcion_objetivo: "El objetivo de este mes es vender 220,000 litros en Querétaro"},
     {id_objetivo: "3", nombre_objetivo: "Litros vendidos Marzo 2020", descripcion_objetivo: "El objetivo de este mes es vender 240,000 litros en Querétaro"},
-    {id_objetivo: "4", nombre_objetivo: "Litros vendidos Abril 2020", descripcion_objetivo: "El objetivo de este mes es vender 250,000 litros en Querétaro"}
+    {id_objetivo: "4", nombre_objetivo: "Litros vendidos Abril 2020", descripcion_objetivo: "El objetivo de este mes es vender 250,000 litros en Querétaro"},
 ];
 
 module.exports = class Objetivo {

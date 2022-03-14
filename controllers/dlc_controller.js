@@ -7,10 +7,10 @@ const path = require('path');
 //const Evento = require('../models/evento');
 const Ng_Block = require('../models/ng_block');
 const Noticia = require('../models/noticia');
-//const Objetivo = require('../models/objetivo');
+const Objetivo = require('../models/objetivo');
 //const Permiso_informal = require('../models/permiso_informal');
 //const Prestaciones = require('../models/prestaciones');
-//const Publicacion = require('../models/publicacion');
+const Publicacion = require('../models/publicacion');
 //const Referidos = require('../models/referidos');
 const Vacaciones = require('../models/vacaciones');
 
@@ -83,7 +83,7 @@ exports.post_a_vacaciones = (request, response, next) => {
 //------------------------Main--------------------------------
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
-    response.render('main', {noticia: Noticia.fetchAll()});
+    response.render('main', {noticia: Noticia.fetchAll(), objetivo: Objetivo.fetchAll(), publicacion: Publicacion.fetchAll()});
 }
 
 //------------------------Main--------------------------------

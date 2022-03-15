@@ -27,6 +27,3 @@ module.exports = class Empleado {
         return db.execute('SELECT * FROM area');
     }
 }
-
-
-const db = require('../util/database');

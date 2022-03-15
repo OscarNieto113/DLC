@@ -1,7 +1,10 @@
 $(function() {
     $('#datepicker').datepicker({
-      format: 'yyyy-mm-dd',
-      orientation: "bottom left"
+      format: 'dd-mm-yyyy',
+      orientation: "bottom left",
+      startDate: new Date(),
+      daysOfWeekDisabled: [0,6],
+      todayHighlight: true
     });
 });
 

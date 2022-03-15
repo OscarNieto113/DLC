@@ -1,0 +1,83 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+<body>
+
+<div class="col py-3">
+  <div height class="container">
+    <h1 class="display-4"><center>Homepage</center></h1>
+    <h1 class="display-6">Banner de Noticias</h1>
+    <div class="container flex-nowrap">
+
+    <div id="carouselNoticias" class="carousel slide bg-dark" data-ride="carousel">
+    <ol class="carousel-indicators">
+    <% if (noticia.length > 0) { %>
+      <% for (let noticia1 of noticia) { %>
+      <li data-target="#carouselNoticias" data-slide-to="<%= noticia1.id_noticia %>" class="active"></li>
+      <% } %>
+    <% } %>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block mw-100" src="https://i.ibb.co/9yk4DH7/image.png" alt="First slide">
+      </div>
+      <% if (noticia.length > 0) { %>
+        <% for (let noticia2 of noticia) { %>
+      <div class="carousel-item">
+        <img class="d-block mw-100" src="<%= noticia2.url_imagen_noticia %>" alt="First slide">
+      </div>
+      <% } %>
+    <% } %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticias" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticias" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  </div>
+  <!-- ----------------------------------------------------------------------->
+<% if (ultimo_ng_block != '') { %>
+    <p>El último NG Block agregado tiene fecha de: <%= ultimo_ng_block %></p>
+<% } %>
+<!-- ----------------------------------------------------------------------->
+  <br><br>
+
+  <h1 class="display-6">Objetivos Mensuales</h1> <br>
+  <div class="card-columns">
+    <% if (objetivo.length > 0) { %>
+      <% for (let objetivo1 of objetivo) { %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= objetivo1.nombre_objetivo %></h5>
+            <p class="card-text"><%= objetivo1.descripcion_objetivo %></p>
+          </div>
+        </div>
+      <% } %>
+    <% } %>
+</div>
+<br>
+
+<h1 class="display-6">Anuncios</h1> <br>
+  <% if (publicacion.length > 0) { %>
+    <% for (let publicacion1 of publicacion) { %>
+      <div class="card mb-3">
+        <img class="card-img-top" src="<%= publicacion1.url_imagen_publicacion %>" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
+            <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+    </div>
+  <% } %>
+<% } %>
+
+
+</div>
+
+
+
+<%- include('includes/foot.ejs') %>

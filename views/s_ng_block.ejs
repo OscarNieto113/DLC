@@ -1,0 +1,70 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+<div class="col py-3">
+  <div class="jumbotron jumbotron-fluid">
+
+    <div class="container">
+      <section class="container">
+          <h3 class="pt-4 pb-2">Solicitud de NG Block</h3>
+          <br>
+          <br>
+
+          <form action="/dlc/solicitud_ng_block" method="POST">
+
+<!--SE VA A BORRAR, PARTE EXPERIMENTAL -->
+         <!--  <label for="id_ng_block">Id: </label> -->
+
+<!--SE VA A BORRAR, PARTE EXPERIMENTAL -->
+
+
+            <div class="row form-group">
+                  <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
+                  <div class="col-sm-4">
+                      <div class="input-group date" id="datepicker">
+                          <input type="text" class="form-control">
+                          <span class="input-group-append">
+                              <span class="input-group-text bg-white">
+                                  <i class="fa fa-calendar"></i>
+                              </span>
+                          </span>
+                      </div>
+                  </div>
+              </div>
+
+            <div class="row form-group">
+              <label for="botton" class="col-sm-3 col-form-label">Elige el turno</label>
+              <div class="col-sm-4">
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Elige turno del día</option>
+                <option value="Matutino">Matutino</option>
+                <option value="Vespertino">Vespertino</option>
+              </select>
+            </div>
+          </div>
+
+            <div class="text">
+              <br>
+              <h6> Motivo de uso </h6>
+              <textarea name="comentario" rows="6" cols="70"></textarea>
+            </div>
+            <p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
+            <br>
+
+            <input type="submit" value="Enviar Solicitud" class="btn btn-primary">
+          </form>
+
+          <br><br>
+
+          <div style="text-align: right;">
+            <a href="/dlc">
+              <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" href="/dlc">Cancelar Solicitud</button>
+            </a>
+          </div>
+
+      </section>
+    </div>
+  </div>
+</div>
+
+<%- include('includes/foot.ejs') %>

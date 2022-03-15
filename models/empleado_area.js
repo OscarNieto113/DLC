@@ -1,10 +1,3 @@
-const empleado_area = [
-    {id_area: "1", nombre_area: "Marketing operaciones"},
-    {id_area: "2", nombre_area: "Marketing Comercial"},
-    {id_area: "3", nombre_area: "Infraestructura"},
-    {id_area: "4", nombre_area: "Optimización e Inteligencia"},
-];
-
 module.exports = class Empleado_area {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
     constructor(nuevo_fecha_union, nuevo_puesto, nuevo_no_empleado, nuevo_id_area) {

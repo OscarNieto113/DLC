@@ -13,20 +13,19 @@
               <form action="/dlc/solicitud_s_vacaciones" method="POST">
 
                 <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-
-                      <!-- Form code begins -->
-                      <div class="form-group">
-                        <!-- Date input -->
-                        <label class="control-label" for="date"><b>Fecha</b></label>
-                        <input class="form-control" id="myrosterdate" name="myrosterdate" placeholder="DD-MM-YYYY"
-                          type="text" />
-                      </div>
-                      <!-- Form code ends -->
+                  <div class="row form-group">
+                        <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
+                        <div class="col-sm-4">
+                            <div class="input-group date" id="datepicker">
+                              <input class="form-control" id="myrosterdate" name="myrosterdate" placeholder="DD-MM-YYYY" type="text"/>
+                                <span class="input-group-append">
+                                    <span class="input-group-text bg-white">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-
                   <div class="mb-3">
                     <br>
                     <h6> Responsable durante tu ausencia </h6>

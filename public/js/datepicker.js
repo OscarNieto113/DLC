@@ -15,4 +15,4 @@ $(function() {
       currentMonth = currentDate.getMonth() < 9
                    ? '0' + (currentDate.getMonth() + 1)
                    : (currentDate.getMonth() + 1);
-    document.getElementById("date").innerHTML = currentDate.getFullYear() + '-' + currentMonth + '-' + currentDay ;
+    document.getElementById("date").innerHTML = currentDay + '-' + currentMonth + '-' + currentDate.getFullYear();

@@ -57,6 +57,7 @@
 
                 <form action="/dlc/main" method="POST">
                   <div class="form-group" style="text-align: left;"">
+                    <input type="hidden" id="id_noticia" name="id_noticia" value="1">
                     <label for="url_imagen_noticia" class="col-form-label">URL de la imagen:</label>
                     <input type="text" class="form-control" id="url_imagen_noticia" name="url_imagen_noticia">
                     <input type="hidden" id="id_imagen_noticia" name="id_imagen_noticia" value="386363">
@@ -149,13 +150,11 @@
         </div>
     </div>
   </div>
-  <!-- -----------------------Pruebas Oscar No borrar------------------------------------------------>
-<% if (ultimo_ng_block != '') { %>
-    <p>El último NG Block agregado tiene fecha de: <%= ultimo_ng_block %></p>
-<% } %>
-<% if (ng_block.length > 0) { %>
-  <% for (let ng_block1 of ng_block) { %>
-    <p> ID <%= ng_block1.id_ng_block %> TURNO <%= ng_block1.turno_ng_block %> DESCRIPCION <%= ng_block1.descripcion_ng_block %> FECHA USO <%= ng_block1.fecha_uso_ng_block %> FECHA SOLICITUD <%= ng_block1.fecha_solicitud_ng_block %> ESTATUS <%= ng_block1.estatus_ng_block %> NO EMPL <%= ng_block1.no_empleado %></p><br>
+
+<!-- -----------------------Pruebas Oscar No borrar------------------------------------------------>
+<% if (vacaciones.length > 0) { %>
+  <% for (let vacaciones1 of vacaciones) { %>
+  <p> ID <%= vacaciones1.folio %> TURNO <%= vacaciones1.no_empleado %> responsable_ausencia <%= vacaciones1.responsable_ausencia %> observaciones <%= vacaciones1.observaciones %> reanudacion_labores <%= vacaciones1.reanudacion_labores %> primer_dia <%= vacaciones1.primer_dia %> ultimo_dia <%= vacaciones1.ultimo_dia %> fecha_solicitud <%= vacaciones1.fecha_solicitud %> dias_solicitados <%= vacaciones1.dias_solicitados %> estatus_vacaciones <%= vacaciones1.estatus_vacaciones %></p><br>
   <% } %>
 <% } %>
 

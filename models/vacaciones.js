@@ -7,12 +7,6 @@ const vacaciones = [
     , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
     {folio: "1", no_empleado: "20", responsable_ausencia: "Oscar", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
     , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
-    {folio: "1", no_empleado: "20", responsable_ausencia: "Oscar", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
-    , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
-    {folio: "1", no_empleado: "20", responsable_ausencia: "Oscar", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
-    , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
-    {folio: "1", no_empleado: "20", responsable_ausencia: "Oscar", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
-    , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
 ];
 
 module.exports = class Vacaciones {

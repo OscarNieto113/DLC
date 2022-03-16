@@ -38,6 +38,34 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+    <div style="text-align: right;"">
+      <br>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar Imagen al Banner</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Imagen al Banner</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="/dlc/main" method="POST">
+                  <div class="form-group" style="text-align: left;"">
+                    <label for="url_imagen_noticia" class="col-form-label">URL de la imagen:</label>
+                    <input type="text" class="form-control" id="url_imagen_noticia" name="url_imagen_noticia">
+                    <br>
+                    <input type="submit" value="Enviar" class="btn btn-primary">
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
   <!-- -----------------------Pruebas Oscar No borrar------------------------------------------------>
 <% if (ultimo_ng_block != '') { %>

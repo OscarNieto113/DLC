@@ -34,7 +34,7 @@ exports.post_s_ng_block = (request, response, next) => {
           request.body.fecha_solicitud_ng_block,
           request.body.estatus_ng_block,
           request.body.no_empleado);
-    ng_block.save();
+    ng_block.save();    
     //
     request.session.info = 'El NG Block con fecha de uso de '+ ng_block.fecha_uso_ng_block + ' fue agregado con éxito';
     response.setHeader('Set-Cookie', 'ultimo_ng_block='+ng_block.fecha_uso_ng_block+'; HttpOnly');

@@ -16,7 +16,11 @@
                         <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
                         <div class="col-sm-4">
                             <div class="input-group date" id="datepicker">
-                              <input class="form-control" id="myrosterdate" name="myrosterdate" placeholder="DD-MM-YYYY" type="text"/>
+
+
+                              <input class="form-control" id="primer_dia" name="primer_dia" placeholder="DD-MM-YYYY" type="text"/>
+
+
                                 <span class="input-group-append">
                                     <span class="input-group-text bg-white">
                                         <i class="fa fa-calendar"></i>
@@ -39,13 +43,16 @@
 
                   </div>
                   <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
+
                   <input type="hidden" id="folio" name="folio" value="999">
                   <input type="hidden" id="no_empleado" name="no_empleado" value="123">
                   <input type="hidden" id="observaciones" name="observaciones" value="ninguna">
                   <input type="hidden" id="reanudacion_labores" name="reanudacion_labores" value="13-10-2000">
                   <input type="hidden" id="fecha_solicitud" name="fecha_solicitud" value="13-11-2000">
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Pendiente">
+                  <input type="hidden" id="ultimo_dia" name="ultimo_dia" value="13-10-2000">
                   <input type="submit" value="Enviar" class="btn btn-primary">
+
                 </div>
               </form>
               <!-- Termina form-->

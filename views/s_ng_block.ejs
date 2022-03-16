@@ -11,6 +11,9 @@
           <br>
           <!--Empieza form -->
           <form action="/dlc/s_ng_block" method="POST">
+            <!--ID PRUEBA SE VA A BORRAR -->
+            <input type="hidden" id="id_ng_block " name="id_ng_block" value="222">
+            <!--ID PRUEBA SE VA A BORRAR -->
 
 <!--SE VA A BORRAR, PARTE EXPERIMENTAL -->
          <!--  <label for="id_ng_block">Id: </label> -->
@@ -34,38 +37,36 @@
               <div class="row form-group">
                 <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige el turno</label>
                 <div class="col-sm-4">
-                <select class="form-select" aria-label="Default select example">
-                  <option selected id="turno_ng_block" name="turno_ng_block">Elige turno del día</option>
+                <select name="turno_ng_block" class="form-select" aria-label="Default select example">
+                  <option value="" disabled selected>Elige turno del día</option>
                   <option value="Matutino">Matutino</option>
                   <option value="Vespertino">Vespertino</option>
                 </select>
               </div>
             </div>
-
             <div class="text">
               <div class="text">
-                <label for="turno_ng_block" class="col-sm-3 col-form-label"><b>Motivo de uso*</b></label>
+                <label for="descripcion_ng_block" class="col-sm-3 col-form-label"><b>Motivo de uso*</b></label>
               <br>
               </div>
-              <textarea id="turno_ng_block" name="turno_ng_block" rows="6" cols="70"></textarea>
+              <textarea id="descripcion_ng_block" name="descripcion_ng_block" rows="6" cols="70"></textarea>
             </div>
-
             <label for="fecha_solicitud_ng_block" >Fecha en la que se realizó la solicitud: <span id='date'></span>.</label>
-
-            <input type="hidden" id="fecha_solicitud_ng_block " name="fecha_solicitud_ng_block" id="15-09-2022">
+            <!-- PRUEBA SE VA A BORRAR -->
+            <input type="hidden" id="fecha_solicitud_ng_block " name="fecha_solicitud_ng_block" value="15-09-2022">
+            <input type="hidden" id="estatus_ng_block " name="estatus_ng_block" value="Pendiente">
+            <input type="hidden" id="no_empleado " name="no_empleado" value="999">
+            <!-- PRUEBA SE VA A BORRAR -->
             <br>
             <input type="submit" value="Enviar" class="btn btn-primary">
           </form>
           <!--Termina form -->
-
           <br><br>
-
           <div style="text-align: right;">
             <a href="/dlc">
               <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" href="/dlc">Cancelar Solicitud</button>
             </a>
           </div>
-
       </section>
     </div>
   </div>

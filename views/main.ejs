@@ -39,11 +39,17 @@
     </button>
   </div>
   </div>
-  <!-- ----------------------------------------------------------------------->
+  <!-- -----------------------Pruebas Oscar No borrar------------------------------------------------>
 <% if (ultimo_ng_block != '') { %>
     <p>El último NG Block agregado tiene fecha de: <%= ultimo_ng_block %></p>
 <% } %>
-<!-- ----------------------------------------------------------------------->
+<% if (ng_block.length > 0) { %>
+  <% for (let ng_block1 of ng_block) { %>
+    <p> ID <%= ng_block1.id_ng_block %> TURNO <%= ng_block1.turno_ng_block %> DESCRIPCION <%= ng_block1.descripcion_ng_block %> FECHA USO <%= ng_block1.fecha_uso_ng_block %> FECHA SOLICITUD <%= ng_block1.fecha_solicitud_ng_block %> ESTATUS <%= ng_block1.estatus_ng_block %> NO EMPL <%= ng_block1.no_empleado %></p><br>
+  <% } %>
+<% } %>
+
+<!-- -------------------------------Pruebas Oscar No borrar---------------------------------------->
   <br><br>
 
   <h1 class="display-6">Objetivos Mensuales</h1> <br>

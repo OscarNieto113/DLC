@@ -70,8 +70,8 @@ exports.get_s_vacaciones = (request, response, next) => {
 exports.post_s_vacaciones = (request, response, next) => {
     console.log('POST /dlc/s_vacaciones');
     console.log(request.body);
-    const ng_block =
-        new Ng_Block(
+    const vacaciones =
+        new Vacaciones(
           request.body.folio,
           request.body.no_empleado,
           request.body.responsable_ausencia,
@@ -82,7 +82,7 @@ exports.post_s_vacaciones = (request, response, next) => {
           request.body.fecha_solicitud,
           request.body.dias_solicitados,
           request.body.estatus_vacaciones);
-    ng_block.save();
+    vacaciones.save();
     response.redirect('/dlc');
 };
 //------------------------Solicitar Vacaciones--------------------------------

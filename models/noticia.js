@@ -1,8 +1,8 @@
 const noticia = [
+    {id_noticia: "0", url_imagen_noticia: "https://i.ibb.co/9yk4DH7/image.png"},
     {id_noticia: "1", url_imagen_noticia: "https://i.ibb.co/9yk4DH7/image.png"},
     {id_noticia: "2", url_imagen_noticia: "https://i.ibb.co/9yk4DH7/image.png"},
     {id_noticia: "3", url_imagen_noticia: "https://i.ibb.co/9yk4DH7/image.png"},
-    {id_noticia: "4", url_imagen_noticia: "https://i.ibb.co/9yk4DH7/image.png"},
 ];
 
 module.exports = class Noticia {

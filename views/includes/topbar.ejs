@@ -3,7 +3,10 @@
     <img src="https://storage.googleapis.com/natgas/others/logos/natgas-logo-horizontal-blanco.png"></a>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
+
+      <% if (username != '') { %>
+              <a class="nav-link px-3" href="#"><%= username %>  Sign out</a>
+            <% } %>
     </div>
   </div>
 </header>

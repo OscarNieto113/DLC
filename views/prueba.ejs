@@ -1,0 +1,17 @@
+<%- include('includes/head.ejs') %>
+    <h1 id="principal">Este sitio es de capybaras</h1>
+    <h2><%= username %>, aquí nacen los capybaras:</h2>
+    <form action="/capybaras/nuevo" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="nombre" name="nombre" placeholder="Pedro">
+        <label for="descripcion">Descipción: </label>
+        <input type="text" id="descripcion" name="descripcion" placeholder="Le gusta la piña">
+        <label for="Imagen">Imagen: </label>
+        <input type="text" id="imagen" name="imagen" placeholder="https://s2.coinmarketcap.com/static/img/coins/200x200/16636.png">
+        <br><br>
+        <input type="submit" value="Enviar">
+    </form>
+    <br><br>
+    <a href="/capybaras">Regresar a la lista de capybaras</a>
+<%- include('includes/foot.ejs') %>

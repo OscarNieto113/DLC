@@ -34,7 +34,7 @@ exports.post_s_ng_block = (request, response, next) => {
           request.body.fecha_solicitud_ng_block,
           request.body.estatus_ng_block,
           request.body.no_empleado);
-    ng_block.save();    
+    ng_block.save();
     //
     request.session.info = 'El NG Block con fecha de uso de '+ ng_block.fecha_uso_ng_block + ' fue agregado con éxito';
     response.setHeader('Set-Cookie', 'ultimo_ng_block='+ng_block.fecha_uso_ng_block+'; HttpOnly');
@@ -70,9 +70,19 @@ exports.get_s_vacaciones = (request, response, next) => {
 exports.post_s_vacaciones = (request, response, next) => {
     console.log('POST /dlc/s_vacaciones');
     console.log(request.body);
-    const vacaciones =
-        new Vacaciones(request.body.folio, request.body.responsable_ausencia, request.body.reanudacion_labores, request.body.primer_dia, request.body.ultimo_dia, request.body.fecha_solicitud, request.body.no_empleado);
-    vacaciones.save();
+    const ng_block =
+        new Ng_Block(
+          request.body.folio,
+          request.body.no_empleado,
+          request.body.responsable_ausencia,
+          request.body.observaciones,
+          request.body.reanudacion_labores,
+          request.body.primer_dia,
+          request.body.ultimo_dia,
+          request.body.fecha_solicitud,
+          request.body.dias_solicitados,
+          request.body.estatus_vacaciones);
+    ng_block.save();
     response.redirect('/dlc');
 };
 //------------------------Solicitar Vacaciones--------------------------------

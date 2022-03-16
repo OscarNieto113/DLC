@@ -9,9 +9,8 @@
               <h1 class="pt-4 pb-2">Solicitud de Vacaciones</h1>
               <br>
               <br>
-
+              <!-- Inicia form-->
               <form action="/dlc/solicitud_s_vacaciones" method="POST">
-
                 <div class="container-fluid">
                   <div class="row form-group">
                         <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
@@ -26,20 +25,32 @@
                             </div>
                         </div>
                     </div>
-                  <div class="mb-3">
+                  <div>
                     <br>
-                    <h6> Responsable durante tu ausencia </h6>
-                    <textarea class= form-control name="comentario" rows="6" cols="60"></textarea>
+                    <label  for="responsable_ausencia" class="col-form-label"><b>Responsable durante tu ausencia*</b></label>
+                    <select name="responsable_ausencia" class="form-select" aria-label="Default select example">
+                      <option value="" disabled selected>Responsable</option>
+                      <option value="A01705090">Oscar Nieto</option>
+                      <option value="A01705091">Cristian Rogelio</option>
+                      <option value="A01705092">Eros Guillen</option>
+                      <option value="A01705093">Arturo Bustos</option>
+                      <option value="A01705094">Arturo Avellaneda</option>
+                    </select>
+
                   </div>
-                  <p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
-                  <br>
+                  <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
+                  <input type="hidden" id="folio" name="folio" value="999">
+                  <input type="hidden" id="no_empleado" name="no_empleado" value="123">
+                  <input type="hidden" id="observaciones" name="observaciones" value="ninguna">
+                  <input type="hidden" id="reanudacion_labores" name="reanudacion_labores" value="13-10-2000">
+                  <input type="hidden" id="fecha_solicitud" name="fecha_solicitud" value="13-11-2000">
+                  <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Pendiente">
                   <input type="submit" value="Enviar Solicitud" class="btn btn-primary">
                 </div>
               </form>
+              <!-- Termina form-->
 
-              <br>
-              <br>
-
+              <br><br>
               <div style="text-align: right;">
                 <a href="/dlc">
                   <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"

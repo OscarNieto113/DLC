@@ -18,10 +18,10 @@
 <!--SE VA A BORRAR, PARTE EXPERIMENTAL -->
 
             <div class="row form-group">
-                  <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
+                  <label for="fecha_uso_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
                   <div class="col-sm-4">
                       <div class="input-group date" id="datepicker">
-                          <input type="text" class="form-control" placeholder="DD-MM-YYYY">
+                          <input type="text" id="fecha_uso_ng_block" name="fecha_uso_ng_block" class="form-control" placeholder="DD-MM-YYYY">
                           <span class="input-group-append">
                               <span class="input-group-text bg-white">
                                   <i class="fa fa-calendar"></i>
@@ -31,21 +31,23 @@
                   </div>
               </div>
 
-            <div class="row form-group">
-              <label for="botton" class="col-sm-3 col-form-label">Elige el turno</label>
-              <div class="col-sm-4">
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Elige turno del día</option>
-                <option value="Matutino">Matutino</option>
-                <option value="Vespertino">Vespertino</option>
-              </select>
+              <div class="row form-group">
+                <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige el turno</label>
+                <div class="col-sm-4">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected id="turno_ng_block" name="turno_ng_block">Elige turno del día</option>
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                </select>
+              </div>
             </div>
-          </div>
 
             <div class="text">
+              <div class="text">
+                <label for="turno_ng_block" class="col-sm-3 col-form-label"><b>Motivo de uso*</b></label>
               <br>
-              <h6> Motivo de uso </h6>
-              <textarea name="comentario" rows="6" cols="70"></textarea>
+              </div>
+              <textarea id="turno_ng_block" name="turno_ng_block" rows="6" cols="70"></textarea>
             </div>
             <p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
             <br>

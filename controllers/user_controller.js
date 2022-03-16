@@ -24,6 +24,7 @@ exports.logout = (request, response, next) => {
     });
 };
 
-exports.root = (request, response, next) => {
+exports.root = (request, response) => {
+    response.send(request.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
     response.redirect('/users/login');
 };

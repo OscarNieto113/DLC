@@ -9,6 +9,19 @@ const rutas_users = require('./routes/user.routes');
 const csrf = require('csurf');
 const csrfProtection = csrf();
 
+const { auth } = require('express-openid-connect');
+require('dotenv').config();
+
+//auth0 config
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: process.env.SECRET,
+    baseURL: process.env.BASEURL,
+    clientID: process.env.CLIENTID,
+    issuerBaseURL: process.env.ISSUER
+  };
+
 
 const path = require('path');
 
@@ -40,5 +53,12 @@ app.use('/dlc', rutas_dlc);
 app.use('/users', rutas_users);
 
 //Middleware
+
+//auth0
+app.use(auth(config));
+app.get('/', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+  });
+
 
 app.listen(3000);

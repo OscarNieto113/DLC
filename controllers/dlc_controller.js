@@ -113,9 +113,7 @@ exports.listar = (request, response, next) => {
     request.session.info = '';
     response.render('main', {
       noticia: Noticia.fetchAll(),
-      ng_block: Ng_Block.fetchAll(),
       objetivo: Objetivo.fetchAll(),
-      vacaciones: Vacaciones.fetchAll(),
       publicacion: Publicacion.fetchAll(),
       username: request.session.username ? request.session.username : '',
       ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',

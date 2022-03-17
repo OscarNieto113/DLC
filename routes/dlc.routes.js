@@ -21,5 +21,6 @@ router.get('/a_vacaciones', dlc_controller.get_a_vacaciones);
 router.post('/a_vacaciones', dlc_controller.post_a_vacaciones);
 
 router.use('/', dlc_controller.listar); //Main Index
+//router.post('/', dlc_controller.post_listar); //Main Index
 
 module.exports = router;

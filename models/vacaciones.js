@@ -1,11 +1,11 @@
 const vacaciones = [
     {folio: "1", no_empleado: "16", responsable_ausencia: "Arturo", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
     , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
-    {folio: "1", no_empleado: "17", responsable_ausencia: "Cristian", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
+    {folio: "2", no_empleado: "17", responsable_ausencia: "Cristian", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
     , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
-    {folio: "1", no_empleado: "18", responsable_ausencia: "Felix", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
+    {folio: "3", no_empleado: "18", responsable_ausencia: "Felix", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
     , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
-    {folio: "1", no_empleado: "19", responsable_ausencia: "Felipe", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
+    {folio: "4", no_empleado: "19", responsable_ausencia: "Felipe", observaciones: "NATDEV", reanudacion_labores: "2022-04-11"
     , primer_dia: "2022-04-05", ultimo_dia: "2022-04-08", fecha_solicitud: "2022-03-09", dias_solicitados: "5", estatus_vacaciones: "Pendiente"},
 ];
 

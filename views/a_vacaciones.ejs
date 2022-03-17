@@ -22,7 +22,7 @@
             <th scope="col"><center>Departamento</center></th>
             <th scope="col"><center>Responsable</center></th>
             <th scope="col"><center>Dias solicitados</center></th>
-            <th scope="col"><center>Documento formal</center></th>
+            <th scope="col"><center>Información completa</center></th>
             <th scope="col"><center>Firma</center></th>
           </tr>
         </thead>
@@ -36,11 +36,23 @@
             <td><center>Departamento</center></td>
             <td><center><%= vacaciones1.responsable_ausencia %></center></td>
             <td><center><%= vacaciones1.dias_solicitados %></center></td>
-            <td><center><button type="button" class="btn btn-primary btn-sm">Visualizar</button></center></td>
+            <td><center>
+              <span class="hovertext" data-hover="
+              Folio: <%= vacaciones1.folio %>
+              No. Empleado: <%= vacaciones1.no_empleado %>
+              Responsable: <%= vacaciones1.responsable_ausencia %>
+              Fecha Reanudacion: <%= vacaciones1.reanudacion_labores %>
+              Fecha primer día: <%= vacaciones1.primer_dia %>
+              Fecha ultimo día: <%= vacaciones1.ultimo_dia %>
+              Fecha de la solicitud: <%= vacaciones1.fecha_solicitud %>
+              Días solicitados: <%= vacaciones1.dias_solicitados %>
+              Estatus: <%= vacaciones1.estatus_vacaciones %>">
+                Vacaciones
+              </span>
+            </center></td>
             <td><center>
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Pendiente
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pendiente
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdown MenuButton">
                   <a class="Pendiente" href="#">Aprobado<br></a>

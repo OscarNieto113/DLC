@@ -13,7 +13,9 @@ const Objetivo = require('../models/objetivo');
 const Publicacion = require('../models/publicacion');
 //const Referidos = require('../models/referidos');
 const Vacaciones = require('../models/vacaciones');
-
+// adding a new route for charts
+const NPS = require('../models/nps');
+const Chart = require ('chart.js/auto');
 //------------------------Solicitar NG Block--------------------------------
 exports.get_s_ng_block = (request, response, next) => {
     console.log('GET /home/s_ng_block');
@@ -88,6 +90,14 @@ exports.post_a_vacaciones = (request, response, next) => {
 };
 //------------------------Aprobar Vacaciones--------------------------------
 
+//------------------------ Reportes NPS --------------------------------
+exports.get_nps = (request, response) => {
+    console.log('GET /home/nps');
+    response.render('nps', {
+        nps: NPS.fetchAll(),
+    });
+};
+//------------------------ Reportes NPS --------------------------------
 
 //------------------------Main--------------------------------
 exports.listar = (request, response, next) => {

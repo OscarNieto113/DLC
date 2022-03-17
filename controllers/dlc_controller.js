@@ -122,4 +122,5 @@ exports.listar = (request, response, next) => {
       info: info //El primer info es la variable del template, el segundo la constante creada arriba
     });
     }
+    //
 //------------------------Main--------------------------------

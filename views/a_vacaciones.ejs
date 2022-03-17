@@ -17,8 +17,11 @@
       <table class="table">
         <thead>
           <tr>
+            <th scope="col"><center>No. Empleado</center></th>
             <th scope="col"><center>Nombre</center></th>
             <th scope="col"><center>Departamento</center></th>
+            <th scope="col"><center>Responsable</center></th>
+            <th scope="col"><center>Dias solicitados</center></th>
             <th scope="col"><center>Documento formal</center></th>
             <th scope="col"><center>Firma</center></th>
           </tr>
@@ -28,8 +31,11 @@
         <% if (vacaciones.length > 0) { %>
         <% for (let vacaciones1 of vacaciones) { %>
           <tr>
+            <td><center><%= vacaciones1.no_empleado %></center></td>
+            <td><center>Nombre</center></td>
+            <td><center>Departamento</center></td>
             <td><center><%= vacaciones1.responsable_ausencia %></center></td>
-            <td><center><%= vacaciones1.observaciones %></center></td>
+            <td><center><%= vacaciones1.dias_solicitados %></center></td>
             <td><center><button type="button" class="btn btn-primary btn-sm">Visualizar</button></center></td>
             <td><center>
               <div class="dropdown">
@@ -53,6 +59,21 @@
 
       <br>
       <br>
+      <!--Pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+      <!--Pagination -->
       <br>
       <br>
       <br>

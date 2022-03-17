@@ -19,9 +19,10 @@
           <tr>
             <th scope="col"><center>No. Empleado</center></th>
             <th scope="col"><center>Nombre</center></th>
-            <th scope="col"><center>Fecha en la que se va a usar</center></th>
+            <th scope="col"><center>Fecha de uso</center></th>
+            <th scope="col"><center>Descripción</center></th>
             <th scope="col"><center>Turno</center></th>
-            <th scope="col"><center>Documento formal</center></th>
+            <th scope="col"><center>Información completa</center></th>
             <th scope="col"><center>Firma</center></th>
           </tr>
         </thead>
@@ -35,16 +36,27 @@
             <td><center>Nombre</center></td>
             <!--Falta aniadir nombre del solicitante -->
             <td><center><%= ng_block1.fecha_uso_ng_block %></center></td>
+            <td><center><%= ng_block1.descripcion_ng_block %></center></td>
             <td><center><%= ng_block1.turno_ng_block %></center></td>
-            <td><center><button type="button" class="btn btn-primary btn-sm">Visualizar</button></center></td>
             <td><center>
+              <span class="hovertext" data-hover="
+              No. Solicitud: <%= ng_block1.id_ng_block %>
+              No. Empleado: <%= ng_block1.no_empleado %>
+              Turno: <%= ng_block1.turno_ng_block %>
+              Fecha uso: <%= ng_block1.fecha_uso_ng_block %>
+              Fecha Solicitud: <%= ng_block1.fecha_solicitud_ng_block %>
+              Estatus: <%= ng_block1.estatus_ng_block %>">
+                NG block
+              </span>
+            </center></td>
 
-              <select class="form-select" aria-label="Default select example">
+
+            <td><center>
+              <select class="btn btn-secondary dropdown-toggle" aria-label="Default select example">
                 <option selected>Pendiente</option>
                 <option value="Aprobado">Aprobado</option>
                 <option value="Rechazado">Rechazado</option>
               </select>
-
             </center></td>
           </tr>
         <% } %>
@@ -54,7 +66,22 @@
       </tbody>
     </table>
 
-      <br><br><br><br><br>
+
+      <br><br>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+      <br><br><br>
 
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button class="btn btn-primary" type="button" id="botoncambiosToast">Realizar cambios</button>

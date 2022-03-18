@@ -51,15 +51,11 @@
               </span>
             </center></td>
             <td><center>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pendiente
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdown MenuButton">
-                  <a class="Pendiente" href="#">Aprobado<br></a>
-                  <a class="Pendiente" href="#">Rechazado<br></a>
-                  <a class="Pendiente" href="#">Pendiente<br></a>
-                </div>
-              </div>
+              <select class="btn btn-secondary dropdown-toggle" aria-label="Default select example">
+                <option selected>Pendiente</option>
+                <option value="Aprobado">Aprobado</option>
+                <option value="Rechazado">Rechazado</option>
+              </select>
             </center></td>
           </tr>
         <% } %>

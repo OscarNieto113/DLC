@@ -3,11 +3,54 @@
         <%- include('includes/sidebar.ejs') %>
 
             <body>
-                <div class="col py-3">
-                    <div height class="container">
-                        <canvas id="npsPIE"></canvas>
-                    </div>
+              <div class="col py-3">
+                <div height class="container">
+                  <h1 class="display-4"><center>Reportes Mensuales</center></h1>
+                  <br><br>
+
+                  <!--Dropdown menu -->
+                  <div class="col-sm-4">
+                  <select name="turno_ng_block" class="form-select" aria-label="Default select example">
+                    <option value="" disabled selected>Mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                  </select>
                 </div>
+                <br><br>
+                <!--Dropdown menu -->
+
+                <div class="card-columns">
+
+                  <% if (nps.length > 0) { %>
+                    <% for (let nps1 of nps) { %>
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= nps1.titulo_reporte_mensual %></h5>
+                          <p class="card-text"><%= nps1.descripcion_reporte_mensual %></p>
+                          <!--Chart -->
+                            <div class="col py-3">
+                              <div height class="container">
+                                <canvas id="npsPIE"></canvas>
+                              </div>
+                            </div>
+                          <!--Chart -->
+                          </div>
+                        </div>
+                      <% } %>
+                    <% } %>
+                </div><br>
+              </div>
+            </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -55,6 +98,5 @@
                         data: data1
                     });
                 </script>
-
             </body>
-            <%- include('includes/foot.ejs') %>
+<%- include('includes/foot.ejs') %>

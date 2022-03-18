@@ -64,7 +64,7 @@ exports.post_a_ng_block = (request, response, next) => {
 
 //------------------------ Reportes NPS --------------------------------
 exports.get_nps = (request, response) => {
-    console.log('GET /home/nps');
+    console.log('GET /dlc/nps');
     response.render('nps', {
         nps: NPS.fetchAll(),
     });

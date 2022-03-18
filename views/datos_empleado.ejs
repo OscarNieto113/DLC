@@ -1,0 +1,104 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+<div class="col py-3">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <div class="container bootstrap snippet">
+        <div class="row">
+      		<div class="col-sm-9"><h1>Mi Perfil</h1></div>
+        </div>
+        <div class="row">
+      		<div class="col-sm-3">
+            <div class="text-center">
+              <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+            </div><br>
+          </div>
+
+        	<div class="col-sm-9">
+              <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                              <label for="nombre"><h4>Nombre(s)</h4></label>
+                              <input type="text" class="form-control" name="nombre" id="nombre" value="Juan" disabled>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                            <label for="apellidoP"><h4>Apellidos</h4></label>
+                              <input type="text" class="form-control" name="apellidoP" id="apellidoP" value="Peréz" disabled>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-sm-9">
+              <div class="tab-content">
+                <div class="tab-pane active" id="home">
+
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <br>
+                      <br>
+                      <br>
+                        <label for="no_empleado"><h4>No. Empleado</h4></label>
+                        <input type="text" class="form-control" name="no_empleado" id="no_empleado" value="A01702752" disabled>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-xs-6">
+                        <br>
+                        <br>
+                        <br>
+                          <label for="email"><h4>Correo electrónico</h4></label>
+                          <input type="email" class="form-control" name="email" id="email" value="A01702752@natgas" disabled>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="text-center">
+
+              </div><br>
+            </div>
+
+            <div class="col-sm-9">
+              <div class="tab-content">
+                <div class="tab-pane active" id="home">
+
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <br>
+                      <br>
+                      <br>
+                        <label for="ng_blockR"><h4>Ng blocks restante</h4></label>
+                        <input type="text" class="form-control" name="ng_blockR" id="ng_blockR" value="3" disabled>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-xs-6">
+                        <br>
+                        <br>
+                        <br>
+                          <label for="vacacionesR"><h4>Días de vacaciones restantes</h4></label>
+                          <input type="text" class="form-control" name="vacacionesR" id="vacacionesR" value="8" disabled>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('includes/foot.ejs') %>

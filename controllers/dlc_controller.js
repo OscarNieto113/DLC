@@ -104,6 +104,14 @@ exports.post_a_vacaciones = (request, response, next) => {
 //------------------------Aprobar Vacaciones--------------------------------
 
 
+//------------------------Consultar datos--------------------------------
+exports.get_d_usuario = (request, response, next) => {
+    console.log('GET /dlc/d_usuario');
+    response.render('datos_empleado', {empleado: Empleado.fetchAll()});
+};
+//------------------------Consultar datos--------------------------------
+
+
 //------------------------Main--------------------------------
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');

@@ -83,7 +83,7 @@ exports.post_s_vacaciones = (request, response, next) => {
           request.body.dias_solicitados,
           request.body.estatus_vacaciones);
     vacaciones.save();
-    response.redirect('/dlc');
+    // response.redirect('/dlc');
 };
 //------------------------Solicitar Vacaciones--------------------------------
 

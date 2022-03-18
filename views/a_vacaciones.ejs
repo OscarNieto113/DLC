@@ -12,6 +12,18 @@
       <br>
       <a><b>Solicitudes de Vacaciones</b></a>
       <br>
+      
+
+      <div class="col-sm-3" >
+        <br>
+        <label  for="responsable_ausencia" class="col-form-label" ><b>Filtrar</b></label>
+        <select name="responsable_ausencia" class="form-select" aria-label="Default select example">
+          <option value="" disabled selected>Pendiente</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="Rechazado">Rechazado</option>
+          <option value="Aceptado">Aceptado</option>
+        </select>
+      </div>
       <br>
 
       <table class="table">
@@ -38,7 +50,7 @@
             <td><center><%= vacaciones1.dias_solicitados %></center></td>
             <td><center>
               <span class="hovertext" data-hover="
-              </div>Folio: <%= vacaciones1.folio %> /n
+              Folio: <%= vacaciones1.folio %>
               No. Empleado: <%= vacaciones1.no_empleado %>
               Responsable: <%= vacaciones1.responsable_ausencia %>
               Fecha Reanudacion: <%= vacaciones1.reanudacion_labores %>

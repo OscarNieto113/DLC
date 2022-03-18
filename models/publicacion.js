@@ -2,7 +2,6 @@ const publicacion = [
     {id_publicacion: "1", titulo_publicacion: "Curso de Inglés", descripcion_publicacion: "Inscribite a los cursos de inglés", url_imagen_publicacion: "https://art.pixilart.com/thumb/adc680302f5c8a3.png"},
     {id_publicacion: "2", titulo_publicacion: "Limpieza dental", descripcion_publicacion: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", url_imagen_publicacion: "https://art.pixilart.com/thumb/adc680302f5c8a3.png"},
     {id_publicacion: "3", titulo_publicacion: "Día del padre", descripcion_publicacion: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", url_imagen_publicacion: "https://art.pixilart.com/thumb/adc680302f5c8a3.png"},
-    {id_publicacion: "4", titulo_publicacion: "Trae a tu hijo al trabajo", descripcion_publicacion: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", url_imagen_publicacion: "https://art.pixilart.com/thumb/adc680302f5c8a3.png"},
 ];
 
 module.exports = class Publicacion {

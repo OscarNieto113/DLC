@@ -10,6 +10,8 @@ const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
 const Referidos = require('../models/referidos');
 const Vacaciones = require('../models/vacaciones');
+const NPS = require('../models/nps');
+const Chart = require ('chart.js/auto');
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_s_ng_block = (request, response, next) => {
@@ -60,6 +62,14 @@ exports.post_a_ng_block = (request, response, next) => {
 };
 //------------------------Aprobar NG Block--------------------------------
 
+//------------------------ Reportes NPS --------------------------------
+exports.get_nps = (request, response) => {
+    console.log('GET /dlc/nps');
+    response.render('nps', {
+        nps: NPS.fetchAll(),
+    });
+};
+//------------------------ Reportes NPS --------------------------------
 
 //------------------------Solicitar Vacaciones--------------------------------
 exports.get_s_vacaciones = (request, response, next) => {
@@ -102,6 +112,14 @@ exports.post_a_vacaciones = (request, response, next) => {
     response.redirect('/dlc');
 };
 //------------------------Aprobar Vacaciones--------------------------------
+
+
+//------------------------Consultar datos--------------------------------
+exports.get_d_usuario = (request, response, next) => {
+    console.log('GET /dlc/d_usuario');
+    response.render('datos_empleado', {empleado: Empleado.fetchAll()});
+};
+//------------------------Consultar datos--------------------------------
 
 
 //------------------------Main--------------------------------

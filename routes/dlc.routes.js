@@ -20,6 +20,12 @@ router.post('/s_vacaciones', dlc_controller.post_s_vacaciones);
 router.get('/a_vacaciones', dlc_controller.get_a_vacaciones);
 router.post('/a_vacaciones', dlc_controller.post_a_vacaciones);
 
+//Interfaz nueva de usuario
+router.get('/d_usuario', dlc_controller.get_d_usuario);
+
+//Reporte NPS
+router.get('/nps', dlc_controller.get_nps);
+
 router.use('/', dlc_controller.listar); //Main Index
 //router.post('/', dlc_controller.post_listar); //Main Index
 

@@ -1,0 +1,34 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+<body>
+  <div class="col py-3">
+    <div height class="container">
+      <h1 class="display-4"><center>Solicitudes de vacaciones</center></h1>
+      <br><br>
+
+    <div class="card-columns">
+
+      <% if (ng_block.length > 0) { %>
+        <% for (let ng_block1 of ng_block) { %>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Fecha de uso: <%= ng_block1.fecha_uso_ng_block%></h5>
+              <p class="card-text"><b>Descripción: </b><%= ng_block1.descripcion_ng_block %></p>
+              <p class="card-text"><b>Fecha en la que se solicitó: </b><%= ng_block1.fecha_solicitud_ng_block %></p>
+              <p class="card-text"><b>Estatus Actual: </b><%= ng_block1.estatus_ng_block %></p>
+            </div>
+          </div><br><br>
+
+        <% } %>
+      <% } %>
+
+    </div><br><br>
+
+  </div>
+
+</div>
+
+</body>
+
+<%- include('includes/foot.ejs') %>

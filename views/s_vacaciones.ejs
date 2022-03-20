@@ -7,7 +7,11 @@
           <div class="container">
             <section class="container">
               <h1 class="pt-4 pb-2">Solicitud de Vacaciones</h1>
-              <br>
+              <div style="text-align: right;">
+                <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
+              </div>
+
+
               <br>
               <!-- Inicia form-->
               <form action="/dlc/s_vacaciones" method="POST">
@@ -42,7 +46,7 @@
                     </select>
 
                   </div>
-                  <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
+                  <br><br>
                   <!-- DATOS FAKE-->
                   <input type="hidden" id="folio" name="folio" value="999">
                   <input type="hidden" id="no_empleado" name="no_empleado" value="123">
@@ -60,9 +64,9 @@
 
               <br><br>
               <div style="text-align: right;">
-                <a href="/dlc">
+                <a href="/dlc/s_vacaciones">
                   <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
-                    href="/dlc">Cancelar Solicitud</button>
+                    href="/dlc/s_vacaciones">Cancelar Solicitud</button>
                 </a>
               </div>
             </section>

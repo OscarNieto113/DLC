@@ -121,6 +121,20 @@ exports.get_d_usuario = (request, response, next) => {
 };
 //------------------------Consultar datos--------------------------------
 
+//------------------------Consultar las solicitudes de vacaciones--------------------------------
+exports.get_v_vacaciones = (request, response, next) => {
+    console.log('GET /dlc/d_usuario/v_vacaciones');
+    response.render('v_vacaciones', {vacaciones: Vacaciones.fetchAll()});
+};
+//------------------------Consultar las solicitudes de vacaciones--------------------------------
+
+//------------------------Consultar las solicitudes de NG BLOCK--------------------------------
+exports.get_v_ng_block = (request, response, next) => {
+    console.log('GET /dlc/d_usuario/v_ng_block');
+    response.render('v_ng_block', {ng_block: Ng_Block.fetchAll()});
+};
+//------------------------Consultar las solicitudes de NG BLOCK--------------------------------
+
 
 //------------------------Main--------------------------------
 exports.listar = (request, response, next) => {

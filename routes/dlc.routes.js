@@ -26,6 +26,12 @@ router.get('/d_usuario', dlc_controller.get_d_usuario);
 //Reporte NPS
 router.get('/nps', dlc_controller.get_nps);
 
+//Ver solicitud de vacaciones
+router.get('/d_usuario/v_vacaciones', dlc_controller.get_v_vacaciones);
+
+//Ver solicitud de NG Block
+router.get('/d_usuario/v_ng_block', dlc_controller.get_v_ng_block);
+
 router.use('/', dlc_controller.listar); //Main Index
 //router.post('/', dlc_controller.post_listar); //Main Index
 

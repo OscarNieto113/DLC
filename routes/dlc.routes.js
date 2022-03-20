@@ -20,6 +20,10 @@ router.post('/s_vacaciones', dlc_controller.post_s_vacaciones);
 router.get('/a_vacaciones', dlc_controller.get_a_vacaciones);
 router.post('/a_vacaciones', dlc_controller.post_a_vacaciones);
 
+//Registrar Usuario
+router.get('/r_usuario', dlc_controller.get_r_usuario);
+router.post('/r_usuario', dlc_controller.post_r_usuario);
+
 //Interfaz nueva de usuario
 router.get('/d_usuario', dlc_controller.get_d_usuario);
 

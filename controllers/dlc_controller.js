@@ -113,6 +113,32 @@ exports.post_a_vacaciones = (request, response, next) => {
 };
 //------------------------Aprobar Vacaciones--------------------------------
 
+//------------------------Registrar Usuario--------------------------------
+exports.get_r_usuario = (request, response, next) => {
+    console.log('GET /dlc/r_usuario');
+    response.render('r_usuario', {empleado: Empleado.fetchAll()});
+};
+
+exports.post_r_usuario = (request, response, next) => {
+    console.log('POST /dlc/r_usuario');
+    console.log(request.body);
+    const empleado =
+        new Empleado(
+          request.body.no_empleado,
+          request.body.ng_blocks_restantes,
+          request.body.fecha_contratacion,
+          request.body.fecha_nacimiento,
+          request.body.correo_empresarial,
+          request.body.nombres_empleado,
+          request.body.apellido_paterno,
+          request.body.apellido_materno,
+          request.body.dias_vacaciones_restantes,
+          request.body.genero_empleado);
+    empleado.save();
+    response.redirect('/dlc');
+};
+//------------------------Registrar Usuario--------------------------------
+
 
 //------------------------Consultar datos--------------------------------
 exports.get_d_usuario = (request, response, next) => {

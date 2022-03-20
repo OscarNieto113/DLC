@@ -1,0 +1,49 @@
+<h1 class="display-6">Anuncios</h1> <br>
+  <% if (publicacion.length > 0) { %>
+    <% for (let publicacion1 of publicacion) { %>
+      <div class="card mb-3">
+        <img class="card-img-top" src="<%= publicacion1.url_imagen_publicacion %>" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
+            <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+    </div>
+  <% } %>
+<% } %>
+<!--Agregar Objetivo -->
+
+<div style="text-align: right;"">
+  <br>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res">Agregar Objetivo</button>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Agregar Objetivo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form action="/dlc/main" method="POST">
+              <div class="form-group" style="text-align: left;"">
+                <input type="hidden" id="id_objetivo" name="id_objetivo" value="982375">
+                <label for="nombre_objetivo" class="col-form-label">Nombre del objetivo:</label>
+                <input type="text" class="form-control" id="nombre_objetivo" name="nombre_objetivo">
+                <label for="descripcion_objetivo" class="col-form-label">Descripción del objetivo:</label>
+                <input type="text" class="form-control" id="descripcion_objetivo" name="descripcion_objetivo">
+
+                <br>
+                <input type="submit" value="Enviar" class="btn btn-primary">
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

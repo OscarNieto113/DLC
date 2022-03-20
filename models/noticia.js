@@ -21,5 +21,4 @@ module.exports = class Noticia {
     static fetchAll() {
         return noticia;
     }
-
 }

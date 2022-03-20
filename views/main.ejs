@@ -1,21 +1,21 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/topbar.ejs') %>
 <%- include('includes/sidebar.ejs') %>
-<body>
 
+<body>
 <div class="col py-3">
   <div height class="container">
     <h1 class="display-4"><center>Homepage</center></h1>
     <h1 class="display-6">Banner de Noticias</h1>
-    <div class="container flex-nowrap">
-      <%- include('carrousel.ejs') %>
-    </div>
-  <br><br>
+      <div class="container flex-nowrap">
+        <%- include('noticia.ejs') %>
+      </div>
+      <br><br>
       <%- include('objetivo_mensual.ejs') %>
-<div class="col py-3" style="text-align: left;">
-  <%- include('anuncio.ejs') %>
-</div>
-
-
+      <div class="col py-3" style="text-align: left;">
+        <%- include('publicacion.ejs') %>
+      </div>
+    </div>
+  </div>
 
 <%- include('includes/foot.ejs') %>

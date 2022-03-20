@@ -163,6 +163,42 @@ exports.get_v_ng_block = (request, response, next) => {
 
 
 //------------------------Main--------------------------------
+exports.post_objetivo = (request, response, next) => {
+    console.log('POST /dlc/objetivo');
+    console.log(request.body);
+    const objetivo =
+        new Objetivo(
+          request.body.id_objetivo,
+          request.body.nombre_objetivo,
+          request.body.descripcion_objetivo);
+    objetivo.save();
+    response.redirect('/dlc');
+};
+
+exports.post_noticia = (request, response, next) => {
+    console.log('POST /dlc/noticia');
+    console.log(request.body);
+    const noticia =
+        new Noticia(
+          request.body.id_noticia,
+          request.body.url_imagen_noticia);
+    noticia.save();
+    response.redirect('/dlc');
+};
+
+exports.post_publicacion = (request, response, next) => {
+    console.log('POST /dlc/publicacion');
+    console.log(request.body);
+    const publicacion =
+        new Publicacion(
+          request.body.id_publicacion,
+          request.body.titulo_publicacion,
+          request.body.descripcion_publicacion,
+          request.body.url_imagen_publicacion);
+    publicacion.save();
+    response.redirect('/dlc');
+};
+
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
     //

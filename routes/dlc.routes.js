@@ -36,7 +36,11 @@ router.get('/d_usuario/v_vacaciones', dlc_controller.get_v_vacaciones);
 //Ver solicitud de NG Block
 router.get('/d_usuario/v_ng_block', dlc_controller.get_v_ng_block);
 
-router.use('/', dlc_controller.listar); //Main Index
-//router.post('/', dlc_controller.post_listar); //Main Index
+//MAIN INDEX
+router.post('/objetivo', dlc_controller.post_objetivo);
+router.post('/noticia', dlc_controller.post_noticia);
+router.post('/publicacion', dlc_controller.post_publicacion);
+router.use('/', dlc_controller.listar);
+
 
 module.exports = router;

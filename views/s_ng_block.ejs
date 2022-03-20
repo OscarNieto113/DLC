@@ -7,7 +7,9 @@
     <div class="container">
       <section class="container">
           <h3 class="pt-4 pb-2">Solicitud de NG Block</h3>
-          <br>
+          <div style="text-align: right;">
+            <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
+          </div>
           <br>
           <!--Empieza form -->
           <form action="/dlc/s_ng_block" method="POST">
@@ -51,7 +53,7 @@
               </div>
               <textarea id="descripcion_ng_block" name="descripcion_ng_block" rows="6" cols="70"></textarea>
             </div>
-            <label for="fecha_solicitud_ng_block" >Fecha en la que se realizó la solicitud: <span id='date'></span>.</label>
+            <br>
             <!-- PRUEBA SE VA A BORRAR -->
             <input type="hidden" id="fecha_solicitud_ng_block " name="fecha_solicitud_ng_block" value="15-09-2022">
             <input type="hidden" id="estatus_ng_block " name="estatus_ng_block" value="Pendiente">

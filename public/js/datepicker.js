@@ -8,6 +8,22 @@ $(function() {
     });
 });
 
+$(function() {
+    $('#fecha_nacimiento').datepicker({
+      format: 'dd-mm-yyyy',
+      orientation: "bottom left",
+      todayHighlight: true
+    });
+});
+
+$(function() {
+    $('#fecha_contratacion').datepicker({
+      format: 'dd-mm-yyyy',
+      orientation: "bottom left",
+      todayHighlight: true
+    });
+});
+
   var currentDate  = new Date(),
       currentDay   = currentDate.getDate() < 10
                    ? '0' + currentDate.getDate()

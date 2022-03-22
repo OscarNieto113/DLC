@@ -74,8 +74,13 @@ exports.get_nps = (request, response) => {
 //------------------------Solicitar Vacaciones--------------------------------
 exports.get_s_vacaciones = (request, response, next) => {
     console.log('GET /dlc/s_vacaciones');
-    response.render('s_vacaciones');
-};
+    response.render('s_vacaciones', {
+      //
+              username: request.session.username ? request.session.username : '',
+              info: ''
+          });
+      };
+//
 
 exports.post_s_vacaciones = (request, response, next) => {
     console.log('POST /dlc/s_vacaciones');
@@ -93,8 +98,12 @@ exports.post_s_vacaciones = (request, response, next) => {
           request.body.dias_solicitados,
           request.body.estatus_vacaciones);
     vacaciones.save();
+    //
+    request.session.info = 'Las vacaciones solicitadas para el dia '+ vacaciones.primer_dia + ' fue agregado con éxito';
+    response.setHeader('Set-Cookie', 'ultimo_vacaciones='+vacaciones.primer_dia+'; HttpOnly');
     response.redirect('/dlc');
 };
+//
 //------------------------Solicitar Vacaciones--------------------------------
 
 //------------------------Aprobar Vacaciones--------------------------------

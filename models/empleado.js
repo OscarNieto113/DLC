@@ -5,7 +5,7 @@ const empleado = [
 module.exports = class Empleado {
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nuevo_no_empleado, nuevo_ng_blocks_restantes, nuevo_fecha_contratacion, nuevo_fecha_nacimiento, nuevo_correo_empresarial, nuevo_nombres_empleado, nuevo_apellido_paterno, nuevo_apellido_materno, nuevo_dias_vacaciones_restantes, nuevo_genero_empleado) {
+    constructor(nuevo_no_empleado, nuevo_ng_blocks_restantes, nuevo_fecha_contratacion, nuevo_fecha_nacimiento, nuevo_correo_empresarial, nuevo_nombres_empleado, nuevo_apellido_paterno, nuevo_apellido_materno, nuevo_dias_vacaciones_restantes, nuevo_genero_empleado, nuevo_id_area) {
         this.no_empleado = nuevo_no_empleado;
         this.ng_blocks_restantes = nuevo_ng_blocks_restantes;
         this.fecha_contratacion = nuevo_fecha_contratacion;

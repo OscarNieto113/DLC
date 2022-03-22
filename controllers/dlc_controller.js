@@ -133,7 +133,8 @@ exports.post_r_usuario = (request, response, next) => {
           request.body.apellido_paterno,
           request.body.apellido_materno,
           request.body.dias_vacaciones_restantes,
-          request.body.genero_empleado);
+          request.body.genero_empleado,
+          request.body.id_area);
     empleado.save();
     response.redirect('/dlc');
 };

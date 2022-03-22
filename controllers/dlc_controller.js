@@ -173,6 +173,7 @@ exports.get_v_ng_block = (request, response, next) => {
 
 
 //------------------------Main--------------------------------
+/*
 exports.post_objetivo = (request, response, next) => {
     console.log('POST /dlc/objetivo');
     console.log(request.body);
@@ -183,31 +184,45 @@ exports.post_objetivo = (request, response, next) => {
           request.body.descripcion_objetivo);
     objetivo.save();
     response.redirect('/dlc');
-};
+};*/
 
 exports.post_noticia = (request, response, next) => {
     console.log('POST /dlc/noticia');
     console.log(request.body);
     const noticia =
         new Noticia(
-          request.body.id_noticia,
           request.body.url_imagen_noticia);
-    noticia.save();
-    response.redirect('/dlc');
+    noticia.save()
+    //
+    .then(() => {
+        request.session.info ='Fue registrado con éxito';
+        response.setHeader('Set-Cookie',
+            'ultimo_noticia='+noticia.url_imagen_noticia+'; HttpOnly');
+        response.redirect('/dlc');
+    })
+    .catch(err => console.log(err));
 };
+//
 
 exports.post_publicacion = (request, response, next) => {
     console.log('POST /dlc/publicacion');
     console.log(request.body);
     const publicacion =
         new Publicacion(
-          request.body.id_publicacion,
           request.body.titulo_publicacion,
           request.body.descripcion_publicacion,
           request.body.url_imagen_publicacion);
-    publicacion.save();
-    response.redirect('/dlc');
+    publicacion.save()
+    //
+    .then(() => {
+        request.session.info ='Fue registrado con éxito';
+        response.setHeader('Set-Cookie',
+            'ultimo_publicacion='+publicacion.titulo_publicacion+'; HttpOnly');
+        response.redirect('/dlc');
+    })
+    .catch(err => console.log(err));
 };
+//
 
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');
@@ -215,14 +230,36 @@ exports.listar = (request, response, next) => {
     console.log(request.cookies);
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
-    response.render('main', {
-      noticia: Noticia.fetchAll(),
-      objetivo: Objetivo.fetchAll(),
-      publicacion: Publicacion.fetchAll(),
+    Noticia.fetchAll()
+      .then(([rows, fieldData]) => {
+        console.log(rows); //Prueba
+        Publicacion.fetchAll()
+        .then(([rows, fieldData]) => {
+          console.log(rows); //Prueba
+          response.render('main', {
+            publicacion: rows,
+            noticia: rows,
+            username: request.session.username ? request.session.username : '',
+            ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
+            info: info //El primer info es la variable del template, el segundo la constante creada arriba
+          });
+      })
+      .catch(err => {
+          console.log(err);
+      });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+}
+
+      //objetivo: Objetivo.fetchAll(),
+      /*publicacion: Publicacion.fetchAll(),
       username: request.session.username ? request.session.username : '',
       ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
       info: info //El primer info es la variable del template, el segundo la constante creada arriba
     });
-    }
+  }*/
     //
 //------------------------Main--------------------------------

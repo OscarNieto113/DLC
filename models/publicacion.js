@@ -1,8 +1,4 @@
-const publicacion = [
-    {id_publicacion: "1", titulo_publicacion: "Curso de Inglés", descripcion_publicacion: "Inscribite a los cursos de inglés", url_imagen_publicacion: "https://art.pixilart.com/thumb/adc680302f5c8a3.png"},
-    {id_publicacion: "2", titulo_publicacion: "Limpieza dental", descripcion_publicacion: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", url_imagen_publicacion: "https://art.pixilart.com/thumb/adc680302f5c8a3.png"},
-    {id_publicacion: "3", titulo_publicacion: "Día del padre", descripcion_publicacion: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", url_imagen_publicacion: "https://art.pixilart.com/thumb/adc680302f5c8a3.png"},
-];
+const db = require ('../util/database')
 
 module.exports = class Publicacion {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
@@ -15,12 +11,17 @@ module.exports = class Publicacion {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto.
     save() {
-        publicacion.push(this);
+      return db.execute('INSERT INTO publicacion (titulo_publicacion, descripcion_publicacion, url_imagen_publicacion) VALUES (?, ?, ?)',
+          [this.titulo_publicacion, this.descripcion_publicacion, this.url_imagen_publicacion]);
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return publicacion;
+        return db.execute('SELECT * FROM publicacion');
+    }
+
+    static fetchOne(id_publicacion) {
+        return db.execute('SELECT * FROM publicacion WHERE id=?', [id_publicacion]);
     }
 
 }

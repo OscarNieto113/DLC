@@ -37,7 +37,7 @@ router.get('/d_usuario/v_vacaciones', dlc_controller.get_v_vacaciones);
 router.get('/d_usuario/v_ng_block', dlc_controller.get_v_ng_block);
 
 //MAIN INDEX
-router.post('/objetivo', dlc_controller.post_objetivo);
+//router.post('/objetivo', dlc_controller.post_objetivo);
 router.post('/noticia', dlc_controller.post_noticia);
 router.post('/publicacion', dlc_controller.post_publicacion);
 router.use('/', dlc_controller.listar);

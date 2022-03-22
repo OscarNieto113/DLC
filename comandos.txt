@@ -2,6 +2,8 @@ Horas desperdiciadas en errores xD:  6
 Cosas pa implementar:
     Agregar mecanismos de seguiridad a la base de datos (Usuario que consulta datos y usuario que modifica la estructura del sistema)
 
+    C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
 npm init
 
 npm install --save-dev nodemon        servidor

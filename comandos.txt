@@ -1,4 +1,6 @@
 Horas desperdiciadas en errores xD:  6
+Cosas pa implementar:
+    Agregar mecanismos de seguiridad a la base de datos (Usuario que consulta datos y usuario que modifica la estructura del sistema)
 
 npm init
 

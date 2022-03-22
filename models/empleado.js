@@ -1,5 +1,5 @@
 const empleado = [
-    {no_empleado: "A0178293", ng_blocks_restantes: "3", fecha_contratacion: "2018-12-30", fecha_nacimiento: "1977-11-04", correo_empresarial: "A01703067@natgas.com.mx", nombres_empleado: "Eros Giovanni", apellido_paterno: "Guillén", apellido_materno: "Velázquez", dias_vacaciones_restantes:"10", genero_empleado:"F"},
+    {no_empleado: "A0178293", ng_blocks_restantes: "3", fecha_contratacion: "2018-12-30", fecha_nacimiento: "1977-11-04", correo_empresarial: "A01703067@natgas.com.mx", nombres_empleado: "Eros Giovanni", apellido_paterno: "Guillén", apellido_materno: "Velázquez", dias_vacaciones_restantes:"10", genero_empleado:"F", id_area:"1"},
 ];
 
 module.exports = class Empleado {
@@ -16,6 +16,7 @@ module.exports = class Empleado {
         this.apellido_materno = nuevo_apellido_materno;
         this.dias_vacaciones_restantes = nuevo_dias_vacaciones_restantes;
         this.genero_empleado = nuevo_genero_empleado;
+        this.id_area = nuevo_id_area;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto.

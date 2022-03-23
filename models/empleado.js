@@ -27,4 +27,8 @@ module.exports = class Empleado {
     static fetchAll() {
         return db.execute('SELECT * FROM empleado');
     }
+
+    static fetchOne(no_empleado) {
+        return db.execute('SELECT * FROM publicacion WHERE id=?', [no_empleado]);
+    }
 }

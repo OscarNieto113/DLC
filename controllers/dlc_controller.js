@@ -40,7 +40,7 @@ exports.post_s_ng_block = (request, response, next) => {
           request.session.info = 'El NG Block con fecha de uso de '+ ng_block.fecha_uso_ng_block + ' fue agregado con éxito';
           response.setHeader('Set-Cookie', 'ultimo_ng_block='+ng_block.fecha_uso_ng_block+'; HttpOnly');
 
-          response.redirect('/capybaras');
+          response.redirect('/dlc');
       })
       .catch(err => console.log(err));
 };
@@ -123,7 +123,7 @@ exports.post_s_vacaciones = (request, response, next) => {
         request.session.info = 'Las vacaciones con fecha de uso de '+ vacaciones.primer_dia + ' fue agregado con éxito';
         response.setHeader('Set-Cookie', 'ultimo_ng_block='+vacaciones.primer_dia+'; HttpOnly');
 
-        response.redirect('/capybaras');
+        response.redirect('/dlc');
     })
     .catch(err => console.log(err));
 };
@@ -133,27 +133,65 @@ exports.post_s_vacaciones = (request, response, next) => {
 //------------------------Aprobar Vacaciones--------------------------------
 exports.get_a_vacaciones = (request, response, next) => {
     console.log('GET /dlc/a_vacaciones');
-    response.render('a_vacaciones', {vacaciones: Vacaciones.fetchAll()});
-};
+    console.log(request.cookies);
+    const info = request.session.info ? request.session.info : '';
+    request.session.info = '';
+    Vacaciones.fetchAll()
+    .then(([rows, fieldData]) => {
+        console.log(rows);
+        response.render('a_vacaciones', {
+            vacaciones: rows,
+            username: request.session.username ? request.session.username : '',
+            ultimo_estatus_vacaciones: request.cookies.ultimo_estatus_vacaciones ? request.cookies.ultimo_estatus_vacaciones : '',
+            info: info //El primer info es la variable del template, el segundo la constante creada arriba
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
 
 exports.post_a_vacaciones = (request, response, next) => {
     console.log('POST /dlc/s_vacaciones');
     console.log(request.body);
     const vacaciones =
-        new Vacaciones(request.body.estatus_vacaciones);
-    vacaciones.save();
-    response.redirect('/dlc');
+        new Vacaciones(
+          request.body.estatus_vacaciones);
+    vacaciones.save()
+    .then(() => {
+        request.session.info = 'Los cambios se guardaron con éxito';
+        response.setHeader('Set-Cookie', 'ultimo_estatus_vacaciones='+vacaciones.id_vacaciones+'; HttpOnly');
+
+        response.redirect('/dlc');
+    })
+    .catch(err => console.log(err));
 };
 //------------------------Aprobar Vacaciones--------------------------------
 
 //------------------------Registrar Usuario--------------------------------
 exports.get_r_usuario = (request, response, next) => {
     console.log('GET /dlc/r_usuario');
-    response.render('r_usuario', {empleado: Empleado.fetchAll()});
-};
+    console.log(request.cookies);
+    const info = request.session.info ? request.session.info : '';
+    request.session.info = '';
+    Area.fetchAll()
+      .then(([rows, fieldData]) => {
+        console.log(rows); //Prueba
+        response.render('r_usuario', {
+          area: rows,
+          username: request.session.username ? request.session.username : '',
+          ultimo_empleado: request.cookies.ultimo_empleado ? request.cookies.ultimo_empleado : '',
+          info: info //El primer info es la variable del template, el segundo la constante creada arriba
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
 
 exports.post_r_usuario = (request, response, next) => {
     console.log('POST /dlc/r_usuario');
+
     console.log(request.body);
     const empleado =
         new Empleado(
@@ -167,19 +205,38 @@ exports.post_r_usuario = (request, response, next) => {
           request.body.apellido_materno,
           request.body.dias_vacaciones_restantes,
           request.body.genero_empleado,
-          request.body.id_area);
-    empleado.save();
-    response.redirect('/dlc');
+        /*request.body.id_area*/);
+    empleado.save()
+    .then(() => {
+        request.session.info = 'El empleado fue registrado con éxito';
+        response.setHeader('Set-Cookie', 'ultimo_empleado='+empleado.no_empleado+'; HttpOnly');
+
+        response.redirect('/dlc');
+    })
+    .catch(err => console.log(err));
 };
 //------------------------Registrar Usuario--------------------------------
 
 
-//------------------------Consultar datos--------------------------------
+//------------------------Consultar informacion personal (perfil)--------------------------------
 exports.get_d_usuario = (request, response, next) => {
     console.log('GET /dlc/d_usuario');
-    response.render('datos_empleado', {empleado: Empleado.fetchAll()});
-};
-//------------------------Consultar datos--------------------------------
+    console.log(request.cookies);
+    const info = request.session.info ? request.session.info : '';
+    request.session.info = '';
+    Empleado.fetchAll() //cambiar a fetchOne falta definir la consulta
+    .then(([rows, fieldData]) => {
+      console.log(rows); //Prueba
+      response.render('datos_empleado', {
+        empleado: rows,
+        username: request.session.username ? request.session.username : '',
+      });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  }
+//------------------------Consultar informacion personal (perfil)---------------------------------
 
 //------------------------Consultar las solicitudes de vacaciones--------------------------------
 exports.get_v_vacaciones = (request, response, next) => {

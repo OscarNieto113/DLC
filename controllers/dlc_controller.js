@@ -187,7 +187,7 @@ exports.get_r_usuario = (request, response, next) => {
     .catch(err => {
         console.log(err);
     });
-}
+};
 
 exports.post_r_usuario = (request, response, next) => {
     console.log('POST /dlc/r_usuario');

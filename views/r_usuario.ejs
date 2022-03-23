@@ -30,16 +30,12 @@
                 <label for="id_area">Departamento al que pertenece</label>
                   <select name="id_area" class="form-select" aria-label="Default select example">
                     <option value="" disabled selected>Departamento</option>
-                    <option value="1">Marketing operaciones</option>
-                    <option value="2">Marketing Comercial</option>
-                    <option value="3">Infraestructura</option>
-                    <option value="4">Optimización e Inteligencia</option>
-                    <option value="5">Impúlsate</option>
-                    <option value="6">Dirección Regulatorios</option>
-                    <option value="7">Asuntos Regulatorios</option>
-                    <option value="8">Recursos Humanos</option>
-                    <option value="9">Proyectos Estratégicos</option>
-                    <option value="10">NatDev</option>
+                    <% if (area.lenght > 0) {%>
+                      <% for (let area1 of area) { %>
+                    <option value="<% area1.id_area %>"><% area1.nombre_area %></option>
+                      <% } %>
+                    <% } %>
+
                   </select><br>
 
                 <label for="no_empleado">Número de empleado</label>

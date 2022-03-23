@@ -12,12 +12,12 @@
       <br>
       <a><b>Solicitudes de Vacaciones</b></a>
       <br>
-      
+
 
       <div class="col-sm-3" >
         <br>
-        <label  for="responsable_ausencia" class="col-form-label" ><b>Filtrar</b></label>
-        <select name="responsable_ausencia" class="form-select" aria-label="Default select example">
+        <label  for="estatus_vacaciones" class="col-form-label" ><b>Filtrar</b></label>
+        <select name="estatus_vacaciones" class="form-select" aria-label="Default select example">
           <option value="" disabled selected>Pendiente</option>
           <option value="Pendiente">Pendiente</option>
           <option value="Rechazado">Rechazado</option>
@@ -29,12 +29,12 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col"><center>No. Empleado</center></th>
             <th scope="col"><center>Nombre</center></th>
             <th scope="col"><center>Departamento</center></th>
             <th scope="col"><center>Responsable</center></th>
             <th scope="col"><center>Dias solicitados</center></th>
             <th scope="col"><center>Información completa</center></th>
+            <th scope="col"><center>Estatus actual</center></th>
             <th scope="col"><center>Firma</center></th>
           </tr>
         </thead>
@@ -43,7 +43,6 @@
         <% if (vacaciones.length > 0) { %>
         <% for (let vacaciones1 of vacaciones) { %>
           <tr>
-            <td><center><%= vacaciones1.no_empleado %></center></td>
             <td><center>Nombre</center></td>
             <td><center>Departamento</center></td>
             <td><center><%= vacaciones1.responsable_ausencia %></center></td>
@@ -54,20 +53,23 @@
               No. Empleado: <%= vacaciones1.no_empleado %>
               Responsable: <%= vacaciones1.responsable_ausencia %>
               Fecha Reanudacion: <%= vacaciones1.reanudacion_labores %>
-              Fecha primer día: <%= vacaciones1.primer_dia %>
-              Fecha ultimo día: <%= vacaciones1.ultimo_dia %>
+              Fecha primer día: <%= vacaciones1.fecha_primer_dia %>
+              Fecha ultimo día: <%= vacaciones1.fecha_ultimo_dia %>
               Fecha de la solicitud: <%= vacaciones1.fecha_solicitud %>
               Días solicitados: <%= vacaciones1.dias_solicitados %>
               Estatus: <%= vacaciones1.estatus_vacaciones %>">
                 Vacaciones
               </span>
             </center></td>
+            <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
             <td><center>
-              <select class="btn btn-secondary dropdown-toggle" aria-label="Default select example">
-                <option selected>Pendiente</option>
+              <form>
+              <select name="estatus_vacaciones<%= vacaciones1.folio %>" class="btn btn-secondary dropdown-toggle" aria-label="Default select example">
+                <option value="" disabled selected>Cambiar estatus</option>
                 <option value="Aprobado">Aprobado</option>
                 <option value="Rechazado">Rechazado</option>
               </select>
+              </form>
             </center></td>
           </tr>
         <% } %>
@@ -75,11 +77,14 @@
         <h1>No hay ninguna solicitud pendiente.</h1>
     <% } %>
       </tbody>
-    </table>
+    </table><br>
 
-      <br>
-      <br>
-      <!--Pagination -->
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <form>
+      <input type="submit" value="Realizar cambios" class="btn btn-primary">
+      </form>
+    </div>
+
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
@@ -93,19 +98,7 @@
           </li>
         </ul>
       </nav>
-      <!--Pagination -->
-      <br>
-      <br>
-      <br>
-
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary" type="button">Realizar cambios</button>
-      </div>
-
-
-
     </div>
   </div>
 </div>
-
 <%- include('includes/foot.ejs') %>

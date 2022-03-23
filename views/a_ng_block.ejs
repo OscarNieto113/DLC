@@ -15,9 +15,8 @@
 
       <div class="col-sm-3" >
         <br>
-        <label  for="responsable_ausencia" class="col-form-label" ><b>Filtrar</b></label>
-        <select name="responsable_ausencia" class="form-select" aria-label="Default select example">
-          <option value="" disabled selected>Pendiente</option>
+        <label  for="estatus_ng_block" class="col-form-label" ><b>Filtrar</b></label>
+        <select name="estatus_ng_block" class="form-select" aria-label="Default select example">
           <option value="Pendiente">Pendiente</option>
           <option value="Rechazado">Rechazado</option>
           <option value="Aceptado">Aceptado</option>
@@ -28,12 +27,12 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col"><center>No. Empleado</center></th>
             <th scope="col"><center>Nombre</center></th>
             <th scope="col"><center>Fecha de uso</center></th>
+            <th scope="col"><center>Fecha en la que se solicitó</center></th>
             <th scope="col"><center>Descripción</center></th>
             <th scope="col"><center>Turno</center></th>
-            <th scope="col"><center>Información completa</center></th>
+            <th scope="col"><center>Estatus actual</center></th>
             <th scope="col"><center>Firma</center></th>
           </tr>
         </thead>
@@ -42,32 +41,24 @@
         <% if (ng_block.length > 0) { %>
         <% for (let ng_block1 of ng_block) { %>
           <tr>
-            <td><center><%= ng_block1.no_empleado %></center></td>
             <!--Falta aniadir nombre del solicitante -->
             <td><center>Nombre</center></td>
             <!--Falta aniadir nombre del solicitante -->
             <td><center><%= ng_block1.fecha_uso_ng_block %></center></td>
+            <td><center><%= ng_block1.fecha_solicitud_ng_block %></center></td>
             <td><center><%= ng_block1.descripcion_ng_block %></center></td>
             <td><center><%= ng_block1.turno_ng_block %></center></td>
-            <td><center>
-              <span class="hovertext" data-hover="
-              No. Solicitud: <%= ng_block1.id_ng_block %>
-              No. Empleado: <%= ng_block1.no_empleado %>
-              Turno: <%= ng_block1.turno_ng_block %>
-              Fecha uso: <%= ng_block1.fecha_uso_ng_block %>
-              Fecha Solicitud: <%= ng_block1.fecha_solicitud_ng_block %>
-              Estatus: <%= ng_block1.estatus_ng_block %>">
-                NG block
-              </span>
-            </center></td>
+            <td><center><%= ng_block1.estatus_ng_block %></center></td>
 
 
             <td><center>
-              <select class="btn btn-secondary dropdown-toggle" aria-label="Default select example">
-                <option selected>Pendiente</option>
+              <form>
+              <select name="estatus_ng_block<%= ng_block1.id_ng_block %>" class="btn btn-secondary dropdown-toggle" aria-label="Default select example">
+                <option value="" disabled selected>Cambiar estatus</option>
                 <option value="Aprobado">Aprobado</option>
                 <option value="Rechazado">Rechazado</option>
               </select>
+              </form>
             </center></td>
           </tr>
         <% } %>
@@ -75,10 +66,14 @@
         <h1>No hay ninguna solicitud pendiente.</h1>
     <% } %>
       </tbody>
-    </table>
+    </table> <br>
 
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <form>
+      <input type="submit" value="Realizar cambios" class="btn btn-primary">
+      </form>
+    </div>
 
-      <br><br>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
@@ -92,11 +87,7 @@
           </li>
         </ul>
       </nav>
-      <br><br><br>
-
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary" type="button" id="botoncambiosToast">Realizar cambios</button>
-      </div>
+      <br><br>
 
 
 

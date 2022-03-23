@@ -25,6 +25,6 @@ module.exports = class Empleado {
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        rreturn db.execute('SELECT * FROM empleado');
+        return db.execute('SELECT * FROM empleado');
     }
 }

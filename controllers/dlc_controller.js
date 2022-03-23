@@ -1,6 +1,5 @@
 const path = require('path');
 const Area = require('../models/area');
-const Empleado_area = require('../models/empleado_area');
 const Empleado = require('../models/empleado');
 const Ng_Block = require('../models/ng_block');
 const Noticia = require('../models/noticia');
@@ -9,8 +8,9 @@ const Permiso_informal = require('../models/permiso_informal');
 const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
-const NPS = require('../models/nps');
-const Chart = require ('chart.js/auto');
+const Nps = require('../models/nps');
+
+
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_s_ng_block = (request, response, next) => {
@@ -35,40 +35,62 @@ exports.post_s_ng_block = (request, response, next) => {
           request.body.fecha_solicitud_ng_block,
           request.body.estatus_ng_block,
           request.body.no_empleado);
-    ng_block.save();
-    //
-    request.session.info = 'El NG Block con fecha de uso de '+ ng_block.fecha_uso_ng_block + ' fue agregado con éxito';
-    response.setHeader('Set-Cookie', 'ultimo_ng_block='+ng_block.fecha_uso_ng_block+'; HttpOnly');
-    response.redirect('/dlc');
-};
-//
+    ng_block.save()
+      .then(() => {
+          request.session.info = 'El NG Block con fecha de uso de '+ ng_block.fecha_uso_ng_block + ' fue agregado con éxito';
+          response.setHeader('Set-Cookie', 'ultimo_ng_block='+ng_block.fecha_uso_ng_block+'; HttpOnly');
 
+          response.redirect('/capybaras');
+      })
+      .catch(err => console.log(err));
+};
 //------------------------Solicitar NG Block--------------------------------
 
 //------------------------Aprobar NG Block--------------------------------
 exports.get_a_ng_block = (request, response, next) => {
     console.log('GET /dlc/a_ng_block');
-    response.render('a_ng_block', {ng_block: Ng_Block.fetchAll()});
-};
+    console.log(request.cookies);
+    const info = request.session.info ? request.session.info : '';
+    request.session.info = '';
+    Ng_Block.fetchAll()
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.render('a_ng_block', {
+                ng_block: rows,
+                username: request.session.username ? request.session.username : '',
+                ultimo_estatus_ng: request.cookies.ultimo_estatus_ng ? request.cookies.ultimo_estatus_ng : '',
+                info: info //El primer info es la variable del template, el segundo la constante creada arriba
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 exports.post_a_ng_block = (request, response, next) => {
     console.log('POST /dlc/a_ng_block');
     console.log(request.body);
     const ng_block =
-        new Ng_Block(request.body.estatus_ng_block);
-    ng_block.save();
-    response.redirect('/dlc');
+        new Ng_Block(
+          request.body.estatus_ng_block);
+    ng_block.save()
+    .then(() => {
+        request.session.info = 'Los cambios se guardaron con éxito';
+        response.setHeader('Set-Cookie', 'ultimo_estatus_ng=' + ng_block.id_ng_block + '; HttpOnly');
+        response.redirect('/dlc');
+    })
+    .catch(err => console.log(err));
 };
 //------------------------Aprobar NG Block--------------------------------
 
-//------------------------ Reportes NPS --------------------------------
+//------------------------ Reportes NPS se va a borrar --------------------------------
 exports.get_nps = (request, response) => {
     console.log('GET /dlc/nps');
     response.render('nps', {
-        nps: NPS.fetchAll(),
+        nps: Nps.fetchAll(),
     });
 };
-//------------------------ Reportes NPS --------------------------------
+//------------------------ Reportes NPS se va a borrar --------------------------------
 
 //------------------------Solicitar Vacaciones--------------------------------
 exports.get_s_vacaciones = (request, response, next) => {
@@ -96,13 +118,16 @@ exports.post_s_vacaciones = (request, response, next) => {
           request.body.fecha_solicitud,
           request.body.dias_solicitados,
           request.body.estatus_vacaciones);
-    vacaciones.save();
-    //
-    request.session.info = 'Las vacaciones solicitadas para el dia '+ vacaciones.primer_dia + ' fue agregado con éxito';
-    response.setHeader('Set-Cookie', 'ultimo_vacaciones='+vacaciones.primer_dia+'; HttpOnly');
-    response.redirect('/dlc');
+    vacaciones.save()
+    .then(() => {
+        request.session.info = 'Las vacaciones con fecha de uso de '+ vacaciones.primer_dia + ' fue agregado con éxito';
+        response.setHeader('Set-Cookie', 'ultimo_ng_block='+vacaciones.primer_dia+'; HttpOnly');
+
+        response.redirect('/capybaras');
+    })
+    .catch(err => console.log(err));
 };
-//
+
 //------------------------Solicitar Vacaciones--------------------------------
 
 //------------------------Aprobar Vacaciones--------------------------------

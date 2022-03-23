@@ -1,6 +1,4 @@
-const empleado = [
-    {no_empleado: "A0178293", ng_blocks_restantes: "3", fecha_contratacion: "2018-12-30", fecha_nacimiento: "1977-11-04", correo_empresarial: "A01703067@natgas.com.mx", nombres_empleado: "Eros Giovanni", apellido_paterno: "Guillén", apellido_materno: "Velázquez", dias_vacaciones_restantes:"10", genero_empleado:"F", id_area:"1"},
-];
+const db = require ('../util/database')
 
 module.exports = class Empleado {
 
@@ -21,11 +19,12 @@ module.exports = class Empleado {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto.
     save() {
-      empleado.push(this);
+      return db.execute('INSERT INTO empleado (no_empleado, ng_blocks_restantes, fecha_contratacion, fecha_nacimiento, correo_empresarial, nombres_empleado, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, id_area) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+          [this.no_empleado, this.ng_blocks_restantes, this.fecha_contratacion, this.fecha_nacimiento, this.correo_empresarial, this.nombres_empleado, this.apellido_paterno, this.apellido_materno, this.dias_vacaciones_restantes, this.genero_empleado, this.id_area]);
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return empleado;
+        rreturn db.execute('SELECT * FROM empleado');
     }
 }

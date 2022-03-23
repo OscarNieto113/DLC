@@ -1,3 +1,5 @@
+const db = require ('../util/database')
+
 module.exports = class Permiso_informal {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
     constructor(nuevo_id_permiso_informal, nuevo_min_permiso_informal, nuevo_permisos_anio) {

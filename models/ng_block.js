@@ -23,7 +23,7 @@ module.exports = class Ng_Block {
         return db.execute('SELECT * FROM ng_block');
     }
 
-    static fetchOne(folio) {
+    static fetchOne(id_ng_block) {
         return db.execute('SELECT * FROM ng_block WHERE id=?', [id_ng_block]);
     }
 

@@ -8,7 +8,6 @@ const Objetivo = require('../models/objetivo');
 const Permiso_informal = require('../models/permiso_informal');
 const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
-const Referidos = require('../models/referidos');
 const Vacaciones = require('../models/vacaciones');
 const NPS = require('../models/nps');
 const Chart = require ('chart.js/auto');
@@ -160,15 +159,34 @@ exports.get_d_usuario = (request, response, next) => {
 //------------------------Consultar las solicitudes de vacaciones--------------------------------
 exports.get_v_vacaciones = (request, response, next) => {
     console.log('GET /dlc/d_usuario/v_vacaciones');
-    response.render('v_vacaciones', {vacaciones: Vacaciones.fetchAll()});
-};
+    Vacaciones.fetchAll()
+    .then(([rows, fieldData]) => {
+        console.log(rows);
+        response.render('v_vacaciones', {
+            vacaciones: rows
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
 //------------------------Consultar las solicitudes de vacaciones--------------------------------
 
 //------------------------Consultar las solicitudes de NG BLOCK--------------------------------
 exports.get_v_ng_block = (request, response, next) => {
     console.log('GET /dlc/d_usuario/v_ng_block');
-    response.render('v_ng_block', {ng_block: Ng_Block.fetchAll()});
-};
+    Ng_Block.fetchAll()
+    .then(([rows, fieldData]) => {
+        console.log(rows);
+        response.render('v_ng_block', {
+            ng_block: rows
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
 //------------------------Consultar las solicitudes de NG BLOCK--------------------------------
 
 
@@ -253,13 +271,4 @@ exports.listar = (request, response, next) => {
     });
 
 }
-
-      //objetivo: Objetivo.fetchAll(),
-      /*publicacion: Publicacion.fetchAll(),
-      username: request.session.username ? request.session.username : '',
-      ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
-      info: info //El primer info es la variable del template, el segundo la constante creada arriba
-    });
-  }*/
-    //
 //------------------------Main--------------------------------

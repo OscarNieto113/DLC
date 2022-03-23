@@ -3,6 +3,7 @@ Cosas pa implementar:
     Agregar mecanismos de seguiridad a la base de datos (Usuario que consulta datos y usuario que modifica la estructura del sistema)
 
     C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+    C:\Windows\System32\wsl.exe
 
 npm init
 

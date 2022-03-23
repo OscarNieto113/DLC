@@ -1,31 +1,54 @@
-exports.get_s_ng_block = (request, response, next) => {
-    console.log('GET /dlc/s_ng_block');
-    response.render('s_ng_block', {
-      //
-              username: request.session.username ? request.session.username : '',
-              info: ''
+exports.listar = (request, response, next) => {
+    console.log('Ruta /dlc');
+    //
+    console.log(request.cookies);
+    const info = request.session.info ? request.session.info : '';
+    request.session.info = '';
+    Noticia.fetchAll()
+      .then(([rows, fieldData]) => {
+        console.log(rows); //Prueba
+        Publicacion.fetchAll()
+        .then(([rows, fieldData]) => {
+          console.log(rows); //Prueba
+          response.render('main', {
+            publicacion: rows,
+            noticia: rows,
+            username: request.session.username ? request.session.username : '',
+            ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
+            info: info //El primer info es la variable del template, el segundo la constante creada arriba
           });
-      };
-//
-
-exports.post_s_ng_block = (request, response, next) => {
-    console.log('POST /dlc/s_ng_block');
-    console.log(request.body);
-    const ng_block =
-        new Ng_Block(
-          request.body.id_ng_block,
-          request.body.turno_ng_block,
-          request.body.descripcion_ng_block,
-          request.body.fecha_uso_ng_block,
-          request.body.fecha_solicitud_ng_block,
-          request.body.estatus_ng_block,
-          request.body.no_empleado);
-    ng_block.save()
-      .then(() => {
-          request.session.info = 'El NG Block con fecha de uso de '+ ng_block.fecha_uso_ng_block + ' fue agregado con éxito';
-          response.setHeader('Set-Cookie', 'ultimo_ng_block='+ng_block.fecha_uso_ng_block+'; HttpOnly');
-
-          response.redirect('/capybaras');
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+          console.log(err);
+      });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+}
+
+exports.post_s_vacaciones = (request, response, next) => {
+    console.log('POST /dlc/s_vacaciones');
+    console.log(request.body);
+    const vacaciones =
+        new Vacaciones(
+          request.body.folio,
+          request.body.no_empleado,
+          request.body.responsable_ausencia,
+          request.body.observaciones,
+          request.body.reanudacion_labores,
+          request.body.primer_dia,
+          request.body.ultimo_dia,
+          request.body.fecha_solicitud,
+          request.body.dias_solicitados,
+          request.body.estatus_vacaciones);
+    vacaciones.save()
+    .then(() => {
+        request.session.info = 'Las vacaciones con fecha de uso de '+ vacaciones.primer_dia + ' fue agregado con éxito';
+        response.setHeader('Set-Cookie', 'ultimo_ng_block='+vacaciones.primer_dia+'; HttpOnly');
+
+        response.redirect('/capybaras');
+    })
+    .catch(err => console.log(err));
 };

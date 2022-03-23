@@ -2,33 +2,18 @@
 
 ## Comandos NPM
 
-Corre estos comandos para que funcione el sitio:
+Para correr el sitio ten encuenta los siguientes puntos:
 
-1. npm init
-2. npm install --save-dev nodemon        
-   > Para correr página web
-3. npm install --save express            
-   > Manejo de rutas
-4. npm install --save body-parser        
-   > Manipular datos de las peticiones
-5. npm install --save ejs                
-6. > HTML dinamico
-7. npm install --save cookie-parser
-   > Manejo de cookies
-8. npm install --save express-session
-   > Manejo de sesiones
-9.  npm install --save bootstrap
-    > Tema de la web app
-10. npm install --save bootstrap-icons
-    > Iconos para la web app
-11. npm install --save-dev vanillajs-datepicker 
-    > Date picker 
-12. npm install --save csurf
+1. Instalar todas las dependencias: npm install
+2. Tener XAMPP corriendo y con la base de datos dentro (se debe de llamar dlc)
+3. De preferencia correrlo en la consola de PowerShell
+4. Correr el programa: npm start
+
 
 ## Webpage sites
 
 ### Pagina PRINCIPAL
-http://localhost:3000/DLC   
+http://localhost:3000/dlc
 
 
 ## Comandos básicos GIT

@@ -1,6 +1,6 @@
 $(function() {
     $('#datepicker').datepicker({
-      format: 'dd-mm-yyyy',
+      format: 'yyyy-mm-dd',
       orientation: "bottom left",
       startDate: new Date(),
       daysOfWeekDisabled: [0,6],
@@ -10,7 +10,7 @@ $(function() {
 
 $(function() {
     $('#fecha_nacimiento').datepicker({
-      format: 'dd-mm-yyyy',
+      format: 'yyyy-mm-dd',
       orientation: "bottom left",
       todayHighlight: true
     });
@@ -18,7 +18,7 @@ $(function() {
 
 $(function() {
     $('#fecha_contratacion').datepicker({
-      format: 'dd-mm-yyyy',
+      format: 'yyyy-mm-dd',
       orientation: "bottom left",
       todayHighlight: true
     });

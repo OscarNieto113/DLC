@@ -296,8 +296,10 @@ exports.post_noticia = (request, response, next) => {
     //
     .then(() => {
         request.session.info ='Fue registrado con éxito';
+        /*request.session.info ='Fue registrado con éxito';
         response.setHeader('Set-Cookie',
             'ultimo_noticia='+noticia.url_imagen_noticia+'; HttpOnly');
+            'ultimo_noticia='+noticia.url_imagen_noticia+'; HttpOnly');*/
         response.redirect('/dlc');
     })
     .catch(err => console.log(err));

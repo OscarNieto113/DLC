@@ -3,6 +3,8 @@
 <% if (noticia.length > 0) { %>
   <% for (let noticia1 of noticia) { %>
   <li data-target="#carouselNoticias" data-slide-to="<%= noticia1.id_noticia %>" class="active"></li>
+  <% for (let x = 1; x <= noticia.lenght; x++) { %>
+  <li data-target="#carouselNoticias" data-slide-to="<%= x %>" class="active"></li>
   <% } %>
 <% } %>
 </ol>
@@ -12,8 +14,10 @@
   </div>
   <% if (noticia.length > 0) { %>
     <% for (let noticia2 of noticia) { %>
+    <% for (let noticia1 of noticia) { %>
   <div class="carousel-item">
     <img class="d-block mw-100" src="<%= noticia2.url_imagen_noticia %>" alt="First slide">
+    <img class="d-block mw-100" src="<%= noticia1.url_imagen_noticia %>" alt="First slide">
   </div>
   <% } %>
 <% } %>
@@ -27,8 +31,9 @@
   <span class="sr-only">Next</span>
 </a>
 </div>
-<!--Agregar imagen al banner -->
 
+
+<!--Agregar imagen al banner -->
   <div style="text-align: right;">
     <br>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal0" data-whatever="@mdo">Agregar Imagen al Banner</button>
@@ -42,21 +47,17 @@
               </button>
             </div>
             <div class="modal-body">
-
-              <form action="/dlc/noticia" method="POST">
                 <div class="form-group" style="text-align: left;"">
-
                   <!--Dato no permanente se va a borrar -->
                   <!--<input type="hidden" id="id_noticia" name="id_noticia" value="5"> -->
                   <!--Dato no permanente se va a borrar -->
-
+                  <form action="/dlc/noticia" method="POST">
                   <label for="url_imagen_noticia" class="col-form-label">URL de la imagen:</label>
                   <input type="text" class="form-control" id="url_imagen_noticia" name="url_imagen_noticia">
-
                   <input type="submit" value="Enviar" class="btn btn-primary">
-                </div>
-              </form>
+                  </form>
 
+                </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

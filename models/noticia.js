@@ -2,8 +2,7 @@ const db = require ('../util/database')
 
 module.exports = class Noticia {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nuevo_id_noticia, nuevo_url_imagen_noticia) {
-        this.id_noticia = nuevo_id_noticia;
+    constructor(nuevo_url_imagen_noticia) {
         this.url_imagen_noticia = nuevo_url_imagen_noticia;
     }
 

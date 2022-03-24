@@ -289,11 +289,8 @@ exports.post_objetivo = (request, response, next) => {
 exports.post_noticia = (request, response, next) => {
     console.log('POST /dlc/noticia');
     console.log(request.body);
-    const noticia =
-        new Noticia(
-          request.body.url_imagen_noticia);
+    const noticia = new Noticia(request.body.url_imagen_noticia);
     noticia.save()
-    //
     .then(() => {
         request.session.info ='Fue registrado con éxito';
         response.setHeader('Set-Cookie',

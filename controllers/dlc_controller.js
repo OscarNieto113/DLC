@@ -289,11 +289,8 @@ exports.post_objetivo = (request, response, next) => {
 exports.post_noticia = (request, response, next) => {
     console.log('POST /dlc/noticia');
     console.log(request.body);
-    const noticia =
-        new Noticia(
-          request.body.url_imagen_noticia);
+    const noticia = new Noticia(request.body.url_imagen_noticia);
     noticia.save()
-    //
     .then(() => {
         request.session.info ='Fue registrado con éxito';
         /*request.session.info ='Fue registrado con éxito';
@@ -334,13 +331,13 @@ exports.listar = (request, response, next) => {
     request.session.info = '';
     Noticia.fetchAll()
       .then(([rows, fieldData]) => {
-        console.log(rows); //Prueba
         Publicacion.fetchAll()
-        .then(([rows, fieldData]) => {
+        .then(([rows2, fieldData]) => {
           console.log(rows); //Prueba
+          console.log(rows2); //Prueba
           response.render('main', {
-            publicacion: rows,
             noticia: rows,
+            publicacion: rows2,
             username: request.session.username ? request.session.username : '',
             ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
             info: info //El primer info es la variable del template, el segundo la constante creada arriba

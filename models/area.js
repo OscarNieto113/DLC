@@ -1,8 +1,7 @@
 const db = require ('../util/database')
 
 module.exports = class Area {
-  constructor(nuevo_id_area, nuevo_nombre_area) {
-      this.id_area = nuevo_id_area;
+  constructor(nuevo_nombre_area) {
       this.nombre_area = nuevo_nombre_area;
   }
 

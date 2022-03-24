@@ -2,8 +2,7 @@ const db = require ('../util/database')
 
 module.exports = class Vacaciones {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nuevo_folio, nuevo_no_empleado, nuevo_responsable_ausencia, nuevo_observaciones, nuevo_reanudacion_labores, nuevo_fecha_primer_dia, nuevo_fecha_ultimo_dia, nuevo_fecha_solicitud, nuevo_dias_solicitados, nuevo_estatus_vacaciones) {
-        this.folio = nuevo_folio;
+    constructor(nuevo_no_empleado, nuevo_responsable_ausencia, nuevo_observaciones, nuevo_reanudacion_labores, nuevo_fecha_primer_dia, nuevo_fecha_ultimo_dia, nuevo_fecha_solicitud, nuevo_dias_solicitados, nuevo_estatus_vacaciones) {
         this.no_empleado = nuevo_no_empleado;
         this.responsable_ausencia = nuevo_responsable_ausencia;
         this.observaciones = nuevo_observaciones;

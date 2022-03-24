@@ -2,8 +2,7 @@ const db = require ('../util/database')
 
 module.exports = class Ng_Block {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nuevo_id_ng_block, nuevo_no_empleado, nuevo_turno_ng_block, nuevo_descripcion_ng_block, nuevo_fecha_uso_ng_block, nuevo_fecha_solicitud_ng_block, nuevo_estatus_ng_block) {
-        this.id_ng_block = nuevo_id_ng_block;
+    constructor(nuevo_no_empleado, nuevo_turno_ng_block, nuevo_descripcion_ng_block, nuevo_fecha_uso_ng_block, nuevo_fecha_solicitud_ng_block, nuevo_estatus_ng_block) {
         this.no_empleado = nuevo_no_empleado;
         this.turno_ng_block = nuevo_turno_ng_block;
         this.descripcion_ng_block = nuevo_descripcion_ng_block;

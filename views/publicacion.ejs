@@ -29,18 +29,14 @@
             <form action="/dlc/publicacion" method="POST">
               <div class="form-group" style="text-align: left;"">
 
-                <!--Dato no permanente se va a borrar -->
-                <input type="hidden" id="id_publicacion" name="id_publicacion" value="100">
-                <!--Dato no permanente se va a borrar -->
-
                 <label for="titulo_publicacion" class="col-form-label">Título de la publicación:</label>
-                <input type="text" class="form-control" id="titulo_publicacion" name="titulo_publicacion">
+                <input type="text" class="form-control" id="titulo_publicacion" name="titulo_publicacion" autocomplete="off">
 
                 <label for="descripcion_publicacion" class="col-form-label">Descripción de la publicación:</label>
-                <input type="text" class="form-control" id="descripcion_publicacion" name="descripcion_publicacion">
+                <input type="text" class="form-control" id="descripcion_publicacion" name="descripcion_publicacion" autocomplete="off">
 
                 <label for="url_imagen_publicacion" class="col-form-label">URL de la imagen:</label>
-                <input type="text" class="form-control" id="url_imagen_publicacion" name="url_imagen_publicacion"><br>
+                <input type="text" class="form-control" id="url_imagen_publicacion" name="url_imagen_publicacion" autocomplete="off"><br>
 
                 <input type="submit" value="Enviar" class="btn btn-primary">
             </form>

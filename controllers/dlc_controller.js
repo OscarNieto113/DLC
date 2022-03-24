@@ -28,13 +28,13 @@ exports.post_s_ng_block = (request, response, next) => {
     console.log(request.body);
     const ng_block =
         new Ng_Block(
-          request.body.id_ng_block,
+          request.body.no_empleado,
           request.body.turno_ng_block,
           request.body.descripcion_ng_block,
           request.body.fecha_uso_ng_block,
           request.body.fecha_solicitud_ng_block,
           request.body.estatus_ng_block,
-          request.body.no_empleado);
+          );
     ng_block.save()
       .then(() => {
           request.session.info = 'El NG Block con fecha de uso de '+ ng_block.fecha_uso_ng_block + ' fue agregado con éxito';

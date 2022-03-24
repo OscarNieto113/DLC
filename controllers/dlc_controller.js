@@ -107,13 +107,12 @@ exports.post_s_vacaciones = (request, response, next) => {
     console.log(request.body);
     const vacaciones =
         new Vacaciones(
-          request.body.folio,
           request.body.no_empleado,
           request.body.responsable_ausencia,
           request.body.observaciones,
           request.body.reanudacion_labores,
-          request.body.primer_dia,
-          request.body.ultimo_dia,
+          request.body.fecha_primer_dia,
+          request.body.fecha_ultimo_dia,
           request.body.fecha_solicitud,
           request.body.dias_solicitados,
           request.body.estatus_vacaciones);

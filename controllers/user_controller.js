@@ -1,21 +1,59 @@
-const path = require('path');
 const User = require('../models/user');
+const bcrypt = require('bcryptjs');
 
 exports.get_login = (request, response, next) => {
     response.render('login', {
-        username: request.session.username ? request.session.username : '',
+        correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
         info: ''
     });
 };
 
 exports.login = (request, response, next) => {
-    if (User.login(request.body.username, request.body.password)) {
-        request.session.username = request.body.username;
-        response.redirect('/dlc');
-    } else {
-        response.redirect('/users/login');
-    }
+    User.findOne(request.body.correo_usuario)
+        .then(([rows, fielData])=>{
 
+            //Si no existe el usuario, redirige a la pantalla de login
+            if (rows.length < 1) {
+                return response.redirect('/users/login');
+            }
+
+            const user = new User(rows[0].correo_usuario, rows[0].contrasenia, rows[0].no_empleado);
+            bcrypt.compare(request.body.contrasenia, user.contrasenia)
+                .then(doMatch => {
+                    if (doMatch) {
+                        request.session.isLoggedIn = true;
+                        request.session.user = user;
+                        request.session.correo_usuario = user.no_empleado;
+                        return request.session.save(err => {
+                            response.redirect('/dlc');
+                        });
+                    }
+                    response.redirect('/users/login');
+                }).catch(err => {
+                    response.redirect('/users/login');
+                });
+        }).catch((error)=>{
+            console.log(error)
+        });
+
+};
+
+exports.get_signup = (request, response, next) => {
+    response.render('signup', {
+        correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
+        info: ''
+    });
+};
+
+exports.post_signup = (request, response, next) => {
+    const user =
+        new User(request.body.correo_usuario, request.body.contrasenia, request.body.no_empleado);
+    user.save()
+        .then(()=>{
+            response.redirect('/users/login');
+        }).catch((error)=>{
+            console.log(error);
+        });
 };
 
 exports.logout = (request, response, next) => {

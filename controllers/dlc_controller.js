@@ -113,7 +113,6 @@ exports.post_s_vacaciones = (request, response, next) => {
           request.body.reanudacion_labores,
           request.body.fecha_primer_dia,
           request.body.fecha_ultimo_dia,
-          request.body.fecha_solicitud,
           request.body.dias_solicitados,
           request.body.estatus_vacaciones);
     vacaciones.save()

@@ -32,7 +32,6 @@ exports.post_s_ng_block = (request, response, next) => {
           request.body.turno_ng_block,
           request.body.descripcion_ng_block,
           request.body.fecha_uso_ng_block,
-          request.body.fecha_solicitud_ng_block,
           request.body.estatus_ng_block,
           );
     ng_block.save()

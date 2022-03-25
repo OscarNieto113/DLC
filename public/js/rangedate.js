@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var date_input=$('input[name="primer_dia"]');
+  var date_input=$('input[name="fecha_primer_dia"]');
   var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
   var options={
     multidate:true,

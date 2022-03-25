@@ -1,0 +1,17 @@
+<%- include('includes/head.ejs') %>
+    <h1 id="principal">Este sitio es de capybaras</h1>
+    <h2>Sitio administrativo de capybaras:</h2>
+    <form action="/users/signup" method="POST">
+        <!--<input type="hidden" name="_csrf" value="= csrfToken " >-->
+        <label for="no_empleado">no_empleado: </label>
+        <input type="text" id="no_empleado" name="no_empleado" >
+        <label for="correo_usuario">correo_usuario: </label>
+        <input type="text" id="correo_usuario" name="correo_usuario" >
+        <label for="contrasenia">contrasenia: </label>
+        <input type="password" id="contrasenia" name="contrasenia" >
+        <br><br>
+        <input type="submit" value="Enviar">
+    </form>
+    <br><br>
+    <a href="/capybaras">Regresar a la lista de capybaras</a>
+<%- include('includes/foot.ejs') %>

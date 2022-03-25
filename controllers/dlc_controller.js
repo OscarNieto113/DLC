@@ -9,6 +9,7 @@ const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
 const Nps = require('../models/nps');
+const User = require('../models/user');
 
 
 
@@ -17,7 +18,7 @@ exports.get_s_ng_block = (request, response, next) => {
     console.log('GET /dlc/s_ng_block');
     response.render('s_ng_block', {
       //
-              username: request.session.username ? request.session.username : '',
+              correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
               info: ''
           });
       };
@@ -56,7 +57,7 @@ exports.get_a_ng_block = (request, response, next) => {
             console.log(rows);
             response.render('a_ng_block', {
                 ng_block: rows,
-                username: request.session.username ? request.session.username : '',
+                correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
                 ultimo_estatus_ng: request.cookies.ultimo_estatus_ng ? request.cookies.ultimo_estatus_ng : '',
                 info: info //El primer info es la variable del template, el segundo la constante creada arriba
             });
@@ -96,7 +97,7 @@ exports.get_s_vacaciones = (request, response, next) => {
     console.log('GET /dlc/s_vacaciones');
     response.render('s_vacaciones', {
       //
-              username: request.session.username ? request.session.username : '',
+              correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
               info: ''
           });
       };
@@ -138,7 +139,7 @@ exports.get_a_vacaciones = (request, response, next) => {
         console.log(rows);
         response.render('a_vacaciones', {
             vacaciones: rows,
-            username: request.session.username ? request.session.username : '',
+            correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
             ultimo_estatus_vacaciones: request.cookies.ultimo_estatus_vacaciones ? request.cookies.ultimo_estatus_vacaciones : '',
             info: info //El primer info es la variable del template, el segundo la constante creada arriba
         });
@@ -166,8 +167,8 @@ exports.post_a_vacaciones = (request, response, next) => {
 //------------------------Aprobar Vacaciones--------------------------------
 
 //------------------------Registrar Usuario--------------------------------
-exports.get_r_usuario = (request, response, next) => {
-    console.log('GET /dlc/r_usuario');
+exports.get_registrar_empleado = (request, response, next) => {
+    console.log('GET /dlc/registrar_empleado');
     console.log(request.cookies);
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
@@ -176,7 +177,7 @@ exports.get_r_usuario = (request, response, next) => {
         console.log(rows); //Prueba
         response.render('r_usuario', {
           area: rows,
-          username: request.session.username ? request.session.username : '',
+          correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
           ultimo_empleado: request.cookies.ultimo_empleado ? request.cookies.ultimo_empleado : '',
           info: info //El primer info es la variable del template, el segundo la constante creada arriba
         });
@@ -186,8 +187,8 @@ exports.get_r_usuario = (request, response, next) => {
     });
 };
 
-exports.post_r_usuario = (request, response, next) => {
-    console.log('POST /dlc/r_usuario');
+exports.post_registrar_empleado = (request, response, next) => {
+    console.log('POST /dlc/registrar_empleado');
 
     console.log(request.body);
     const empleado =
@@ -197,7 +198,7 @@ exports.post_r_usuario = (request, response, next) => {
           request.body.fecha_contratacion,
           request.body.fecha_nacimiento,
           request.body.correo_empresarial,
-          request.body.nombres_empleado,
+          request.body.nombres_empleados,
           request.body.apellido_paterno,
           request.body.apellido_materno,
           request.body.dias_vacaciones_restantes,
@@ -216,23 +217,52 @@ exports.post_r_usuario = (request, response, next) => {
 
 
 //------------------------Consultar informacion personal (perfil)--------------------------------
-exports.get_d_usuario = (request, response, next) => {
-    console.log('GET /dlc/d_usuario');
+
+exports.get_informacion_empleado = (request, response, next) => {
+  console.log('GET /dlc/d_empleado');
+  console.log(request.params.correo_usuario);
+    //console.log(request.get('Cookie').split('=')[1]);
     console.log(request.cookies);
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
-    Empleado.fetchAll() //cambiar a fetchOne falta definir la consulta
-    .then(([rows, fieldData]) => {
-      console.log(rows); //Prueba
-      response.render('datos_empleado', {
-        empleado: rows,
-        username: request.session.username ? request.session.username : '',
-      });
-    })
-    .catch(err => {
-        console.log(err);
-    });
-  }
+    Empleado.fetchEmpleadoAll(request.params.no_empleado)
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.render('datos_empleado', {
+                empleado: rows,
+                no_empleado: request.session.no_empleado ? request.session.no_empleado : '',
+                ultimo_empleado: request.cookies.ultimo_empleado ? request.cookies.ultimo_empleado : '',
+                info: info //El primer info es la variable del template, el segundo la constante creada arriba
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+
+exports.get_informacion_empleado = (request, response, next) => {
+    console.log('Ruta /dlc');
+    console.log(request.params.no_empleado);
+    //console.log(request.get('Cookie').split('=')[1]);
+    console.log(request.cookies);
+    console.log('Ruta /dlc');
+    const info = request.session.info ? request.session.info : '';
+    request.session.info = '';
+    Empleado.fetchEmpleadoAll(request.params.no_empleado)
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.render('datos_empleado', {
+                empleado: rows,
+                correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
+                ultimo_empleado: request.cookies.ultimo_empleado ? request.cookies.ultimo_empleado : '',
+                info: info //El primer info es la variable del template, el segundo la constante creada arriba
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 //------------------------Consultar informacion personal (perfil)---------------------------------
 
 //------------------------Consultar las solicitudes de vacaciones--------------------------------
@@ -335,7 +365,7 @@ exports.listar = (request, response, next) => {
           response.render('main', {
             noticia: rows,
             publicacion: rows2,
-            username: request.session.username ? request.session.username : '',
+            correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
             ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
             info: info //El primer info es la variable del template, el segundo la constante creada arriba
           });
@@ -347,6 +377,5 @@ exports.listar = (request, response, next) => {
     .catch(err => {
         console.log(err);
     });
-
 }
 //------------------------Main--------------------------------

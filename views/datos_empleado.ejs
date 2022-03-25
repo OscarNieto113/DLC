@@ -4,6 +4,7 @@
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
+      <% for (let empleado1 of empleado) { %>
       <div class="container bootstrap snippet">
         <div class="row">
       		<div class="col-sm-9"><h1>Mi Perfil</h1></div>
@@ -20,13 +21,14 @@
                       <div class="form-group">
                           <div class="col-xs-6">
                               <label for="nombre"><h4>Nombre(s)</h4></label>
-                              <input type="text" class="form-control" name="nombre" id="nombre" value="Eros" disabled>
+                              <input type="text" class="form-control" name="nombre" id="nombre" value="<%= empleado1.nombres_empleados %>" disabled>
                           </div>
                       </div>
+
                       <div class="form-group">
                           <div class="col-xs-6">
                             <label for="apellidoP"><h4>Apellidos</h4></label>
-                              <input type="text" class="form-control" name="apellidoP" id="apellidoP" value="Guillén" disabled>
+                              <input type="text" class="form-control" name="apellidoP" id="apellidoP" value="<%= empleado1.apellido_paterno %> <%= empleado1.apellido_materno %>" disabled>
                           </div>
                       </div>
                   </div>
@@ -41,7 +43,7 @@
                       <br>
                       <br>
                         <label for="no_empleado"><h4>No. Empleado</h4></label>
-                        <input type="text" class="form-control" name="no_empleado" id="no_empleado" value="A01702752" disabled>
+                        <input type="text" class="form-control" name="no_empleado" id="no_empleado" value="<%= empleado1.no_empleado %>" disabled>
                     </div>
                   </div>
                   <div class="form-group">
@@ -50,13 +52,21 @@
                         <br>
                         <br>
                           <label for="email"><h4>Correo electrónico</h4></label>
-                          <input type="email" class="form-control" name="email" id="email" value="A01702752@natgas" disabled>
+                          <input type="email" class="form-control" name="email" id="email" value="<%= empleado1.correo_empresarial %>" disabled>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-xs-6">
+                        <br>
+                        <br>
+                        <br>
+                          <label for="vacacionesR"><h4>Días de vacaciones restantes</h4></label>
+                          <input type="text" class="form-control" name="vacacionesR" id="vacacionesR" value="<%= empleado1.dias_vacaciones_restantes %>" disabled>
                       </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="col-sm-5">
               <div class="tab-content">
                 <div class="tab-pane active" id="home">
@@ -65,40 +75,44 @@
                       <br>
                       <br>
                       <br>
-                        <label for="ng_blockR"><h4>Ng blocks restantes</h4></label>
-                        <input type="text" class="form-control" name="ng_blockR" id="ng_blockR" value="3" disabled>
+                        <label for="no_empleado"><h4>Fecha de Nacimiento</h4></label>
+                        <input type="text" class="form-control" name="no_empleado" id="no_empleado" value="<%= empleado1.fecha_nacimiento %>" disabled>
                     </div>
                   </div>
-
                   <div class="form-group">
                       <div class="col-xs-6">
                         <br>
                         <br>
                         <br>
-                          <label for="vacacionesR"><h4>Días de vacaciones restantes</h4></label>
-                          <input type="text" class="form-control" name="vacacionesR" id="vacacionesR" value="8" disabled>
+                          <label for="email"><h4>Departamento</h4></label>
+                          <input type="email" class="form-control" name="email" id="email" value="<%= empleado1.id_area %>" disabled>
                       </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <br>
+                      <br>
+                      <br>
+                        <label for="ng_blockR"><h4>Ng blocks restantes</h4></label>
+                        <input type="text" class="form-control" name="ng_blockR" id="ng_blockR" value="<%= empleado1.ng_blocks_restantes %>" disabled>
+                        <% } %>
+                    </div>
                   </div>
                 </div>
               </div>
-              <br>
+              <br><br>
             </div>
-
+            </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
               <a href="/dlc/d_usuario/v_ng_block">
                 <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/v_ng_block">Ver solicitudes NG Blocks</button>
               </a>
-
               <a href="/dlc/d_usuario/v_vacaciones">
                 <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/v_vacaciones">Ver solicitudes de Vacaciones</button>
               </a>
-
-            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
 <%- include('includes/foot.ejs') %>

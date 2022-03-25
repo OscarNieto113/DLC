@@ -21,11 +21,11 @@ router.get('/a_vacaciones', dlc_controller.get_a_vacaciones);
 router.post('/a_vacaciones', dlc_controller.post_a_vacaciones);
 
 //Registrar Usuario
-router.get('/r_usuario', dlc_controller.get_r_usuario);
-router.post('/r_usuario', dlc_controller.post_r_usuario);
+router.get('/r_usuario', dlc_controller.get_registrar_empleado);
+router.post('/r_usuario', dlc_controller.post_registrar_empleado);
 
-//Interfaz nueva de usuario
-router.get('/d_usuario', dlc_controller.get_d_usuario);
+//Interfaz datos del empleado
+router.get('/:no_empleado', dlc_controller.get_informacion_empleado);
 
 //Reporte NPS
 router.get('/nps', dlc_controller.get_nps);

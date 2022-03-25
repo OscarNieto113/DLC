@@ -1,4 +1,4 @@
-const path = require('path');
+
 const Area = require('../models/area');
 const Empleado = require('../models/empleado');
 const Ng_Block = require('../models/ng_block');
@@ -10,8 +10,6 @@ const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
 const Nps = require('../models/nps');
 const User = require('../models/user');
-
-
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_s_ng_block = (request, response, next) => {
@@ -82,6 +80,26 @@ exports.post_a_ng_block = (request, response, next) => {
     .catch(err => console.log(err));
 };
 //------------------------Aprobar NG Block--------------------------------
+
+
+//------------------------Consultar las solicitudes de NG BLOCK--------------------------------
+exports.get_v_ng_block = (request, response, next) => {
+    console.log('GET /dlc/d_usuario/v_ng_block');
+    Ng_Block.fetchAll()
+    .then(([rows, fieldData]) => {
+        console.log(rows);
+        response.render('v_ng_block', {
+            ng_block: rows
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
+//------------------------Consultar las solicitudes de NG BLOCK--------------------------------
+
+
 
 //------------------------ Reportes NPS se va a borrar --------------------------------
 exports.get_nps = (request, response) => {
@@ -169,17 +187,12 @@ exports.post_a_vacaciones = (request, response, next) => {
 //------------------------Registrar Usuario--------------------------------
 exports.get_registrar_empleado = (request, response, next) => {
     console.log('GET /dlc/registrar_empleado');
-    console.log(request.cookies);
-    const info = request.session.info ? request.session.info : '';
-    request.session.info = '';
     Area.fetchAll()
-      .then(([rows, fieldData]) => {
-        console.log(rows); //Prueba
+      .then(([area, fieldData]) => {
         response.render('r_usuario', {
-          area: rows,
           correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-          ultimo_empleado: request.cookies.ultimo_empleado ? request.cookies.ultimo_empleado : '',
-          info: info //El primer info es la variable del template, el segundo la constante creada arriba
+          info: '', //El primer info es la variable del template, el segundo la constante creada arriba
+          area: area,
         });
     })
     .catch(err => {
@@ -281,22 +294,7 @@ exports.get_v_vacaciones = (request, response, next) => {
 }
 //------------------------Consultar las solicitudes de vacaciones--------------------------------
 
-//------------------------Consultar las solicitudes de NG BLOCK--------------------------------
-exports.get_v_ng_block = (request, response, next) => {
-    console.log('GET /dlc/d_usuario/v_ng_block');
-    Ng_Block.fetchAll()
-    .then(([rows, fieldData]) => {
-        console.log(rows);
-        response.render('v_ng_block', {
-            ng_block: rows
-        });
-    })
-    .catch(err => {
-        console.log(err);
-    });
-}
 
-//------------------------Consultar las solicitudes de NG BLOCK--------------------------------
 
 
 //------------------------Main--------------------------------

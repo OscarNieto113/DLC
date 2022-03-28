@@ -82,22 +82,57 @@ exports.post_a_ng_block = (request, response, next) => {
 //------------------------Aprobar NG Block--------------------------------
 
 
-//------------------------Consultar las solicitudes de NG BLOCK--------------------------------
-exports.get_v_ng_block = (request, response, next) => {
-    console.log('GET /dlc/d_usuario/v_ng_block');
-    Ng_Block.fetchAll()
+//------------------------Consultar Vacacciones solicitadas--------------------------------
+exports.get_vacaciones_solicitadas = (request, response, next) => {
+    console.log('GET /dlc/:no_empleado/vacaciones_solicitadas');
+    console.log(request.params.no_empleado);
+    //console.log(request.get('Cookie').split('=')[1]);
+    console.log(request.cookies);
+    console.log('GET /dlc/:no_empleado/vacaciones_solicitadas');
+    const info = request.session.info ? request.session.info : '';
+    request.session.info = '';
+    Vacaciones.fetchSome(request.params.no_empleado)
     .then(([rows, fieldData]) => {
-        console.log(rows);
-        response.render('v_ng_block', {
-            ng_block: rows
-        });
-    })
-    .catch(err => {
-        console.log(err);
-    });
+      console.log(rows);
+      response.render('vacaciones_solicitadas', {
+          vacaciones: rows,
+          correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
+          ultimo_sol_vacaciones: request.cookies.ultimo_sol_vacaciones ? request.cookies.ultimo_sol_vacaciones : '',
+          info: info //El primer info es la variable del template, el segundo la constante creada arriba
+      });
+  })
+
+  .catch(err => {
+      console.log(err);
+  });
 }
 
-//------------------------Consultar las solicitudes de NG BLOCK--------------------------------
+//------------------------Consultar Vacacciones solicitadas--------------------------------
+
+
+//------------------------Consultar NG Blocks solicitadas--------------------------------
+exports.get_ngblocks_solicitados = (request, response, next) => {
+    console.log('GET /dlc/:no_empleado/get_ngblocks_solicitados');
+    console.log(request.params.no_empleado);
+    //console.log(request.get('Cookie').split('=')[1]);
+    console.log(request.cookies);
+    console.log('GET /dlc/:no_empleado/get_ngblocks_solicitados');
+    const info = request.session.info ? request.session.info : '';
+    request.session.info = '';
+    Ng_Block.fetchSome(request.params.no_empleado)
+    .then(([rows, fieldData]) => {
+      console.log(rows);
+      response.render('ngblocks_solicitados', {
+          ng_block: rows,
+          correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
+          info: info //El primer info es la variable del template, el segundo la constante creada arriba
+      });
+  })
+  .catch(err => {
+      console.log(err);
+  });
+}
+//------------------------Consultar NGblocks solicitadas--------------------------------
 
 
 
@@ -230,36 +265,12 @@ exports.post_registrar_empleado = (request, response, next) => {
 
 
 //------------------------Consultar informacion personal (perfil)--------------------------------
-
 exports.get_informacion_empleado = (request, response, next) => {
-  console.log('GET /dlc/d_empleado');
-  console.log(request.params.correo_usuario);
-    //console.log(request.get('Cookie').split('=')[1]);
-    console.log(request.cookies);
-    const info = request.session.info ? request.session.info : '';
-    request.session.info = '';
-    Empleado.fetchEmpleadoAll(request.params.no_empleado)
-        .then(([rows, fieldData]) => {
-            console.log(rows);
-            response.render('datos_empleado', {
-                empleado: rows,
-                no_empleado: request.session.no_empleado ? request.session.no_empleado : '',
-                ultimo_empleado: request.cookies.ultimo_empleado ? request.cookies.ultimo_empleado : '',
-                info: info //El primer info es la variable del template, el segundo la constante creada arriba
-            });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}
-
-
-exports.get_informacion_empleado = (request, response, next) => {
-    console.log('Ruta /dlc');
+    console.log('Ruta /dlc/:no_empleado');
     console.log(request.params.no_empleado);
     //console.log(request.get('Cookie').split('=')[1]);
     console.log(request.cookies);
-    console.log('Ruta /dlc');
+    console.log('Ruta /dlc/:no_empleado');
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
     Empleado.fetchEmpleadoAll(request.params.no_empleado)
@@ -277,24 +288,6 @@ exports.get_informacion_empleado = (request, response, next) => {
         });
 }
 //------------------------Consultar informacion personal (perfil)---------------------------------
-
-//------------------------Consultar las solicitudes de vacaciones--------------------------------
-exports.get_v_vacaciones = (request, response, next) => {
-    console.log('GET /dlc/d_usuario/v_vacaciones');
-    Vacaciones.fetchAll()
-    .then(([rows, fieldData]) => {
-        console.log(rows);
-        response.render('v_vacaciones', {
-            vacaciones: rows
-        });
-    })
-    .catch(err => {
-        console.log(err);
-    });
-}
-//------------------------Consultar las solicitudes de vacaciones--------------------------------
-
-
 
 
 //------------------------Main--------------------------------

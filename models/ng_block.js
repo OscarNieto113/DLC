@@ -18,8 +18,17 @@ module.exports = class Ng_Block {
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT * FROM ng_block');
+        return db.execute(
+          'SELECT * FROM ng_block');
     }
+
+    static fetchSome(no_empleado) {
+        return db.execute(
+          'SELECT turno_ng_block, descripcion_ng_block, fecha_uso_ng_block, estatus_ng_block, ng.no_empleado ' +
+          'FROM empleado e, ng_block ng ' +
+          'WHERE e.no_empleado = ng.no_empleado AND ng.no_empleado=?', [no_empleado]);
+    }
+
 
     static fetchOne(id_ng_block) {
         return db.execute('SELECT * FROM ng_block WHERE id=?', [id_ng_block]);

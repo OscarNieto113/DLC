@@ -12,10 +12,6 @@ router.post('/s_ng_block', dlc_controller.post_s_ng_block);
 router.get('/a_ng_block', dlc_controller.get_a_ng_block);
 router.post('/a_ng_block', dlc_controller.post_a_ng_block);
 
-//Ver solicitud de NG Block
-router.get('/d_usuario/v_ng_block', dlc_controller.get_v_ng_block);
-
-
 //Solicitar Vacaciones
 router.get('/s_vacaciones', dlc_controller.get_s_vacaciones);
 router.post('/s_vacaciones', dlc_controller.post_s_vacaciones);
@@ -34,8 +30,11 @@ router.get('/:no_empleado', dlc_controller.get_informacion_empleado);
 //Reporte NPS
 router.get('/nps', dlc_controller.get_nps);
 
-//Ver solicitud de vacaciones
-router.get('/d_usuario/v_vacaciones', dlc_controller.get_v_vacaciones);
+//Ver solicitud de tus vacaciones
+router.get('/:no_empleado/vacaciones_solicitadas', dlc_controller.get_vacaciones_solicitadas);
+
+//Ver solicitud de tus NG Block
+router.get('/:no_empleado/ngblocks_solicitados', dlc_controller.get_ngblocks_solicitados);
 
 //MAIN INDEX
 //router.post('/objetivo', dlc_controller.post_objetivo);

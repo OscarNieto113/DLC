@@ -24,6 +24,13 @@ module.exports = class Vacaciones {
         return db.execute('SELECT * FROM vacaciones');
     }
 
+    static fetchSome(no_empleado) {
+        return db.execute(
+          'SELECT fecha_solicitud, fecha_primer_dia, fecha_ultimo_dia, reanudacion_labores, dias_solicitados, responsable_ausencia, observaciones, estatus_vacaciones ' +
+          'FROM empleado e, vacaciones v ' +
+          'WHERE e.no_empleado = v.no_empleado AND v.no_empleado=?', [no_empleado]);
+    }
+
     static fetchOne(folio) {
         return db.execute('SELECT * FROM vacaciones WHERE id=?', [folio]);
     }

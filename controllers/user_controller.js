@@ -9,11 +9,13 @@ exports.get_login = (request, response, next) => {
 };
 
 exports.login = (request, response, next) => {
-    User.findOne(request.body.correo_usuario)
+    request.session.error = "";
+    const email = request.body.correo_usuario;
+    User.findOne(email)
         .then(([rows, fielData])=>{
-
             //Si no existe el usuario, redirige a la pantalla de login
             if (rows.length < 1) {
+                request.session.error = "El usuario y/o contraseña no coinciden";
                 return response.redirect('/users/login');
             }
 
@@ -23,7 +25,7 @@ exports.login = (request, response, next) => {
                     if (doMatch) {
                         request.session.isLoggedIn = true;
                         request.session.user = user;
-                        request.session.correo_usuario = user.no_empleado;
+                        request.session.user_no_empleado = user.no_empleado;
                         return request.session.save(err => {
                             response.redirect('/dlc');
                         });

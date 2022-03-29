@@ -324,11 +324,12 @@ exports.post_noticia = (request, response, next) => {
 exports.post_publicacion = (request, response, next) => {
     console.log('POST /dlc/publicacion');
     console.log(request.body);
+    console.log(request.file);
     const publicacion =
         new Publicacion(
           request.body.titulo_publicacion,
           request.body.descripcion_publicacion,
-          request.body.url_imagen_publicacion);
+          request.file.filename);
     publicacion.save()
     //
     .then(() => {

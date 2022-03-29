@@ -20,6 +20,7 @@ router.post('/s_vacaciones', dlc_controller.post_s_vacaciones);
 router.get('/a_vacaciones', dlc_controller.get_a_vacaciones);
 router.post('/a_vacaciones', dlc_controller.post_a_vacaciones);
 
+<<<<<<< HEAD
 //Registrar Usuario
 router.get('/r_usuario', dlc_controller.get_registrar_empleado);
 router.post('/r_usuario', dlc_controller.post_registrar_empleado);
@@ -42,5 +43,11 @@ router.post('/noticia', dlc_controller.post_noticia);
 router.post('/publicacion', dlc_controller.post_publicacion);
 router.use('/', dlc_controller.listar);
 
+=======
+//Reporte NPS
+router.get('/nps', dlc_controller.get_nps);
+
+router.use('/', dlc_controller.listar); //Main Index
+>>>>>>> 7ff8f3e6dd97f1cce6954e2db2841355aedf69d0
 
 module.exports = router;

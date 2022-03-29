@@ -1,8 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 
 const dlc_controller = require('../controllers/dlc_controller');
 
+const fileStorage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        //'uploads': Es el directorio del servidor donde se subirán los archivos
+        callback(null, 'uploads');
+    },
+    filename: (request, file, callback) => {
+        //aquí configuramos el nombre que queremos que tenga el archivo en el servidor,
+        //para que no haya problema si se suben 2 archivos con el mismo nombre concatenamos el timestamp
+        callback(null, new Date().getTime()+ '-' + file.originalname);
+    },
+});
 
 //Solicitar NG BLOCK
 router.get('/s_ng_block', dlc_controller.get_s_ng_block);
@@ -38,8 +50,8 @@ router.get('/profile/ngblocks_solicitados', dlc_controller.get_ngblocks_solicita
 
 //MAIN INDEX
 //router.post('/objetivo', dlc_controller.post_objetivo);
-router.post('/noticia', dlc_controller.post_noticia);
-router.post('/publicacion', dlc_controller.post_publicacion);
+router.post('/noticia',multer({ storage: fileStorage }).single('url_imagen_noticia') ,dlc_controller.post_noticia);
+router.post('/publicacion', multer({ storage: fileStorage }).single('url_imagen_publicacion'),dlc_controller.post_publicacion);
 router.use('/', dlc_controller.listar);
 
 

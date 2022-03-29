@@ -21,7 +21,10 @@ module.exports = class Vacaciones {
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT * FROM vacaciones');
+      return db.execute(
+        'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
+        'FROM empleado e, vacaciones v, area a ' +
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones ="Pendiente" ' );
     }
 
     static fetchSome(no_empleado) {
@@ -30,6 +33,14 @@ module.exports = class Vacaciones {
           'FROM empleado e, vacaciones v ' +
           'WHERE e.no_empleado = v.no_empleado AND v.no_empleado=?', [no_empleado]);
     }
+
+    static fetchByStatus(estatus_vacaciones) {
+        return db.execute(
+          'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
+          'FROM empleado e, vacaciones v, area a ' +
+          'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones =?', [estatus_vacaciones]);
+    }
+
 
     static fetchOne(folio) {
         return db.execute('SELECT * FROM vacaciones WHERE id=?', [folio]);

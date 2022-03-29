@@ -43,8 +43,8 @@
         <% if (vacaciones.length > 0) { %>
         <% for (let vacaciones1 of vacaciones) { %>
           <tr>
-            <td><center>Nombre</center></td>
-            <td><center>Departamento</center></td>
+            <td><center><%=vacaciones1.nombres_empleados%> <%=vacaciones1.apellido_paterno%> <%=vacaciones1.apellido_materno%></center></td>
+            <td><center><%=vacaciones1.nombre_area%></center></td>
             <td><center><%= vacaciones1.responsable_ausencia %></center></td>
             <td><center><%= vacaciones1.dias_solicitados %></center></td>
             <td><center>

@@ -4,7 +4,8 @@ $(function() {
       orientation: "bottom left",
       startDate: new Date(),
       daysOfWeekDisabled: [0,6],
-      todayHighlight: true
+      todayHighlight: true,
+      autoclose: true
     });
 });
 
@@ -12,7 +13,8 @@ $(function() {
     $('#fecha_nacimiento').datepicker({
       format: 'yyyy-mm-dd',
       orientation: "bottom left",
-      todayHighlight: true
+      todayHighlight: true,
+      autoclose: true
     });
 });
 
@@ -20,7 +22,8 @@ $(function() {
     $('#fecha_contratacion').datepicker({
       format: 'yyyy-mm-dd',
       orientation: "bottom left",
-      todayHighlight: true
+      todayHighlight: true,
+      autoclose: true
     });
 });
 

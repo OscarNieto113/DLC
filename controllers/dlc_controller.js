@@ -307,7 +307,8 @@ exports.post_objetivo = (request, response, next) => {
 exports.post_noticia = (request, response, next) => {
     console.log('POST /dlc/noticia');
     console.log(request.body);
-    const noticia = new Noticia(request.body.url_imagen_noticia);
+    console.log(request.file);
+    const noticia = new Noticia(request.file.filename);
     noticia.save()
     .then(() => {
         request.session.info ='Fue registrado con éxito';

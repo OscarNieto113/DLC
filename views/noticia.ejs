@@ -48,9 +48,9 @@
                   <!--Dato no permanente se va a borrar -->
                   <!--<input type="hidden" id="id_noticia" name="id_noticia" value="5"> -->
                   <!--Dato no permanente se va a borrar -->
-                  <form action="/dlc/noticia" method="POST">
+                  <form action="/dlc/noticia" method="POST" enctype="multipart/form-data">
                   <label for="url_imagen_noticia" class="col-form-label">URL de la imagen:</label>
-                  <input type="url" class="form-control" id="url_imagen_noticia" name="url_imagen_noticia" autocomplete="off"><br>
+                  <input type="file" class="form-control" id="url_imagen_noticia" name="url_imagen_noticia" autocomplete="off"><br>
                   <input type="submit" value="Enviar" class="btn btn-primary">
                   </form>
 

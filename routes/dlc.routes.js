@@ -25,16 +25,16 @@ router.get('/r_usuario', dlc_controller.get_registrar_empleado);
 router.post('/r_usuario', dlc_controller.post_registrar_empleado);
 
 //Interfaz datos del empleado
-router.get('/:no_empleado', dlc_controller.get_informacion_empleado);
+router.get('/profile', dlc_controller.get_profile);
 
 //Reporte NPS
 router.get('/nps', dlc_controller.get_nps);
 
 //Ver solicitud de tus vacaciones
-router.get('/:no_empleado/vacaciones_solicitadas', dlc_controller.get_vacaciones_solicitadas);
+router.get('/profile/vacaciones_solicitadas', dlc_controller.get_vacaciones_solicitadas);
 
 //Ver solicitud de tus NG Block
-router.get('/:no_empleado/ngblocks_solicitados', dlc_controller.get_ngblocks_solicitados);
+router.get('/profile/ngblocks_solicitados', dlc_controller.get_ngblocks_solicitados);
 
 //MAIN INDEX
 //router.post('/objetivo', dlc_controller.post_objetivo);

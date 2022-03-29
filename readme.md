@@ -13,7 +13,9 @@ Para correr el sitio ten encuenta los siguientes puntos:
 ## Webpage sites
 
 ### Pagina PRINCIPAL
-http://localhost:3000/dlc
+http://localhost:3000/users/login
+correo: A01705004@natgas.com.mx
+contraseña: 1234
 
 
 ## Comandos básicos GIT

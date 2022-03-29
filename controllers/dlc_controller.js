@@ -84,19 +84,20 @@ exports.post_a_ng_block = (request, response, next) => {
 
 //------------------------Consultar Vacacciones solicitadas--------------------------------
 exports.get_vacaciones_solicitadas = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/:no_empleado/vacaciones_solicitadas');
     console.log(request.params.no_empleado);
+    console.log(request.session.user_no_empleado);
     //console.log(request.get('Cookie').split('=')[1]);
     console.log(request.cookies);
     console.log('GET /dlc/:no_empleado/vacaciones_solicitadas');
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
-    Vacaciones.fetchSome(request.params.no_empleado)
+    Vacaciones.fetchSome(no_empleado)
     .then(([rows, fieldData]) => {
       console.log(rows);
       response.render('vacaciones_solicitadas', {
           vacaciones: rows,
-          correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
           ultimo_sol_vacaciones: request.cookies.ultimo_sol_vacaciones ? request.cookies.ultimo_sol_vacaciones : '',
           info: info //El primer info es la variable del template, el segundo la constante creada arriba
       });
@@ -112,14 +113,15 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
 
 //------------------------Consultar NG Blocks solicitadas--------------------------------
 exports.get_ngblocks_solicitados = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/:no_empleado/get_ngblocks_solicitados');
-    console.log(request.params.no_empleado);
+    console.log(request.session.user_no_empleado);
     //console.log(request.get('Cookie').split('=')[1]);
     console.log(request.cookies);
     console.log('GET /dlc/:no_empleado/get_ngblocks_solicitados');
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
-    Ng_Block.fetchSome(request.params.no_empleado)
+    Ng_Block.fetchSome(no_empleado)
     .then(([rows, fieldData]) => {
       console.log(rows);
       response.render('ngblocks_solicitados', {
@@ -265,22 +267,19 @@ exports.post_registrar_empleado = (request, response, next) => {
 
 
 //------------------------Consultar informacion personal (perfil)--------------------------------
-exports.get_informacion_empleado = (request, response, next) => {
+exports.get_profile = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('Ruta /dlc/:no_empleado');
-    console.log(request.params.no_empleado);
-    //console.log(request.get('Cookie').split('=')[1]);
+    console.log(request.session.user_no_empleado);
     console.log(request.cookies);
     console.log('Ruta /dlc/:no_empleado');
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
-    Empleado.fetchEmpleadoAll(request.params.no_empleado)
+    Empleado.fetchEmpleadoAll(no_empleado)
         .then(([rows, fieldData]) => {
             console.log(rows);
-            response.render('datos_empleado', {
+            response.render('profile', {
                 empleado: rows,
-                correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-                ultimo_empleado: request.cookies.ultimo_empleado ? request.cookies.ultimo_empleado : '',
-                info: info //El primer info es la variable del template, el segundo la constante creada arriba
             });
         })
         .catch(err => {
@@ -352,8 +351,8 @@ exports.listar = (request, response, next) => {
       .then(([rows, fieldData]) => {
         Publicacion.fetchAll()
         .then(([rows2, fieldData]) => {
-          console.log(rows); //Prueba
-          console.log(rows2); //Prueba
+          //console.log(rows); //Prueba
+          //console.log(rows2); //Prueba
           response.render('main', {
             noticia: rows,
             publicacion: rows2,

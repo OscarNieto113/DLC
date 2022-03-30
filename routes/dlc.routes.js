@@ -52,8 +52,8 @@ router.get('/profile/ngblocks_solicitados', dlc_controller.get_ngblocks_solicita
 
 //MAIN INDEX
 //router.post('/objetivo', dlc_controller.post_objetivo);
-router.post('/noticia',multer({ storage: fileStorage }).single('url_imagen_noticia') ,dlc_controller.post_noticia);
-router.post('/publicacion', multer({ storage: fileStorage }).single('url_imagen_publicacion'),dlc_controller.post_publicacion);
+router.post('/noticia',multer({ storage: fileStorage }).single('imagen_noticia') ,dlc_controller.post_noticia);
+router.post('/publicacion', multer({ storage: fileStorage }).single('imagen_publicacion'),dlc_controller.post_publicacion);
 router.use('/', dlc_controller.listar);
 
 

@@ -38,7 +38,8 @@
             <th scope="col"><center>Dias solicitados</center></th>
             <th scope="col"><center>Información completa</center></th>
             <th scope="col"><center>Estatus actual</center></th>
-            <th scope="col"><center>Firma</center></th>
+            <th scope="col"><center></center></th>
+            <th scope="col"><center></center></th>
           </tr>
         </thead>
 
@@ -65,13 +66,17 @@
             </center></td>
             <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
             <td><center>
-              <form>
-              <select name="estatus_vacaciones<%= vacaciones1.folio %>" class="btn btn-secondary dropdown-toggle" aria-label="Default select example">
-                <option value="" disabled selected>Cambiar estatus</option>
-                <option value="Aprobado">Aprobado</option>
-                <option value="Rechazado">Rechazado</option>
-              </select>
-
+              <form action="/dlc/a_vacaciones" method="POST">
+                <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Aprobado">
+                <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>">
+                <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color:#86B049">
+              </form>
+            </center></td>
+            <td><center>
+              <form action="/dlc/a_vacaciones" method="POST">
+                <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Rechazado">
+                <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>">
+                <input type="submit" value="Rechazar" class="btn btn-primary"style="background-color:#B8293D">
               </form>
             </center></td>
           </tr>

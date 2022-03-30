@@ -184,7 +184,7 @@ exports.post_s_vacaciones = (request, response, next) => {
 //------------------------Solicitar Vacaciones--------------------------------
 
 //------------------------Aprobar Vacaciones--------------------------------
-exports.get_a_vacaciones = (request, response, next) => {
+exports.get_aprobar_vacaciones = (request, response, next) => {
     console.log('GET /dlc/a_vacaciones');
     console.log(request.cookies);
     const info = request.session.info ? request.session.info : '';
@@ -204,21 +204,14 @@ exports.get_a_vacaciones = (request, response, next) => {
     });
 }
 
-exports.post_a_vacaciones = (request, response, next) => {
+exports.post_estatus_vacaciones = (request, response, next) => {
     console.log('POST /dlc/s_vacaciones');
     console.log(request.body);
-    const vacaciones =
-        new Vacaciones(
-          request.body.estatus_vacaciones);
-    vacaciones.save()
-    .then(() => {
-        request.session.info = 'Los cambios se guardaron con éxito';
-        response.setHeader('Set-Cookie', 'ultimo_estatus_vacaciones='+vacaciones.id_vacaciones+'; HttpOnly');
-
-        response.redirect('/dlc');
-    })
-    .catch(err => console.log(err));
-};
+    Vacaciones.updateEstatus(request.body.estatus_vacaciones, request.body.folio)
+      .then(() => {
+          response.redirect('a_vacaciones');
+      }).catch(err => console.log(err));
+  }
 
 exports.aprobar_vacaciones_estatus = (request, response, next) => {
     console.log(request.params.estatus);

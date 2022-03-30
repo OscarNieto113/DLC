@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-03-2022 a las 23:36:47
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 7.4.27
+-- Tiempo de generación: 30-03-2022 a las 19:12:43
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `dlc`
 --
+CREATE DATABASE IF NOT EXISTS `dlc` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dlc`;
 
 -- --------------------------------------------------------
 
@@ -174,18 +176,19 @@ INSERT INTO `ng_block` (`id_ng_block`, `turno_ng_block`, `descripcion_ng_block`,
 
 CREATE TABLE `noticia` (
   `id_noticia` int(11) NOT NULL,
-  `url_imagen_noticia` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `imagen_noticia` varchar(300) DEFAULT NULL,
+  `fecha_noticia` date DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `noticia`
 --
 
-INSERT INTO `noticia` (`id_noticia`, `url_imagen_noticia`) VALUES
-(1, 'https://i.ibb.co/9yk4DH7/image.png'),
-(2, 'https://i.ibb.co/9yk4DH7/image.png'),
-(3, 'https://i.ibb.co/9yk4DH7/image.png'),
-(4, 'https://i.ibb.co/9yk4DH7/image.png');
+INSERT INTO `noticia` (`id_noticia`, `imagen_noticia`, `fecha_noticia`) VALUES
+(1, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-16'),
+(2, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-17'),
+(3, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-15'),
+(4, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-14');
 
 -- --------------------------------------------------------
 
@@ -263,18 +266,19 @@ CREATE TABLE `publicacion` (
   `id_publicacion` int(11) NOT NULL,
   `titulo_publicacion` varchar(50) DEFAULT NULL,
   `descripcion_publicacion` varchar(300) DEFAULT NULL,
-  `url_imagen_publicacion` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `imagen_publicacion` varchar(300) DEFAULT NULL,
+  `fecha_publicacion` date DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `publicacion`
 --
 
-INSERT INTO `publicacion` (`id_publicacion`, `titulo_publicacion`, `descripcion_publicacion`, `url_imagen_publicacion`) VALUES
-(1, 'Curso de Inglés', 'Inscribite a los cursos de inglés', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png'),
-(2, 'Limpieza dental', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png'),
-(3, 'Día del padre', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png'),
-(4, 'Trae a tu hijo al trabajo', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png');
+INSERT INTO `publicacion` (`id_publicacion`, `titulo_publicacion`, `descripcion_publicacion`, `imagen_publicacion`, `fecha_publicacion`) VALUES
+(1, 'Curso de Inglés', 'Inscribite a los cursos de inglés', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-03-30'),
+(2, 'Limpieza dental', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-03-30'),
+(3, 'Día del padre', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-03-30'),
+(4, 'Trae a tu hijo al trabajo', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-03-30');
 
 -- --------------------------------------------------------
 
@@ -341,7 +345,9 @@ INSERT INTO `vacaciones` (`folio`, `responsable_ausencia`, `observaciones`, `rea
 (17, 'Teresita Castañeda Barba', '  ', '2022-06-08', '2022-06-06', '2022-06-07', '2022-04-21', 2, 'Pendiente', 'A4'),
 (18, 'Pascuala Collado Royo', '  ', '2022-04-04', '2022-03-21', '2022-04-01', '2022-02-15', 10, 'Pendiente', 'A3'),
 (19, 'Zoraida Criado Zabala', '  ', '2022-04-25', '2022-04-18', '2022-04-22', '2022-04-09', 5, 'Pendiente', 'A2'),
-(20, 'Benita Martín Zabala', '  ', '2022-05-06', '2022-05-03', '2022-05-05', '2022-03-09', 3, 'Pendiente', 'A1');
+(20, 'Benita Martín Zabala', '  ', '2022-05-06', '2022-05-03', '2022-05-05', '2022-03-09', 3, 'Pendiente', 'A1'),
+(21, 'A01705091', 'ninguna', '2000-10-13', '2022-03-29', '2000-10-13', NULL, 5, 'Pendiente', 'A4'),
+(22, 'A01705091', 'ninguna', '2000-10-13', '2022-03-29', '2000-10-13', NULL, 5, 'Pendiente', 'A4');
 
 --
 -- Índices para tablas volcadas
@@ -449,7 +455,7 @@ ALTER TABLE `publicacion`
 -- AUTO_INCREMENT de la tabla `vacaciones`
 --
 ALTER TABLE `vacaciones`
-  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas

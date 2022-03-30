@@ -2,7 +2,7 @@
   <% if (publicacion.length > 0) { %>
     <% for (let publicacion1 of publicacion) { %>
       <div class="card mb-3">
-        <img class="card-img-top" src="<%= publicacion1.url_imagen_publicacion %>" alt="Card image cap">
+        <img class="card-img-top" src="<%= publicacion1.imagen_publicacion %>" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
             <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
@@ -35,8 +35,8 @@
                 <label for="descripcion_publicacion" class="col-form-label">Descripción de la publicación:</label>
                 <input type="text" class="form-control" id="descripcion_publicacion" name="descripcion_publicacion" autocomplete="off" required>
 
-                <label for="url_imagen_publicacion" class="col-form-label">Adjuntar imagen:</label>
-                <input type="file" class="form-control" id="url_imagen_publicacion" name="url_imagen_publicacion" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
+                <label for="imagen_publicacion" class="col-form-label">Adjuntar imagen:</label>
+                <input type="file" class="form-control" id="imagen_publicacion" name="imagen_publicacion" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
 
                 <input type="submit" value="Enviar" class="btn btn-primary">
             </form>

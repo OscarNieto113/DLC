@@ -57,11 +57,10 @@
               No. Empleado: <%= vacaciones1.no_empleado %>
               Responsable: <%= vacaciones1.responsable_ausencia %>
               Fecha Reanudacion: <%= vacaciones1.reanudacion_labores %>
-              Fecha primer día: <%= vacaciones1.fecha_primer_dia %>
-              Fecha ultimo día: <%= vacaciones1.fecha_ultimo_dia %>
-              Fecha de la solicitud: <%= vacaciones1.fecha_solicitud %>
-              Días solicitados: <%= vacaciones1.dias_solicitados %>
-              Estatus: <%= vacaciones1.estatus_vacaciones %>">
+              Fecha primer día: <%= vacaciones1.primer_dia %>
+              Fecha ultimo día: <%= vacaciones1.ultimo_dia %>
+              Fecha de la solicitud: <%= vacaciones1.fecha_solicitud %>">
+                Vacaciones
               </span>
             </center></td>
             <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
@@ -157,9 +156,7 @@
                   'Fecha Reanudacion: ' + vacaciones.reanudacion_labores +
                   'Fecha primer día: ' + vacaciones.fecha_primer_dia +
                   'Fecha ultimo día: ' + vacaciones.fecha_ultimo_dia +
-                  'Fecha de la solicitud: ' + vacaciones.fecha_solicitud +
-                  'Días solicitados: ' + vacaciones.dias_solicitados +
-                  'Estatus: ' + vacaciones.estatus_vacaciones+  '">' +
+                  'Fecha de la solicitud: ' + vacaciones.fecha_solicitud + ' " > vacaciones' +
                   '</span>' +
                 '</center></td>' +
                 '<td><center>' + vacaciones.estatus_vacaciones + '</center></td>' +

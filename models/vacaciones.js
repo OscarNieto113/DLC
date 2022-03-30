@@ -34,6 +34,13 @@ module.exports = class Vacaciones {
           'WHERE e.no_empleado = v.no_empleado AND v.no_empleado=?', [no_empleado]);
     }
 
+    static updateEstatus(estatus_vacaciones, folio) {
+        return db.execute(
+          'UPDATE vacaciones ' +
+          'SET estatus_vacaciones = ? ' +
+          'WHERE folio = ? ', [estatus_vacaciones, folio]);
+    }
+
     static fetchByStatus(estatus_vacaciones) {
         return db.execute(
           'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +

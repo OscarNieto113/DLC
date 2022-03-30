@@ -22,6 +22,13 @@ module.exports = class Ng_Block {
           'SELECT * FROM ng_block');
     }
 
+    static updateEstatus(estatus_ng_block, id_ng_block) {
+        return db.execute(
+          'UPDATE ng_block ' +
+          'SET estatus_ng_block = ? ' +
+          'WHERE id_ng_block = ? ', [estatus_ng_block, id_ng_block]);
+    }
+
     static fetchSome(no_empleado) {
         return db.execute(
           'SELECT turno_ng_block, descripcion_ng_block, fecha_uso_ng_block, estatus_ng_block, ng.no_empleado ' +

@@ -31,6 +31,7 @@ router.post('/s_vacaciones', dlc_controller.post_s_vacaciones);
 //Aprobar Vacaciones
 router.get('/a_vacaciones', dlc_controller.get_a_vacaciones);
 router.post('/a_vacaciones', dlc_controller.post_a_vacaciones);
+//router.get('/a_vacaciones/:estatus', dlc_controller.aprobar_vacaciones_estatus);
 
 //Registrar Usuario
 router.get('/r_usuario', dlc_controller.get_registrar_empleado);

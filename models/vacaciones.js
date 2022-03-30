@@ -36,8 +36,8 @@ module.exports = class Vacaciones {
     }
 
     static count () {
-      return db.execute(
-        'SELECT COUNT(folio) ' +
+      return db.query(
+        'SELECT COUNT(folio) as num ' +
         'FROM empleado e, vacaciones v, area a ' +
         'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area ');
     }

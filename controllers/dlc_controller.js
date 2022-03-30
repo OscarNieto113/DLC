@@ -201,18 +201,21 @@ exports.get_aprobar_vacaciones = (request, response, next) => {
 
 exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
   console.log('GET /dlc/a_vacaciones/:page');
-  var perPage = 5
-  var page = request.params.page || 1
+  var perPage = 5;
+  var page = request.params.page || 1;
+
   Vacaciones
     .fetchPagination(perPage, ((perPage * page) - perPage))
     .then(([vacaciones, fieldData]) => {
       Vacaciones
         .count()
         .then(([count, fieldData]) => {
+          console.log(count.values());
             response.render('estatus_vacaciones', {
                 vacaciones: vacaciones,
                 current: page,
                 pages: Math.ceil(((perPage * page) - count) / perPage)
+
             });
           })
           .catch(err => {

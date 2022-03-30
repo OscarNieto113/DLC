@@ -5,13 +5,8 @@ include('includes/sidebar.ejs') %>
     <div class="container">
       <h1 class="display-4">Aprobar vacaciones</h1>
 
-      <br />
-      <br />
-      <a><b>Solicitudes de Vacaciones</b></a>
-      <br />
-
       <div class="col-sm-4">
-        <br />
+        <br/>
         <label for="aprobar_vacaciones_estatus">Buscar: </label>
         <input type="text" name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus"/>
         <!--<label  for="aprobar_vacaciones_estatus" class="col-form-label" ><b>Filtrar</b></label>
@@ -68,51 +63,24 @@ include('includes/sidebar.ejs') %>
             <td>
               <center>
                 <form action="/dlc/a_vacacionesp/<%=current%>" method="POST">
-                  <input
-                    type="hidden"
-                    id="estatus_vacaciones"
-                    name="estatus_vacaciones"
-                    value="Aprobado"/>
-                  <input
-                    type="hidden"
-                    id="folio"
-                    name="folio"
-                    value="<%= vacaciones1.folio %>"/>
-                  <input
-                    type="submit"
-                    value="Aprobar"
-                    class="btn btn-primary"
-                    style="background-color: #86b049"/>
+                  <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Aprobado"/>
+                  <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
+                  <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color: #86b049"/>
                 </form>
               </center>
             </td>
             <td>
               <center>
                 <form action="/dlc/a_vacacionesp/<%=current%>" method="POST">
-                  <input
-                    type="hidden"
-                    id="estatus_vacaciones"
-                    name="estatus_vacaciones"
-                    value="Rechazado"
-                  />
-                  <input
-                    type="hidden"
-                    id="folio"
-                    name="folio"
-                    value="<%= vacaciones1.folio %>"
-                  />
-                  <input
-                    type="submit"
-                    value="Rechazar"
-                    class="btn btn-primary"
-                    style="background-color: #b8293d"
-                  />
+                  <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones"value="Rechazado"/>
+                  <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
+                  <input type="submit" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d"/>
                 </form>
               </center>
             </td>
           </tr>
           <% } %> <% } else { %>
-          <h1>No hay solicitudes existentes.</h1>
+          <h1>No hay solicitudes Pendientes.</h1>
           <% } %>
         </tbody>
       </table>
@@ -146,7 +114,7 @@ include('includes/sidebar.ejs') %>
           <% } %>
           </ul>
       </nav>
-      </div
+      </div>
     </div>
   </div>
 </div>
@@ -160,7 +128,7 @@ include('includes/sidebar.ejs') %>
       //const csrf = document.getElementById('_csrf').value;
 
       //función que manda la petición asíncrona
-      fetch('/dlc/a_vacacionesp/1/filtrar/'+v_estatus, {
+      fetch('/dlc/a_vacacionesp/:page/filtrar/'+v_estatus, {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',
@@ -181,8 +149,6 @@ include('includes/sidebar.ejs') %>
                 '<th scope="col"><center>Responsable</center></th>' +
                 '<th scope="col"><center>Dias solicitados</center></th>' +
                 '<th scope="col"><center>Información completa</center></th>' +
-                '<th scope="col"><center>Estatus actual</center></th>' +
-                '<th scope="col"><center>Firma</center></th>' +
               '</tr>' +
             '</thead>' +
             '<tbody>';
@@ -205,27 +171,7 @@ include('includes/sidebar.ejs') %>
                   '</span>' +
                 '</center></td>' +
                 '<td><center>' + vacaciones.estatus_vacaciones + '</center></td>' +
-                '<td><center>' +
-                  '<form action="/dlc/a_vacacionesp/' + current + '" method="POST">' +
-                    '<input' +
-                      'type="hidden"' +
-                      'id="estatus_vacaciones"' +
-                      'name="estatus_vacaciones"' +
-                      'value="Rechazado"' +
-                    '/>' +
-                    '<input' +
-                      'type="hidden"' +
-                      'id="folio"' +
-                      'name="folio"' +
-                      'value="' + vacaciones1.folio '"'+
-                    '<input' +
-                      'type="submit"' +
-                      'value="Rechazar"' +
-                      'class="btn btn-primary"' +
-                      'style="background-color: #b8293d"' +
-                    '/>' +
-                  '</form>' +
-                '</center></td>';
+                '<tr>';
           }
           respuesta += '</tbody>' +
               '</table>';

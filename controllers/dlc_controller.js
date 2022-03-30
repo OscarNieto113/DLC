@@ -214,7 +214,6 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
                 vacaciones: vacaciones,
                 current: page,
                 pages: Math.ceil(totalesV / perPage)
-
             });
           })
           .catch(err => {

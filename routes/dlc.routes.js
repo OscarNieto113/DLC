@@ -32,7 +32,7 @@ router.post('/s_vacaciones', dlc_controller.post_s_vacaciones);
 router.get('/a_vacaciones', dlc_controller.get_aprobar_vacaciones);
 router.get('/a_vacacionesp/:page', dlc_controller.get_aprobar_vacaciones_pagination);
 router.post('/a_vacacionesp/:page', dlc_controller.post_estatus_vacaciones);
-router.get('/a_vacacionesp/filtrar/:estatus', dlc_controller.aprobar_vacaciones_estatus);
+router.get('/a_vacacionesp/:page/filtrar/:estatus', dlc_controller.aprobar_vacaciones_estatus);
 
 //Registrar Usuario
 router.get('/r_usuario', dlc_controller.get_registrar_empleado);

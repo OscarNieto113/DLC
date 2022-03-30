@@ -215,7 +215,7 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
             response.render('estatus_vacaciones', {
                 vacaciones: vacaciones,
                 current: page,
-                pages: Math.ceil( perPage / (totalesV / perPage))
+                pages: Math.ceil(totalesV / perPage)
 
             });
           })

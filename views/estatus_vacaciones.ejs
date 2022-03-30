@@ -86,13 +86,13 @@
       </tbody>
     </table><br>
 </div>
-  <% console.log(pages) %>
     <% if (pages > 0) { %>
-        <ul class="pagination text-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-sm">
             <% if (current == 1) { %>
-                <li class="disabled"><a>First</a></li>
+                <li class="page-item disabled"><a>First</a></li>
             <% } else { %>
-                <li><a href="/a_vacacionesp/1">First</a></li>
+                <li><a href="/dlc/a_vacacionesp/1">First</a></li>
             <% } %>
             <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
             <% if (i !== 1) { %>
@@ -100,20 +100,21 @@
             <% } %>
             <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
                 <% if (i == current) { %>
-                    <li class="active"><a><%= i %></a></li>
+                    <li class="active page-item"><a><%= i %></a></li>
                 <% } else { %>
-                    <li><a href="/a_vacacionesp/<%= i %>"><%= i %></a></li>
+                    <li><a href="<%=i%>"><%=i%></a></li>
                 <% } %>
                 <% if (i == Number(current) + 4 && i < pages) { %>
-                    <li class="disabled"><a>...</a></li>
+                    <li class="disabled page-item"><a>...</a></li>
                 <% } %>
             <% } %>
             <% if (current == pages) { %>
-                <li class="disabled"><a>Last</a></li>
+                <li class="disabled page-item"><a>Last</a></li>
             <% } else { %>
-                <li><a href="/a_vacacionesp/<%= pages %>">Last</a></li>
+                <li><a href="/dlc/a_vacacionesp/<%= pages %>">Last</a></li>
             <% } %>
         </ul>
+        </nav>
     <% } %>
   </div>
 </div>

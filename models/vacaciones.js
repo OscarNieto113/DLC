@@ -24,7 +24,7 @@ module.exports = class Vacaciones {
       return db.execute(
         'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
         'FROM empleado e, vacaciones v, area a ' +
-        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones ="Pendiente" ' );
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area' );
     }
 
     static fetchSome(no_empleado) {
@@ -38,7 +38,7 @@ module.exports = class Vacaciones {
         return db.execute(
           'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
           'FROM empleado e, vacaciones v, area a ' +
-          'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones =?', [estatus_vacaciones]);
+          'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones LIKE ?', ['%' + estatus_vacaciones + '%']);
     }
 
 

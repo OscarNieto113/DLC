@@ -219,6 +219,18 @@ exports.post_a_vacaciones = (request, response, next) => {
     })
     .catch(err => console.log(err));
 };
+
+exports.aprobar_vacaciones_estatus = (request, response, next) => {
+    console.log(request.params.estatus);
+    Vacaciones.fetchByStatus(request.params.estatus)
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.status(200).json(rows);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 //------------------------Aprobar Vacaciones--------------------------------
 
 //------------------------Registrar Usuario--------------------------------

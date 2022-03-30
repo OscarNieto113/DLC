@@ -14,18 +14,21 @@
       <br>
 
 
-      <div class="col-sm-3" >
+      <div class="col-sm-4" >
         <br>
-        <label  for="estatus_vacaciones" class="col-form-label" ><b>Filtrar</b></label>
-        <select name="estatus_vacaciones" class="form-select" aria-label="Default select example">
-          <option value="" disabled selected>Pendiente</option>
+        <label for="aprobar_vacaciones_estatus">Buscar: </label>
+        <input type="text" name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus">
+        <!--<label  for="aprobar_vacaciones_estatus" class="col-form-label" ><b>Filtrar</b></label>
+        <select name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus" class="form-select" aria-label="Default select example">
+          <option value="" disabled selected>Filtrar por estatus</option>
           <option value="Pendiente">Pendiente</option>
           <option value="Rechazado">Rechazado</option>
           <option value="Aceptado">Aceptado</option>
-        </select>
+        </select>-->
       </div>
       <br>
 
+    <div id="respuesta_ajax">
       <table class="table">
         <thead>
           <tr>
@@ -40,6 +43,7 @@
         </thead>
 
         <tbody>
+
         <% if (vacaciones.length > 0) { %>
         <% for (let vacaciones1 of vacaciones) { %>
           <tr>
@@ -58,7 +62,6 @@
               Fecha de la solicitud: <%= vacaciones1.fecha_solicitud %>
               Días solicitados: <%= vacaciones1.dias_solicitados %>
               Estatus: <%= vacaciones1.estatus_vacaciones %>">
-                Vacaciones
               </span>
             </center></td>
             <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
@@ -78,7 +81,9 @@
         <h1>No hay ninguna solicitud pendiente.</h1>
     <% } %>
       </tbody>
-    </table><br>
+    </table>
+  </div><br>
+</div>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <form>
@@ -99,7 +104,86 @@
           </li>
         </ul>
       </nav>
-    </div>
   </div>
 </div>
+
+<script>
+  const accion_asincrona = () => {
+      const v_estatus = document.getElementById('aprobar_vacaciones_estatus').value;
+      console.log(v_estatus);
+
+      //El token de protección CSRF
+      //const csrf = document.getElementById('_csrf').value;
+
+      //función que manda la petición asíncrona
+      fetch('/dlc/a_vacaciones/filtrar/'+v_estatus, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              //'csrf-token': csrf
+          }
+          //body: JSON.stringify(data)
+      }).then(result => {
+          return result.json(); //Regresa otra promesa
+      }).then(data => {
+          //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+          console.log(data);
+          let respuesta =
+          '<table class="table">' +
+            '<thead>' +
+              '<tr>' +
+                '<th scope="col"><center>Nombre</center></th>' +
+                '<th scope="col"><center>Departamento</center></th>' +
+                '<th scope="col"><center>Responsable</center></th>' +
+                '<th scope="col"><center>Dias solicitados</center></th>' +
+                '<th scope="col"><center>Información completa</center></th>' +
+                '<th scope="col"><center>Estatus actual</center></th>' +
+                '<th scope="col"><center>Firma</center></th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>';
+          for(let vacaciones of data) {
+              respuesta +=
+                '<tr>' +
+                '<td><center>' + vacaciones.nombres_empleados + ' ' + vacaciones.apellido_paterno + ' ' + vacaciones.apellido_materno + '</center></td>' +
+                '<td><center>' + vacaciones.nombre_area + '</center></td>' +
+                '<td><center>' + vacaciones.responsable_ausencia + '</center></td>' +
+                '<td><center>' + vacaciones.dias_solicitados + '</center></td>' +
+                '<td><center>' +
+                  '<span class="hovertext" data-hover="' +
+                  'Folio: ' + vacaciones.folio +
+                  'No. Empleado: ' + vacaciones.no_empleado +
+                  'Responsable: ' + vacaciones.responsable_ausencia +
+                  'Fecha Reanudacion: ' + vacaciones.reanudacion_labores +
+                  'Fecha primer día: ' + vacaciones.fecha_primer_dia +
+                  'Fecha ultimo día: ' + vacaciones.fecha_ultimo_dia +
+                  'Fecha de la solicitud: ' + vacaciones.fecha_solicitud +
+                  'Días solicitados: ' + vacaciones.dias_solicitados +
+                  'Estatus: ' + vacaciones.estatus_vacaciones+  '">' +
+                  '</span>' +
+                '</center></td>' +
+                '<td><center>' + vacaciones.estatus_vacaciones + '</center></td>' +
+                '<td><center>' +
+                  '<form>' +
+                  '<select name="estatus_vacaciones'+ vacaciones.folio + '" class="btn btn-secondary dropdown-toggle" aria-label="Default select example">' +
+                    '<option value="" disabled selected>Cambiar estatus</option>' +
+                    '<option value="Aprobado">Aprobado</option>' +
+                    '<option value="Rechazado">Rechazado</option>' +
+                  '</select>' +
+                  '</form>' +
+                '</center></td>';
+          }
+          respuesta += '</tbody>' +
+              '</table>';
+
+
+          document.getElementById('respuesta_ajax').innerHTML = respuesta;
+
+      }).catch(err => {
+          console.log(err);
+      });
+  };
+
+  document.getElementById('aprobar_vacaciones_estatus').onkeyup  = accion_asincrona;
+</script>
 <%- include('includes/foot.ejs') %>

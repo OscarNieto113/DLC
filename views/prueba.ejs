@@ -1,17 +1,91 @@
 <%- include('includes/head.ejs') %>
-    <h1 id="principal">Este sitio es de capybaras</h1>
-    <h2><%= username %>, aquí nacen los capybaras:</h2>
-    <form action="/capybaras/nuevo" method="POST">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-        <label for="nombre">Nombre: </label>
-        <input type="text" id="nombre" name="nombre" placeholder="Pedro">
-        <label for="descripcion">Descipción: </label>
-        <input type="text" id="descripcion" name="descripcion" placeholder="Le gusta la piña">
-        <label for="Imagen">Imagen: </label>
-        <input type="text" id="imagen" name="imagen" placeholder="https://s2.coinmarketcap.com/static/img/coins/200x200/16636.png">
-        <br><br>
-        <input type="submit" value="Enviar">
-    </form>
+    <h1 id="principal">Este sitio es de capybaras chidos</h1>
+    <p>Tenemos los siguientes capybaras:</p>
+
+    <label for="buscar">Buscar: </label>
+    <input type="text" name="buscar" id="buscar">
+
+    <div class="row" id="respuesta_ajax">
+    <% if (capybaras.length > 0) { %>
+        <% for (let capybara of capybaras) { %>
+            <div class="col l3 m4 s12">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="<%= capybara.imagen %>">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= capybara.nombre %><i class="material-icons right">more_vert</i></span>
+                        <p><%= capybara.created_at %></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= capybara.nombre %><i class="material-icons right">close</i></span>
+                        <p><%= capybara.descripcion %></p>
+                        <p>Su dueño es: <%= capybara.duenio %></p>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    <% } else { %>
+        <h1>Ahorita no hay capybaras, regresa pronto.</h1>
+    <% } %>
+    </div>
+    <% if (ultimo_capybara != '') { %>
+        <p>El último capybara agregado fue: <%= ultimo_capybara %></p>
+    <% } %>
+    <br>
+    <a href="/capybaras/nuevo"><i class="material-icons">add</i> Agregar un nuevo capybara</a>
     <br><br>
-    <a href="/capybaras">Regresar a la lista de capybaras</a>
+
+    <script>
+        const accion_asincrona = () => {
+            const valor_busqueda = document.getElementById('buscar').value;
+            console.log(valor_busqueda);
+
+            //El token de protección CSRF
+            //const csrf = document.getElementById('_csrf').value;
+
+            //función que manda la petición asíncrona
+            fetch('/capybaras/buscar/'+valor_busqueda, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    //'csrf-token': csrf
+                }
+                //body: JSON.stringify(data)
+            }).then(result => {
+                return result.json(); //Regresa otra promesa
+            }).then(data => {
+                //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+                console.log(data);
+                let respuesta = '';
+
+                for(let capybara of data) {
+                    respuesta += '<div class="col l3 m4 s12">' +
+                        '<div class="card">' +
+                        '    <div class="card-image waves-effect waves-block waves-light">' +
+                        '        <img class="activator" src="'+ capybara.imagen +'">' +
+                        '    </div>' +
+                        '   <div class="card-content">' +
+                        '        <span class="card-title activator grey-text text-darken-4">' + capybara.nombre + ' <i class="material-icons right">more_vert</i></span>' +
+                        '        <p>' + capybara.created_at +'</p>' +
+                        '    </div>' +
+                        '    <div class="card-reveal">' +
+                        '        <span class="card-title grey-text text-darken-4">' + capybara.nombre + '<i class="material-icons right">close</i></span>' +
+                        '        <p>' + capybara.descripcion +'</p>' +
+                        '        <p>Su dueño es:' + capybara.duenio + '</p>' +
+                        '    </div>' +
+                        '</div>' +
+                    '</div>';
+                }
+
+                document.getElementById('respuesta_ajax').innerHTML = respuesta;
+
+            }).catch(err => {
+                console.log(err);
+            });
+        };
+
+        document.getElementById('buscar').onkeyup = accion_asincrona;
+    </script>
+
 <%- include('includes/foot.ejs') %>

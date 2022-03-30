@@ -1,5 +1,17 @@
 const db = require ('../util/database')
 
+/**
+ *
+ * @param
+ * @returns Número total de solicitudes de vacaciones
+ */
+module.exports.numeroSolicitudesVacaciones  = function numeroSolicitudesVacaciones() {
+	const query = ('SELECT COUNT(folio) as num ' +
+  'FROM empleado e, vacaciones v, area a ' +
+  'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area ');
+	return db.query(query);
+}
+
 module.exports = class Vacaciones {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
     constructor(nuevo_no_empleado, nuevo_responsable_ausencia, nuevo_observaciones, nuevo_reanudacion_labores, nuevo_fecha_primer_dia, nuevo_fecha_ultimo_dia, nuevo_dias_solicitados, nuevo_estatus_vacaciones) {

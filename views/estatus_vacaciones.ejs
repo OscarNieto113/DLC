@@ -1,0 +1,120 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+<div class="col py-3">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+
+
+      <h1 class="display-4">Aprobar vacaciones</h1>
+
+      <br>
+      <br>
+      <a><b>Solicitudes de Vacaciones</b></a>
+      <br>
+
+
+      <div class="col-sm-4" >
+        <br>
+        <label for="aprobar_vacaciones_estatus">Buscar: </label>
+        <input type="text" name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus">
+        <!--<label  for="aprobar_vacaciones_estatus" class="col-form-label" ><b>Filtrar</b></label>
+        <select name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus" class="form-select" aria-label="Default select example">
+          <option value="" disabled selected>Filtrar por estatus</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="Rechazado">Rechazado</option>
+          <option value="Aceptado">Aceptado</option>
+        </select>-->
+      </div>
+      <br>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"><center>Nombre</center></th>
+            <th scope="col"><center>Departamento</center></th>
+            <th scope="col"><center>Responsable</center></th>
+            <th scope="col"><center>Dias solicitados</center></th>
+            <th scope="col"><center>Información completa</center></th>
+            <th scope="col"><center>Estatus actual</center></th>
+            <th scope="col"><center></center></th>
+            <th scope="col"><center></center></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% if (vacaciones.length > 0) { %>
+        <% for (let vacaciones1 of vacaciones) { %>
+          <tr>
+            <td><center>Nombre</center></td>
+            <td><center>Area</center></td>
+            <td><center><%= vacaciones1.responsable_ausencia %></center></td>
+            <td><center><%= vacaciones1.dias_solicitados %></center></td>
+            <td><center>
+              <span class="hovertext" data-hover="
+              Folio: <%= vacaciones1.folio %>
+              No. Empleado: <%= vacaciones1.no_empleado %>
+              Responsable: <%= vacaciones1.responsable_ausencia %>
+              Fecha Reanudacion: <%= vacaciones1.reanudacion_labores %>
+              Fecha primer día: <%= vacaciones1.primer_dia %>
+              Fecha ultimo día: <%= vacaciones1.ultimo_dia %>
+              Fecha de la solicitud: <%= vacaciones1.fecha_solicitud %>">
+                Vacaciones
+              </span>
+            </center></td>
+            <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
+            <td><center>
+              <form action="/dlc/a_vacaciones" method="POST">
+                <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Aprobado">
+                <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>">
+                <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color:#86B049" disabled="False">
+              </form>
+            </center></td>
+            <td><center>
+              <form action="/dlc/a_vacaciones" method="POST">
+                <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Rechazado">
+                <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>">
+                <input type="submit" value="Rechazar" class="btn btn-primary"style="background-color:#B8293D">
+              </form>
+            </center></td>
+          </tr>
+        <% } %>
+    <% } else { %>
+        <h1>No hay solicitudes existentes.</h1>
+    <% } %>
+      </tbody>
+    </table><br>
+</div>
+    <% if (pages > 0) { %>
+        <ul class="pagination text-center">
+            <% if (current == 1) { %>
+                <li class="disabled"><a>First</a></li>
+            <% } else { %>
+                <li><a href="/a_vacacionesp/1">First</a></li>
+            <% } %>
+            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+                <li class="disabled"><a>...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                <% if (i == current) { %>
+                    <li class="active"><a><%= i %></a></li>
+                <% } else { %>
+                    <li><a href="/a_vacacionesp/<%= i %>"><%= i %></a></li>
+                <% } %>
+                <% if (i == Number(current) + 4 && i < pages) { %>
+                    <li class="disabled"><a>...</a></li>
+                <% } %>
+            <% } %>
+            <% if (current == pages) { %>
+                <li class="disabled"><a>Last</a></li>
+            <% } else { %>
+                <li><a href="/a_vacacionesp/<%= pages %>">Last</a></li>
+            <% } %>
+        </ul>
+    <% } %>
+  </div>
+</div>
+
+<%- include('includes/foot.ejs') %>

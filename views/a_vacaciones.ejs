@@ -69,7 +69,7 @@
               <form action="/dlc/a_vacaciones" method="POST">
                 <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Aprobado">
                 <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>">
-                <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color:#86B049">
+                <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color:#86B049" disabled="False">
               </form>
             </center></td>
             <td><center>
@@ -188,4 +188,6 @@
 
   document.getElementById('aprobar_vacaciones_estatus').onkeyup  = accion_asincrona;
 </script>
+
+
 <%- include('includes/foot.ejs') %>

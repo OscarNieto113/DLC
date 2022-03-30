@@ -186,23 +186,45 @@ exports.post_s_vacaciones = (request, response, next) => {
 //------------------------Aprobar Vacaciones--------------------------------
 exports.get_aprobar_vacaciones = (request, response, next) => {
     console.log('GET /dlc/a_vacaciones');
-    console.log(request.cookies);
-    const info = request.session.info ? request.session.info : '';
-    request.session.info = '';
     Vacaciones.fetchAll()
     .then(([rows, fieldData]) => {
         console.log(rows);
         response.render('a_vacaciones', {
             vacaciones: rows,
-            correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-            ultimo_estatus_vacaciones: request.cookies.ultimo_estatus_vacaciones ? request.cookies.ultimo_estatus_vacaciones : '',
-            info: info //El primer info es la variable del template, el segundo la constante creada arriba
         });
     })
     .catch(err => {
         console.log(err);
     });
 }
+
+
+exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
+  console.log('GET /dlc/a_vacaciones/:page');
+  var perPage = 5
+  var page = request.params.page || 1
+  Vacaciones
+    .fetchPagination(perPage, ((perPage * page) - perPage))
+    .then(([vacaciones, fieldData]) => {
+      Vacaciones
+        .count()
+        .then(([count, fieldData]) => {
+            response.render('estatus_vacaciones', {
+                vacaciones: vacaciones,
+                current: page,
+                pages: Math.ceil(((perPage * page) - count) / perPage)
+            });
+          })
+          .catch(err => {
+              console.log(err);
+          });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+
 
 exports.post_estatus_vacaciones = (request, response, next) => {
     console.log('POST /dlc/s_vacaciones');

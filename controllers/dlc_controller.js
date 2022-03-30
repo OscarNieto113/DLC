@@ -209,9 +209,7 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
       Vacaciones
         .count()
         .then(([count, fieldData]) => {
-          console.log((count[0].num));
           const totalesV = count[0].num
-          console.log(totalesV);
             response.render('estatus_vacaciones', {
                 vacaciones: vacaciones,
                 current: page,
@@ -231,11 +229,11 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
 
 
 exports.post_estatus_vacaciones = (request, response, next) => {
-    console.log('POST /dlc/s_vacaciones');
+    console.log('POST /dlc/a_vacacionesp/:page');
     console.log(request.body);
     Vacaciones.updateEstatus(request.body.estatus_vacaciones, request.body.folio)
       .then(() => {
-          response.redirect('a_vacaciones');
+          response.redirect('/dlc/a_vacacionesp/1');
       }).catch(err => console.log(err));
   }
 

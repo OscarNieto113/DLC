@@ -13,11 +13,7 @@ include('includes/sidebar.ejs') %>
       <div class="col-sm-4">
         <br />
         <label for="aprobar_vacaciones_estatus">Buscar: </label>
-        <input
-          type="text"
-          name="aprobar_vacaciones_estatus"
-          id="aprobar_vacaciones_estatus"
-        />
+        <input type="text" name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus"/>
         <!--<label  for="aprobar_vacaciones_estatus" class="col-form-label" ><b>Filtrar</b></label>
         <select name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus" class="form-select" aria-label="Default select example">
           <option value="" disabled selected>Filtrar por estatus</option>
@@ -28,6 +24,7 @@ include('includes/sidebar.ejs') %>
       </div>
       <br />
 
+      <div id="respuesta_ajax">
       <table class="table">
         <thead>
           <tr>
@@ -46,8 +43,8 @@ include('includes/sidebar.ejs') %>
           <% if (vacaciones.length > 0) { %> <% for (let vacaciones1 of
           vacaciones) { %>
           <tr>
-            <td><center>Nombre</center></td>
-            <td><center>Area</center></td>
+            <td><center><%=vacaciones1.nombres_empleados%> <%=vacaciones1.apellido_paterno%> <%=vacaciones1.apellido_materno%></center></td>
+            <td><center><%=vacaciones1.nombre_area%></center></td>
             <td><center><%= vacaciones1.responsable_ausencia %></center></td>
             <td><center><%= vacaciones1.dias_solicitados %></center></td>
             <td>
@@ -70,32 +67,28 @@ include('includes/sidebar.ejs') %>
             <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
             <td>
               <center>
-                <form action="/dlc/a_vacaciones" method="POST">
+                <form action="/dlc/a_vacacionesp/<%=current%>" method="POST">
                   <input
                     type="hidden"
                     id="estatus_vacaciones"
                     name="estatus_vacaciones"
-                    value="Aprobado"
-                  />
+                    value="Aprobado"/>
                   <input
                     type="hidden"
                     id="folio"
                     name="folio"
-                    value="<%= vacaciones1.folio %>"
-                  />
+                    value="<%= vacaciones1.folio %>"/>
                   <input
                     type="submit"
                     value="Aprobar"
                     class="btn btn-primary"
-                    style="background-color: #86b049"
-                    disabled="False"
-                  />
+                    style="background-color: #86b049"/>
                 </form>
               </center>
             </td>
             <td>
               <center>
-                <form action="/dlc/a_vacaciones" method="POST">
+                <form action="/dlc/a_vacacionesp/<%=current%>" method="POST">
                   <input
                     type="hidden"
                     id="estatus_vacaciones"
@@ -123,7 +116,9 @@ include('includes/sidebar.ejs') %>
           <% } %>
         </tbody>
       </table>
-      <br />
+      <br>
+      <br>
+
       <% if (pages > 0) { %>
       <nav aria-label="Paginación solicitudes">
         <ul class="pagination justify-content-center">
@@ -151,8 +146,99 @@ include('includes/sidebar.ejs') %>
           <% } %>
           </ul>
       </nav>
+      </div
     </div>
   </div>
 </div>
+
+<script>
+  const accion_asincrona = () => {
+      const v_estatus = document.getElementById('aprobar_vacaciones_estatus').value;
+      console.log(v_estatus);
+
+      //El token de protección CSRF
+      //const csrf = document.getElementById('_csrf').value;
+
+      //función que manda la petición asíncrona
+      fetch('/dlc/a_vacacionesp/1/filtrar/'+v_estatus, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              //'csrf-token': csrf
+          }
+          //body: JSON.stringify(data)
+      }).then(result => {
+          return result.json(); //Regresa otra promesa
+      }).then(data => {
+          //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+          console.log(data);
+          let respuesta =
+          '<table class="table">' +
+            '<thead>' +
+              '<tr>' +
+                '<th scope="col"><center>Nombre</center></th>' +
+                '<th scope="col"><center>Departamento</center></th>' +
+                '<th scope="col"><center>Responsable</center></th>' +
+                '<th scope="col"><center>Dias solicitados</center></th>' +
+                '<th scope="col"><center>Información completa</center></th>' +
+                '<th scope="col"><center>Estatus actual</center></th>' +
+                '<th scope="col"><center>Firma</center></th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>';
+          for(let vacaciones of data) {
+              respuesta +=
+                '<tr>' +
+                '<td><center>' + vacaciones.nombres_empleados + ' ' + vacaciones.apellido_paterno + ' ' + vacaciones.apellido_materno + '</center></td>' +
+                '<td><center>' + vacaciones.nombre_area + '</center></td>' +
+                '<td><center>' + vacaciones.responsable_ausencia + '</center></td>' +
+                '<td><center>' + vacaciones.dias_solicitados + '</center></td>' +
+                '<td><center>' +
+                  '<span class="hovertext" data-hover="' +
+                  'Folio: ' + vacaciones.folio +
+                  'No. Empleado: ' + vacaciones.no_empleado +
+                  'Responsable: ' + vacaciones.responsable_ausencia +
+                  'Fecha Reanudacion: ' + vacaciones.reanudacion_labores +
+                  'Fecha primer día: ' + vacaciones.fecha_primer_dia +
+                  'Fecha ultimo día: ' + vacaciones.fecha_ultimo_dia +
+                  'Fecha de la solicitud: ' + vacaciones.fecha_solicitud + ' " > vacaciones' +
+                  '</span>' +
+                '</center></td>' +
+                '<td><center>' + vacaciones.estatus_vacaciones + '</center></td>' +
+                '<td><center>' +
+                  '<form action="/dlc/a_vacacionesp/' + current + '" method="POST">' +
+                    '<input' +
+                      'type="hidden"' +
+                      'id="estatus_vacaciones"' +
+                      'name="estatus_vacaciones"' +
+                      'value="Rechazado"' +
+                    '/>' +
+                    '<input' +
+                      'type="hidden"' +
+                      'id="folio"' +
+                      'name="folio"' +
+                      'value="' + vacaciones1.folio '"'+
+                    '<input' +
+                      'type="submit"' +
+                      'value="Rechazar"' +
+                      'class="btn btn-primary"' +
+                      'style="background-color: #b8293d"' +
+                    '/>' +
+                  '</form>' +
+                '</center></td>';
+          }
+          respuesta += '</tbody>' +
+              '</table>';
+
+
+          document.getElementById('respuesta_ajax').innerHTML = respuesta;
+
+      }).catch(err => {
+          console.log(err);
+      });
+  };
+
+  document.getElementById('aprobar_vacaciones_estatus').onkeyup  = accion_asincrona;
+</script>
 
 <%- include('includes/foot.ejs') %>

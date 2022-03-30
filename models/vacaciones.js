@@ -27,6 +27,21 @@ module.exports = class Vacaciones {
         'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area' );
     }
 
+    static fetchPagination(num_solicitudes, num_offset) {
+      return db.execute(
+        'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
+        'FROM empleado e, vacaciones v, area a ' +
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area ' +
+        'LIMIT ? OFFSET ? ', [num_solicitudes, num_offset]);
+    }
+
+    static count () {
+      return db.execute(
+        'SELECT COUNT(folio) ' +
+        'FROM empleado e, vacaciones v, area a ' +
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area ');
+    }
+
     static fetchSome(no_empleado) {
         return db.execute(
           'SELECT fecha_solicitud, fecha_primer_dia, fecha_ultimo_dia, reanudacion_labores, dias_solicitados, responsable_ausencia, observaciones, estatus_vacaciones ' +

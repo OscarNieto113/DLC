@@ -3,21 +3,17 @@ include('includes/sidebar.ejs') %>
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">Aprobar vacaciones</h1>
+      <h1 class="display-4">Aprobar vacaciones</h1> <br>
 
-      <div class="col-sm-4">
-        <br/>
-        <label for="search_vacaciones">Buscar: </label>
-        <input type="text" name="search_vacaciones" id="search_vacaciones"/>
-        <!--<label  for="aprobar_vacaciones_estatus" class="col-form-label" ><b>Filtrar</b></label>
-        <select name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus" class="form-select" aria-label="Default select example">
-          <option value="" disabled selected>Filtrar por estatus</option>
-          <option value="Pendiente">Pendiente</option>
-          <option value="Rechazado">Rechazado</option>
-          <option value="Aceptado">Aceptado</option>
-        </select>-->
+      <div class="input-group rounded col-sm-6">
+        <input type="text" name="search_vacaciones" id="search_vacaciones" class="form-control rounded" placeholder="Buscar Solicitudes Anteriores" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
+        <span class="input-group-text border-0" id="search-addon">
+          <i class="bi bi-search"></i>
+        </span>
       </div>
       <br />
+
+
 
       <div id="respuesta_ajax">
         <% if (vacaciones.length > 0) { %>

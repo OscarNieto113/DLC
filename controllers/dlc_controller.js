@@ -86,20 +86,13 @@ exports.post_a_ng_block = (request, response, next) => {
 exports.get_vacaciones_solicitadas = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/:no_empleado/vacaciones_solicitadas');
-    console.log(request.params.no_empleado);
-    console.log(request.session.user_no_empleado);
-    //console.log(request.get('Cookie').split('=')[1]);
-    console.log(request.cookies);
-    console.log('GET /dlc/:no_empleado/vacaciones_solicitadas');
-    const info = request.session.info ? request.session.info : '';
-    request.session.info = '';
+    console.log(request.params.no_empleado);//
+    console.log(request.session.user_no_empleado);//
     Vacaciones.fetchSome(no_empleado)
     .then(([rows, fieldData]) => {
       console.log(rows);
       response.render('vacaciones_solicitadas', {
           vacaciones: rows,
-          ultimo_sol_vacaciones: request.cookies.ultimo_sol_vacaciones ? request.cookies.ultimo_sol_vacaciones : '',
-          info: info //El primer info es la variable del template, el segundo la constante creada arriba
       });
   })
 

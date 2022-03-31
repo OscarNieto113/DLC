@@ -85,6 +85,13 @@ module.exports = class Vacaciones {
           'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND (v.estatus_vacaciones LIKE ? OR v.folio LIKE ? OR v.responsable_ausencia LIKE ? OR v.no_empleado LIKE ? OR e.nombres_empleados LIKE ?)', ['%'+search+'%', '%'+search+'%', '%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
     }
 
+		static getEstatus(no_empleado, folio) {
+        return db.execute(
+          'SELECT v.estatus_vacaciones ' +
+          'FROM empleado e, vacaciones v ' +
+          'WHERE e.no_empleado = v.no_empleado AND v.no_empleado = ? AND v.folio = ?', [no_empleado, folio]);
+    }
+
     static fetchOne(folio) {
         return db.execute('SELECT * FROM vacaciones WHERE id=?', [folio]);
     }

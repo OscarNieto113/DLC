@@ -11,18 +11,28 @@
 
       <% if (vacaciones.length > 0) { %>
         <% for (let vacaciones1 of vacaciones) { %>
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Fecha de uso: <%= vacaciones1.fecha_solicitud%></h5>
-              <br><p class="card-text"><b>Primer día de vacaciones: </b><%= vacaciones1.fecha_primer_dia %></p>
-              <p class="card-text"><b>Último día de vacaciones: </b><%= vacaciones1.fecha_ultimo_dia %></p>
-              <p class="card-text"><b>Reanudación de labores: </b><%= vacaciones1.reanudacion_labores %></p>
-              <p class="card-text"><b>Días solicitados: </b><%= vacaciones1.dias_solicitados %></p>
-              <p class="card-text"><b>Responsable durante ausencia: </b><%= vacaciones1.responsable_ausencia %></p>
-              <p class="card-text"><b>Observaciones: </b><%= vacaciones1.observaciones %></p>
-              <p class="card-text"><b>Estatus de la solicitud: </b><%= vacaciones1.estatus_vacaciones %></p>
+          <% if (vacaciones1.estatus_vacaciones === "Pendiente") { %>
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <% } else if (vacaciones1.estatus_vacaciones === "Aprobado") { %>
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+          <% } else if (vacaciones1.estatus_vacaciones === 'Rechazado') { %>
+            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+          <% } else { %>
+            <div class="card">
+          <% } %>
+            <div class="card-header"><%= vacaciones1.estatus_vacaciones %></div>
+              <div class="card-body">
+                <p class="card-text"><b>Fecha de uso: </b><%= vacaciones1.fecha_solicitud%></p>
+                <br><p class="card-text"><b>Primer día de vacaciones: </b><%= vacaciones1.fecha_primer_dia %></p>
+                <p class="card-text"><b>Último día de vacaciones: </b><%= vacaciones1.fecha_ultimo_dia %></p>
+                <p class="card-text"><b>Reanudación de labores: </b><%= vacaciones1.reanudacion_labores %></p>
+                <p class="card-text"><b>Días solicitados: </b><%= vacaciones1.dias_solicitados %></p>
+                <p class="card-text"><b>Responsable durante ausencia: </b><%= vacaciones1.responsable_ausencia %></p>
+                <p class="card-text"><b>Observaciones: </b><%= vacaciones1.observaciones %></p>
+                <p class="card-text"><b>Estatus de la solicitud: </b><%= vacaciones1.estatus_vacaciones %></p>
+              </div>
             </div>
-          </div><br><br>
+          </div<br><br>
         <% } %>
       <% } %>
 

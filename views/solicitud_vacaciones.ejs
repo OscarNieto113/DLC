@@ -38,13 +38,10 @@
                     <label  for="responsable_ausencia" class="col-form-label"><b>Responsable durante tu ausencia*</b></label>
                     <select name="responsable_ausencia" class="form-select" aria-label="Default select example">
                       <option value="" disabled selected>Responsable</option>
-                      <option value="A01705090">Oscar Nieto</option>
-                      <option value="A01705091">Cristian Rogelio</option>
-                      <option value="A01705092">Eros Guillen</option>
-                      <option value="A01705093">Arturo Bustos</option>
-                      <option value="A01705094">Arturo Avellaneda</option>
+                      <% for (let empleado1 of empleado) { %>
+                          <option value="<%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%>"><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></option>
+                      <% } %>
                     </select>
-
                   </div>
                   <br><br>
                   <!-- DATOS FAKE-->

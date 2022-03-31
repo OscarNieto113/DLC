@@ -148,18 +148,33 @@ exports.get_nps = (request, response) => {
 //------------------------ Reportes NPS se va a borrar --------------------------------
 
 //------------------------Solicitar Vacaciones--------------------------------
-exports.get_s_vacaciones = (request, response, next) => {
-    console.log('GET /dlc/s_vacaciones');
-    response.render('s_vacaciones', {
-      //
-              correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-              info: ''
+exports.get_solicitud_vacaciones = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
+    console.log('GET /dlc/solicitud_vacaciones');
+    Empleado
+      .getAreaEmpleado(no_empleado)
+      .then(([id_area, fieldData]) => {
+        let id = id_area[0].id_area
+        //console.log(id);
+        Empleado
+          .fetchEmpleadoArea(id)
+          .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.render('solicitud_vacaciones', {
+            empleado: rows,
           });
-      };
-//
+        })
+        .catch(err => {
+            console.log(err);
+        });
+      })
+      .catch(err => {
+          console.log(err);
+      });
+  }
 
-exports.post_s_vacaciones = (request, response, next) => {
-    console.log('POST /dlc/s_vacaciones');
+exports.post_solicitud_vacaciones = (request, response, next) => {
+    console.log('POST /dlc/solicitud_vacaciones');
     console.log(request.body);
     const vacaciones =
         new Vacaciones(
@@ -252,10 +267,9 @@ exports.get_registrar_empleado = (request, response, next) => {
     console.log('GET /dlc/registrar_empleado');
     Area.fetchAll()
       .then(([area, fieldData]) => {
+        console.log(area);
         response.render('r_usuario', {
-          correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-          info: '', //El primer info es la variable del template, el segundo la constante creada arriba
-          area: area,
+          area: area
         });
     })
     .catch(err => {

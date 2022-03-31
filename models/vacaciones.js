@@ -36,14 +36,14 @@ module.exports = class Vacaciones {
       return db.execute(
         'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
         'FROM empleado e, vacaciones v, area a ' +
-        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area' );
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area ' );
     }
 
     static fetchPagination(num_solicitudes, num_offset) {
       return db.execute(
-        'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
+        'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud, v.no_empleado ' +
         'FROM empleado e, vacaciones v, area a ' +
-        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area ' +
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones = "Pendiente" ' +
         'LIMIT ? OFFSET ? ', [num_solicitudes, num_offset]);
     }
 
@@ -51,7 +51,7 @@ module.exports = class Vacaciones {
       return db.query(
         'SELECT COUNT(folio) as num ' +
         'FROM empleado e, vacaciones v, area a ' +
-        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area ');
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones = "Pendiente"');
     }
 
     static fetchSome(no_empleado) {
@@ -61,20 +61,29 @@ module.exports = class Vacaciones {
           'WHERE e.no_empleado = v.no_empleado AND v.no_empleado=?', [no_empleado]);
     }
 
-    static updateEstatus(estatus_vacaciones, folio) {
+    static rejectVacations(estatus_vacaciones, folio) {
         return db.execute(
           'UPDATE vacaciones ' +
           'SET estatus_vacaciones = ? ' +
           'WHERE folio = ? ', [estatus_vacaciones, folio]);
     }
 
-    static fetchByStatus(estatus_vacaciones) {
+		static aproveeVacations(estatus_vacaciones, dias_solicitados, folio, no_empleado) {
+        return db.execute(
+          'UPDATE vacaciones, empleado ' +
+          'SET vacaciones.estatus_vacaciones =  ?, ' +
+						'empleado.dias_vacaciones_restantes = empleado.dias_vacaciones_restantes - ? ' +
+					'WHERE ' +
+						'vacaciones.folio = ? ' +
+						'AND empleado.no_empleado = ? ', [estatus_vacaciones, dias_solicitados, folio, no_empleado]);
+    }
+
+    static fetchSearch(search) {
         return db.execute(
           'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.reanudacion_labores, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
           'FROM empleado e, vacaciones v, area a ' +
-          'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones LIKE ?', ['%' + estatus_vacaciones + '%']);
+          'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND (v.estatus_vacaciones LIKE ? OR v.folio LIKE ? OR v.responsable_ausencia LIKE ? OR v.no_empleado LIKE ? OR e.nombres_empleados LIKE ?)', ['%'+search+'%', '%'+search+'%', '%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
     }
-
 
     static fetchOne(folio) {
         return db.execute('SELECT * FROM vacaciones WHERE id=?', [folio]);

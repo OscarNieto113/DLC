@@ -29,10 +29,10 @@ router.get('/s_vacaciones', dlc_controller.get_s_vacaciones);
 router.post('/s_vacaciones', dlc_controller.post_s_vacaciones);
 
 //Aprobar Vacaciones
-router.get('/a_vacaciones', dlc_controller.get_aprobar_vacaciones);
 router.get('/a_vacacionesp/:page', dlc_controller.get_aprobar_vacaciones_pagination);
-router.post('/a_vacacionesp/:page', dlc_controller.post_estatus_vacaciones);
-router.get('/a_vacacionesp/:page/filtrar/:estatus', dlc_controller.aprobar_vacaciones_estatus);
+router.post('/a_vacacionesp/:page/reject', dlc_controller.post_reject_vacaciones);
+router.post('/a_vacacionesp/:page/aprovee', dlc_controller.post_aprovee_vacaciones);
+router.get('/a_vacacionesp/:page/filtrar/:search', dlc_controller.search_vacaciones);
 
 //Registrar Usuario
 router.get('/r_usuario', dlc_controller.get_registrar_empleado);

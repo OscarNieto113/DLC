@@ -7,8 +7,8 @@ include('includes/sidebar.ejs') %>
 
       <div class="col-sm-4">
         <br/>
-        <label for="aprobar_vacaciones_estatus">Buscar: </label>
-        <input type="text" name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus"/>
+        <label for="search_vacaciones">Buscar: </label>
+        <input type="text" name="search_vacaciones" id="search_vacaciones"/>
         <!--<label  for="aprobar_vacaciones_estatus" class="col-form-label" ><b>Filtrar</b></label>
         <select name="aprobar_vacaciones_estatus" id="aprobar_vacaciones_estatus" class="form-select" aria-label="Default select example">
           <option value="" disabled selected>Filtrar por estatus</option>
@@ -20,6 +20,7 @@ include('includes/sidebar.ejs') %>
       <br />
 
       <div id="respuesta_ajax">
+        <% if (vacaciones.length > 0) { %>
       <table class="table">
         <thead>
           <tr>
@@ -35,8 +36,8 @@ include('includes/sidebar.ejs') %>
         </thead>
 
         <tbody>
-          <% if (vacaciones.length > 0) { %> <% for (let vacaciones1 of
-          vacaciones) { %>
+
+            <% for (let vacaciones1 of vacaciones) { %>
           <tr>
             <td><center><%=vacaciones1.nombres_empleados%> <%=vacaciones1.apellido_paterno%> <%=vacaciones1.apellido_materno%></center></td>
             <td><center><%=vacaciones1.nombre_area%></center></td>
@@ -62,16 +63,18 @@ include('includes/sidebar.ejs') %>
             <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
             <td>
               <center>
-                <form action="/dlc/a_vacacionesp/<%=current%>" method="POST">
+                <form action="/dlc/a_vacacionesp/<%=current%>/aprovee" method="POST">
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Aprobado"/>
+                  <input type="hidden" id="dias_solicitados" name="dias_solicitados" value="<%= vacaciones1.dias_solicitados %>"/>
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
+                  <input type="hidden" id="no_empleado" name="no_empleado" value="<%= vacaciones1.no_empleado %>"/>
                   <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color: #86b049"/>
                 </form>
               </center>
             </td>
             <td>
               <center>
-                <form action="/dlc/a_vacacionesp/<%=current%>" method="POST">
+                <form action="/dlc/a_vacacionesp/<%=current%>/reject" method="POST">
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones"value="Rechazado"/>
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
                   <input type="submit" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d"/>
@@ -79,11 +82,12 @@ include('includes/sidebar.ejs') %>
               </center>
             </td>
           </tr>
-          <% } %> <% } else { %>
-          <h1>No hay solicitudes Pendientes.</h1>
           <% } %>
         </tbody>
       </table>
+      <% } else { %>
+      <h1>No hay solicitudes Pendientes.</h1>
+      <% } %>
       <br>
       <br>
 
@@ -121,7 +125,7 @@ include('includes/sidebar.ejs') %>
 
 <script>
   const accion_asincrona = () => {
-      const v_estatus = document.getElementById('aprobar_vacaciones_estatus').value;
+      const v_estatus = document.getElementById('search_vacaciones').value;
       console.log(v_estatus);
 
       //El token de protección CSRF
@@ -149,6 +153,7 @@ include('includes/sidebar.ejs') %>
                 '<th scope="col"><center>Responsable</center></th>' +
                 '<th scope="col"><center>Dias solicitados</center></th>' +
                 '<th scope="col"><center>Información completa</center></th>' +
+                '<th scope="col"><center>Estatus</center></th>' +
               '</tr>' +
             '</thead>' +
             '<tbody>';
@@ -174,17 +179,16 @@ include('includes/sidebar.ejs') %>
                 '<tr>';
           }
           respuesta += '</tbody>' +
-              '</table>';
-
-
+              '</table>' +
+              '<a href="/dlc/a_vacacionesp/1">' +
+                '<button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23" href="/dlc/s_vacaciones">Regresar</button>';
           document.getElementById('respuesta_ajax').innerHTML = respuesta;
 
       }).catch(err => {
           console.log(err);
       });
   };
-
-  document.getElementById('aprobar_vacaciones_estatus').onkeyup  = accion_asincrona;
+  document.getElementById('search_vacaciones').onkeyup  = accion_asincrona;
 </script>
 
 <%- include('includes/foot.ejs') %>

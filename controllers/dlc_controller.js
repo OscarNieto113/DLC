@@ -184,21 +184,6 @@ exports.post_s_vacaciones = (request, response, next) => {
 //------------------------Solicitar Vacaciones--------------------------------
 
 //------------------------Aprobar Vacaciones--------------------------------
-exports.get_aprobar_vacaciones = (request, response, next) => {
-    console.log('GET /dlc/a_vacaciones');
-    Vacaciones.fetchAll()
-    .then(([rows, fieldData]) => {
-        console.log(rows);
-        response.render('a_vacaciones', {
-            vacaciones: rows,
-        });
-    })
-    .catch(err => {
-        console.log(err);
-    });
-}
-
-
 exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
   console.log('GET /dlc/a_vacaciones/:page');
   var perPage = 5;
@@ -209,7 +194,8 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
       Vacaciones
         .count()
         .then(([count, fieldData]) => {
-          const totalesV = count[0].num
+          let totalesV = count[0].num
+          console.log(totalesV)
             response.render('estatus_vacaciones', {
                 vacaciones: vacaciones,
                 current: page,
@@ -225,20 +211,32 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
         });
     }
 
-
-
-exports.post_estatus_vacaciones = (request, response, next) => {
-    console.log('POST /dlc/a_vacacionesp/:page');
+exports.post_reject_vacaciones = (request, response, next) => {
+    console.log('POST /dlc/a_vacacionesp/:page/reject');
     console.log(request.body);
-    Vacaciones.updateEstatus(request.body.estatus_vacaciones, request.body.folio)
+    Vacaciones.rejectVacations(request.body.estatus_vacaciones, request.body.folio)
       .then(() => {
           response.redirect('/dlc/a_vacacionesp/1');
       }).catch(err => console.log(err));
   }
 
-exports.aprobar_vacaciones_estatus = (request, response, next) => {
-    console.log(request.params.estatus);
-    Vacaciones.fetchByStatus(request.params.estatus)
+  exports.post_aprovee_vacaciones = (request, response, next) => {
+      console.log('POST /dlc/a_vacacionesp/:page/aprovee');
+      console.log(request.body);
+      Vacaciones
+        .aproveeVacations(
+          request.body.estatus_vacaciones,
+          request.body.dias_solicitados,
+          request.body.folio,
+          request.body.no_empleado)
+        .then(() => {
+            response.redirect('/dlc/a_vacacionesp/1');
+        }).catch(err => console.log(err));
+    }
+
+exports.search_vacaciones = (request, response, next) => {
+    console.log(request.params.search);
+    Vacaciones.fetchSearch(request.params.search)
         .then(([rows, fieldData]) => {
             console.log(rows);
             response.status(200).json(rows);

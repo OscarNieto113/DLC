@@ -37,7 +37,6 @@
           //var u_dia2 = document.getElementById("u_dia");//.value = longitud;
           //u_dia2.innerHTML = u_dia;
           document.getElementById("fecha_ultimo_dia").value = u_dia;
-
       });
 
       //funcion pa la cantidad de dias

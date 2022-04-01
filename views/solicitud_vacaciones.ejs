@@ -12,8 +12,7 @@
               </div>
 
               <br>
-              <!-- Inicia form-->
-              <form action="/dlc/s_vacaciones" method="POST">
+
                 <div class="container-fluid">
                   <div class="row form-group">
                         <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
@@ -35,6 +34,8 @@
                     </div>
                   <div>
                     <br>
+                    <!-- Inicia form-->
+                    <form action="/dlc/s_vacaciones" method="POST">
                     <label  for="responsable_ausencia" class="col-form-label"><b>Responsable durante tu ausencia*</b></label>
                     <select name="responsable_ausencia" class="form-select" aria-label="Default select example">
                       <option value="" disabled selected>Responsable</option>
@@ -50,7 +51,7 @@
                   <input type="hidden" id="observaciones" name="observaciones" value="ninguna">
                   <input type="hidden" id="reanudacion_labores" name="reanudacion_labores" value="2022-10-13">
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Pendiente">
-                  <input  id="fecha_ultimo_dia" name="fecha_ultimo_dia">
+                  <input type="text" id="fecha_ultimo_dia" name="fecha_ultimo_dia">
                   <input  id="fecha_primer_dia" name="fecha_primer_dia">
                   <input  id="dias_solicitados" name="dias_solicitados">
                   <!-- DATOS FAKE-->

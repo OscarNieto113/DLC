@@ -297,7 +297,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`correo_usuario`, `contrasenia`, `no_empleado`) VALUES
 ('a01705001@natgas.com.mx', '1234', 'A1'),
 ('a01705002@natgas.com.mx', '5678', 'A2'),
-('a01705003@natgas.com.mx', '9012', 'A3');
+('a01705003@natgas.com.mx', '9012', 'A3'),
+('a01705004@natgas.com.mx', '$2a$12$znJE3hjcqcMWwsEQyteVe.d0Vpe0wCrQQ/DNKZGONoyP1Q9oJM/jK', 'A4');
 
 -- --------------------------------------------------------
 

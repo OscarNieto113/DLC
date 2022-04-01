@@ -10,6 +10,8 @@ const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
 const Nps = require('../models/nps');
 const User = require('../models/user');
+//const rangedate = require('../public/js/rangedate');
+
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_s_ng_block = (request, response, next) => {
@@ -142,15 +144,16 @@ exports.get_nps = (request, response) => {
 
 //------------------------Solicitar Vacaciones--------------------------------
 exports.get_solicitud_vacaciones = (request, response, next) => {
-    const no_empleado = request.session.user_no_empleado;
+    //const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/solicitud_vacaciones');
     Empleado
-      .getAreaEmpleado(no_empleado)
+      .getAreaEmpleado("A4")
       .then(([id_area, fieldData]) => {
-        let id = id_area[0].id_area
+        //console.log(id_area);
+        //let id = id_area[0].id_area
         //console.log(id);
         Empleado
-          .fetchEmpleadoArea(id)
+          .fetchEmpleadoArea(1)
           .then(([rows, fieldData]) => {
             console.log(rows);
             response.render('solicitud_vacaciones', {

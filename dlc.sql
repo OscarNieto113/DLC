@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-03-2022 a las 19:12:43
+-- Tiempo de generación: 01-04-2022 a las 22:58:34
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.28
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `dlc`
 --
-CREATE DATABASE IF NOT EXISTS `dlc` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dlc`;
 
 -- --------------------------------------------------------
 
@@ -137,7 +135,7 @@ CREATE TABLE `ng_block` (
   `turno_ng_block` varchar(130) DEFAULT NULL,
   `descripcion_ng_block` varchar(130) DEFAULT NULL,
   `fecha_uso_ng_block` date DEFAULT NULL,
-  `fecha_solicitud_ng_block` date DEFAULT NULL,
+  `fecha_solicitud_ng_block` date DEFAULT current_timestamp(),
   `estatus_ng_block` varchar(20) DEFAULT NULL,
   `no_empleado` varchar(130) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -147,26 +145,26 @@ CREATE TABLE `ng_block` (
 --
 
 INSERT INTO `ng_block` (`id_ng_block`, `turno_ng_block`, `descripcion_ng_block`, `fecha_uso_ng_block`, `fecha_solicitud_ng_block`, `estatus_ng_block`, `no_empleado`) VALUES
-(1, 'Matutino', 'Tengo que ir al médico', '2022-02-10', '2022-02-09', 'Pendiente', 'A5'),
-(2, 'Matutino', 'Problemas personales.', '2022-02-15', '2022-01-09', 'Aprobado', 'A49'),
-(3, 'Matutino', 'Emergencia familiar.', '2022-03-22', '2022-02-12', 'Aprobado', 'A48'),
-(4, 'Matutino', 'Tengo que recoger a mis hijos.', '2022-04-22', '2022-03-11', 'Aprobado', 'A47'),
-(5, 'Matutino', 'Un familiar ha fallecido.', '2022-06-07', '2022-05-05', 'Aprobado', 'A46'),
-(6, 'Matutino', 'Mi mascota está enferma.', '2022-06-15', '2022-05-12', 'Pendiente', 'A45'),
-(7, 'Matutino', 'Mi coche se averió.', '2022-06-27', '2022-05-21', 'Aprobado', 'A44'),
-(8, 'Matutino', 'Estoy enfermo.', '2022-06-29', '2022-05-12', 'Pendiente', 'A43'),
-(9, 'Matutino', 'Tengo una cita con el doctor', '2022-07-08', '2022-06-29', 'Aprobado', 'A42'),
-(10, 'Matutino', 'Tengo la menstruación.', '2022-07-19', '2022-06-26', 'Rechazado', 'A41'),
-(11, 'Vespertino', 'Mi pareja tuvo un accidente', '2022-08-09', '2022-07-12', 'Aprobado', 'A31'),
-(12, 'Vespertino', 'Un pariente está de visita', '2022-08-15', '2022-07-05', 'Pendiente', 'A22'),
-(13, 'Vespertino', 'Tuve un incendio en mi apartamento', '2022-02-10', '2022-02-09', 'Aprobado', 'A13'),
-(14, 'Vespertino', 'Voy al partido de los gallos vs atlas', '2022-08-22', '2022-07-22', 'Rechazado', 'A14'),
-(15, 'Vespertino', 'Tengo que ir a una boda', '2022-09-02', '2022-08-29', 'Aprobado', 'A15'),
-(16, 'Vespertino', 'Me asaltaron en la calle en Tamaulipas.', '2022-09-09', '2022-09-08', 'Rechazado', 'A2'),
-(17, 'Vespertino', 'Me quedé encerrado en casa', '2022-09-23', '2022-09-22', 'Pendiente', 'A9'),
-(18, 'Vespertino', 'Es el cumpleaños de mi hijo', '2022-09-29', '2022-09-18', 'Aprobado', 'A7'),
-(19, 'Vespertino', 'Tengo sintomas de covid”', '2022-10-06', '2022-09-09', 'Rechazado', 'A21'),
-(20, 'Vespertino', 'Tengo que ir al recital de mi hija', '2022-10-18', '2022-10-09', 'Rechazado', 'A20');
+(1, 'Matutino', 'Tengo que ir al médico', '2022-02-10', '2022-04-01', 'Pendiente', 'A5'),
+(2, 'Matutino', 'Problemas personales.', '2022-02-15', '2022-04-01', 'Aprobado', 'A49'),
+(3, 'Matutino', 'Emergencia familiar.', '2022-03-22', '2022-04-01', 'Aprobado', 'A48'),
+(4, 'Matutino', 'Tengo que recoger a mis hijos.', '2022-04-22', '2022-04-01', 'Aprobado', 'A47'),
+(5, 'Matutino', 'Un familiar ha fallecido.', '2022-06-07', '2022-04-01', 'Aprobado', 'A46'),
+(6, 'Matutino', 'Mi mascota está enferma.', '2022-06-15', '2022-04-01', 'Pendiente', 'A45'),
+(7, 'Matutino', 'Mi coche se averió.', '2022-06-27', '2022-04-01', 'Aprobado', 'A44'),
+(8, 'Matutino', 'Estoy enfermo.', '2022-06-29', '2022-04-01', 'Pendiente', 'A43'),
+(9, 'Matutino', 'Tengo una cita con el doctor', '2022-07-08', '2022-04-01', 'Aprobado', 'A42'),
+(10, 'Matutino', 'Tengo la menstruación.', '2022-07-19', '2022-04-01', 'Rechazado', 'A41'),
+(11, 'Vespertino', 'Mi pareja tuvo un accidente', '2022-08-09', '2022-04-01', 'Aprobado', 'A31'),
+(12, 'Vespertino', 'Un pariente está de visita', '2022-08-15', '2022-04-01', 'Pendiente', 'A22'),
+(13, 'Vespertino', 'Tuve un incendio en mi apartamento', '2022-02-10', '2022-04-01', 'Aprobado', 'A13'),
+(14, 'Vespertino', 'Voy al partido de los gallos vs atlas', '2022-08-22', '2022-04-01', 'Rechazado', 'A14'),
+(15, 'Vespertino', 'Tengo que ir a una boda', '2022-09-02', '2022-04-01', 'Aprobado', 'A15'),
+(16, 'Vespertino', 'Me asaltaron en la calle en Tamaulipas.', '2022-09-09', '2022-04-01', 'Rechazado', 'A2'),
+(17, 'Vespertino', 'Me quedé encerrado en casa', '2022-09-23', '2022-04-01', 'Pendiente', 'A9'),
+(18, 'Vespertino', 'Es el cumpleaños de mi hijo', '2022-09-29', '2022-04-01', 'Aprobado', 'A7'),
+(19, 'Vespertino', 'Tengo sintomas de covid”', '2022-10-06', '2022-04-01', 'Rechazado', 'A21'),
+(20, 'Vespertino', 'Tengo que ir al recital de mi hija', '2022-10-18', '2022-04-01', 'Rechazado', 'A20');
 
 -- --------------------------------------------------------
 
@@ -178,7 +176,7 @@ CREATE TABLE `noticia` (
   `id_noticia` int(11) NOT NULL,
   `imagen_noticia` varchar(300) DEFAULT NULL,
   `fecha_noticia` date DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `noticia`
@@ -268,17 +266,17 @@ CREATE TABLE `publicacion` (
   `descripcion_publicacion` varchar(300) DEFAULT NULL,
   `imagen_publicacion` varchar(300) DEFAULT NULL,
   `fecha_publicacion` date DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `publicacion`
 --
 
 INSERT INTO `publicacion` (`id_publicacion`, `titulo_publicacion`, `descripcion_publicacion`, `imagen_publicacion`, `fecha_publicacion`) VALUES
-(1, 'Curso de Inglés', 'Inscribite a los cursos de inglés', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-03-30'),
-(2, 'Limpieza dental', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-03-30'),
-(3, 'Día del padre', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-03-30'),
-(4, 'Trae a tu hijo al trabajo', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-03-30');
+(1, 'Curso de Inglés', 'Inscribite a los cursos de inglés', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-04-01'),
+(2, 'Limpieza dental', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-04-01'),
+(3, 'Día del padre', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-04-01'),
+(4, 'Trae a tu hijo al trabajo', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-04-01');
 
 -- --------------------------------------------------------
 
@@ -299,8 +297,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`correo_usuario`, `contrasenia`, `no_empleado`) VALUES
 ('a01705001@natgas.com.mx', '1234', 'A1'),
 ('a01705002@natgas.com.mx', '5678', 'A2'),
-('a01705003@natgas.com.mx', '9012', 'A3'),
-('a01705004@natgas.com.mx', '$2a$12$znJE3hjcqcMWwsEQyteVe.d0Vpe0wCrQQ/DNKZGONoyP1Q9oJM/jK', 'A4');
+('a01705003@natgas.com.mx', '9012', 'A3');
 
 -- --------------------------------------------------------
 
@@ -315,7 +312,7 @@ CREATE TABLE `vacaciones` (
   `reanudacion_labores` date DEFAULT NULL,
   `fecha_primer_dia` date DEFAULT NULL,
   `fecha_ultimo_dia` date DEFAULT NULL,
-  `fecha_solicitud` date DEFAULT NULL,
+  `fecha_solicitud` date DEFAULT current_timestamp(),
   `dias_solicitados` int(23) DEFAULT NULL,
   `estatus_vacaciones` varchar(20) DEFAULT NULL,
   `no_empleado` varchar(130) NOT NULL
@@ -326,28 +323,27 @@ CREATE TABLE `vacaciones` (
 --
 
 INSERT INTO `vacaciones` (`folio`, `responsable_ausencia`, `observaciones`, `reanudacion_labores`, `fecha_primer_dia`, `fecha_ultimo_dia`, `fecha_solicitud`, `dias_solicitados`, `estatus_vacaciones`, `no_empleado`) VALUES
-(1, 'Óscar Eduardo Nieto Espitia', '  ', '2022-04-11', '2022-04-05', '2022-04-08', '2022-03-09', 5, 'Pendiente', 'A20'),
-(2, 'Dalila Azcona Garrido', '  ', '2022-01-27', '2022-01-17', '2022-01-26', '2022-01-09', 8, 'Pendiente', 'A19'),
-(3, 'Perlita Calzada Lladó', '  ', '2022-03-01', '2022-02-17', '2022-02-28', '2022-01-17', 8, 'Pendiente', 'A18'),
-(4, 'América Paz Álvarez', '  ', '2022-04-11', '2022-04-08', '2022-03-05', '2022-02-09', 10, 'Pendiente', 'A17'),
-(5, 'Trinidad Vazquez Mate', '  ', '2022-04-15', '2022-04-01', '2022-04-14', '2022-03-01', 6, 'Pendiente', 'A16'),
-(6, 'Crescencia Botella Sola', '  ', '2022-06-01', '2022-05-02', '2022-05-30', '2022-04-09', 21, 'Pendiente', 'A15'),
-(7, 'Antonia Torrijos Robles', '  ', '2022-06-22', '2022-06-08', '2022-06-21', '2022-05-09', 10, 'Pendiente', 'A14'),
-(8, 'Natanael Morillo Ramos', '  ', '2022-07-08', '2022-07-05', '2022-07-07', '2022-06-09', 3, 'Pendiente', 'A13'),
-(9, 'Fulgencio Rocha Ribera', '  ', '2022-08-19', '2022-08-05', '2022-08-18', '2022-07-09', 10, 'Pendiente', 'A12'),
-(10, 'Adelina Llanos Sanmartín', '  ', '2022-09-30', '2022-09-05', '2022-09-29', '2022-03-02', 15, 'Pendiente', 'A11'),
-(11, 'Ciríaco Tejero Gimeno', '  ', '2022-09-06', '2022-09-05', '2022-09-05', '2022-08-10', 1, 'Pendiente', 'A10'),
-(12, 'Iris Gomis Batlle', '  ', '2022-08-12', '2022-08-08', '2022-08-11', '2022-06-25', 4, 'Pendiente', 'A9'),
-(13, 'Rita Corral Pallarès', '  ', '2022-08-03', '2022-08-01', '2022-08-02', '2022-02-23', 2, 'Pendiente', 'A8'),
-(14, 'Amando Roselló Ballester', '  ', '2022-03-17', '2022-03-16', '2022-03-16', '2022-03-09', 1, 'Pendiente', 'A7'),
-(15, 'Mayte Canals Carbonell', '  ', '2022-05-13', '2022-05-02', '2022-05-12', '2022-05-01', 9, 'Pendiente', 'A6'),
-(16, 'Chelo Coca Mascaró', '  ', '2022-06-29', '2022-06-20', '2022-06-28', '2022-05-19', 7, 'Pendiente', 'A5'),
-(17, 'Teresita Castañeda Barba', '  ', '2022-06-08', '2022-06-06', '2022-06-07', '2022-04-21', 2, 'Pendiente', 'A4'),
-(18, 'Pascuala Collado Royo', '  ', '2022-04-04', '2022-03-21', '2022-04-01', '2022-02-15', 10, 'Pendiente', 'A3'),
-(19, 'Zoraida Criado Zabala', '  ', '2022-04-25', '2022-04-18', '2022-04-22', '2022-04-09', 5, 'Pendiente', 'A2'),
-(20, 'Benita Martín Zabala', '  ', '2022-05-06', '2022-05-03', '2022-05-05', '2022-03-09', 3, 'Pendiente', 'A1'),
-(21, 'A01705091', 'ninguna', '2000-10-13', '2022-03-29', '2000-10-13', NULL, 5, 'Pendiente', 'A4'),
-(22, 'A01705091', 'ninguna', '2000-10-13', '2022-03-29', '2000-10-13', NULL, 5, 'Pendiente', 'A4');
+(1, 'Óscar Eduardo Nieto Espitia', '  ', '2022-04-11', '2022-04-05', '2022-04-08', '2022-04-01', 5, 'Pendiente', 'A20'),
+(2, 'Dalila Azcona Garrido', '  ', '2022-01-27', '2022-01-17', '2022-01-26', '2022-04-01', 8, 'Pendiente', 'A19'),
+(3, 'Perlita Calzada Lladó', '  ', '2022-03-01', '2022-02-17', '2022-02-28', '2022-04-01', 8, 'Pendiente', 'A18'),
+(4, 'América Paz Álvarez', '  ', '2022-04-11', '2022-04-08', '2022-03-05', '2022-04-01', 10, 'Pendiente', 'A17'),
+(5, 'Trinidad Vazquez Mate', '  ', '2022-04-15', '2022-04-01', '2022-04-14', '2022-04-01', 6, 'Pendiente', 'A16'),
+(6, 'Crescencia Botella Sola', '  ', '2022-06-01', '2022-05-02', '2022-05-30', '2022-04-01', 21, 'Pendiente', 'A15'),
+(7, 'Antonia Torrijos Robles', '  ', '2022-06-22', '2022-06-08', '2022-06-21', '2022-04-01', 10, 'Pendiente', 'A14'),
+(8, 'Natanael Morillo Ramos', '  ', '2022-07-08', '2022-07-05', '2022-07-07', '2022-04-01', 3, 'Pendiente', 'A13'),
+(9, 'Fulgencio Rocha Ribera', '  ', '2022-08-19', '2022-08-05', '2022-08-18', '2022-04-01', 10, 'Pendiente', 'A12'),
+(10, 'Adelina Llanos Sanmartín', '  ', '2022-09-30', '2022-09-05', '2022-09-29', '2022-04-01', 15, 'Pendiente', 'A11'),
+(11, 'Ciríaco Tejero Gimeno', '  ', '2022-09-06', '2022-09-05', '2022-09-05', '2022-04-01', 1, 'Pendiente', 'A10'),
+(12, 'Iris Gomis Batlle', '  ', '2022-08-12', '2022-08-08', '2022-08-11', '2022-04-01', 4, 'Pendiente', 'A9'),
+(13, 'Rita Corral Pallarès', '  ', '2022-08-03', '2022-08-01', '2022-08-02', '2022-04-01', 2, 'Pendiente', 'A8'),
+(14, 'Amando Roselló Ballester', '  ', '2022-03-17', '2022-03-16', '2022-03-16', '2022-04-01', 1, 'Pendiente', 'A7'),
+(15, 'Mayte Canals Carbonell', '  ', '2022-05-13', '2022-05-02', '2022-05-12', '2022-04-01', 9, 'Pendiente', 'A6'),
+(16, 'Chelo Coca Mascaró', '  ', '2022-06-29', '2022-06-20', '2022-06-28', '2022-04-01', 7, 'Pendiente', 'A5'),
+(17, 'Teresita Castañeda Barba', '  ', '2022-06-08', '2022-06-06', '2022-06-07', '2022-04-01', 2, 'Pendiente', 'A4'),
+(18, 'Pascuala Collado Royo', '  ', '2022-04-04', '2022-03-21', '2022-04-01', '2022-04-01', 10, 'Pendiente', 'A3'),
+(19, 'Zoraida Criado Zabala', '  ', '2022-04-25', '2022-04-18', '2022-04-22', '2022-04-01', 5, 'Pendiente', 'A2'),
+(20, 'Benita Martín Zabala', '  ', '2022-05-06', '2022-05-03', '2022-05-05', '2022-04-01', 3, 'Pendiente', 'A1'),
+(21, 'Óscar Eduardo Nieto Espitia', 'ninguna', '2022-10-13', '2022-04-04', '2022-04-07', '2022-04-01', 4, 'Pendiente', 'A4');
 
 --
 -- Índices para tablas volcadas
@@ -455,7 +451,7 @@ ALTER TABLE `publicacion`
 -- AUTO_INCREMENT de la tabla `vacaciones`
 --
 ALTER TABLE `vacaciones`
-  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas

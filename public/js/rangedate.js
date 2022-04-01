@@ -22,7 +22,7 @@
           var u_dia = sorted_dates[0];
           //var p_dia2 = document.getElementById("p_dia");//.value = longitud;
           //p_dia2.innerHTML = p_dia;
-          document.getElementById("fecha_primer_dia").value = u_dia;
+          document.getElementById("fecha_primer_dia").value = u_dia.toISOString().split('T')[0];
 
       });
 
@@ -36,7 +36,7 @@
           var u_dia = sorted_dates[sorted_dates.length-1];
           //var u_dia2 = document.getElementById("u_dia");//.value = longitud;
           //u_dia2.innerHTML = u_dia;
-          document.getElementById("fecha_ultimo_dia").value = u_dia;
+          document.getElementById("fecha_ultimo_dia").value = u_dia.toISOString().split('T')[0];
       });
 
       //funcion pa la cantidad de dias

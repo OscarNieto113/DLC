@@ -177,7 +177,6 @@ exports.post_solicitud_vacaciones = (request, response, next) => {
           request.body.no_empleado,
           request.body.responsable_ausencia,
           request.body.observaciones,
-          request.body.reanudacion_labores,
           request.body.fecha_primer_dia,
           request.body.fecha_ultimo_dia,
           request.body.dias_solicitados,

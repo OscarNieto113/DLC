@@ -17,6 +17,19 @@ http://localhost:3000/users/login
 correo: A01705004@natgas.com.mx
 contraseña: 1234
 
+## Cosas por hacer
+
+1. Conexión con Auth0
+2. Reportes Mensuales ()
+3. Pulir todo lo relacionado con NG Blocks
+4. Busqueda de empleado por AJAX
+5. Post con AJAX
+6. Eliminar solicitudes en estado pendiente
+7. Postear con tu no_empleado
+8. Registrar Empleado (No jala departamento, agregar rol a la pestaña)
+9. Agregar Vacaciones y NG Blocks adicionales
+10. Modificar Rol desde el perfil
+11. Calcular los dias de vacaciones
 
 ## Comandos básicos GIT
 `git clone ruta_repositorio_remoto`: Clona el repositorio remoto en la computadora en la que se está trabajando dentro de una carpeta con el nombre del repositorio. Hay que seleccionar la carpeta para poder manipular el repositorio, esto se hace con: cd nombre_repositorio.

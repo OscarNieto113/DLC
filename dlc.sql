@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-04-2022 a las 22:58:34
+-- Tiempo de generación: 02-04-2022 a las 02:03:39
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.28
 
@@ -310,7 +310,6 @@ CREATE TABLE `vacaciones` (
   `folio` int(11) NOT NULL,
   `responsable_ausencia` varchar(130) DEFAULT NULL,
   `observaciones` varchar(800) DEFAULT NULL,
-  `reanudacion_labores` date DEFAULT NULL,
   `fecha_primer_dia` date DEFAULT NULL,
   `fecha_ultimo_dia` date DEFAULT NULL,
   `fecha_solicitud` date DEFAULT current_timestamp(),
@@ -323,28 +322,27 @@ CREATE TABLE `vacaciones` (
 -- Volcado de datos para la tabla `vacaciones`
 --
 
-INSERT INTO `vacaciones` (`folio`, `responsable_ausencia`, `observaciones`, `reanudacion_labores`, `fecha_primer_dia`, `fecha_ultimo_dia`, `fecha_solicitud`, `dias_solicitados`, `estatus_vacaciones`, `no_empleado`) VALUES
-(1, 'Óscar Eduardo Nieto Espitia', '  ', '2022-04-11', '2022-04-05', '2022-04-08', '2022-04-01', 5, 'Pendiente', 'A20'),
-(2, 'Dalila Azcona Garrido', '  ', '2022-01-27', '2022-01-17', '2022-01-26', '2022-04-01', 8, 'Pendiente', 'A19'),
-(3, 'Perlita Calzada Lladó', '  ', '2022-03-01', '2022-02-17', '2022-02-28', '2022-04-01', 8, 'Pendiente', 'A18'),
-(4, 'América Paz Álvarez', '  ', '2022-04-11', '2022-04-08', '2022-03-05', '2022-04-01', 10, 'Pendiente', 'A17'),
-(5, 'Trinidad Vazquez Mate', '  ', '2022-04-15', '2022-04-01', '2022-04-14', '2022-04-01', 6, 'Pendiente', 'A16'),
-(6, 'Crescencia Botella Sola', '  ', '2022-06-01', '2022-05-02', '2022-05-30', '2022-04-01', 21, 'Pendiente', 'A15'),
-(7, 'Antonia Torrijos Robles', '  ', '2022-06-22', '2022-06-08', '2022-06-21', '2022-04-01', 10, 'Pendiente', 'A14'),
-(8, 'Natanael Morillo Ramos', '  ', '2022-07-08', '2022-07-05', '2022-07-07', '2022-04-01', 3, 'Pendiente', 'A13'),
-(9, 'Fulgencio Rocha Ribera', '  ', '2022-08-19', '2022-08-05', '2022-08-18', '2022-04-01', 10, 'Pendiente', 'A12'),
-(10, 'Adelina Llanos Sanmartín', '  ', '2022-09-30', '2022-09-05', '2022-09-29', '2022-04-01', 15, 'Pendiente', 'A11'),
-(11, 'Ciríaco Tejero Gimeno', '  ', '2022-09-06', '2022-09-05', '2022-09-05', '2022-04-01', 1, 'Pendiente', 'A10'),
-(12, 'Iris Gomis Batlle', '  ', '2022-08-12', '2022-08-08', '2022-08-11', '2022-04-01', 4, 'Pendiente', 'A9'),
-(13, 'Rita Corral Pallarès', '  ', '2022-08-03', '2022-08-01', '2022-08-02', '2022-04-01', 2, 'Pendiente', 'A8'),
-(14, 'Amando Roselló Ballester', '  ', '2022-03-17', '2022-03-16', '2022-03-16', '2022-04-01', 1, 'Pendiente', 'A7'),
-(15, 'Mayte Canals Carbonell', '  ', '2022-05-13', '2022-05-02', '2022-05-12', '2022-04-01', 9, 'Pendiente', 'A6'),
-(16, 'Chelo Coca Mascaró', '  ', '2022-06-29', '2022-06-20', '2022-06-28', '2022-04-01', 7, 'Pendiente', 'A5'),
-(17, 'Teresita Castañeda Barba', '  ', '2022-06-08', '2022-06-06', '2022-06-07', '2022-04-01', 2, 'Pendiente', 'A4'),
-(18, 'Pascuala Collado Royo', '  ', '2022-04-04', '2022-03-21', '2022-04-01', '2022-04-01', 10, 'Pendiente', 'A3'),
-(19, 'Zoraida Criado Zabala', '  ', '2022-04-25', '2022-04-18', '2022-04-22', '2022-04-01', 5, 'Pendiente', 'A2'),
-(20, 'Benita Martín Zabala', '  ', '2022-05-06', '2022-05-03', '2022-05-05', '2022-04-01', 3, 'Pendiente', 'A1'),
-(21, 'Óscar Eduardo Nieto Espitia', 'ninguna', '2022-10-13', '2022-04-04', '2022-04-07', '2022-04-01', 4, 'Pendiente', 'A4');
+INSERT INTO `vacaciones` (`folio`, `responsable_ausencia`, `observaciones`, `fecha_primer_dia`, `fecha_ultimo_dia`, `fecha_solicitud`, `dias_solicitados`, `estatus_vacaciones`, `no_empleado`) VALUES
+(1, 'Óscar Eduardo Nieto Espitia', '  ', '2022-04-05', '2022-04-08', '2022-04-01', 5, 'Pendiente', 'A20'),
+(2, 'Dalila Azcona Garrido', '  ', '2022-01-17', '2022-01-26', '2022-04-01', 8, 'Pendiente', 'A19'),
+(3, 'Perlita Calzada Lladó', '  ', '2022-02-17', '2022-02-28', '2022-04-01', 8, 'Pendiente', 'A18'),
+(4, 'América Paz Álvarez', '  ', '2022-04-08', '2022-03-05', '2022-04-01', 10, 'Pendiente', 'A17'),
+(5, 'Trinidad Vazquez Mate', '  ', '2022-04-01', '2022-04-14', '2022-04-01', 6, 'Pendiente', 'A16'),
+(6, 'Crescencia Botella Sola', '  ', '2022-05-02', '2022-05-30', '2022-04-01', 21, 'Pendiente', 'A15'),
+(7, 'Antonia Torrijos Robles', '  ', '2022-06-08', '2022-06-21', '2022-04-01', 10, 'Pendiente', 'A14'),
+(8, 'Natanael Morillo Ramos', '  ', '2022-07-05', '2022-07-07', '2022-04-01', 3, 'Pendiente', 'A13'),
+(9, 'Fulgencio Rocha Ribera', '  ', '2022-08-05', '2022-08-18', '2022-04-01', 10, 'Pendiente', 'A12'),
+(10, 'Adelina Llanos Sanmartín', '  ', '2022-09-05', '2022-09-29', '2022-04-01', 15, 'Pendiente', 'A11'),
+(11, 'Ciríaco Tejero Gimeno', '  ', '2022-09-05', '2022-09-05', '2022-04-01', 1, 'Pendiente', 'A10'),
+(12, 'Iris Gomis Batlle', '  ', '2022-08-08', '2022-08-11', '2022-04-01', 4, 'Pendiente', 'A9'),
+(13, 'Rita Corral Pallarès', '  ', '2022-08-01', '2022-08-02', '2022-04-01', 2, 'Pendiente', 'A8'),
+(14, 'Amando Roselló Ballester', '  ', '2022-03-16', '2022-03-16', '2022-04-01', 1, 'Pendiente', 'A7'),
+(15, 'Mayte Canals Carbonell', '  ', '2022-05-02', '2022-05-12', '2022-04-01', 9, 'Pendiente', 'A6'),
+(16, 'Chelo Coca Mascaró', '  ', '2022-06-20', '2022-06-28', '2022-04-01', 7, 'Pendiente', 'A5'),
+(17, 'Teresita Castañeda Barba', '  ', '2022-06-06', '2022-06-07', '2022-04-01', 2, 'Pendiente', 'A4'),
+(18, 'Pascuala Collado Royo', '  ', '2022-03-21', '2022-04-01', '2022-04-01', 10, 'Pendiente', 'A3'),
+(19, 'Zoraida Criado Zabala', '  ', '2022-04-18', '2022-04-22', '2022-04-01', 5, 'Pendiente', 'A2'),
+(20, 'Benita Martín Zabala', '  ', '2022-05-03', '2022-05-05', '2022-04-01', 3, 'Pendiente', 'A1');
 
 --
 -- Índices para tablas volcadas
@@ -452,7 +450,7 @@ ALTER TABLE `publicacion`
 -- AUTO_INCREMENT de la tabla `vacaciones`
 --
 ALTER TABLE `vacaciones`
-  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas

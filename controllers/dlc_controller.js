@@ -320,7 +320,21 @@ exports.get_profile = (request, response, next) => {
         .catch(err => {
             console.log(err);
         });
-}
+      };
+
+exports.get_perfil_empleado = (request, response, next) => {
+    Empleado.fetchEmpleadoAll(request.params.no_empleado)
+        .then(([rows, fieldData]) => {
+          console.log(rows)
+            response.render('profile', {
+                empleado: rows,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+          });
+  };
+
 //------------------------Consultar informacion personal (perfil)---------------------------------
 
 //------------------------Consultar informacion personal (perfil)--------------------------------
@@ -336,7 +350,7 @@ exports.get_buscar_empleado = (request, response, next) => {
         .catch(err => {
             console.log(err);
         });
-}
+};
 //------------------------Consultar informacion personal (perfil)---------------------------------
 
 

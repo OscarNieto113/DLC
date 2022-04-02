@@ -14,20 +14,19 @@
       <div class="card-columns">
       <% if (empleado.length > 0) { %>
         <% for (let empleado1 of empleado) { %>
-
-        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-          <div class="card-header"><center><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></center></div>
-          <div class="card-body">
-            <p class="card-text"><center><b>Número de empleado: </b><%=empleado1.no_empleado%></center></p>
-            <p class="card-text"><center><b>Departamento: </b><%=empleado1.nombre_area%></center></p>
-            <p class="card-text"><center><b>Correo empresarial: </b><%=empleado1.correo_empresarial%></center></p>
-            <center><button type="button" class="btn btn-light">Ver perfil</button></center>
+          <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header"><center><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></center></div>
+            <div class="card-body">
+              <p class="card-text"><center><b>Número de empleado: </b><%=empleado1.no_empleado%></center></p>
+              <p class="card-text"><center><b>Departamento: </b><%=empleado1.nombre_area%></center></p>
+              <p class="card-text"><center><b>Correo empresarial: </b><%=empleado1.correo_empresarial%></center></p>
+              <a href="/dlc/buscar_empleado/<%=empleado1.no_empleado%>">
+              <center><button type="button" class="btn btn-light">Ver perfil</button></center>
+              </a>
+            </div>
           </div>
-        </div>
-
         <% } %>
       <% } %>
-
       </div>
     </div>
   </div>

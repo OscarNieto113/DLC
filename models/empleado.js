@@ -32,7 +32,9 @@ module.exports = class Empleado {
 
     static fetchEmpleadoAll(no_empleado) {
         return db.execute(
-            'SELECT e.no_empleado, ng_blocks_restantes, fecha_contratacion, fecha_nacimiento, correo_empresarial, nombres_empleados, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, id_area FROM empleado e, usuario u WHERE e.no_empleado = u.no_empleado AND u.no_empleado=?', [no_empleado]);
+            'SELECT e.no_empleado, ng_blocks_restantes, fecha_contratacion, fecha_nacimiento, correo_empresarial, nombres_empleados, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, nombre_area ' +
+            'FROM empleado e, area a ' +
+            'WHERE e.id_area = a.id_area AND e.no_empleado=?', [no_empleado]);
     }
 
     static fetchEmpleadoArea(id_area) {

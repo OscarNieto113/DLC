@@ -1,5 +1,6 @@
-<%- include('includes/head.ejs') %> <%- include('includes/topbar.ejs') %> <%-
-include('includes/sidebar.ejs') %>
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%-include('includes/sidebar.ejs') %>
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -47,8 +48,8 @@ include('includes/sidebar.ejs') %>
               Folio: <%= vacaciones1.folio %>
               No. Empleado: <%= vacaciones1.no_empleado %>
               Responsable: <%= vacaciones1.responsable_ausencia %>
-              Fecha primer día: <%= vacaciones1.primer_dia %>
-              Fecha ultimo día: <%= vacaciones1.ultimo_dia %>
+              Fecha primer día: <%= vacaciones1.fecha_primer_dia %>
+              Fecha ultimo día: <%= vacaciones1.fecha_ultimo_dia %>
               Fecha de la solicitud: <%= vacaciones1.fecha_solicitud %>"
                 >
                   Vacaciones

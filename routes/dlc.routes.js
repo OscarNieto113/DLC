@@ -34,9 +34,13 @@ router.post('/a_vacacionesp/:page/reject', dlc_controller.post_reject_vacaciones
 router.post('/a_vacacionesp/:page/aprovee', dlc_controller.post_aprovee_vacaciones);
 router.get('/a_vacacionesp/:page/filtrar/:search', dlc_controller.search_vacaciones);
 
-//Registrar Usuario
+//Registrar Empleado
 router.get('/r_usuario', dlc_controller.get_registrar_empleado);
 router.post('/r_usuario', dlc_controller.post_registrar_empleado);
+
+//Buscar Empelado
+router.get('/buscar_empleado', dlc_controller.get_buscar_empleado);
+//router.post('/buscar_empleado', dlc_controller.post_buscar_empleado);
 
 //Interfaz datos del empleado
 router.get('/profile', dlc_controller.get_profile);

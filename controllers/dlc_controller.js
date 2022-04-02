@@ -323,6 +323,22 @@ exports.get_profile = (request, response, next) => {
 }
 //------------------------Consultar informacion personal (perfil)---------------------------------
 
+//------------------------Consultar informacion personal (perfil)--------------------------------
+exports.get_buscar_empleado = (request, response, next) => {
+    console.log('Ruta /dlc/search_empleado');
+    Empleado.search()
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.render('buscar_empleado', {
+                empleado: rows,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+//------------------------Consultar informacion personal (perfil)---------------------------------
+
 
 //------------------------Main--------------------------------
 /*

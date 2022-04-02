@@ -23,9 +23,11 @@ module.exports = class Empleado {
           [this.no_empleado, this.ng_blocks_restantes, this.fecha_contratacion, this.fecha_nacimiento, this.correo_empresarial, this.nombres_empleados, this.apellido_paterno, this.apellido_materno, this.dias_vacaciones_restantes, this.genero_empleado, this.id_area]);
     }
 
-    //Este método servirá para devolver los objetos del almacenamiento persistente.
-    static fetchAll() {
-        return db.execute('SELECT * FROM empleado');
+    static search() {
+        return db.execute('SELECT a.nombre_area, e.no_empleado, e.nombres_empleados, e.apellido_paterno, e.apellido_materno, correo_empresarial ' +
+        'FROM empleado e, area a ' +
+        'WHERE a.id_area = e.id_area ' +
+        'LIMIT 15 ' );
     }
 
     static fetchEmpleadoAll(no_empleado) {

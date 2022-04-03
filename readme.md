@@ -1,5 +1,5 @@
 # Read ME
-
+Horas desperdiciadas en los datepickers = 9
 ## Comandos NPM
 
 Para correr el sitio ten encuenta los siguientes puntos:

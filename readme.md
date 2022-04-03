@@ -27,7 +27,7 @@ contraseña: 1234
 6. Eliminar solicitudes en estado pendiente
 7. Postear con tu no_empleado
 8. Registrar Empleado (No jala departamento, agregar rol a la pestaña)
-9. Agregar Vacaciones y NG Blocks adicionales
+9. Agregar Vacaciones y NG Blocks adicionales LISTO
 10. Modificar Rol desde el perfil
 11. Calcular los dias de vacaciones
 12. Cookies y Toast

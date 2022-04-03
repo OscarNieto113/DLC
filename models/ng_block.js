@@ -31,7 +31,7 @@ module.exports = class Ng_Block {
 
     static fetchSome(no_empleado) {
         return db.execute(
-          'SELECT turno_ng_block, descripcion_ng_block, fecha_uso_ng_block, estatus_ng_block, ng.no_empleado ' +
+          'SELECT turno_ng_block, descripcion_ng_block, fecha_uso_ng_block, estatus_ng_block, ng.no_empleado, id_ng_block ' +
           'FROM empleado e, ng_block ng ' +
           'WHERE e.no_empleado = ng.no_empleado AND ng.no_empleado=?', [no_empleado]);
     }
@@ -49,4 +49,10 @@ module.exports = class Ng_Block {
             'no_empleado = ? ', [giveNgBlocks, no_empleado]);
     }
 
+    static deleteNgBlock(id_ng_block) {
+        return db.execute(
+          'DELETE FROM ng_block ' +
+            'WHERE ' +
+					'id_ng_block = ? ', [id_ng_block]);
+    }
 }

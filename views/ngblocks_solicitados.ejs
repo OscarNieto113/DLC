@@ -11,7 +11,23 @@
 
       <% if (ng_block.length > 0) { %>
         <% for (let ng_block1 of ng_block) { %>
-          <div class="card">
+          <% if (ng_block1.estatus_ng_block === "Pendiente") { %>
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+
+              <form action="/dlc/profile/ngblocks_solicitados/delete/<%= ng_block1.id_ng_block %>" method="POST">
+                <input type="hidden" id="id_ng_block" name="id_ng_block" value="<%= ng_block1.id_ng_block %>"/>
+                <div style="text-align: right;">
+                  <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+                </div>
+              </form>
+          <% } else if (ng_block1.estatus_ng_block === "Aprobado") { %>
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+          <% } else if (ng_block1.estatus_ng_block === 'Rechazado') { %>
+            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+          <% } else { %>
+            <div class="card">
+          <% } %>
+          <div class="card-header"><%= ng_block1.estatus_ng_block %></div>
             <div class="card-body">
               <h5 class="card-title">Fecha de uso: <%= ng_block1.fecha_uso_ng_block%></h5>
               <br><p class="card-text"><b>Descripción: </b><%= ng_block1.descripcion_ng_block %></p>

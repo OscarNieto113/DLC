@@ -44,7 +44,7 @@ module.exports = class Vacaciones {
 
     static fetchSome(no_empleado) {
         return db.execute(
-          'SELECT fecha_solicitud, fecha_primer_dia, fecha_ultimo_dia, dias_solicitados, responsable_ausencia, observaciones, estatus_vacaciones ' +
+          'SELECT fecha_solicitud, fecha_primer_dia, fecha_ultimo_dia, dias_solicitados, responsable_ausencia, observaciones, estatus_vacaciones, folio ' +
           'FROM empleado e, vacaciones v ' +
           'WHERE e.no_empleado = v.no_empleado AND v.no_empleado=?', [no_empleado]);
     }
@@ -90,6 +90,13 @@ module.exports = class Vacaciones {
             'SET dias_vacaciones_restantes = dias_vacaciones_restantes + ? ' +
 					'WHERE ' +
             'no_empleado = ? ', [giveVacations, no_empleado]);
+    }
+
+    static deleteVacations(folio) {
+        return db.execute(
+          'DELETE FROM vacaciones ' +
+            'WHERE ' +
+					'folio = ? ', [folio]);
     }
 
 }

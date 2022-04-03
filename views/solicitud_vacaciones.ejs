@@ -12,32 +12,27 @@
               </div>
 
               <br>
-
+                <form action="/dlc/s_vacaciones" method="POST">
                 <div class="container-fluid">
                   <div class="row form-group">
                         <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
                         <div class="col-sm-4">
                             <div class="input-group date" id="datepicker">
-
-
-                              <input class="form-control" id="all_dates" name="all_dates" placeholder="YYYY-MM-DD" autocomplete="off" type="text"/>
-
-
-                                <span class="input-group-append">
+                              <input type="text" id="all_dates" name="all_dates" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" required/>
+                              <span class="input-group-append">
                                     <span class="input-group-text bg-white">
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                 </span>
                             </div>
-
                         </div>
                     </div>
                   <div>
                     <br>
                     <!-- Inicia form-->
-                    <form action="/dlc/s_vacaciones" method="POST">
+
                     <label  for="responsable_ausencia" class="col-form-label"><b>Responsable durante tu ausencia*</b></label>
-                    <select name="responsable_ausencia" class="form-select" aria-label="Default select example">
+                    <select name="responsable_ausencia" class="form-select" aria-label="Default select example" required>
                       <option value="" disabled selected>Responsable</option>
                       <% for (let empleado1 of empleado) { %>
                           <option value="<%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%>"><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></option>
@@ -56,7 +51,7 @@
                   <!-- DATOS FAKE-->
                   <input type="submit" value="Enviar" class="btn btn-primary">
                 </div>
-                  </form>
+                </form>
               <!-- Termina form-->
 
               <br><br>

@@ -95,7 +95,7 @@
                       <br>
                         <label for="ng_blockR"><h4>Ng blocks restantes</h4></label>
                         <input type="text" class="form-control" name="ng_blockR" id="ng_blockR" value="<%= empleado1.ng_blocks_restantes %>" disabled>
-                        <% } %>
+
                     </div>
                   </div>
                 </div>
@@ -111,7 +111,24 @@
                 <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/vacaciones_solicitadas">Ver solicitudes de Vacaciones</button>
               </a>
           </div>
+          <br>
+
+          <form action="/dlc/buscar_empleado/:no_empleado/vacaciones" method="POST">
+            <label for="giveVacations">Agregar dias de vacaciones: </label>
+            <input type="number" id="giveVacations" name="giveVacations" min="1" max="5" class="btn btn-light" s placeholder="0" required>
+            <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
+            <input type="submit" class="btn btn-primary">
+          </form>
+
+          <br>
+          <form action="/dlc/buscar_empleado/:no_empleado/ng_blocks" method="POST">
+            <label for="giveNgBlocks">Agregar Ng Blocks: </label>
+            <input type="number" id="giveNgBlocks" name="giveNgBlocks" min="1" max="5" class="btn btn-light" s placeholder="0" required>
+            <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
+            <input type="submit" class="btn btn-primary">
+          </form>
         </div>
+        <% } %>
       </div>
     </div>
   </div>

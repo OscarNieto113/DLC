@@ -84,4 +84,12 @@ module.exports = class Vacaciones {
         return db.execute('SELECT * FROM vacaciones WHERE id=?', [folio]);
     }
 
+    static giveVacations(giveVacations, no_empleado) {
+        return db.execute(
+          'UPDATE empleado ' +
+            'SET dias_vacaciones_restantes = dias_vacaciones_restantes + ? ' +
+					'WHERE ' +
+            'no_empleado = ? ', [giveVacations, no_empleado]);
+    }
+
 }

@@ -30,6 +30,7 @@ contraseña: 1234
 9. Agregar Vacaciones y NG Blocks adicionales
 10. Modificar Rol desde el perfil
 11. Calcular los dias de vacaciones
+12. Cookies y Toast
 
 ## Comandos básicos GIT
 `git clone ruta_repositorio_remoto`: Clona el repositorio remoto en la computadora en la que se está trabajando dentro de una carpeta con el nombre del repositorio. Hay que seleccionar la carpeta para poder manipular el repositorio, esto se hace con: cd nombre_repositorio.

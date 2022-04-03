@@ -41,4 +41,12 @@ module.exports = class Ng_Block {
         return db.execute('SELECT * FROM ng_block WHERE id=?', [id_ng_block]);
     }
 
+    static giveNgBlocks(giveNgBlocks, no_empleado) {
+        return db.execute(
+          'UPDATE empleado ' +
+            'SET ng_blocks_restantes = ng_blocks_restantes + ? ' +
+          'WHERE ' +
+            'no_empleado = ? ', [giveNgBlocks, no_empleado]);
+    }
+
 }

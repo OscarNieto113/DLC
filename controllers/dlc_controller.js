@@ -337,7 +337,7 @@ exports.get_perfil_empleado = (request, response, next) => {
 
 //------------------------Consultar informacion personal (perfil)---------------------------------
 
-//------------------------Consultar informacion personal (perfil)--------------------------------
+//------------------------Buscar empleado (perfil)--------------------------------
 exports.get_buscar_empleado = (request, response, next) => {
     console.log('Ruta /dlc/search_empleado');
     Empleado.search()
@@ -351,7 +351,34 @@ exports.get_buscar_empleado = (request, response, next) => {
             console.log(err);
         });
 };
-//------------------------Consultar informacion personal (perfil)---------------------------------
+//-------------------------Buscar empleado (perfil)---------------------------------
+
+//------------------------Dar dias de vacaciones (perfil)--------------------------------
+exports.post_give_vacations = (request, response, next) => {
+    console.log('POST /dlc/buscar_empleado/:no_empleado/vacaciones');
+    console.log(request.body);
+    Vacaciones.giveVacations(
+      request.body.giveVacations,
+      request.body.no_empleado)
+      .then(() => {
+          response.redirect('/dlc/buscar_empleado');
+      }).catch(err => console.log(err));
+  }
+//-------------------------Dar dias de vacaciones (perfil)---------------------------------
+
+//------------------------Dar Ng Blocks (perfil)--------------------------------
+exports.post_give_ng_blocks = (request, response, next) => {
+    console.log('POST /dlc/buscar_empleado/:no_empleado/ng_blocks');
+    console.log(request.body);
+    Ng_Block.giveNgBlocks(
+      request.body.giveNgBlocks,
+      request.body.no_empleado)
+      .then(() => {
+          response.redirect('/dlc/buscar_empleado');
+      }).catch(err => console.log(err));
+  }
+//-------------------------Dar Ng Blocks (perfil)---------------------------------
+
 
 
 //------------------------Main--------------------------------

@@ -46,6 +46,16 @@ router.get('/buscar_empleado/:no_empleado', dlc_controller.get_perfil_empleado);
 //Interfaz datos del empleado
 router.get('/profile', dlc_controller.get_profile);
 
+
+
+//Dar dias de vacaciones
+router.post('/buscar_empleado/:no_empleado/vacaciones', dlc_controller.post_give_vacations);
+
+//Dar Ng Blocks
+router.post('/buscar_empleado/:no_empleado/ng_blocks', dlc_controller.post_give_ng_blocks);
+
+
+
 //Reporte NPS
 router.get('/nps', dlc_controller.get_nps);
 

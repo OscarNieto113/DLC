@@ -61,9 +61,11 @@ router.get('/nps', dlc_controller.get_nps);
 
 //Ver solicitud de tus vacaciones
 router.get('/profile/vacaciones_solicitadas', dlc_controller.get_vacaciones_solicitadas);
+router.post('/profile/vacaciones_solicitadas/delete/:folio', dlc_controller.post_delete_vacaciones_solicitadas);
 
 //Ver solicitud de tus NG Block
 router.get('/profile/ngblocks_solicitados', dlc_controller.get_ngblocks_solicitados);
+router.post('/profile/ngblocks_solicitados/delete/:id_ng_block', dlc_controller.post_delete_ng_block_solicitadas);
 
 //MAIN INDEX
 //router.post('/objetivo', dlc_controller.post_objetivo);

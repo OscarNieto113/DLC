@@ -129,32 +129,44 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
   });
 }
 
+exports.post_delete_vacaciones_solicitadas = (request, response, next) => {
+    console.log('POST /dlc/vacaciones_solicitadas/delete/:folio');
+    console.log(request.body);
+    Vacaciones.deleteVacations(
+      request.body.folio)
+      .then(() => {
+          response.redirect('/dlc/profile/vacaciones_solicitadas');
+      }).catch(err => console.log(err));
+  }
+
 //------------------------Consultar Vacacciones solicitadas--------------------------------
 
 
 //------------------------Consultar NG Blocks solicitadas--------------------------------
 exports.get_ngblocks_solicitados = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
-    console.log('GET /dlc/:no_empleado/get_ngblocks_solicitados');
-    console.log(request.session.user_no_empleado);
-    //console.log(request.get('Cookie').split('=')[1]);
-    console.log(request.cookies);
-    console.log('GET /dlc/:no_empleado/get_ngblocks_solicitados');
-    const info = request.session.info ? request.session.info : '';
     request.session.info = '';
     Ng_Block.fetchSome(no_empleado)
     .then(([rows, fieldData]) => {
       console.log(rows);
       response.render('ngblocks_solicitados', {
           ng_block: rows,
-          correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-          info: info //El primer info es la variable del template, el segundo la constante creada arriba
       });
   })
   .catch(err => {
       console.log(err);
   });
 }
+
+exports.post_delete_ng_block_solicitadas = (request, response, next) => {
+    console.log('POST /dlc/profile/ngblocks_solicitados/delete/:id_ng_block');
+    console.log(request.body);
+    Ng_Block.deleteNgBlock(
+      request.body.id_ng_block)
+      .then(() => {
+          response.redirect('/dlc/profile/ngblocks_solicitados');
+      }).catch(err => console.log(err));
+  }
 //------------------------Consultar NGblocks solicitadas--------------------------------
 
 
@@ -283,13 +295,14 @@ exports.search_vacaciones = (request, response, next) => {
 }
 //------------------------Aprobar Vacaciones--------------------------------
 
-//------------------------Registrar Usuario--------------------------------
+
+//------------------------Registrar empleado--------------------------------
 exports.get_registrar_empleado = (request, response, next) => {
     console.log('GET /dlc/registrar_empleado');
     Area.fetchAll()
       .then(([area, fieldData]) => {
         console.log(area);
-        response.render('r_usuario', {
+        response.render('registrar_empleado', {
           area: area
         });
     })
@@ -314,7 +327,7 @@ exports.post_registrar_empleado = (request, response, next) => {
           request.body.apellido_materno,
           request.body.dias_vacaciones_restantes,
           request.body.genero_empleado,
-        /*request.body.id_area*/);
+          request.body.id_area);
     empleado.save()
     .then(() => {
         request.session.info = 'El empleado fue registrado con éxito';

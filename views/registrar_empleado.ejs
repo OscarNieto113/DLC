@@ -28,13 +28,10 @@
                   </select><br>
 
                 <label for="id_area">Departamento al que pertenece</label>
-                <% for (let area1 of area) { %>
-                  <a>aaa <% area1.nombre_area %>aaa</a>
-                <% } %>
                   <select name="id_area" class="form-select" aria-label="Default select example" required>
                     <option value="" disabled selected>Departamento</option>
                       <% for (let area1 of area) { %>
-                    <option value="<% area1.id_area %>"> <% area1.nombre_area %></option>
+                    <option value="<%=area1.id_area%>"><%=area1.nombre_area%></option>
                       <% } %>
                   </select><br>
 
@@ -75,8 +72,8 @@
                     </div><br>
 
                     <!-- PRUEBA SE VA A BORRAR -->
-                    <input type="hidden" id="ng_blocks_restantes" name="fecha_solicitud_ng_block" value="5">
-                    <input type="hidden" id="dias_vacaciones_restantes" name="estatus_ng_block" value="8">
+                    <input type="hidden" id="ng_blocks_restantes" name="ng_blocks_restantes" value="5">
+                    <input type="hidden" id="dias_vacaciones_restantes" name="dias_vacaciones_restantes" value="8">
                     <!-- PRUEBA SE VA A BORRAR -->
               </div>
               <input type="submit" value="Enviar" class="btn btn-primary">

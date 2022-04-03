@@ -21,8 +21,8 @@ router.get('/s_ng_block', dlc_controller.get_s_ng_block);
 router.post('/s_ng_block', dlc_controller.post_s_ng_block);
 
 //Aprobar NG BLOCK
-router.get('/a_ng_block', dlc_controller.get_a_ng_block);
-router.post('/a_ng_block', dlc_controller.post_a_ng_block);
+router.get('/a_ng_blocksp/:page', dlc_controller.get_aprobar_ng_blocks_pagination);
+//router.post('/a_ng_block', dlc_controller.post_a_ng_block);
 
 //Solicitar Vacaciones
 router.get('/s_vacaciones', dlc_controller.get_solicitud_vacaciones);

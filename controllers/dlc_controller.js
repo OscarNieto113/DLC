@@ -47,25 +47,51 @@ exports.post_s_ng_block = (request, response, next) => {
 //------------------------Solicitar NG Block--------------------------------
 
 //------------------------Aprobar NG Block--------------------------------
-exports.get_a_ng_block = (request, response, next) => {
-    console.log('GET /dlc/a_ng_block');
-    console.log(request.cookies);
-    const info = request.session.info ? request.session.info : '';
-    request.session.info = '';
-    Ng_Block.fetchAll()
-        .then(([rows, fieldData]) => {
-            console.log(rows);
-            response.render('a_ng_block', {
-                ng_block: rows,
-                correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-                ultimo_estatus_ng: request.cookies.ultimo_estatus_ng ? request.cookies.ultimo_estatus_ng : '',
-                info: info //El primer info es la variable del template, el segundo la constante creada arriba
+//exports.get_a_ng_block = (request, response, next) => {
+  //  console.log('GET /dlc/a_ng_block');
+  //  console.log(request.cookies);
+  //  const info = request.session.info ? request.session.info : '';
+  //  request.session.info = '';
+    //Ng_Block.fetchAll()
+      //  .then(([rows, fieldData]) => {
+        //    console.log(rows);
+          //  response.render('a_ng_block', {
+            //    ng_block: rows,
+              //  correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
+                //ultimo_estatus_ng: request.cookies.ultimo_estatus_ng ? request.cookies.ultimo_estatus_ng : '',
+                //info: info //El primer info es la variable del template, el segundo la constante creada arriba
+            //});
+        //})
+        //.catch(err => {
+          //  console.log(err);
+        //});
+//}
+exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
+  console.log('GET /dlc/a_ng_blocksp/:page');
+  var perPage = 5;
+  var page = request.params.page || 1;
+  Ng_Block
+    .fetchPagination(perPage, ((perPage * page) - perPage))
+    .then(([ng_block, fieldData]) => {
+      Ng_Block
+        .count()
+        .then(([count, fieldData]) => {
+          let totalesN = count[0].num
+          console.log(totalesN)
+            response.render('aprobar_ngblocks', {
+                ng_block: ng_block,
+                current: page,
+                pages: Math.ceil(totalesN / perPage)
             });
+          })
+          .catch(err => {
+              console.log(err);
+          });
         })
         .catch(err => {
             console.log(err);
         });
-}
+    }
 
 exports.post_a_ng_block = (request, response, next) => {
     console.log('POST /dlc/a_ng_block');

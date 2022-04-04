@@ -92,21 +92,31 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
             console.log(err);
         });
     }
-
-exports.post_a_ng_block = (request, response, next) => {
-    console.log('POST /dlc/a_ng_block');
-    console.log(request.body);
-    const ng_block =
-        new Ng_Block(
-          request.body.estatus_ng_block);
-    ng_block.save()
-    .then(() => {
-        request.session.info = 'Los cambios se guardaron con éxito';
-        response.setHeader('Set-Cookie', 'ultimo_estatus_ng=' + ng_block.id_ng_block + '; HttpOnly');
-        response.redirect('/dlc');
-    })
-    .catch(err => console.log(err));
-};
+    exports.search_ngblock = (request, response, next) => {
+        console.log(request.params.search);
+        Ng_Block.fetchSearch(request.params.search)
+            .then(([rows, fieldData]) => {
+                console.log(rows);
+                response.status(200).json(rows);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+//exports.post_a_ng_block = (request, response, next) => {
+  //  console.log('POST /dlc/a_ng_block');
+    //console.log(request.body);
+    //const ng_block =
+      //  new Ng_Block(
+        //  request.body.estatus_ng_block);
+    //ng_block.save()
+    //.then(() => {
+      //  request.session.info = 'Los cambios se guardaron con éxito';
+        //response.setHeader('Set-Cookie', 'ultimo_estatus_ng=' + ng_block.id_ng_block + '; HttpOnly');
+        //response.redirect('/dlc');
+    //})
+    //.catch(err => console.log(err));
+//};
 //------------------------Aprobar NG Block--------------------------------
 
 

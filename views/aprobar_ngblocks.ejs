@@ -8,7 +8,7 @@
       <h1 class="display-4">Aprobar NG Blocks</h1> <br>
 
       <div class="input-group rounded col-sm-6">
-        <input type="text" name="search_vacaciones" id="search_vacaciones" class="form-control rounded" placeholder="Buscar Solicitudes Anteriores" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
+        <input type="text" name="search_ngblock" id="search_ngblock" class="form-control rounded" placeholder="Buscar Solicitudes Anteriores" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
         <span class="input-group-text border-0" id="search-addon">
           <i class="bi bi-search"></i>
         </span>
@@ -104,5 +104,62 @@
   </div>
 </div>
 
+<script>
+  const accion_asincrona = () => {
+      const n_estatus = document.getElementById('search_ngblock').value;
+      console.log(n_estatus);
+
+      //El token de protección CSRF
+      //const csrf = document.getElementById('_csrf').value;
+
+      //función que manda la petición asíncrona
+      fetch('/dlc/a_ng_blocksp/:page/filtrar/'+n_estatus, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              //'csrf-token': csrf
+          }
+          //body: JSON.stringify(data)
+      }).then(result => {
+          return result.json(); //Regresa otra promesa
+      }).then(data => {
+          //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+          console.log(data);
+          let respuesta =
+          '<table class="table">' +
+            '<thead>' +
+              '<tr>' +
+                '<th scope="col"><center>Nombre</center></th>' +
+                '<th scope="col"><center>Fecha de uso</center></th>' +
+                '<th scope="col"><center>Fecha en la que se solicitó</center></th>' +
+                '<th scope="col"><center>Descripción</center></th>' +
+                '<th scope="col"><center>Turno</center></th>' +
+                '<th scope="col"><center>Estatus actual</center></th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>';
+          for(let ng_block of data) {
+              respuesta +=
+                '<tr>' +
+                '<td><center>' + ng_block.nombres_empleados + ' ' + ng_block.apellido_paterno + ' ' + ng_block.apellido_materno + '</center></td>' +
+                '<td><center>' + ng_block.fecha_uso_ng_block + '</center></td>' +
+                '<td><center>' + ng_block.fecha_solicitud_ng_block + '</center></td>' +
+                '<td><center>' + ng_block.descripcion_ng_block + '</center></td>' +
+                '<td><center>' + ng_block.turno_ng_block + '</center></td>' +
+                '<td><center>' + ng_block.estatus_ng_block + '</center></td>' +
+                '<tr>';
+          }
+          respuesta += '</tbody>' +
+              '</table>' +
+              '<a href="/dlc/a_ng_blocksp/1">' +
+                '<button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23" href="/dlc/s_ng_block">Regresar</button>';
+          document.getElementById('respuesta_ajax').innerHTML = respuesta;
+
+      }).catch(err => {
+          console.log(err);
+      });
+  };
+  document.getElementById('search_ngblock').onkeyup  = accion_asincrona;
+</script>
 
 <%- include('includes/foot.ejs') %>

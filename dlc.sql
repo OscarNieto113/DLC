@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-04-2022 a las 02:03:39
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.28
+-- Tiempo de generación: 04-04-2022 a las 15:36:27
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,7 +73,7 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`no_empleado`, `ng_blocks_restantes`, `fecha_contratacion`, `fecha_nacimiento`, `correo_empresarial`, `nombres_empleados`, `apellido_paterno`, `apellido_materno`, `dias_vacaciones_restantes`, `genero_empleado`, `id_area`) VALUES
-('A1', 5, '2010-08-09', '2021-03-02', 'a01705001@natgas.com.mx', 'Óscar Eduardo', 'Nieto', 'Espitia', 6, 'M', 1),
+('A1', 5, '2010-08-09', '2021-03-02', 'a01705001@natgas.com.mx', 'Óscar Eduardo', 'Nieto', 'Espitia', 11, 'M', 1),
 ('A10', 4, '2015-07-21', '1967-07-18', 'a01705011@natgas.com.mx', 'Adelina', 'Llanos', 'Sanmartín', 23, 'F', 10),
 ('A11', 4, '2015-11-24', '1968-12-05', 'a01705012@natgas.com.mx', 'Ciríaco', 'Tejero', 'Gimeno', 1, 'M', 1),
 ('A12', 2, '2016-06-29', '1971-12-24', 'a01705013@natgas.com.mx', 'Iris', 'Gomis', 'Batlle', 0, 'F', 2),
@@ -83,9 +83,9 @@ INSERT INTO `empleado` (`no_empleado`, `ng_blocks_restantes`, `fecha_contratacio
 ('A16', 3, '2017-04-22', '1982-09-27', 'a01705017@natgas.com.mx', 'Chelo', 'Coca', 'Mascaró', 18, 'M', 6),
 ('A17', 3, '2018-01-31', '2021-03-02', 'a01705018@natgas.com.mx', 'Teresita', 'Castañeda', 'Barba', 12, 'F', 7),
 ('A18', 3, '2018-07-15', '1985-06-11', 'a01705019@natgas.com.mx', 'Pascuala', 'Collado', 'Royo', 18, 'F', 8),
-('A19', 5, '2018-09-28', '1993-03-17', 'a01705020@natgas.com.mx', 'Zoraida', 'Criado', 'Zabala', 14, 'F', 9),
+('A19', 5, '2018-09-28', '1993-03-17', 'a01705020@natgas.com.mx', 'Zoraida', 'Criado', 'Zabala', 6, 'F', 9),
 ('A2', 4, '2012-02-26', '1945-05-28', 'a01705002@natgas.com.mx', 'Dalila', 'Azcona', 'Garrido', 9, 'F', 2),
-('A20', 4, '2019-08-24', '1996-05-01', 'a01705021@natgas.com.mx', 'Benita', 'Martin', 'Zabala', 9, 'F', 10),
+('A20', 4, '2019-08-24', '1996-05-01', 'a01705021@natgas.com.mx', 'Benita', 'Martin', 'Zabala', 4, 'F', 10),
 ('A21', 3, '2019-12-03', '1996-05-11', 'a01705022@natgas.com.mx', 'Yolanda', 'Urrutia', 'Bas', 3, 'F', 1),
 ('A22', 2, '2020-05-04', '1998-10-31', 'a01705023@natgas.com.mx', 'Dorita', 'Lastra', 'Rosales', 21, 'F', 2),
 ('A23', 2, '2020-08-15', '1999-11-16', 'a01705024@natgas.com.mx', 'Perla', 'Alcaraz', 'Sotelo', 3, 'F', 3),
@@ -136,7 +136,7 @@ CREATE TABLE `ng_block` (
   `descripcion_ng_block` varchar(130) DEFAULT NULL,
   `fecha_uso_ng_block` date DEFAULT NULL,
   `fecha_solicitud_ng_block` date DEFAULT current_timestamp(),
-  `estatus_ng_block` varchar(20) DEFAULT NULL,
+  `estatus_ng_block` varchar(20) DEFAULT 'Pendiente',
   `no_empleado` varchar(130) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -164,7 +164,9 @@ INSERT INTO `ng_block` (`id_ng_block`, `turno_ng_block`, `descripcion_ng_block`,
 (17, 'Vespertino', 'Me quedé encerrado en casa', '2022-09-23', '2022-04-01', 'Pendiente', 'A9'),
 (18, 'Vespertino', 'Es el cumpleaños de mi hijo', '2022-09-29', '2022-04-01', 'Aprobado', 'A7'),
 (19, 'Vespertino', 'Tengo sintomas de covid”', '2022-10-06', '2022-04-01', 'Rechazado', 'A21'),
-(20, 'Vespertino', 'Tengo que ir al recital de mi hija', '2022-10-18', '2022-04-01', 'Rechazado', 'A20');
+(20, 'Vespertino', 'Tengo que ir al recital de mi hija', '2022-10-18', '2022-04-01', 'Rechazado', 'A20'),
+(21, 'Vespertino', 'adadas', '2022-04-05', '2022-04-04', 'Pendiente', 'A4'),
+(22, 'Matutino', 'adadsa', '2022-04-05', '2022-04-04', 'Pendiente', 'A4');
 
 -- --------------------------------------------------------
 
@@ -309,12 +311,12 @@ INSERT INTO `usuario` (`correo_usuario`, `contrasenia`, `no_empleado`) VALUES
 CREATE TABLE `vacaciones` (
   `folio` int(11) NOT NULL,
   `responsable_ausencia` varchar(130) DEFAULT NULL,
-  `observaciones` varchar(800) DEFAULT NULL,
+  `observaciones` varchar(800) DEFAULT 'Ninguna',
   `fecha_primer_dia` date DEFAULT NULL,
   `fecha_ultimo_dia` date DEFAULT NULL,
   `fecha_solicitud` date DEFAULT current_timestamp(),
   `dias_solicitados` int(23) DEFAULT NULL,
-  `estatus_vacaciones` varchar(20) DEFAULT NULL,
+  `estatus_vacaciones` varchar(20) DEFAULT 'Pendiente',
   `no_empleado` varchar(130) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -323,8 +325,8 @@ CREATE TABLE `vacaciones` (
 --
 
 INSERT INTO `vacaciones` (`folio`, `responsable_ausencia`, `observaciones`, `fecha_primer_dia`, `fecha_ultimo_dia`, `fecha_solicitud`, `dias_solicitados`, `estatus_vacaciones`, `no_empleado`) VALUES
-(1, 'Óscar Eduardo Nieto Espitia', '  ', '2022-04-05', '2022-04-08', '2022-04-01', 5, 'Pendiente', 'A20'),
-(2, 'Dalila Azcona Garrido', '  ', '2022-01-17', '2022-01-26', '2022-04-01', 8, 'Pendiente', 'A19'),
+(1, 'Óscar Eduardo Nieto Espitia', '  ', '2022-04-05', '2022-04-08', '2022-04-01', 5, 'Aprobado', 'A20'),
+(2, 'Dalila Azcona Garrido', '  ', '2022-01-17', '2022-01-26', '2022-04-01', 8, 'Aprobado', 'A19'),
 (3, 'Perlita Calzada Lladó', '  ', '2022-02-17', '2022-02-28', '2022-04-01', 8, 'Pendiente', 'A18'),
 (4, 'América Paz Álvarez', '  ', '2022-04-08', '2022-03-05', '2022-04-01', 10, 'Pendiente', 'A17'),
 (5, 'Trinidad Vazquez Mate', '  ', '2022-04-01', '2022-04-14', '2022-04-01', 6, 'Pendiente', 'A16'),
@@ -342,7 +344,8 @@ INSERT INTO `vacaciones` (`folio`, `responsable_ausencia`, `observaciones`, `fec
 (17, 'Teresita Castañeda Barba', '  ', '2022-06-06', '2022-06-07', '2022-04-01', 2, 'Pendiente', 'A4'),
 (18, 'Pascuala Collado Royo', '  ', '2022-03-21', '2022-04-01', '2022-04-01', 10, 'Pendiente', 'A3'),
 (19, 'Zoraida Criado Zabala', '  ', '2022-04-18', '2022-04-22', '2022-04-01', 5, 'Pendiente', 'A2'),
-(20, 'Benita Martín Zabala', '  ', '2022-05-03', '2022-05-05', '2022-04-01', 3, 'Pendiente', 'A1');
+(20, 'Benita Martín Zabala', '  ', '2022-05-03', '2022-05-05', '2022-04-01', 3, 'Pendiente', 'A1'),
+(22, 'Yolanda Urrutia Bas', 'Ninguna', '2022-04-05', '2022-04-07', '2022-04-04', 3, 'Pendiente', 'A4');
 
 --
 -- Índices para tablas volcadas
@@ -420,7 +423,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT de la tabla `ng_block`
 --
 ALTER TABLE `ng_block`
-  MODIFY `id_ng_block` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_ng_block` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia`
@@ -450,7 +453,7 @@ ALTER TABLE `publicacion`
 -- AUTO_INCREMENT de la tabla `vacaciones`
 --
 ALTER TABLE `vacaciones`
-  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas

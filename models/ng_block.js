@@ -8,13 +8,13 @@ module.exports = class Ng_Block {
         this.turno_ng_block = nuevo_turno_ng_block;
         this.descripcion_ng_block = nuevo_descripcion_ng_block;
         this.fecha_uso_ng_block = nuevo_fecha_uso_ng_block;
-        this.estatus_ng_block = nuevo_estatus_ng_block;
+        //this.estatus_ng_block = nuevo_estatus_ng_block;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto.
     save() {
-      return db.execute('INSERT INTO ng_block (no_empleado, turno_ng_block, descripcion_ng_block, fecha_uso_ng_block, estatus_ng_block) VALUES (?, ?, ?, ?, ?)',
-          [this.no_empleado, this.turno_ng_block, this.descripcion_ng_block, this.fecha_uso_ng_block, this.estatus_ng_block]);
+      return db.execute('INSERT INTO ng_block (no_empleado, turno_ng_block, descripcion_ng_block, fecha_uso_ng_block) VALUES (?, ?, ?, ?)',
+          [this.no_empleado, this.turno_ng_block, this.descripcion_ng_block, this.fecha_uso_ng_block]);
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.

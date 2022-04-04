@@ -1,4 +1,5 @@
 # Read ME
+Cambios en la base de datos ACTUALIZAR DB
 Horas desperdiciadas en los datepickers = 9
 ## Comandos NPM
 

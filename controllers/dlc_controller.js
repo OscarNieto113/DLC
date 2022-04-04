@@ -312,6 +312,21 @@ exports.search_vacaciones = (request, response, next) => {
 }
 //------------------------Aprobar Vacaciones--------------------------------
 
+//------------------------Modificar dias de vacaciones totales--------------------------------
+exports.get_dias_vacaciones_totales = (request, response, next) => {
+    console.log('GET /dlc/vacaciones_totales');
+    Prestaciones.fetchAll()
+    .then(([rows, fieldData]) => {
+      console.log(rows);
+      response.render('modificar_vacaciones_totales', {
+          prestaciones: rows,
+      });
+  })
+  .catch(err => {
+      console.log(err);
+  });
+}
+//------------------------Modificar dias de vacaciones totales--------------------------------
 
 //------------------------Registrar empleado--------------------------------
 exports.get_registrar_empleado = (request, response, next) => {

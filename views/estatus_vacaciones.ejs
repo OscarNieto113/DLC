@@ -71,7 +71,7 @@
             </td>
             <td>
               <center>
-                <form action="/dlc/a_vacacionesp/<%=current%>/reject" method="POST" id="post_reject_vacaciones">
+                <form action="/dlc/a_vacacionesp/<%=current%>/reject/<%= vacaciones1.folio %>" method="POST" id="post_reject_vacaciones">
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones"value="Rechazado"/>
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
                   <input type="submit" name="post_reject_vacaciones" id="post_reject_vacaciones" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d"/>
@@ -197,12 +197,12 @@
       //const csrf = document.getElementById('_csrf').value;
 
       //función que manda la petición asíncrona
-      fetch('/dlc/a_vacacionesp/:page/reject', {
+      fetch('/dlc/a_vacacionesp/:page/reject/', {
           method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
+          //headers: {
+              //'Content-Type': 'application/json'
               //'csrf-token': csrf
-          },
+          //},
           body: v_estatus2
 
 

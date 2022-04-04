@@ -12,9 +12,12 @@
               </div>
 
               <br>
-                <form action="/dlc/s_vacaciones" method="POST">
+
                 <div class="container-fluid">
                   <div class="row form-group">
+
+
+                    <form>
                         <label for="turno_ng_block" class="col-sm-3 col-form-label">Elige la fecha</label>
                         <div class="col-sm-4">
                             <div class="input-group date" id="datepicker">
@@ -26,32 +29,32 @@
                                 </span>
                             </div>
                         </div>
+                      </form>
                     </div>
                   <div>
                     <br>
-                    <!-- Inicia form-->
+                      <!-- Inicia form-->
+                      <form action="/dlc/s_vacaciones" method="POST">
+                        <label  for="responsable_ausencia" class="col-form-label"><b>Responsable durante tu ausencia*</b></label>
+                        <select name="responsable_ausencia" class="form-select" aria-label="Default select example" required>
+                          <option value="" disabled selected>Responsable</option>
+                          <% for (let empleado1 of empleado) { %>
+                              <option value="<%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%>"><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></option>
+                          <% } %>
+                        </select>
 
-                    <label  for="responsable_ausencia" class="col-form-label"><b>Responsable durante tu ausencia*</b></label>
-                    <select name="responsable_ausencia" class="form-select" aria-label="Default select example" required>
-                      <option value="" disabled selected>Responsable</option>
-                      <% for (let empleado1 of empleado) { %>
-                          <option value="<%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%>"><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></option>
-                      <% } %>
-                    </select>
+                      <br><br>
+                      <!-- DATOS FAKE-->
+                      <input type="hidden" id="no_empleado" name="no_empleado" value="A4">
+                      <input type="hidden" id="fecha_ultimo_dia" name="fecha_ultimo_dia">
+                      <input type="hidden" id="fecha_primer_dia" name="fecha_primer_dia">
+                      <input type="hidden" id="dias_solicitados" name="dias_solicitados">
+                      <!-- DATOS FAKE-->
+                      <input type="submit" value="Enviar" class="btn btn-primary">
+                    </form>
                   </div>
-                  <br><br>
-                  <!-- DATOS FAKE-->
-
-                  <input type="hidden" id="no_empleado" name="no_empleado" value="A4">
-                  <input type="hidden" id="observaciones" name="observaciones" value="ninguna">
-                  <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Pendiente">
-                  <input type="hidden" id="fecha_ultimo_dia" name="fecha_ultimo_dia">
-                  <input type="hidden" id="fecha_primer_dia" name="fecha_primer_dia">
-                  <input type="hidden" id="dias_solicitados" name="dias_solicitados">
-                  <!-- DATOS FAKE-->
-                  <input type="submit" value="Enviar" class="btn btn-primary">
                 </div>
-                </form>
+
               <!-- Termina form-->
 
               <br><br>

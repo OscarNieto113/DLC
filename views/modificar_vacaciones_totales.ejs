@@ -4,40 +4,12 @@
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-
-			<script type="text/javascript">
-				function addRows(){
-					var table = document.getElementById('vacaciones_totalesbl');
-					var rowCount = table.rows.length;
-					var cellCount = ((table.rows[0].cells.length)-1);
-					var row = table.insertRow(rowCount);
-					for(var i =0; i <= cellCount; i++){
-						var cell = 'cell'+i;
-						cell = row.insertCell(i);
-						var copycel = document.getElementById('col1').innerHTML;
-						cell.innerHTML=copycel;
-					}
-				}
-
-			function deleteRows(){
-				var table = document.getElementById('vacaciones_totalesbl');
-				var rowCount = table.rows.length;
-				if(rowCount > '2'){
-					var row = table.deleteRow(rowCount-1);
-					rowCount--;
-				}
-				else{
-					alert('There should be atleast one row');
-				}
-			}
-			</script>
-
-
+      <h1><center>Modificar dias de vacaciones por Año </center></h1>
 			<form action="#" method="post">
 				<table id="vacaciones_totalesbl" class="table">
 					<tr>
-						<th><center>De: Año laboral</center></th>
-						<th><center>Hasta: Año laboral</center></th>
+						<th>De:<center> Año laboral</center></th>
+						<th>Hasta:<center> Año laboral</center></th>
 						<th><center>Días de vacaciones</center></th>
 					</tr>
 					<% for (let prestaciones1 of prestaciones) { %>
@@ -48,19 +20,17 @@
 						</tr>
 					<% } %>
 				</table>
-
-
 						<div style="text-align: right;">
-							<input type="submit" value="Submit" class="btn btn-primary"/>
+							<input type="submit" value="Guardar cambios" class="btn btn-primary"/>
 						</div>
 			 </form>
-
-			 	<input type="button" value="Add Row" onclick="addRows()" class="btn btn-primary" style="background-color: #86b049"/>
-				<input type="button" value="Delete Row" onclick="deleteRows()" class="btn btn-primary" style="background-color: #b8293d"/>
-
+			 	<input type="button" value="Añadir fila" onclick="addRows()" class="btn btn-primary" style="background-color: #86b049"/>
+				<input type="button" value="Eliminar fila" onclick="deleteRows()" class="btn btn-primary" style="background-color: #b8293d"/>
     </div>
   </div>
 </div>
+
+<script src="/js/add_delete_row.js"></script>
 
 
 <%- include('includes/foot.ejs') %>

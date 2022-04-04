@@ -115,7 +115,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                 response.redirect('/dlc/a_ng_blocksp/1');
             }).catch(err => console.log(err));
         }
-        
+
     exports.search_ngblock = (request, response, next) => {
         console.log(request.params.search);
         Ng_Block.fetchSearch(request.params.search)
@@ -248,16 +248,16 @@ exports.post_solicitud_vacaciones = (request, response, next) => {
         new Vacaciones(
           request.body.no_empleado,
           request.body.responsable_ausencia,
-          request.body.observaciones,
+          //request.body.observaciones,
           request.body.fecha_primer_dia,
           request.body.fecha_ultimo_dia,
-          request.body.dias_solicitados,
-          request.body.estatus_vacaciones);
+          request.body.dias_solicitados);
+          //request.body.estatus_vacaciones);
     vacaciones.save()
     .then(() => {
         request.session.info = 'Las vacaciones con fecha de uso de '+ vacaciones.primer_dia + ' fue agregado con éxito';
-        response.setHeader('Set-Cookie', 'ultimo_ng_block='+vacaciones.primer_dia+'; HttpOnly');
-
+        response.setHeader('Set-Cookie',
+         'ultimo_vacaciones='+vacaciones.primer_dia+'; HttpOnly');
         response.redirect('/dlc');
     })
     .catch(err => console.log(err));

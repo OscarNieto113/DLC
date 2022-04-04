@@ -72,7 +72,7 @@
                 <form action="/dlc/a_vacacionesp/<%=current%>/reject/<%= vacaciones1.folio %>" method="POST" id="post_reject_vacaciones">
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones"value="Rechazado"/>
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
-                  <input type="submit" name="post_reject_vacaciones" id="post_reject_vacaciones" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d"/>
+                  <a href="#" name="post_reject_vacaciones" id="post_reject_vacaciones" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d">Rechazar</a>
                 </form>
               </center>
             </td>
@@ -205,11 +205,12 @@
 
           //body: JSON.stringify(data)
       }).then(result => {
+          console.log(result)
           return result.json(); //Regresa otra promesa
       }).then(data => {
           //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
           console.log(data);
-          let respuesta = '';
+          let respuesta = 'hola';
           for(let estatus of data) {
               respuesta +=
                 '<tr>' +

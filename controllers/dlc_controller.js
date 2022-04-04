@@ -312,7 +312,7 @@ exports.post_reject_vacaciones = (request, response, next) => {
           request.body.folio)
             .then(() => {
                 console.log('c:');
-                response.status(200).json();
+                response.status(200).json(rows);
             })
             .catch(err => {
                 console.log(err);

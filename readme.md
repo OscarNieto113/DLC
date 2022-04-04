@@ -30,7 +30,7 @@ contraseña: 1234
 8. Registrar Empleado (No jala departamento, agregar rol a la pestaña) / Ya jala departamento, falta roles
 9. Agregar Vacaciones y NG Blocks adicionales / LISTO
 10. Modificar Rol desde el perfil
-11. Calcular los dias de vacaciones
+11. Calcular los dias de vacaciones restantes
 12. Cookies y Toast
 
 ## Comandos básicos GIT

@@ -259,14 +259,31 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
         });
     }
 
+/*
 exports.post_reject_vacaciones = (request, response, next) => {
     console.log('POST /dlc/a_vacacionesp/:page/reject');
     console.log(request.body);
-    Vacaciones.rejectVacations(request.body.estatus_vacaciones, request.body.folio)
+    Vacaciones.rejectVacations(
+      request.body.estatus_vacaciones,
+      request.body.folio)
       .then(() => {
           response.redirect('/dlc/a_vacacionesp/1');
       }).catch(err => console.log(err));
-  }
+  }*/
+
+    exports.post_reject_vacaciones = (request, response, next) => {
+      console.log('POST /dlc/a_vacacionesp/:page/reject/:folio');
+        Vacaciones.rejectVacations(
+          request.body.estatus_vacaciones,
+          request.body.folio)
+            .then(() => {
+                console.log('c:');
+                response.status(200).json();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
   exports.post_aprovee_vacaciones = (request, response, next) => {
       console.log('POST /dlc/a_vacacionesp/:page/aprovee');

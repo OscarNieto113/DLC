@@ -24,10 +24,10 @@ contraseña: 1234
 3. Pulir todo lo relacionado con NG Blocks
 4. Busqueda de empleado por AJAX
 5. Post con AJAX
-6. Eliminar solicitudes en estado pendiente LISTO
+6. Eliminar solicitudes en estado pendiente / LISTO
 7. Postear con tu no_empleado
-8. Registrar Empleado (No jala departamento, agregar rol a la pestaña)
-9. Agregar Vacaciones y NG Blocks adicionales LISTO
+8. Registrar Empleado (No jala departamento, agregar rol a la pestaña) / Ya jala departamento, falta roles
+9. Agregar Vacaciones y NG Blocks adicionales / LISTO
 10. Modificar Rol desde el perfil
 11. Calcular los dias de vacaciones
 12. Cookies y Toast

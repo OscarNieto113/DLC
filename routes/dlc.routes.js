@@ -30,6 +30,7 @@ router.post('/s_vacaciones', dlc_controller.post_solicitud_vacaciones);
 
 //Aprobar Vacaciones
 router.get('/a_vacacionesp/:page', dlc_controller.get_aprobar_vacaciones_pagination);
+//router.post('/a_vacacionesp/:page/reject', dlc_controller.post_reject_vacaciones);
 router.post('/a_vacacionesp/:page/reject', dlc_controller.post_reject_vacaciones);
 router.post('/a_vacacionesp/:page/aprovee', dlc_controller.post_aprovee_vacaciones);
 router.get('/a_vacacionesp/:page/filtrar/:search', dlc_controller.search_vacaciones);

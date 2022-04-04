@@ -36,7 +36,22 @@ module.exports = class Ng_Block {
           'FROM empleado e, ng_block ng ' +
           'WHERE e.no_empleado = ng.no_empleado AND ng.no_empleado=?', [no_empleado]);
     }
+    static rejectNGBlock(estatus_ng_block, id_ng_block) {
+        return db.execute(
+          'UPDATE ng_block ' +
+          'SET estatus_ng_block = ? ' +
+          'WHERE id_ng_block = ? ', [estatus_ng_block, id_ng_block]);
+    }
 
+    static aproveeNGBlock(estatus_ng_block, id_ng_block, no_empleado) {
+        return db.execute(
+          'UPDATE ng_block, empleado ' +
+          'SET ng_block.estatus_ng_block =  ?, ' +
+            'empleado.ng_blocks_restantes = empleado.ng_blocks_restantes - 1 ' +
+          'WHERE ' +
+            'ng_block.id_ng_block = ? ' +
+            'AND empleado.no_empleado = ? ', [estatus_ng_block, id_ng_block, no_empleado]);
+    }
 
     static fetchOne(id_ng_block) {
         return db.execute('SELECT * FROM ng_block WHERE id=?', [id_ng_block]);
@@ -52,7 +67,7 @@ module.exports = class Ng_Block {
 
     static fetchPagination(num_solicitudes, num_offset) {
       return db.execute(
-        'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, n.estatus_ng_block, n.fecha_uso_ng_block, n.fecha_solicitud_ng_block, n.descripcion_ng_block, n.estatus_ng_block, n.turno_ng_block ' +
+        'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, n.estatus_ng_block, n.fecha_uso_ng_block, n.fecha_solicitud_ng_block, n.descripcion_ng_block, n.turno_ng_block, n.id_ng_block, n.no_empleado ' +
         'FROM empleado e, ng_block n, area a ' +
         'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente" ' +
         'LIMIT ? OFFSET ? ', [num_solicitudes, num_offset]);
@@ -67,7 +82,7 @@ module.exports = class Ng_Block {
 
     static fetchSearch(search) {
         return db.execute(
-          'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, n.estatus_ng_block, n.fecha_uso_ng_block, n.fecha_solicitud_ng_block, n.descripcion_ng_block, n.estatus_ng_block, n.turno_ng_block ' +
+          'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, n.estatus_ng_block, n.fecha_uso_ng_block, n.fecha_solicitud_ng_block, n.descripcion_ng_block, n.turno_ng_block, n.id_ng_block, n.no_empleado ' +
           'FROM empleado e, ng_block n, area a ' +
           'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND (n.estatus_ng_block LIKE ? OR n.id_ng_block LIKE ? OR n.turno_ng_block LIKE ? OR n.no_empleado LIKE ? OR e.nombres_empleados LIKE ?)', ['%'+search+'%', '%'+search+'%', '%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
     }

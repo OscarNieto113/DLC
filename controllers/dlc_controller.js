@@ -92,6 +92,30 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
             console.log(err);
         });
     }
+    exports.post_reject_ng_blocks = (request, response, next) => {
+        console.log('POST /dlc/a_ng_blocksp/:page/reject');
+        console.log(request.body);
+        Ng_Block.rejectNGBlock(
+          request.body.estatus_ng_block,
+          request.body.id_ng_block)
+          .then(() => {
+              response.redirect('/dlc/a_ng_blocksp/1');
+          }).catch(err => console.log(err));
+      }
+
+      exports.post_aprovee_ng_blocks = (request, response, next) => {
+          console.log('POST /dlc/a_ng_blocksp/:page/aprovee');
+          console.log(request.body);
+          Ng_Block
+            .aproveeNGBlock(
+              request.body.estatus_ng_block,
+              request.body.id_ng_block,
+              request.body.no_empleado)
+            .then(() => {
+                response.redirect('/dlc/a_ng_blocksp/1');
+            }).catch(err => console.log(err));
+        }
+        
     exports.search_ngblock = (request, response, next) => {
         console.log(request.params.search);
         Ng_Block.fetchSearch(request.params.search)

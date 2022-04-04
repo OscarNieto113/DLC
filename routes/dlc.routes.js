@@ -23,6 +23,8 @@ router.post('/s_ng_block', dlc_controller.post_s_ng_block);
 //Aprobar NG BLOCK
 router.get('/a_ng_blocksp/:page', dlc_controller.get_aprobar_ng_blocks_pagination);
 //router.post('/a_ng_block', dlc_controller.post_a_ng_block);
+router.post('/a_ng_blocksp/:page/aprovee', dlc_controller.post_aprovee_ng_blocks);
+router.post('/a_ng_blocksp/:page/reject', dlc_controller.post_reject_ng_blocks);
 router.get('/a_ng_blocksp/:page/filtrar/:search', dlc_controller.search_ngblock);
 
 //Solicitar Vacaciones

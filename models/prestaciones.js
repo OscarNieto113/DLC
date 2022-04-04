@@ -17,7 +17,7 @@ module.exports = class Prestaciones {
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
       return db.execute(
-        'SELECT max_prestaciones, min_prestaciones, dias_prestaciones ' +
+        'SELECT id_prestaciones, max_prestaciones, min_prestaciones, dias_prestaciones ' +
         'FROM prestaciones ');
     }
 

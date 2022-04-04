@@ -282,7 +282,7 @@ exports.post_reject_vacaciones = (request, response, next) => {
   }*/
 
     exports.post_reject_vacaciones = (request, response, next) => {
-      console.log('POST /dlc/a_vacacionesp/:page/reject/:folio');
+      console.log('POST /dlc/a_vacacionesp/:page/reject');
         Vacaciones.rejectVacations(
           request.body.estatus_vacaciones,
           request.body.folio)

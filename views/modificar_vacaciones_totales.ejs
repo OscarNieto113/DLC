@@ -5,25 +5,30 @@
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1><center>Modificar dias de vacaciones por Año </center></h1>
-			<form action="#" method="post">
+
 				<table id="vacaciones_totalesbl" class="table">
 					<tr>
 						<th>De:<center> Año laboral</center></th>
 						<th>Hasta:<center> Año laboral</center></th>
 						<th><center>Días de vacaciones</center></th>
+            <th></th>
 					</tr>
 					<% for (let prestaciones1 of prestaciones) { %>
 						<tr>
-							<td id="col<%=prestaciones1.id_prestaciones%>"><input type="text" name="a" value="<%=prestaciones1.min_prestaciones%>" class="form-control"/></td>
-							<td id="col<%=prestaciones1.id_prestaciones%>"><input type="text" name="a" value="<%=prestaciones1.max_prestaciones%>" class="form-control"/></td>
-							<td id="col<%=prestaciones1.id_prestaciones%>"><input type="text" name="a" value="<%=prestaciones1.dias_prestaciones%>" class="form-control"/></td>
+              <form action="/dlc/vacaciones_totales/<%=prestaciones1.id_prestaciones%>" method="post">
+                <input type="hidden" name="id_prestaciones" id="id_prestaciones" value="<%=prestaciones1.id_prestaciones%>" class="form-control"/>
+							<td id="col0"><input type="text" name="min_prestaciones" id="min_prestaciones" value="<%=prestaciones1.min_prestaciones%>" class="form-control"/></td>
+							<td id="col1"><input type="text" name="max_prestaciones" id="max_prestaciones" value="<%=prestaciones1.max_prestaciones%>" class="form-control"/></td>
+							<td id="col2"><input type="text" name="dias_prestaciones" id="dias_prestaciones" value="<%=prestaciones1.dias_prestaciones%>" class="form-control"/></td>
+              <td id="col3"><input type="submit" value="Guardar cambios" class="btn btn-primary"/></td>
+              </form>
 						</tr>
 					<% } %>
 				</table>
 						<div style="text-align: right;">
-							<input type="submit" value="Guardar cambios" class="btn btn-primary"/>
+
 						</div>
-			 </form>
+
 			 	<input type="button" value="Añadir fila" onclick="addRows()" class="btn btn-primary" style="background-color: #86b049"/>
 				<input type="button" value="Eliminar fila" onclick="deleteRows()" class="btn btn-primary" style="background-color: #b8293d"/>
     </div>

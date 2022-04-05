@@ -351,7 +351,7 @@ exports.get_dias_vacaciones_totales = (request, response, next) => {
     console.log('GET /dlc/vacaciones_totales');
     Prestaciones.fetchAll()
     .then(([rows, fieldData]) => {
-      console.log(rows);
+      //console.log(rows);
       response.render('modificar_vacaciones_totales', {
           prestaciones: rows,
       });
@@ -360,6 +360,21 @@ exports.get_dias_vacaciones_totales = (request, response, next) => {
       console.log(err);
   });
 }
+
+exports.post_dias_vacaciones_totales = (request, response, next) => {
+    console.log('POST /dlc/modificar_vacaciones_totales/:id_prestaciones');
+    console.log(request.body);
+    Prestaciones
+      .updatePrestaciones(
+        request.body.max_prestaciones,
+        request.body.min_prestaciones,
+        request.body.dias_prestaciones,
+        request.body.id_prestaciones)
+      .then(() => {
+          response.redirect('/dlc/vacaciones_totales');
+      }).catch(err => console.log(err));
+  }
+
 //------------------------Modificar dias de vacaciones totales--------------------------------
 
 //------------------------Registrar empleado--------------------------------

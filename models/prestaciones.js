@@ -21,5 +21,14 @@ module.exports = class Prestaciones {
         'FROM prestaciones ');
     }
 
+    static updatePrestaciones(max_prestaciones, min_prestaciones, dias_prestaciones, id_prestaciones) {
+        return db.execute(
+          'UPDATE prestaciones ' +
+          'SET max_prestaciones =  ?, ' +
+						'min_prestaciones = ?, ' +
+            'dias_prestaciones = ? ' +
+					'WHERE id_prestaciones = ? ', [max_prestaciones, min_prestaciones, dias_prestaciones, id_prestaciones]);
+    }
+
 
 }

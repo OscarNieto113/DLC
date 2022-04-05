@@ -33,7 +33,6 @@
         <tbody>
 
             <% for (let vacaciones1 of vacaciones) { %>
-              <div id="respuesta_ajax2">
           <tr>
             <td><center><%=vacaciones1.nombres_empleados%> <%=vacaciones1.apellido_paterno%> <%=vacaciones1.apellido_materno%></center></td>
             <td><center><%=vacaciones1.nombre_area%></center></td>
@@ -69,15 +68,14 @@
             </td>
             <td>
               <center>
-                <form action="/dlc/a_vacacionesp/<%=current%>/reject/<%= vacaciones1.folio %>" method="POST" id="post_reject_vacaciones">
+                <form action="/dlc/a_vacacionesp/<%=current%>/reject" method="POST">
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones"value="Rechazado"/>
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
-                  <a href="#" name="post_reject_vacaciones" id="post_reject_vacaciones" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d">Rechazar</a>
+                  <input type="submit" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d"/>
                 </form>
               </center>
             </td>
           </tr>
-          </div>
           <% } %>
         </tbody>
       </table>
@@ -180,64 +178,6 @@
       });
   };
   document.getElementById('search_vacaciones').onkeyup  = accion_asincrona;
-</script>
-
-
-
-<script>
-  const accion_asincrona2 = () => {
-      //const v_estatus2 = document.getElementById('post_reject_vacaciones').value;
-      const v_estatus2 = new FormData(document.getElementById('post_reject_vacaciones'));
-      console.log(v_estatus2);
-
-      //El token de protección CSRF
-      //const csrf = document.getElementById('_csrf').value;
-
-      //función que manda la petición asíncrona
-      fetch('/dlc/a_vacacionesp/:page/reject/', {
-          method: 'POST',
-          //headers: {
-              //'Content-Type': 'application/json'
-              //'csrf-token': csrf
-          //},
-          body: v_estatus2
-
-
-          //body: JSON.stringify(data)
-      }).then(result => {
-          console.log(result)
-          return result.json(); //Regresa otra promesa
-      }).then(data => {
-          //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
-          console.log(data);
-          let respuesta = 'hola';
-          for(let estatus of data) {
-              respuesta +=
-                '<tr>' +
-                '<td><center>' + vacaciones.nombres_empleados + ' ' + vacaciones.apellido_paterno + ' ' + vacaciones.apellido_materno + '</center></td>' +
-                '<td><center>' + vacaciones.nombre_area + '</center></td>' +
-                '<td><center>' + vacaciones.responsable_ausencia + '</center></td>' +
-                '<td><center>' + vacaciones.dias_solicitados + '</center></td>' +
-                '<td><center>' +
-                  '<span class="hovertext" data-hover="' +
-                  'Folio: ' + vacaciones.folio +
-                  'No. Empleado: ' + vacaciones.no_empleado +
-                  'Responsable: ' + vacaciones.responsable_ausencia +
-                  'Fecha primer día: ' + vacaciones.fecha_primer_dia +
-                  'Fecha ultimo día: ' + vacaciones.fecha_ultimo_dia +
-                  'Fecha de la solicitud: ' + vacaciones.fecha_solicitud + ' " > vacaciones' +
-                  '</span>' +
-                '</center></td>' +
-                '<td><center>' + vacaciones.estatus_vacaciones + '</center></td>' +
-                '<tr>';
-          }
-          document.getElementById('respuesta_ajax2').innerHTML = respuesta;
-
-      }).catch(err => {
-          console.log(err);
-      });
-  };
-  document.getElementById('post_reject_vacaciones').onclick  = accion_asincrona2;
 </script>
 
 <%- include('includes/foot.ejs') %>

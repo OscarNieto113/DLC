@@ -10,8 +10,6 @@ const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
 const Nps = require('../models/nps');
 const User = require('../models/user');
-//const rangedate = require('../public/js/rangedate');
-
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_s_ng_block = (request, response, next) => {
@@ -47,25 +45,6 @@ exports.post_s_ng_block = (request, response, next) => {
 //------------------------Solicitar NG Block--------------------------------
 
 //------------------------Aprobar NG Block--------------------------------
-//exports.get_a_ng_block = (request, response, next) => {
-  //  console.log('GET /dlc/a_ng_block');
-  //  console.log(request.cookies);
-  //  const info = request.session.info ? request.session.info : '';
-  //  request.session.info = '';
-    //Ng_Block.fetchAll()
-      //  .then(([rows, fieldData]) => {
-        //    console.log(rows);
-          //  response.render('a_ng_block', {
-            //    ng_block: rows,
-              //  correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-                //ultimo_estatus_ng: request.cookies.ultimo_estatus_ng ? request.cookies.ultimo_estatus_ng : '',
-                //info: info //El primer info es la variable del template, el segundo la constante creada arriba
-            //});
-        //})
-        //.catch(err => {
-          //  console.log(err);
-        //});
-//}
 exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
   console.log('GET /dlc/a_ng_blocksp/:page');
   var perPage = 5;
@@ -91,7 +70,8 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
         .catch(err => {
             console.log(err);
         });
-    }
+    };
+
     exports.post_reject_ng_blocks = (request, response, next) => {
         console.log('POST /dlc/a_ng_blocksp/:page/reject');
         console.log(request.body);
@@ -101,7 +81,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
           .then(() => {
               response.redirect('/dlc/a_ng_blocksp/1');
           }).catch(err => console.log(err));
-      }
+      };
 
       exports.post_aprovee_ng_blocks = (request, response, next) => {
           console.log('POST /dlc/a_ng_blocksp/:page/aprovee');
@@ -114,7 +94,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
             .then(() => {
                 response.redirect('/dlc/a_ng_blocksp/1');
             }).catch(err => console.log(err));
-        }
+        };
 
     exports.search_ngblock = (request, response, next) => {
         console.log(request.params.search);
@@ -126,25 +106,12 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
             .catch(err => {
                 console.log(err);
             });
-    }
-//exports.post_a_ng_block = (request, response, next) => {
-  //  console.log('POST /dlc/a_ng_block');
-    //console.log(request.body);
-    //const ng_block =
-      //  new Ng_Block(
-        //  request.body.estatus_ng_block);
-    //ng_block.save()
-    //.then(() => {
-      //  request.session.info = 'Los cambios se guardaron con éxito';
-        //response.setHeader('Set-Cookie', 'ultimo_estatus_ng=' + ng_block.id_ng_block + '; HttpOnly');
-        //response.redirect('/dlc');
-    //})
-    //.catch(err => console.log(err));
-//};
+    };
 //------------------------Aprobar NG Block--------------------------------
 
 
 //------------------------Consultar Vacacciones solicitadas--------------------------------
+
 exports.get_vacaciones_solicitadas = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/:no_empleado/vacaciones_solicitadas');
@@ -157,11 +124,11 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
           vacaciones: rows,
       });
   })
-
   .catch(err => {
       console.log(err);
   });
-}
+};
+
 
 exports.post_delete_vacaciones_solicitadas = (request, response, next) => {
     console.log('POST /dlc/vacaciones_solicitadas/delete/:folio');
@@ -171,7 +138,7 @@ exports.post_delete_vacaciones_solicitadas = (request, response, next) => {
       .then(() => {
           response.redirect('/dlc/profile/vacaciones_solicitadas');
       }).catch(err => console.log(err));
-  }
+  };
 
 //------------------------Consultar Vacacciones solicitadas--------------------------------
 
@@ -190,7 +157,7 @@ exports.get_ngblocks_solicitados = (request, response, next) => {
   .catch(err => {
       console.log(err);
   });
-}
+};
 
 exports.post_delete_ng_block_solicitadas = (request, response, next) => {
     console.log('POST /dlc/profile/ngblocks_solicitados/delete/:id_ng_block');
@@ -200,7 +167,7 @@ exports.post_delete_ng_block_solicitadas = (request, response, next) => {
       .then(() => {
           response.redirect('/dlc/profile/ngblocks_solicitados');
       }).catch(err => console.log(err));
-  }
+  };
 //------------------------Consultar NGblocks solicitadas--------------------------------
 
 
@@ -239,7 +206,7 @@ exports.get_solicitud_vacaciones = (request, response, next) => {
       .catch(err => {
           console.log(err);
       });
-  }
+  };
 
 exports.post_solicitud_vacaciones = (request, response, next) => {
     console.log('POST /dlc/solicitud_vacaciones');
@@ -291,9 +258,9 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
         .catch(err => {
             console.log(err);
         });
-    }
+    };
 
-/*
+
 exports.post_reject_vacaciones = (request, response, next) => {
     console.log('POST /dlc/a_vacacionesp/:page/reject');
     console.log(request.body);
@@ -303,21 +270,7 @@ exports.post_reject_vacaciones = (request, response, next) => {
       .then(() => {
           response.redirect('/dlc/a_vacacionesp/1');
       }).catch(err => console.log(err));
-  }*/
-
-    exports.post_reject_vacaciones = (request, response, next) => {
-      console.log('POST /dlc/a_vacacionesp/:page/reject');
-        Vacaciones.rejectVacations(
-          request.body.estatus_vacaciones,
-          request.body.folio)
-            .then(() => {
-                console.log('c:');
-                response.status(200).json(rows);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+  };
 
   exports.post_aprovee_vacaciones = (request, response, next) => {
       console.log('POST /dlc/a_vacacionesp/:page/aprovee');
@@ -331,7 +284,7 @@ exports.post_reject_vacaciones = (request, response, next) => {
         .then(() => {
             response.redirect('/dlc/a_vacacionesp/1');
         }).catch(err => console.log(err));
-    }
+    };
 
 exports.search_vacaciones = (request, response, next) => {
     console.log(request.params.search);
@@ -343,7 +296,7 @@ exports.search_vacaciones = (request, response, next) => {
         .catch(err => {
             console.log(err);
         });
-}
+};
 //------------------------Aprobar Vacaciones--------------------------------
 
 //------------------------Modificar dias de vacaciones totales--------------------------------
@@ -359,7 +312,7 @@ exports.get_dias_vacaciones_totales = (request, response, next) => {
   .catch(err => {
       console.log(err);
   });
-}
+};
 
 exports.post_dias_vacaciones_totales = (request, response, next) => {
     console.log('POST /dlc/modificar_vacaciones_totales/:id_prestaciones');
@@ -373,7 +326,7 @@ exports.post_dias_vacaciones_totales = (request, response, next) => {
       .then(() => {
           response.redirect('/dlc/vacaciones_totales');
       }).catch(err => console.log(err));
-  }
+  };
 
 //------------------------Modificar dias de vacaciones totales--------------------------------
 
@@ -483,7 +436,7 @@ exports.post_give_vacations = (request, response, next) => {
       .then(() => {
           response.redirect('/dlc/buscar_empleado');
       }).catch(err => console.log(err));
-  }
+  };
 //-------------------------Dar dias de vacaciones (perfil)---------------------------------
 
 //------------------------Dar Ng Blocks (perfil)--------------------------------
@@ -496,25 +449,12 @@ exports.post_give_ng_blocks = (request, response, next) => {
       .then(() => {
           response.redirect('/dlc/buscar_empleado');
       }).catch(err => console.log(err));
-  }
+  };
 //-------------------------Dar Ng Blocks (perfil)---------------------------------
 
 
 
 //------------------------Main--------------------------------
-/*
-exports.post_objetivo = (request, response, next) => {
-    console.log('POST /dlc/objetivo');
-    console.log(request.body);
-    const objetivo =
-        new Objetivo(
-          request.body.id_objetivo,
-          request.body.nombre_objetivo,
-          request.body.descripcion_objetivo);
-    objetivo.save();
-    response.redirect('/dlc');
-};*/
-
 exports.post_noticia = (request, response, next) => {
     console.log('POST /dlc/noticia');
     console.log(request.body);
@@ -523,10 +463,6 @@ exports.post_noticia = (request, response, next) => {
     noticia.save()
     .then(() => {
         request.session.info ='Fue registrado con éxito';
-        /*request.session.info ='Fue registrado con éxito';
-        response.setHeader('Set-Cookie',
-            'ultimo_noticia='+noticia.url_imagen_noticia+'; HttpOnly');
-            'ultimo_noticia='+noticia.url_imagen_noticia+'; HttpOnly');*/
         response.redirect('/dlc');
     })
     .catch(err => console.log(err));
@@ -564,8 +500,6 @@ exports.listar = (request, response, next) => {
       .then(([rows, fieldData]) => {
         Publicacion.fetchAll()
         .then(([rows2, fieldData]) => {
-          //console.log(rows); //Prueba
-          //console.log(rows2); //Prueba
           response.render('main', {
             noticia: rows,
             publicacion: rows2,
@@ -581,5 +515,5 @@ exports.listar = (request, response, next) => {
     .catch(err => {
         console.log(err);
     });
-}
+};
 //------------------------Main--------------------------------

@@ -14,7 +14,8 @@ $(function() {
       format: 'yyyy-mm-dd',
       orientation: "bottom left",
       todayHighlight: true,
-      autoclose: true
+      autoclose: true,
+      endDate: new Date()
     });
 });
 
@@ -23,7 +24,8 @@ $(function() {
       format: 'yyyy-mm-dd',
       orientation: "bottom left",
       todayHighlight: true,
-      autoclose: true
+      autoclose: true,
+      endDate: new Date()
     });
 });
 /*

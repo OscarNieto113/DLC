@@ -61,6 +61,7 @@ router.get('/nps', dlc_controller.get_nps);
 
 //Modificar dias de vacaciones Totales
 router.get('/vacaciones_totales', dlc_controller.get_dias_vacaciones_totales);
+router.post('/vacaciones_totales/:id_prestaciones', dlc_controller.post_dias_vacaciones_totales);
 
 //Ver solicitud de tus vacaciones
 router.get('/profile/vacaciones_solicitadas', dlc_controller.get_vacaciones_solicitadas);

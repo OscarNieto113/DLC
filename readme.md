@@ -25,7 +25,7 @@ contraseña: 1234
 
 1. Conexión con Auth0
 2. Reportes Mensuales ()
-3. Pulir todo lo relacionado con NG Blocks
+3. Pulir todo lo relacionado con NG Blocks /LISTO
 4. Busqueda de empleado por AJAX
 5. Post con AJAX
 6. Eliminar solicitudes en estado pendiente / LISTO

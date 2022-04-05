@@ -29,7 +29,7 @@ module.exports = class Vacaciones {
 
     static fetchPagination(num_solicitudes, num_offset) {
       return db.execute(
-        'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud, v.no_empleado ' +
+        `SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, date_format(v.fecha_primer_dia, '%d/%m/%Y') as fecha_primer_dia, date_format(v.fecha_ultimo_dia, '%d/%m/%Y') as fecha_ultimo_dia, date_format(v.fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, v.no_empleado ` +
         'FROM empleado e, vacaciones v, area a ' +
         'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones = "Pendiente" ' +
         'LIMIT ? OFFSET ? ', [num_solicitudes, num_offset]);
@@ -68,7 +68,7 @@ module.exports = class Vacaciones {
 
     static fetchSearch(search) {
         return db.execute(
-          'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud ' +
+          `SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, date_format(v.fecha_primer_dia, '%d/%m/%Y') as fecha_primer_dia, date_format(v.fecha_ultimo_dia, '%d/%m/%Y') as fecha_ultimo_dia, date_format(v.fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, v.no_empleado ` +
           'FROM empleado e, vacaciones v, area a ' +
           'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND (v.estatus_vacaciones LIKE ? OR v.folio LIKE ? OR v.responsable_ausencia LIKE ? OR v.no_empleado LIKE ? OR e.nombres_empleados LIKE ?)', ['%'+search+'%', '%'+search+'%', '%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
     }

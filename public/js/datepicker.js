@@ -37,3 +37,7 @@ $(function() {
                    ? '0' + (currentDate.getMonth() + 1)
                    : (currentDate.getMonth() + 1);
     document.getElementById("date").innerHTML = currentDay + '-' + currentMonth + '-' + currentDate.getFullYear();*/
+
+var current = new Date();
+var current2 = current.toLocaleDateString("en-AU");
+document.getElementById("date").innerHTML= current2//.toISOString().split('T')[0];

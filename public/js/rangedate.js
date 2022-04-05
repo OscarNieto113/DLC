@@ -1,5 +1,3 @@
-//async function getDates(){
-//  var dates = [0];
   $(document).ready(function () {
       $('#all_dates').datepicker({
         multidate: true,
@@ -33,29 +31,10 @@
           );
           //alguna madre que nos permita apuntar al ultimo día
           var u_dia = sorted_dates[sorted_dates.length-1];
-          var a = u_dia.getDate() + 1
-          console.log(a)
-          //var u_dia2 = document.getElementById("u_dia");//.value = longitud;
-          //u_dia2.innerHTML = u_dia;
-          document.getElementById("fecha_ultimo_dia").value = u_dia.toISOString().split('T')[0];
-      });
-
-      $('#all_dates').on("changeDate", function ultimo_dia () {
-          var the_dates = $('#all_dates').datepicker('getDates');
-          sorted_dates = the_dates.sort(
-            (dateA, dateB) => new Date(dateA)- new Date(dateB)
-          );
-          //alguna madre que nos permita apuntar al ultimo día
-          var u_dia = sorted_dates[sorted_dates.length-1];
           var date = u_dia;
           console.log(date.setDate(date.getDate() + 1))
 
-
-          // add a day
-
-          //var u_dia2 = document.getElementById("u_dia");//.value = longitud;
-          //u_dia2.innerHTML = u_dia;
-
+          document.getElementById("fecha_ultimo_dia").value = u_dia.toISOString().split('T')[0];
       });
 
       //funcion pa la cantidad de dias
@@ -65,14 +44,7 @@
             (dateA, dateB) => new Date(dateA)- new Date(dateB)
           );
           var longitud = sorted_dates.length
-          //var long = document.getElementById("longitud");//.value = longitud;
-          //long.innerHTML = longitud;
-          //console.log(longitud);
 
           document.getElementById("dias_solicitados").value = longitud;
       });
   });
-//return dates;
-//}
-
-//document.getElementById("resultado1").innerHTML = getDates(); //Se manda a llamar la funcion

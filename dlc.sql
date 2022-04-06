@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-04-2022 a las 15:36:27
+-- Tiempo de generación: 06-04-2022 a las 02:57:08
 -- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 7.4.27
+-- Versión de PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -283,6 +283,20 @@ INSERT INTO `publicacion` (`id_publicacion`, `titulo_publicacion`, `descripcion_
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `reportes_mensuales`
+--
+
+CREATE TABLE `reportes_mensuales` (
+  `id_reportes_mensuales` int(11) NOT NULL,
+  `titulo_reporte_mensual` varchar(180) DEFAULT NULL,
+  `descripcion_reporte_mensual` varchar(800) DEFAULT NULL,
+  `imagen_reporte` varchar(300) DEFAULT NULL,
+  `fecha_reporte_mensual` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -396,6 +410,12 @@ ALTER TABLE `publicacion`
   ADD PRIMARY KEY (`id_publicacion`);
 
 --
+-- Indices de la tabla `reportes_mensuales`
+--
+ALTER TABLE `reportes_mensuales`
+  ADD PRIMARY KEY (`id_reportes_mensuales`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -448,6 +468,12 @@ ALTER TABLE `prestaciones`
 --
 ALTER TABLE `publicacion`
   MODIFY `id_publicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `reportes_mensuales`
+--
+ALTER TABLE `reportes_mensuales`
+  MODIFY `id_reportes_mensuales` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `vacaciones`

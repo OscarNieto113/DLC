@@ -5,6 +5,8 @@ Horas desperdiciadas en los datepickers = 16
 
 Horas despercidiciadas en archivos de reportes mensuales = 5
 
+Horas desperdiciadas en centrar el carousel de noticias = 2
+
 Horas desperdiciadas en los toast = 9
 ## Comandos NPM
 

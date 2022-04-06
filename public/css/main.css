@@ -5,11 +5,12 @@
 }
 
 .carousel{
-  width: 60%;
-  height: 60%;
+  width: 50%;
+  margin: auto;
 }
 .carousel-inner > .carousel-item > img {
    object-fit: contain;
+
 }
 
 #carouselNoticias .carousel-item:before {
@@ -24,4 +25,4 @@
     );
   width: 100vw;
   top: 0;
-  height: 100vh;
+  height: 100%;

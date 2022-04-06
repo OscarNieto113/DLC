@@ -17,6 +17,18 @@ exports.post_reportes_mensuales = (request, response, next) => {
     .catch(err => console.log(err));
 };
 
+exports.search_date = (request, response, next) => {
+    console.log(request.params.search);
+    Reportes_mensuales.fetchSearch(request.params.search)
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.status(200).json(rows);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
 exports.get_reportes_mensuales = (request, response, next) => {
     Reportes_mensuales.fetchAll()
     .then(([rows, fieldData]) => {

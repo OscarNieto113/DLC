@@ -7,10 +7,8 @@
                   <h1 class="display-4"><center>Reportes Mensuales</center></h1>
                   <br><br>
                   <!--Dropdown menu -->
-                <div class="row">
-                  <div class="col-sm-4">
                     <div class="tab-content">
-                      Desde:
+                      Filtrar por Mes:
                       <div class="input-group date" id="datepicker">
                           <input type="text" id="search_date" name="search_date" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
                           <span class="input-group-append">
@@ -20,11 +18,10 @@
                           </span>
                       </div>
                     </div>
-                  </div>
-                </div>
                 <br><br>
                 <!--Dropdown menu -->
 
+                <div id="ajax_date">
                 <% if (reportes_mensuales.length > 0) { %>
                   <% for (let reportes_mensuales1 of reportes_mensuales) { %>
                     <div class="card mb-3">
@@ -35,7 +32,10 @@
                         </div>
                   </div>
                 <% } %>
+              <% } else { %>
+              <h1>No hay Reportes Mensuales de este mes.</h1>
               <% } %>
+              </div>
                 </div><br><br>
 
                 <!--Agregar Reporte Mensual -->
@@ -87,7 +87,44 @@
                         </div>
                       </div>
                     </div>
-
               </div>
+
+              <script>
+                const async_date = () => {
+                    const s_date = document.getElementById('search_date').value;
+                    console.log(s_date);
+                    //El token de protección CSRF
+                    //const csrf = document.getElementById('_csrf').value;
+                    //función que manda la petición asíncrona
+                    fetch('/reporte_mensual/filtrar/'+s_date, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            //'csrf-token': csrf
+                        }
+                        //body: JSON.stringify(data)
+                    }).then(result => {
+                        return result.json(); //Regresa otra promesa
+                    }).then(data => {
+                        //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+                        console.log(data);
+                        let respuesta = '';
+                        for(let reportes_mensuales1 of data) {
+                            respuesta +=
+                            '<div class="card mb-3">' +
+                              '<img class="card-img-top embed-responsive-item" src="' + reportes_mensuales1.imagen_reporte + '" alt="Card image cap">' +
+                                '<div class="card-body">' +
+                                  '<h5 class="card-title">' + reportes_mensuales1.titulo_reporte_mensual + '</h5>' +
+                                  '<p class="card-text">' + reportes_mensuales1.descripcion_reporte_mensual + '</p>' +
+                                '</div>' +
+                          '</div>';
+                        }
+                        document.getElementById('ajax_date').innerHTML = respuesta;
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                };
+                document.getElementById('search_date').change = async_date;
+              </script>
 
 <%- include('includes/foot.ejs') %>

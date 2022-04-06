@@ -1,19 +1,6 @@
-<h1 class="display-6">Anuncios</h1> <br>
-  <% if (publicacion.length > 0) { %>
-    <% for (let publicacion1 of publicacion) { %>
-      <div class="card mb-3">
-        <img class="card-img-top embed-responsive-item" src="<%= publicacion1.imagen_publicacion %>" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
-            <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
-          </div>
-    </div>
-  <% } %>
-<% } %>
-<!--Agregar Objetivo -->
-
-<div style="text-align: right;"">
-  <br>
+<div>
+<h1 class="display-6">Anuncios</h1>
+<div style="text-align: right;">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res">Agregar Anuncio</button>
     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -48,4 +35,36 @@
         </div>
       </div>
     </div>
+</div>
+</div>
+<br>
+
+<div class="row">
+  <br>
+  <% if (publicacion.length > 0) { %>
+    <% for (let publicacion1 of publicacion) { %>
+      <% if (publicacion1.imagen_publicacion == '') { %>
+        <div class="col-sm-6">
+          <br>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
+              <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
+            </div>
+          </div>
+        </div>
+        <% } else { %>
+          <div class="col-sm-6">
+            <div class="card mb-3">
+              <img class="card-img-top embed-responsive-item" src="<%= publicacion1.imagen_publicacion %>" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
+                  <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
+                </div>
+          </div>
+        </div>
+    <% } %>
+  <% } %>
+<% } %>
+
 </div>

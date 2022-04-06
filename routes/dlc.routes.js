@@ -58,7 +58,7 @@ router.post('/buscar_empleado/:no_empleado/vacaciones', dlc_controller.post_give
 router.post('/buscar_empleado/:no_empleado/ng_blocks', dlc_controller.post_give_ng_blocks);
 
 //Reporte NPS
-router.get('/reportes_mensuales', dlc_controller.get_reportes_mensuales);
+//router.get('/reportes_mensuales', dlc_controller.get_reportes_mensuales);
 
 //Modificar dias de vacaciones Totales
 router.get('/vacaciones_totales', dlc_controller.get_dias_vacaciones_totales);
@@ -76,7 +76,7 @@ router.post('/profile/ngblocks_solicitados/delete/:id_ng_block', dlc_controller.
 //router.post('/objetivo', dlc_controller.post_objetivo);
 router.post('/noticia',multer({ storage: fileStorage }).single('imagen_noticia') ,dlc_controller.post_noticia);
 router.post('/publicacion', multer({ storage: fileStorage }).single('imagen_publicacion'),dlc_controller.post_publicacion);
-router.post('/reportes_mensuales/post',multer({ storage: fileStorage }).single('imagen_reporte'),dlc_controller.post_reportes_mensuales);
+//router.post('/reportes_mensuales/post',multer({ storage: fileStorage }).single('imagen_reporte'),dlc_controller.post_reportes_mensuales);
 
 router.use('/', dlc_controller.listar);
 

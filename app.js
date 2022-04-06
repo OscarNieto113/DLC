@@ -5,6 +5,7 @@ const session = require('express-session');
 //const bootstrap = require('bootstrap');
 //const bootstrap_icons = require('bootstrap-icons');
 const rutas_dlc = require('./routes/dlc.routes');
+const rutas_reporte_mensual = require('./routes/reporte_mensual.routes');
 const rutas_users = require('./routes/user.routes');
 const csrf = require('csurf');
 const csrfProtection = csrf();
@@ -39,6 +40,7 @@ app.use(session({
 
 //ruta url
 app.use('/dlc', rutas_dlc);
+app.use('/reporte_mensual', rutas_reporte_mensual);
 app.use('/users', rutas_users);
 
 //Middleware

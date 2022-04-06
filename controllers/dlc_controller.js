@@ -8,7 +8,7 @@ const Permiso_informal = require('../models/permiso_informal');
 const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
-const Reportes_mensuales = require('../models/reportes_mensuales');
+//const Reportes_mensuales = require('../models/reportes_mensuales');
 const User = require('../models/user');
 
 //------------------------Solicitar NG Block--------------------------------
@@ -173,6 +173,7 @@ exports.post_delete_ng_block_solicitadas = (request, response, next) => {
 
 
 //------------------------ Reportes NPS se va a borrar --------------------------------
+/*
 exports.get_reportes_mensuales = (request, response, next) => {
     Reportes_mensuales.fetchAll()
     .then(([rows, fieldData]) => {
@@ -185,7 +186,7 @@ exports.get_reportes_mensuales = (request, response, next) => {
       console.log(err);
   });
 };
-
+*/
 
 
 //------------------------ Reportes NPS se va a borrar --------------------------------
@@ -510,6 +511,7 @@ exports.post_publicacion = (request, response, next) => {
     .catch(err => console.log(err));
 };
 //
+/*
 exports.post_reportes_mensuales = (request, response, next) => {
     console.log(request.body);
     console.log(request.file);
@@ -526,6 +528,7 @@ exports.post_reportes_mensuales = (request, response, next) => {
     })
     .catch(err => console.log(err));
 };
+*/
 
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');

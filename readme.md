@@ -3,6 +3,8 @@ Cambios en la base de datos ACTUALIZAR DB
 
 Horas desperdiciadas en los datepickers = 16
 
+Horas despercidiciadas en archivos de reportes mensuales = 5
+
 Horas desperdiciadas en los toast = 9
 ## Comandos NPM
 

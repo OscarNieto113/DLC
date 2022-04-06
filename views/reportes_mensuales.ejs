@@ -50,15 +50,15 @@
                             </div>
                             <div class="modal-body">
                               <!--Form -->
-                              <form action="/dlc/reportes_mensuales/post" method="POST">
+                              <form action="/dlc/reportes_mensuales" method="POST">
                                 <div class="form-group" style="text-align: left;"">
                                   <label for="titulo_reporte_mensual" class="col-form-label">Titulo del Reporte:</label>
-                                  <input type="text" class="form-control" id="titulo_reporte_mensual" name="titulo_reporte_mensual">
+                                  <input type="text" class="form-control" id="titulo_reporte_mensual" name="titulo_reporte_mensual" autocomplete="off" required>
 
                                   <label for="fecha_reporte_mensual" class="col-form-label">Mes del Reporte:</label>
                                   <!--Datepicker -->
                                   <div class="input-group date" id="monthpicker">
-                                      <input type="text" id="fecha_reporte_mensual" name="fecha_reporte_mensual" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                                      <input type="text" id="fecha_reporte_mensual" name="fecha_reporte_mensual" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" required>
                                       <span class="input-group-append">
                                           <span class="input-group-text bg-white">
                                               <i class="fa fa-calendar"></i>
@@ -68,10 +68,10 @@
                                   <!--Datepicker -->
 
                                   <label for="descripcion_reporte_mensual" class="col-form-label">Descripción del Reporte:</label>
-                                  <input type="text" class="form-control" id="descripcion_reporte_mensual" name="descripcion_reporte_mensual">
+                                  <input type="text" class="form-control" id="descripcion_reporte_mensual" name="descripcion_reporte_mensual" autocomplete="off" required>
 
                                   <label for="imagen_reporte" class="col-form-label">Imagen del Reporte Mensual:</label>
-                                  <input type="text" class="form-control" id="imagen_reporte" name="imagen_reporte">
+                                  <input type="file" class="form-control" id="imagen_reporte" name="imagen_reporte" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required>
                                   <br>
                                   <input type="submit" value="Enviar" class="btn btn-primary">
                               </form>

@@ -186,24 +186,7 @@ exports.get_reportes_mensuales = (request, response, next) => {
   });
 };
 
-exports.post_reportes_mensuales = (request, response, next) => {
-    console.log(request.body);
-    const reportes_mensuales =
-        new Reportes_mensuales(
-          request.body.titulo_reporte_mensual,
-          request.body.descripcion_reporte_mensual,
-          request.body.imagen_reporte,
-          request.body.fecha_reporte_mensual,
-        );
-    vacaciones.save()
-    .then(() => {
-        request.session.info = 'Las vacaciones con fecha de uso de '+ vacaciones.primer_dia + ' fue agregado con éxito';
-        response.setHeader('Set-Cookie',
-         'ultimo_vacaciones='+vacaciones.primer_dia+'; HttpOnly');
-        response.redirect('/dlc');
-    })
-    .catch(err => console.log(err));
-};
+
 
 //------------------------ Reportes NPS se va a borrar --------------------------------
 
@@ -527,6 +510,23 @@ exports.post_publicacion = (request, response, next) => {
     .catch(err => console.log(err));
 };
 //
+exports.post_reportes_mensuales = (request, response, next) => {
+    console.log(request.body);
+    console.log(request.file);
+    const reportes_mensuales =
+        new Reportes_mensuales(
+          request.body.titulo_reporte_mensual,
+          request.body.descripcion_reporte_mensual,
+          request.file.filename,
+          request.body.fecha_reporte_mensual
+        );
+    reportes_mensuales.save()
+    .then(() => {
+        request.session.info ='Fue registrado con éxito';
+        response.redirect('/dlc/reportes_mensuales');
+    })
+    .catch(err => console.log(err));
+};
 
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');

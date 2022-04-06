@@ -14,17 +14,6 @@
       <div class="col py-3" style="text-align: left;">
         <%- include('publicacion.ejs') %>
       </div>
-      <% if (reportes_mensuales.length > 0) { %>
-        <% for (let reportes_mensuales1 of reportes_mensuales) { %>
-          <div class="card mb-3">
-            <img class="card-img-top embed-responsive-item" src="<%= reportes_mensuales1.imagen_reporte %>" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title"><%= reportes_mensuales1.titulo_reporte_mensual %></h5>
-                <p class="card-text"><%= reportes_mensuales1.descripcion_reporte_mensual %></p>
-              </div>
-        </div>
-      <% } %>
-    <% } %>
     </div>
   </div>
 

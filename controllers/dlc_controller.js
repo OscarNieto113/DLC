@@ -540,13 +540,9 @@ exports.listar = (request, response, next) => {
       .then(([rows, fieldData]) => {
         Publicacion.fetchAll()
         .then(([rows2, fieldData]) => {
-          Reportes_mensuales.fetchAll()
-          .then(([rows3, fieldData]) => {
-            console.log(rows3)
           response.render('main', {
             noticia: rows,
             publicacion: rows2,
-            reportes_mensuales: rows3,
             correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
             ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
             info: info //El primer info es la variable del template, el segundo la constante creada arriba
@@ -559,9 +555,5 @@ exports.listar = (request, response, next) => {
     .catch(err => {
         console.log(err);
     });
-  })
-  .catch(err => {
-      console.log(err);
-  });
 };
 //------------------------Main--------------------------------

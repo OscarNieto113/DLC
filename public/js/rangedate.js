@@ -47,4 +47,5 @@
 
           document.getElementById("dias_solicitados").value = longitud;
       });
+
   });

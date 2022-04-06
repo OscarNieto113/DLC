@@ -20,4 +20,11 @@ module.exports = class Reportes_mensuales {
     static fetchAll() {
         return db.execute('SELECT * FROM reportes_mensuales');
     }
+
+    static fetchSearch(search) {
+        return db.execute(
+          `SELECT id_reportes_mensuales, titulo_reporte_mensual, descripcion_reporte_mensual, imagen_reporte, date_format(fecha_reporte_mensual, '%d/%m/%Y') as fecha_reporte_mensual ` +
+          'FROM reportes_mensuales ' +
+          'WHERE fecha_reporte_mensual LIKE ? ', [search+'%']);
+    }
 }

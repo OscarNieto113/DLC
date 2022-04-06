@@ -6,12 +6,14 @@
     <div class="container">
 
       <div class="input-group rounded col-sm-6">
-        <input type="text" name="search_vacaciones" id="search_vacaciones" class="form-control rounded" placeholder="Buscar Empleados" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
+        <input type="text" name="search_empleado" id="search_empleado" class="form-control rounded" placeholder="Buscar Empleados" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
         <span class="input-group-text border-0" id="search-addon">
           <i class="bi bi-search"></i>
         </span>
       </div> <br><br>
+
       <div class="card-columns">
+        <div id="respuesta_ajax">
       <% if (empleado.length > 0) { %>
         <% for (let empleado1 of empleado) { %>
           <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
@@ -31,6 +33,52 @@
     </div>
   </div>
 </div>
+</div>
 
+<script>
+  const accion_asincrona = () => {
+      const e_estatus = document.getElementById('search_empleado').value;
+      console.log(e_estatus);
 
+      //El token de protección CSRF
+      //const csrf = document.getElementById('_csrf').value;
+
+      //función que manda la petición asíncrona
+      fetch('/dlc/s_buscar_empleadop/filtrar/'+e_estatus, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              //'csrf-token': csrf
+          }
+          //body: JSON.stringify(data)
+      }).then(result => {
+          return result.json(); //Regresa otra promesa
+      }).then(data => {
+          //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+          console.log(data);
+          let respuesta = '';
+          for(let empleado of data) {
+              respuesta +=
+              '<div class="card text-white bg-dark mb-3" style="max-width: 18rem">' +
+                '<div class="card-header"><center>' + empleado.nombres_empleados + ' ' + empleado.apellido_paterno + ' ' + empleado.apellido_materno + '</center></div>' +
+                '<div class="card-body">' +
+                  '<p class="card-text"><center><b>Número de empleado: </b>' + empleado.no_empleado + '</center></p>' +
+                  '<p class="card-text"><center><b>Departamento: </b>' + empleado.nombre_area + '</center></p>' +
+                  '<p class="card-text"><center><b>Correo empresarial: </b>' + empleado.correo_empresarial + '</center></p>' +
+                  '<a href="/dlc/buscar_empleado/' + empleado.no_empleado + '">' +
+                  '<center><button type="button" class="btn btn-light">Ver perfil</button></center>' +
+                  '</a>' +
+                '</div>' +
+              '</div>' 
+          }
+          respuesta += '<a href="/dlc/buscar_empleado">' +
+                '<button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23" href="/dlc/s_ng_block">Regresar</button>';
+          document.getElementById('respuesta_ajax').innerHTML = respuesta;
+
+      }).catch(err => {
+          console.log(err);
+      });
+  };
+  document.getElementById('search_empleado').onkeyup  = accion_asincrona;
+</script>
 <%- include('includes/foot.ejs') %>

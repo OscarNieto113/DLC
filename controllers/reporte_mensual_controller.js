@@ -12,7 +12,7 @@ exports.post_reportes_mensuales = (request, response, next) => {
     reportes_mensuales.save()
     //
     .then(() => {
-        response.redirect('/dlc/reportes_mensuales');
+        response.redirect('/reporte_mensual');
     })
     .catch(err => console.log(err));
 };

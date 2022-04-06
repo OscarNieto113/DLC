@@ -6,17 +6,34 @@
 
                   <h1 class="display-4"><center>Reportes Mensuales</center></h1>
                   <br><br>
-
                   <!--Dropdown menu -->
+                <div class="row">
                   <div class="col-sm-4">
-                    <div class="input-group date" id="datepicker">
-                        <input type="text" id="search_date" name="search_date" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
-                        <span class="input-group-append">
-                            <span class="input-group-text bg-white">
-                                <i class="fa fa-calendar"></i>
-                            </span>
-                        </span>
+                    <div class="tab-content">
+                      Desde:
+                      <div class="input-group date" id="datepicker">
+                          <input type="text" id="search_date" name="search_date" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                          <span class="input-group-append">
+                              <span class="input-group-text bg-white">
+                                  <i class="fa fa-calendar"></i>
+                              </span>
+                          </span>
+                      </div>
                     </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="tab-content">
+                      Hasta:
+                      <div class="input-group date" id="datepicker">
+                          <input type="text" id="search_date" name="search_date" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                          <span class="input-group-append">
+                              <span class="input-group-text bg-white">
+                                  <i class="fa fa-calendar"></i>
+                              </span>
+                          </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <br><br>
                 <!--Dropdown menu -->
@@ -49,7 +66,7 @@
                             </div>
                             <div class="modal-body">
                               <!--Form -->
-                              <form action="/dlc/reportes_mensuales/post" method="POST" enctype="multipart/form-data">
+                              <form action="/reporte_mensual/post" method="POST" enctype="multipart/form-data">
                                 <div class="form-group" style="text-align: left;"">
                                   <label for="titulo_reporte_mensual" class="col-form-label">Titulo del Reporte:</label>
                                   <input type="text" class="form-control" id="titulo_reporte_mensual" name="titulo_reporte_mensual" autocomplete="off" required>

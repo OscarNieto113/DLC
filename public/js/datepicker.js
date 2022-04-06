@@ -1,5 +1,5 @@
 $(function() {
-    $('#datepicker').datepicker({
+    $('#fecha_uso_ng_block').datepicker({
       format: 'yyyy-mm-dd',
       orientation: "bottom left",
       startDate: new Date(),
@@ -31,7 +31,7 @@ $(function() {
 
 $(function() {
     $('#search_date').datepicker({
-      format: "yyyy-mm-dd",
+      format: "yyyy-mm",
       orientation: "bottom left",
       startView: "months",
       minViewMode: "months",

@@ -517,13 +517,12 @@ exports.post_reportes_mensuales = (request, response, next) => {
         new Reportes_mensuales(
           request.body.titulo_reporte_mensual,
           request.body.descripcion_reporte_mensual,
-          request.file.filename,
-          request.body.fecha_reporte_mensual
-        );
+          request.body.fecha_reporte_mensual,
+          request.file.filename);
     reportes_mensuales.save()
+    //
     .then(() => {
-        request.session.info ='Fue registrado con éxito';
-        response.redirect('/dlc/reportes_mensuales');
+        response.redirect('/reportes_mensuales');
     })
     .catch(err => console.log(err));
 };

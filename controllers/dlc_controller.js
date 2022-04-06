@@ -8,7 +8,7 @@ const Permiso_informal = require('../models/permiso_informal');
 const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
-const Nps = require('../models/nps');
+const Reportes_mensuales = require('../models/reportes_mensuales');
 const User = require('../models/user');
 
 //------------------------Solicitar NG Block--------------------------------
@@ -173,12 +173,38 @@ exports.post_delete_ng_block_solicitadas = (request, response, next) => {
 
 
 //------------------------ Reportes NPS se va a borrar --------------------------------
-exports.get_nps = (request, response) => {
-    console.log('GET /dlc/nps');
-    response.render('nps', {
-        nps: Nps.fetchAll(),
-    });
+exports.get_reportes_mensuales = (request, response, next) => {
+    Reportes_mensuales.fetchAll()
+    .then(([rows, fieldData]) => {
+      console.log(rows);
+      response.render('reportes_mensuales', {
+          reportes_mensuales: rows,
+      });
+  })
+  .catch(err => {
+      console.log(err);
+  });
 };
+
+exports.post_reportes_mensuales = (request, response, next) => {
+    console.log(request.body);
+    const reportes_mensuales =
+        new Reportes_mensuales(
+          request.body.titulo_reporte_mensual,
+          request.body.descripcion_reporte_mensual,
+          request.body.imagen_reporte,
+          request.body.fecha_reporte_mensual,
+        );
+    vacaciones.save()
+    .then(() => {
+        request.session.info = 'Las vacaciones con fecha de uso de '+ vacaciones.primer_dia + ' fue agregado con éxito';
+        response.setHeader('Set-Cookie',
+         'ultimo_vacaciones='+vacaciones.primer_dia+'; HttpOnly');
+        response.redirect('/dlc');
+    })
+    .catch(err => console.log(err));
+};
+
 //------------------------ Reportes NPS se va a borrar --------------------------------
 
 //------------------------Solicitar Vacaciones--------------------------------

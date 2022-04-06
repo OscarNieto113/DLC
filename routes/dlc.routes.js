@@ -57,7 +57,8 @@ router.post('/buscar_empleado/:no_empleado/vacaciones', dlc_controller.post_give
 router.post('/buscar_empleado/:no_empleado/ng_blocks', dlc_controller.post_give_ng_blocks);
 
 //Reporte NPS
-router.get('/nps', dlc_controller.get_nps);
+router.get('/reportes_mensuales', dlc_controller.get_reportes_mensuales);
+router.post('/reportes_mensuales/post', dlc_controller.post_reportes_mensuales);
 
 //Modificar dias de vacaciones Totales
 router.get('/vacaciones_totales', dlc_controller.get_dias_vacaciones_totales);

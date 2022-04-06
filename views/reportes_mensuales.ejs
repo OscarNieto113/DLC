@@ -1,0 +1,91 @@
+<%- include('includes/head.ejs') %>
+    <%- include('includes/topbar.ejs') %>
+        <%- include('includes/sidebar.ejs') %>
+              <div class="col py-3">
+                <div height class="container">
+
+                  <h1 class="display-4"><center>Reportes Mensuales</center></h1>
+                  <br><br>
+
+                  <!--Dropdown menu -->
+                  <div class="col-sm-4">
+                    <div class="input-group date" id="datepicker">
+                        <input type="text" id="monthpicker" name="monthpicker" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <br><br>
+                <!--Dropdown menu -->
+
+                  <% if (reportes_mensuales.length > 0) { %>
+                    <% for (let reportes_mensuales1 of reportes_mensuales) { %>
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                        <img class="card-img-bottom" src="..." alt="Card image cap">
+                      </div>
+                      <% } %>
+                    <% } %>
+                </div><br><br>
+
+                <!--Agregar Reporte Mensual -->
+                  <div style="text-align: right;">
+                    <br>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal00" data-whatever="@mdo">Agregar Reporte Mensual</button>
+                      <div class="modal fade" id="exampleModal00" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel00" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel0">Agregar Imagen al Banner</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <!--Form -->
+                              <form action="/dlc/reportes_mensuales/post" method="POST">
+                                <div class="form-group" style="text-align: left;"">
+                                  <label for="titulo_reporte_mensual" class="col-form-label">Titulo del Reporte:</label>
+                                  <input type="text" class="form-control" id="titulo_reporte_mensual" name="titulo_reporte_mensual">
+
+                                  <label for="fecha_reporte_mensual" class="col-form-label">Mes del Reporte:</label>
+                                  <!--Datepicker -->
+                                  <div class="input-group date" id="monthpicker">
+                                      <input type="text" id="monthpicker" name="monthpicker" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                                      <span class="input-group-append">
+                                          <span class="input-group-text bg-white">
+                                              <i class="fa fa-calendar"></i>
+                                          </span>
+                                      </span>
+                                  </div>
+                                  <!--Datepicker -->
+
+                                  <label for="descripcion_reporte_mensual" class="col-form-label">Descripción del Reporte:</label>
+                                  <input type="text" class="form-control" id="descripcion_reporte_mensual" name="descripcion_reporte_mensual">
+
+                                  <label for="imagen_reporte" class="col-form-label">Imagen del Reporte Mensual:</label>
+                                  <input type="text" class="form-control" id="imagen_reporte" name="imagen_reporte">
+                                  <br>
+                                  <input type="submit" value="Enviar" class="btn btn-primary">
+                              </form>
+                              <!--Form -->
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+              </div>
+
+<script src="/js/month_picker.js"></script>
+<%- include('includes/foot.ejs') %>

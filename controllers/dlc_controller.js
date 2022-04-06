@@ -478,7 +478,19 @@ exports.post_give_ng_blocks = (request, response, next) => {
   };
 //-------------------------Dar Ng Blocks (perfil)---------------------------------
 
-
+//-------------------------Buscar Empleado (Ajax)---------------------------------
+exports.search_empleado = (request, response, next) => {
+    console.log(request.params.search);
+    Empleado.fetchSearch(request.params.search)
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.status(200).json(rows);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+//-------------------------Buscar Empleado (Ajax)---------------------------------
 
 //------------------------Main--------------------------------
 exports.post_noticia = (request, response, next) => {

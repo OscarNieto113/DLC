@@ -54,4 +54,11 @@ module.exports = class Empleado {
     static fetchOne(no_empleado) {
         return db.execute('SELECT * FROM publicacion WHERE id=?', [no_empleado]);
     }
+
+    static fetchSearch(search) {
+        return db.execute(
+          'SELECT a.nombre_area, e.no_empleado, e.nombres_empleados, e.apellido_paterno, e.apellido_materno, correo_empresarial '+
+          'FROM empleado e, area a ' +
+          'WHERE a.id_area = e.id_area AND (a.nombre_area LIKE ? OR e.no_empleado LIKE ? OR e.nombres_empleados LIKE ?)', ['%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
+    }
 }

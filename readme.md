@@ -24,17 +24,16 @@ contraseña: 1234
 ## Cosas por hacer
 
 1. Conexión con Auth0
-2. Reportes Mensuales ()
+2. Reportes Mensuales () /EN PROCESO
 3. Pulir todo lo relacionado con NG Blocks /LISTO
-4. Busqueda de empleado por AJAX
-5. Post con AJAX
-6. Eliminar solicitudes en estado pendiente / LISTO
-7. Postear con tu no_empleado
-8. Registrar Empleado (No jala departamento, agregar rol a la pestaña) / Ya jala departamento, falta roles
-9. Agregar Vacaciones y NG Blocks adicionales / LISTO
-10. Modificar Rol desde el perfil
-11. Calcular los dias de vacaciones restantes
-12. Cookies y Toast
+4. Busqueda de empleado por AJAX /LISTO
+5. Eliminar solicitudes en estado pendiente / LISTO
+6. Postear con tu no_empleado
+7. Registrar Empleado (No jala departamento, agregar rol a la pestaña) / Ya jala departamento, falta roles
+8. Agregar Vacaciones y NG Blocks adicionales / LISTO
+9. Modificar Rol desde el perfil
+10. Calcular los dias de vacaciones restantes
+11. Cookies y Toast
 
 ## Comandos básicos GIT
 `git clone ruta_repositorio_remoto`: Clona el repositorio remoto en la computadora en la que se está trabajando dentro de una carpeta con el nombre del repositorio. Hay que seleccionar la carpeta para poder manipular el repositorio, esto se hace con: cd nombre_repositorio.

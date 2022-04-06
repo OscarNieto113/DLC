@@ -28,6 +28,28 @@ $(function() {
       endDate: new Date()
     });
 });
+
+$(function() {
+    $('#search_date').datepicker({
+      format: "yyyy-mm-dd",
+      orientation: "bottom left",
+      startView: "months",
+      minViewMode: "months",
+      todayHighlight: true,
+      autoclose: true
+    });
+});
+
+$(function() {
+    $('#fecha_reporte_mensual').datepicker({
+      format: "yyyy-mm-dd",
+      orientation: "bottom left",
+      startView: "months",
+      minViewMode: "months",
+      todayHighlight: true,
+      autoclose: true
+    });
+});
 /*
   var currentDate  = new Date(),
       currentDay   = currentDate.getDate() < 10

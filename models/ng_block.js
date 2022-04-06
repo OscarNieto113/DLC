@@ -67,7 +67,6 @@ module.exports = class Ng_Block {
 
     static fetchPagination(num_solicitudes, num_offset) {
       return db.execute(
-        //'SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, n.estatus_ng_block, n.fecha_uso_ng_block, n.fecha_solicitud_ng_block, n.descripcion_ng_block, n.turno_ng_block, n.id_ng_block, n.no_empleado ' +
         `SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, n.estatus_ng_block, date_format(n.fecha_uso_ng_block, '%d/%m/%Y') as fecha_uso_ng_block, date_format(n.fecha_solicitud_ng_block, '%d/%m/%Y') as fecha_solicitud_ng_block, n.descripcion_ng_block, n.turno_ng_block, n.id_ng_block, n.no_empleado ` +
         'FROM empleado e, ng_block n, area a ' +
         'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente" ' +

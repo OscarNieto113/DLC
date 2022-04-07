@@ -4,6 +4,19 @@
 
 <div class="col py-3">
   <div height class="container">
+
+    <% if (error.length != 0) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Excelsior!</strong> <%= error %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+
+            <p style="color:red"><%= error %></p>
+    <% } %>
+
+
     <h1 class="display-4"><center>Homepage</center></h1>
     <br>
     <h1 class="display-6" style="text-align: center;"">Banner de Noticias</h1>
@@ -17,5 +30,7 @@
       </div>
     </div>
   </div>
+
+  <script src="jquery-3.6.0.min.js"></script>
 
 <%- include('includes/foot.ejs') %>

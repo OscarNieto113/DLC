@@ -558,37 +558,75 @@ exports.search_empleado = (request, response, next) => {
 //------------------------Main--------------------------------
 exports.post_noticia = (request, response, next) => {
     console.log('POST /dlc/noticia');
-    console.log(request.body);
     console.log(request.file);
-    const noticia = new Noticia(request.file.filename);
-    noticia.save()
-    .then(() => {
-        request.session.info ='Fue registrado con éxito';
-        response.redirect('/dlc');
-    })
-    .catch(err => console.log(err));
+
+    const filename = request.file.filename;
+
+    console.log(filename);
+
+        if (filename.length == undefined){
+          request.flash('error', 'No se recibio ningun archivo.');
+          response.redirect('/dlc');
+        }
+
+        else {
+          const noticia =
+              new Noticia(
+                filename,
+                );
+
+          noticia.save()
+          .then(() => {
+              console.log("Se guardo la publicacion");
+              request.flash('success', 'La noticia fue agregado con éxito');
+              response.redirect('/dlc');
+          })
+          .catch((error)=>{
+            console.log(error)
+          });
+        }
 };
 //
 
 exports.post_publicacion = (request, response, next) => {
     console.log('POST /dlc/publicacion');
-    console.log(request.body);
-    console.log(request.file);
-    const publicacion =
-        new Publicacion(
-          request.body.titulo_publicacion,
-          request.body.descripcion_publicacion,
-          request.file.filename);
-    publicacion.save()
-    //
-    .then(() => {
-        request.session.info ='Fue registrado con éxito';
-        response.setHeader('Set-Cookie',
-            'ultimo_publicacion='+publicacion.titulo_publicacion+'; HttpOnly');
-        request.flash('error','No se recibio ningun dato. 😢🙃');
-        response.redirect('/dlc');
-    })
-    .catch(err => console.log(err));
+
+    const titulo_publicacion = request.body.titulo_publicacion;
+    const descripcion_publicacion = request.body.descripcion_publicacion;
+    const filename = request.file.filename;
+
+    console.log(titulo_publicacion);
+    console.log(descripcion_publicacion);
+    console.log(filename);
+
+        if (titulo_publicacion.length == 0 && descripcion_publicacion.length == 0 && filename.length == undefined){
+          request.flash('error1', 'No se recibio ningun dato.');
+          response.redirect('/dlc');
+        }
+
+        else if (titulo_publicacion.length == 0 || descripcion_publicacion.length == 0 || filename.length == undefined){
+          request.flash('error1', 'Faltan datos por llenar.');
+          response.redirect('/dlc');
+        }
+
+        else {
+          const publicacion =
+              new Publicacion(
+                titulo_publicacion,
+                descripcion_publicacion,
+                filename,
+                );
+
+          publicacion.save()
+          .then(() => {
+              console.log("Se guardo la publicacion");
+              request.flash('success1', 'La publicación ' + titulo_publicacion + ' fue agregado con éxito');
+              response.redirect('/dlc');
+          })
+          .catch((error)=>{
+            console.log(error)
+          });
+        }
 };
 //
 /*
@@ -622,11 +660,14 @@ exports.listar = (request, response, next) => {
         .then(([rows2, fieldData]) => {
           response.render('main', {
             noticia: rows,
+            success: request.flash("success"),
+            error: request.flash("error"),
             publicacion: rows2,
+            success1: request.flash("success1"),
+            error1: request.flash("error1"),
             correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
             ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
             info: info, //El primer info es la variable del template, el segundo la constante creada arriba
-            error: request.flash("error")
           });
       })
       .catch(err => {

@@ -8,7 +8,7 @@
       <section class="container">
         <% if (success.length != 0) { %>
               <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong>Excelsior!</strong> <%= success %>
+                  <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
                       <span aria-hidden="true">&times;</span>
                   </button>
@@ -16,7 +16,7 @@
           <% } %>
           <% if (error.length != 0) { %>
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>Holy natgas!</strong> <%= error %>
+                  <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻   </strong> <%= error %>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
                       <span aria-hidden="true">&times;</span>
                   </button>
@@ -79,22 +79,6 @@
             <br>
             <input type="submit" value="Enviar" class="btn btn-primary">
           </form>
-          <% if (success.length != 0) { %>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Excelsior!</strong> <%= success %>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <% } %>
-            <% if (error.length != 0) { %>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Holy natgas!</strong> <%= error %>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <% } %>
           <!--Termina form -->
           <br><br>
           <div style="text-align: right;">

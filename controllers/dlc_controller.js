@@ -17,7 +17,6 @@ exports.get_s_ng_block = (request, response, next) => {
     console.log('GET /dlc/s_ng_block');
       Empleado.getBlocksR(no_empleado)
           .then(([rows, fieldData]) => {
-              console.log(rows);
               response.render('s_ng_block', {
                   empleado: rows,
                   success: request.flash("success"),
@@ -41,31 +40,42 @@ exports.post_s_ng_block = (request, response, next) => {
     console.log(descripcion_ng_block);
     console.log(fecha_uso_ng_block);
 
-    if (turno_ng_block.lenght == 0 && descripcion_ng_block.lenght == 0 && fecha_uso_ng_block.lenght == 0){
-      request.flash('error', 'No se recibio ningun dato.');
-      response.redirect('/dlc/s_ng_block');
-    }
-
-    else if (turno_ng_block.lenght == 0 || descripcion_ng_block.lenght == 0 || fecha_uso_ng_block.lenght == 0){
-      request.flash('error', 'Faltan datos por llenar.');
-      response.redirect('/dlc/s_ng_block');
-    }
-    else {
-      const ng_block =
-          new Ng_Block(
-            no_empleado,
-            turno_ng_block,
-            descripcion_ng_block,
-            fecha_uso_ng_block,
-            );
-      ng_block.save()
-      .then(() => {
-          console.log("Se guardo la solicitud");
-          request.flash('success', 'El NG Block con fecha de uso de ' + fecha_uso_ng_block + 'fue agregado con éxito');
+    Empleado.getBlocksR(no_empleado)
+      .then(([rows, fielData])=>{
+        console.log(rows[0].ng_blocks_restantes);
+        const ng_blocks_restantes = rows[0].ng_blocks_restantes;
+        if (turno_ng_block.lenght == 0 && descripcion_ng_block.lenght == 0 && fecha_uso_ng_block.lenght == 0){
+          request.flash('error', 'No se recibio ningun dato.');
           response.redirect('/dlc/s_ng_block');
-      })
-      .catch(err => console.log(err));
-    }
+        }
+
+        else if (turno_ng_block.lenght == 0 || descripcion_ng_block.lenght == 0 || fecha_uso_ng_block.lenght == 0){
+          request.flash('error', 'Faltan datos por llenar.');
+          response.redirect('/dlc/s_ng_block');
+        }
+        else if (ng_blocks_restantes <= 0){
+          request.flash('error', 'No posees más Ng Blocks');
+          response.redirect('/dlc/s_ng_block');
+        }
+        else {
+          const ng_block =
+              new Ng_Block(
+                no_empleado,
+                turno_ng_block,
+                descripcion_ng_block,
+                fecha_uso_ng_block,
+                );
+          ng_block.save()
+          .then(() => {
+              console.log("Se guardo la solicitud");
+              request.flash('success', 'El NG Block con fecha de uso de ' + fecha_uso_ng_block + ' fue agregado con éxito');
+              response.redirect('/dlc/s_ng_block');
+          })
+          .catch(err => console.log(err));
+        }
+  }).catch((error)=>{
+      console.log(error)
+  });
 };
 //------------------------Solicitar NG Block--------------------------------
 
@@ -99,17 +109,23 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
 
     exports.post_reject_ng_blocks = (request, response, next) => {
         console.log('POST /dlc/a_ng_blocksp/:page/reject');
-        console.log(request.body);
+        const estatus_ng_block = request.body.estatus_ng_block;
+        const id_ng_block = request.body.id_ng_block;
+
+        console.log(estatus_ng_block);
+        console.log(id_ng_block);
+
         Ng_Block.rejectNGBlock(
-          request.body.estatus_ng_block,
-          request.body.id_ng_block)
+          estatus_ng_block,
+          id_ng_block)
           .then(() => {
               response.redirect('/dlc/a_ng_blocksp/1');
           }).catch(err => console.log(err));
-      };
+};
 
       exports.post_aprovee_ng_blocks = (request, response, next) => {
           console.log('POST /dlc/a_ng_blocksp/:page/aprovee');
+
           console.log(request.body);
           Ng_Block
             .aproveeNGBlock(

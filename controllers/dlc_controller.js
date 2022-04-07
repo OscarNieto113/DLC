@@ -174,6 +174,8 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
       console.log(rows);
       response.render('vacaciones_solicitadas', {
           vacaciones: rows,
+          success: request.flash("success"),
+          error: request.flash("error")
       });
   })
   .catch(err => {
@@ -184,13 +186,31 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
 
 exports.post_delete_vacaciones_solicitadas = (request, response, next) => {
     console.log('POST /dlc/vacaciones_solicitadas/delete/:folio');
-    console.log(request.body);
-    Vacaciones.deleteVacations(
-      request.body.folio)
-      .then(() => {
+    const folio = request.body.folio;
+    const no_empleado = request.session.user_no_empleado;
+    Vacaciones.getEstatus(no_empleado, folio)
+      .then(([rows, fielData])=>{
+        console.log(rows[0].estatus_vacaciones);
+        const estatus_vacaciones = rows[0].estatus_vacaciones;
+
+        if (estatus_vacaciones == 'Aprobado' || estatus_vacaciones == 'Rechazado'){
+          request.flash('error', 'No puedes eliminar una solicitud de Vacaciones que esté en estatus Aprobado o Rechazado');
           response.redirect('/dlc/profile/vacaciones_solicitadas');
-      }).catch(err => console.log(err));
-  };
+        }
+
+        else {
+          Vacaciones.deleteVacations(
+            folio)
+            .then(() => {
+              console.log("Se elimino la solicitud");
+              request.flash('success', 'La solicitud de vacaciones se eliminó con éxito');
+              response.redirect('/dlc/profile/vacaciones_solicitadas');
+            }).catch(err => console.log(err));
+        }
+      }).catch((error)=>{
+          console.log(error)
+      });
+    };
 
 //------------------------Consultar Vacacciones solicitadas--------------------------------
 

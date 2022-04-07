@@ -61,4 +61,11 @@ module.exports = class Empleado {
           'FROM empleado e, area a ' +
           'WHERE a.id_area = e.id_area AND (a.nombre_area LIKE ? OR e.no_empleado LIKE ? OR e.nombres_empleados LIKE ?)', ['%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
     }
+
+    static getBlocksR(no_empleado) {
+      return db.execute(
+        'SELECT ng_blocks_restantes ' +
+        'FROM empleado e ' +
+        'WHERE e.no_empleado = ? ' ,[no_empleado]);
+    }
 }

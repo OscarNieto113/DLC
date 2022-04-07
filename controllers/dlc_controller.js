@@ -13,13 +13,19 @@ const User = require('../models/user');
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_s_ng_block = (request, response, next) => {
+  const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/s_ng_block');
-    response.render('s_ng_block', {
-      //
-              correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-              info: ''
+      Empleado.getBlocksR(no_empleado)
+          .then(([rows, fieldData]) => {
+              console.log(rows);
+              response.render('s_ng_block', {
+                  empleado: rows,
+              });
+          })
+          .catch(err => {
+              console.log(err);
           });
-      };
+};
 //
 
 exports.post_s_ng_block = (request, response, next) => {

@@ -97,7 +97,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                 current: page,
                 pages: Math.ceil(totalesN / perPage),
                 success: request.flash("success"),
-                //error: request.flash("error")
+                error: request.flash("error")
             });
           })
           .catch(err => {
@@ -136,17 +136,31 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
           console.log(estatus_ng_block);
           console.log(id_ng_block);
           console.log(no_empleado);
-          Ng_Block
-            .aproveeNGBlock(
-              estatus_ng_block,
-              id_ng_block,
-              no_empleado)
-            .then(() => {
-              console.log("Se rechazo la solicitud solicitud");
-              request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue APROBADO con éxito');
-              response.redirect('/dlc/a_ng_blocksp/1');
-            }).catch(err => console.log(err));
-        };
+          Empleado.getBlocksR(no_empleado)
+            .then(([rows, fielData])=>{
+              console.log(rows[0].ng_blocks_restantes);
+              const ng_blocks_restantes = rows[0].ng_blocks_restantes;
+              if (ng_blocks_restantes <= 0){
+                request.flash('error', 'Este Usuario no posee más Ng Blocks');
+                response.redirect('/dlc/a_ng_blocksp/1');
+              }
+
+              else {
+                Ng_Block
+                  .aproveeNGBlock(
+                    estatus_ng_block,
+                    id_ng_block,
+                    no_empleado)
+                  .then(() => {
+                    console.log("Se rechazo la solicitud solicitud");
+                    request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue APROBADO con éxito');
+                    response.redirect('/dlc/a_ng_blocksp/1');
+                  }).catch(err => console.log(err));
+              }
+            }).catch((error)=>{
+                console.log(error)
+            });
+          };
 
     exports.search_ngblock = (request, response, next) => {
         console.log(request.params.search);

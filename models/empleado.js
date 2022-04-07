@@ -68,4 +68,11 @@ module.exports = class Empleado {
         'FROM empleado e ' +
         'WHERE e.no_empleado = ? ' ,[no_empleado]);
     }
+
+    static getVacacionesR(no_empleado) {
+      return db.execute(
+        'SELECT dias_vacaciones_restantes ' +
+        'FROM empleado e ' +
+        'WHERE e.no_empleado = ? ' ,[no_empleado]);
+    }
 }

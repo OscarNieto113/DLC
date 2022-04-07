@@ -44,12 +44,12 @@ exports.post_s_ng_block = (request, response, next) => {
       .then(([rows, fielData])=>{
         console.log(rows[0].ng_blocks_restantes);
         const ng_blocks_restantes = rows[0].ng_blocks_restantes;
-        if (turno_ng_block.lenght == 0 && descripcion_ng_block.lenght == 0 && fecha_uso_ng_block.lenght == 0){
+        if (turno_ng_block.length == 0 && descripcion_ng_block.length == 0 && fecha_uso_ng_block.length == 0){
           request.flash('error', 'No se recibio ningun dato.');
           response.redirect('/dlc/s_ng_block');
         }
 
-        else if (turno_ng_block.lenght == 0 || descripcion_ng_block.lenght == 0 || fecha_uso_ng_block.lenght == 0){
+        else if (turno_ng_block.length == 0 || descripcion_ng_block.length == 0 || fecha_uso_ng_block.length == 0){
           request.flash('error', 'Faltan datos por llenar.');
           response.redirect('/dlc/s_ng_block');
         }

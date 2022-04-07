@@ -519,6 +519,7 @@ exports.post_publicacion = (request, response, next) => {
         request.session.info ='Fue registrado con éxito';
         response.setHeader('Set-Cookie',
             'ultimo_publicacion='+publicacion.titulo_publicacion+'; HttpOnly');
+        request.flash('error','No se recibio ningun dato. 😢🙃');
         response.redirect('/dlc');
     })
     .catch(err => console.log(err));
@@ -558,7 +559,8 @@ exports.listar = (request, response, next) => {
             publicacion: rows2,
             correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
             ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
-            info: info //El primer info es la variable del template, el segundo la constante creada arriba
+            info: info, //El primer info es la variable del template, el segundo la constante creada arriba
+            error: request.flash("error")
           });
       })
       .catch(err => {

@@ -10,6 +10,8 @@ const rutas_users = require('./routes/user.routes');
 const csrf = require('csurf');
 const csrfProtection = csrf();
 
+const flash = require('connect-flash');
+
 
 const path = require('path');
 
@@ -39,6 +41,8 @@ app.use(session({
 //});
 
 //ruta url
+app.use(flash());
+
 app.use('/dlc', rutas_dlc);
 app.use('/reporte_mensual', rutas_reporte_mensual);
 app.use('/users', rutas_users);

@@ -95,7 +95,9 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
             response.render('aprobar_ngblocks', {
                 ng_block: ng_block,
                 current: page,
-                pages: Math.ceil(totalesN / perPage)
+                pages: Math.ceil(totalesN / perPage),
+                success: request.flash("success"),
+                //error: request.flash("error")
             });
           })
           .catch(err => {
@@ -119,7 +121,9 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
           estatus_ng_block,
           id_ng_block)
           .then(() => {
-              response.redirect('/dlc/a_ng_blocksp/1');
+            console.log("Se rechazo la solicitud solicitud");
+            request.flash('success', 'El NG Block con folio de ' + id_ng_block + ' fue rechazado con éxito');
+            response.redirect('/dlc/a_ng_blocksp/1');
           }).catch(err => console.log(err));
 };
 

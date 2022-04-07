@@ -10,6 +10,18 @@
           <div style="text-align: right;">
             <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
           </div>
+            <% for (let empleado1 of empleado) { %>
+              <div class="row form-group">
+                <div class="col-sm-8">
+                  </div>
+                  <div class="col-sm-2">
+                  <label for="ng_blockR1">Ng blocks restantes</label>
+                  </div>
+                  <div class="col-sm-2">
+                  <input type="text" class="form-control" name="ng_blockR1" id="ng_blockR1" value="<%= empleado1.ng_blocks_restantes %>" style="width: 30%;" disabled>
+                </div>
+              </div>
+            <% } %>
           <br>
           <!--Empieza form -->
           <form action="/dlc/s_ng_block" method="POST">
@@ -39,10 +51,8 @@
               </div>
             </div>
             <div class="text">
-              <div class="text">
                 <label for="descripcion_ng_block" class="col-sm-3 col-form-label"><b>Motivo de uso*</b></label>
               <br>
-              </div>
               <textarea id="descripcion_ng_block" name="descripcion_ng_block" rows="6" cols="70" required></textarea>
             </div>
             <br>

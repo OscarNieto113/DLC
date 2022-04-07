@@ -199,7 +199,7 @@ exports.get_reportes_mensuales = (request, response, next) => {
 
 //------------------------Solicitar Vacaciones--------------------------------
 exports.get_solicitud_vacaciones = (request, response, next) => {
-    //const no_empleado = request.session.user_no_empleado;
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/solicitud_vacaciones');
     Empleado
       .getAreaEmpleado("A4")
@@ -207,12 +207,19 @@ exports.get_solicitud_vacaciones = (request, response, next) => {
         //console.log(id_area);
         //let id = id_area[0].id_area
         //console.log(id);
-        Empleado
-          .fetchEmpleadoArea(1)
+        Empleado.fetchEmpleadoArea(1)
           .then(([rows, fieldData]) => {
-            console.log(rows);
-            response.render('solicitud_vacaciones', {
-            empleado: rows,
+            Empleado.getVacacionesR(no_empleado)
+              .then(([rows2, fieldData]) => {
+                console.log(rows);
+                console.log(rows2);
+                response.render('solicitud_vacaciones', {
+                  empleadoV: rows2,
+                  empleado: rows,
+                });
+              })
+              .catch(err => {
+                  console.log(err);
           });
         })
         .catch(err => {

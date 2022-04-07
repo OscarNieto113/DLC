@@ -122,22 +122,29 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
           id_ng_block)
           .then(() => {
             console.log("Se rechazo la solicitud solicitud");
-            request.flash('success', 'El NG Block con folio de ' + id_ng_block + ' fue rechazado con éxito');
+            request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue RECHAZADO con éxito');
             response.redirect('/dlc/a_ng_blocksp/1');
           }).catch(err => console.log(err));
 };
 
       exports.post_aprovee_ng_blocks = (request, response, next) => {
           console.log('POST /dlc/a_ng_blocksp/:page/aprovee');
+          const estatus_ng_block = request.body.estatus_ng_block;
+          const id_ng_block = request.body.id_ng_block;
+          const no_empleado = request.body.no_empleado;
 
-          console.log(request.body);
+          console.log(estatus_ng_block);
+          console.log(id_ng_block);
+          console.log(no_empleado);
           Ng_Block
             .aproveeNGBlock(
-              request.body.estatus_ng_block,
-              request.body.id_ng_block,
-              request.body.no_empleado)
+              estatus_ng_block,
+              id_ng_block,
+              no_empleado)
             .then(() => {
-                response.redirect('/dlc/a_ng_blocksp/1');
+              console.log("Se rechazo la solicitud solicitud");
+              request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue APROBADO con éxito');
+              response.redirect('/dlc/a_ng_blocksp/1');
             }).catch(err => console.log(err));
         };
 

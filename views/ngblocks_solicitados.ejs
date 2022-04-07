@@ -4,6 +4,22 @@
 <body>
   <div class="col py-3">
     <div height class="container">
+      <% if (success.length != 0) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+        <% if (error.length != 0) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻   </strong> <%= error %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
       <h1 class="display-4"><center>Solicitudes de NG Blocks</center></h1>
       <br><br>
 

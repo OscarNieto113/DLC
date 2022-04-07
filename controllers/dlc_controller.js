@@ -97,7 +97,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                 current: page,
                 pages: Math.ceil(totalesN / perPage),
                 success: request.flash("success"),
-                //error: request.flash("error")
+                error: request.flash("error")
             });
           })
           .catch(err => {
@@ -136,17 +136,31 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
           console.log(estatus_ng_block);
           console.log(id_ng_block);
           console.log(no_empleado);
-          Ng_Block
-            .aproveeNGBlock(
-              estatus_ng_block,
-              id_ng_block,
-              no_empleado)
-            .then(() => {
-              console.log("Se rechazo la solicitud solicitud");
-              request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue APROBADO con éxito');
-              response.redirect('/dlc/a_ng_blocksp/1');
-            }).catch(err => console.log(err));
-        };
+          Empleado.getBlocksR(no_empleado)
+            .then(([rows, fielData])=>{
+              console.log(rows[0].ng_blocks_restantes);
+              const ng_blocks_restantes = rows[0].ng_blocks_restantes;
+              if (ng_blocks_restantes <= 0){
+                request.flash('error', 'Este Usuario no posee más Ng Blocks');
+                response.redirect('/dlc/a_ng_blocksp/1');
+              }
+
+              else {
+                Ng_Block
+                  .aproveeNGBlock(
+                    estatus_ng_block,
+                    id_ng_block,
+                    no_empleado)
+                  .then(() => {
+                    console.log("Se rechazo la solicitud solicitud");
+                    request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue APROBADO con éxito');
+                    response.redirect('/dlc/a_ng_blocksp/1');
+                  }).catch(err => console.log(err));
+              }
+            }).catch((error)=>{
+                console.log(error)
+            });
+          };
 
     exports.search_ngblock = (request, response, next) => {
         console.log(request.params.search);
@@ -166,7 +180,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
 
 exports.get_vacaciones_solicitadas = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
-    console.log('GET /dlc/:no_empleado/vacaciones_solicitadas');
+    console.log('GET /dlc/profile/vacaciones_solicitadas');
     console.log(request.params.no_empleado);//
     console.log(request.session.user_no_empleado);//
     Vacaciones.fetchSome(no_empleado)
@@ -218,12 +232,16 @@ exports.post_delete_vacaciones_solicitadas = (request, response, next) => {
 //------------------------Consultar NG Blocks solicitadas--------------------------------
 exports.get_ngblocks_solicitados = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
-    request.session.info = '';
+    console.log('GET /dlc/profile/vacaciones_solicitadas');
+    console.log(request.params.no_empleado);//
+    console.log(request.session.user_no_empleado);//
     Ng_Block.fetchSome(no_empleado)
     .then(([rows, fieldData]) => {
       console.log(rows);
       response.render('ngblocks_solicitados', {
           ng_block: rows,
+          success: request.flash("success"),
+          error: request.flash("error")
       });
   })
   .catch(err => {
@@ -233,13 +251,31 @@ exports.get_ngblocks_solicitados = (request, response, next) => {
 
 exports.post_delete_ng_block_solicitadas = (request, response, next) => {
     console.log('POST /dlc/profile/ngblocks_solicitados/delete/:id_ng_block');
-    console.log(request.body);
-    Ng_Block.deleteNgBlock(
-      request.body.id_ng_block)
-      .then(() => {
+    const id_ng_block = request.body.id_ng_block;
+    const no_empleado = request.session.user_no_empleado;
+    Ng_Block.getEstatus(no_empleado, id_ng_block)
+      .then(([rows, fielData])=>{
+        console.log(rows[0].estatus_ng_block);
+        const estatus_ng_block = rows[0].estatus_ng_block;
+
+        if (estatus_ng_block == 'Aprobado' || estatus_ng_block == 'Rechazado'){
+          request.flash('error', 'No puedes eliminar una solicitud de Ng Block que esté en estatus Aprobado o Rechazado');
           response.redirect('/dlc/profile/ngblocks_solicitados');
-      }).catch(err => console.log(err));
-  };
+        }
+
+        else {
+          Ng_Block.deleteNgBlock(
+            request.body.id_ng_block)
+            .then(() => {
+              console.log("Se elimino la solicitud");
+              request.flash('success', 'La solicitud de Ng Blocks se eliminó con éxito');
+                response.redirect('/dlc/profile/ngblocks_solicitados');
+            }).catch(err => console.log(err));
+        }
+      }).catch((error)=>{
+          console.log(error)
+      });
+    };
 //------------------------Consultar NGblocks solicitadas--------------------------------
 
 

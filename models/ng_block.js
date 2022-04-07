@@ -93,4 +93,11 @@ module.exports = class Ng_Block {
             'WHERE ' +
 					'id_ng_block = ? ', [id_ng_block]);
     }
+
+    static getEstatus(no_empleado, id_ng_block) {
+        return db.execute(
+          'SELECT n.estatus_ng_block ' +
+          'FROM empleado e, ng_block n ' +
+          'WHERE e.no_empleado = n.no_empleado AND n.no_empleado = ? AND n.id_ng_block = ?', [no_empleado, id_ng_block]);
+    }
 }

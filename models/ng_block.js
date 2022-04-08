@@ -32,7 +32,7 @@ module.exports = class Ng_Block {
 
     static fetchSome(no_empleado) {
         return db.execute(
-          'SELECT turno_ng_block, descripcion_ng_block, fecha_uso_ng_block, estatus_ng_block, ng.no_empleado, id_ng_block ' +
+          `SELECT turno_ng_block, descripcion_ng_block, date_format(fecha_uso_ng_block, '%d/%m/%Y') as fecha_uso_ng_block, estatus_ng_block, ng.no_empleado, id_ng_block, date_format(fecha_solicitud_ng_block, '%d/%m/%Y') as fecha_solicitud_ng_block ` +
           'FROM empleado e, ng_block ng ' +
           'WHERE e.no_empleado = ng.no_empleado AND ng.no_empleado=?', [no_empleado]);
     }

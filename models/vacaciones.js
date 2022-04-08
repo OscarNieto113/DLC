@@ -32,6 +32,7 @@ module.exports = class Vacaciones {
         `SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, date_format(v.fecha_primer_dia, '%d/%m/%Y') as fecha_primer_dia, date_format(v.fecha_ultimo_dia, '%d/%m/%Y') as fecha_ultimo_dia, date_format(v.fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, v.no_empleado ` +
         'FROM empleado e, vacaciones v, area a ' +
         'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones = "Pendiente" ' +
+        //'ORDER BY v.fecha_solicitud DESC' +
         'LIMIT ? OFFSET ? ', [num_solicitudes, num_offset]);
     }
 
@@ -44,7 +45,7 @@ module.exports = class Vacaciones {
 
     static fetchSome(no_empleado) {
         return db.execute(
-          'SELECT fecha_solicitud, fecha_primer_dia, fecha_ultimo_dia, dias_solicitados, responsable_ausencia, observaciones, estatus_vacaciones, folio ' +
+          `SELECT date_format(fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, date_format(fecha_primer_dia, '%d/%m/%Y') as fecha_primer_dia, date_format(fecha_ultimo_dia, '%d/%m/%Y') as fecha_ultimo_dia, dias_solicitados, responsable_ausencia, observaciones, estatus_vacaciones, folio ` +
           'FROM empleado e, vacaciones v ' +
           'WHERE e.no_empleado = v.no_empleado AND v.no_empleado=?', [no_empleado]);
     }

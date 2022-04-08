@@ -622,6 +622,10 @@ exports.get_profile = (request, response, next) => {
             console.log(rows);
             response.render('profile', {
                 empleado: rows,
+                success: request.flash("success"),
+                error: request.flash("error"),
+                success1: request.flash("success1"),
+                error1: request.flash("error1"),
             });
         })
         .catch(err => {

@@ -635,6 +635,10 @@ exports.get_perfil_empleado = (request, response, next) => {
           console.log(rows)
             response.render('profile', {
                 empleado: rows,
+                success: request.flash("success"),
+                error: request.flash("error"),
+                success1: request.flash("success1"),
+                error1: request.flash("error1"),
             });
         })
         .catch(err => {
@@ -664,12 +668,36 @@ exports.get_buscar_empleado = (request, response, next) => {
 exports.post_give_vacations = (request, response, next) => {
     console.log('POST /dlc/buscar_empleado/:no_empleado/vacaciones');
     console.log(request.body);
-    Vacaciones.giveVacations(
-      request.body.giveVacations,
-      request.body.no_empleado)
-      .then(() => {
-          response.redirect('/dlc/buscar_empleado');
-      }).catch(err => console.log(err));
+    const giveVacations = request.body.giveVacations;
+    const no_empleado = request.body.no_empleado;
+
+    console.log(giveVacations);
+    console.log(no_empleado);
+
+      if (giveVacations === 0 && no_empleado.length == 0 ){
+        request.flash('error', 'No se recibio ningun dato.');
+        response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+      }
+
+      else if (giveVacations === 0 && no_empleado.length == 0 ){
+        request.flash('error', 'Faltan datos por llenar.');
+        response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+      }
+
+      else if (giveVacations > 5){
+        request.flash('error', 'Estas agregando más vacaciones de las permitidas por el sistema');
+        response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+      }
+
+      else {
+        Vacaciones.giveVacations(giveVacations,no_empleado)
+        .then(() => {
+            console.log("Se guardó los cambios");
+            request.flash('success', 'Las vacaciones fueron agregadas con éxito');
+            response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+        })
+        .catch(err => console.log(err));
+      }
   };
 //-------------------------Dar dias de vacaciones (perfil)---------------------------------
 
@@ -677,12 +705,37 @@ exports.post_give_vacations = (request, response, next) => {
 exports.post_give_ng_blocks = (request, response, next) => {
     console.log('POST /dlc/buscar_empleado/:no_empleado/ng_blocks');
     console.log(request.body);
-    Ng_Block.giveNgBlocks(
-      request.body.giveNgBlocks,
-      request.body.no_empleado)
-      .then(() => {
-          response.redirect('/dlc/buscar_empleado');
-      }).catch(err => console.log(err));
+
+      const giveNgBlocks = request.body.giveNgBlocks;
+      const no_empleado = request.body.no_empleado;
+
+      console.log(giveNgBlocks);
+      console.log(no_empleado);
+
+        if (giveNgBlocks === 0 && no_empleado.length == 0 ){
+          request.flash('error', 'No se recibio ningun dato.');
+          response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+        }
+
+        else if (giveNgBlocks === 0 && no_empleado.length == 0 ){
+          request.flash('error', 'Faltan datos por llenar.');
+          response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+        }
+
+        else if (giveNgBlocks > 5){
+          request.flash('error', 'Estas agregando más ng blocks de las permitidas por el sistema');
+          response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+        }
+
+        else {
+          Ng_Block.giveNgBlocks(giveNgBlocks,no_empleado)
+          .then(() => {
+              console.log("Se guardó los cambios 2");
+              request.flash('success', 'Los ng blocks fueron agregadas con éxito');
+              response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+          })
+          .catch(err => console.log(err));
+        }
   };
 //-------------------------Dar Ng Blocks (perfil)---------------------------------
 

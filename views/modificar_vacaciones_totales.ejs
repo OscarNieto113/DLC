@@ -34,9 +34,9 @@
 						<tr>
               <form action="/dlc/vacaciones_totales/<%=prestaciones1.id_prestaciones%>" method="post">
                 <input type="hidden" name="id_prestaciones" id="id_prestaciones" value="<%=prestaciones1.id_prestaciones%>" class="form-control"/>
-							<td id="col0"><input type="text" name="min_prestaciones" id="min_prestaciones" value="<%=prestaciones1.min_prestaciones%>" class="form-control"/></td>
-							<td id="col1"><input type="text" name="max_prestaciones" id="max_prestaciones" value="<%=prestaciones1.max_prestaciones%>" class="form-control"/></td>
-							<td id="col2"><input type="text" name="dias_prestaciones" id="dias_prestaciones" value="<%=prestaciones1.dias_prestaciones%>" class="form-control"/></td>
+							<td id="col0"><input type="number" name="min_prestaciones" id="min_prestaciones" value="<%=prestaciones1.min_prestaciones%>" autocomplete="off" class="form-control"/></td>
+							<td id="col1"><input type="number" name="max_prestaciones" id="max_prestaciones" value="<%=prestaciones1.max_prestaciones%>" autocomplete="off" class="form-control"/></td>
+							<td id="col2"><input type="number" name="dias_prestaciones" id="dias_prestaciones" value="<%=prestaciones1.dias_prestaciones%>" autocomplete="off" class="form-control"/></td>
               <td id="col3"><input type="submit" value="Guardar cambios" class="btn btn-primary"/></td>
               </form>
               <td id="col4">

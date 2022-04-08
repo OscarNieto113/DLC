@@ -123,7 +123,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
           estatus_ng_block,
           id_ng_block)
           .then(() => {
-            console.log("Se rechazo la solicitud solicitud");
+            console.log("Se rechazo la solicitud");
             request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue RECHAZADO con éxito');
             response.redirect('/dlc/a_ng_blocksp/1');
           }).catch(err => console.log(err));
@@ -154,7 +154,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                     id_ng_block,
                     no_empleado)
                   .then(() => {
-                    console.log("Se rechazo la solicitud solicitud");
+                    console.log("Se aprobo la solicitud");
                     request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue APROBADO con éxito');
                     response.redirect('/dlc/a_ng_blocksp/1');
                   }).catch(err => console.log(err));
@@ -333,12 +333,12 @@ exports.post_solicitar_vacaciones = (request, response, next) => {
         console.log(rows2[0].dias_vacaciones_restantes);
         const dias_vacaciones_restantes = rows2[0].dias_vacaciones_restantes;
 
-        if (responsable_ausencia.length == 0 && fecha_primer_dia.length == 0 && fecha_ultimo_dia.length == 0 && dias_solicitados.length == 0){
+        if (responsable_ausencia == undefined && fecha_primer_dia.length == 0 && fecha_ultimo_dia.length == 0 && dias_solicitados.length == 0){
           request.flash('error', 'No se recibio ningun dato.');
           response.redirect('/dlc/s_vacaciones');
         }
 
-        else if (responsable_ausencia.length == 0 || fecha_primer_dia.length == 0 || fecha_ultimo_dia.length == 0 || dias_solicitados.length == 0){
+        else if (responsable_ausencia == undefined || fecha_primer_dia.length == 0 || fecha_ultimo_dia.length == 0 || dias_solicitados.length == 0){
           request.flash('error', 'Faltan datos por llenar.');
           response.redirect('/dlc/s_vacaciones');
         }
@@ -382,10 +382,12 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
         .then(([count, fieldData]) => {
           let totalesV = count[0].num
           console.log(totalesV)
-            response.render('estatus_vacaciones', {
+            response.render('aprobar_vacaciones', {
                 vacaciones: vacaciones,
                 current: page,
-                pages: Math.ceil(totalesV / perPage)
+                pages: Math.ceil(totalesV / perPage),
+                success: request.flash("success"),
+                error: request.flash("error")
             });
           })
           .catch(err => {
@@ -400,28 +402,60 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
 
 exports.post_reject_vacaciones = (request, response, next) => {
     console.log('POST /dlc/a_vacacionesp/:page/reject');
-    console.log(request.body);
+    const estatus_vacaciones = request.body.estatus_vacaciones;
+    const folio = request.body.folio;
+
+    console.log(estatus_vacaciones);
+    console.log(folio);
+
     Vacaciones.rejectVacations(
-      request.body.estatus_vacaciones,
-      request.body.folio)
+      estatus_vacaciones,
+      folio)
       .then(() => {
+          console.log("Se rechazo la solicitud");
+          request.flash('success', 'La solicitud con folio ' + folio + ' fue RECHAZADA con éxito');
           response.redirect('/dlc/a_vacacionesp/1');
       }).catch(err => console.log(err));
   };
 
   exports.post_aprovee_vacaciones = (request, response, next) => {
       console.log('POST /dlc/a_vacacionesp/:page/aprovee');
-      console.log(request.body);
-      Vacaciones
-        .aproveeVacations(
-          request.body.estatus_vacaciones,
-          request.body.dias_solicitados,
-          request.body.folio,
-          request.body.no_empleado)
-        .then(() => {
+      const estatus_vacaciones = request.body.estatus_vacaciones;
+      const dias_solicitados = request.body.dias_solicitados;
+      const folio = request.body.folio;
+      const no_empleado = request.body.no_empleado;
+
+      console.log(estatus_vacaciones);
+      console.log(dias_solicitados);
+      console.log(folio);
+      console.log(no_empleado);
+
+      Empleado.getVacacionesR(no_empleado)
+        .then(([rows, fielData])=>{
+          console.log(rows[0].dias_vacaciones_restantes);
+          const dias_vacaciones_restantes = rows[0].dias_vacaciones_restantes;
+          if (dias_vacaciones_restantes < dias_solicitados){
+            request.flash('error', 'Este Usuario no posee días de vacaciones');
             response.redirect('/dlc/a_vacacionesp/1');
-        }).catch(err => console.log(err));
-    };
+          }
+
+          else {
+            Vacaciones
+              .aproveeVacations(
+                request.body.estatus_vacaciones,
+                request.body.dias_solicitados,
+                request.body.folio,
+                request.body.no_empleado)
+              .then(() => {
+                  console.log("Se aprobo la solicitud");
+                  request.flash('success', 'La solicitud con folio ' + folio + ' fue APROBADA con éxito');
+                  response.redirect('/dlc/a_vacacionesp/1');
+              }).catch(err => console.log(err));
+            }
+          }).catch((error)=>{
+              console.log(error)
+          });
+        };
 
 exports.search_vacaciones = (request, response, next) => {
     console.log(request.params.search);

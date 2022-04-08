@@ -487,7 +487,7 @@ exports.get_dias_vacaciones_totales = (request, response, next) => {
 };
 
 exports.post_dias_vacaciones_totales = (request, response, next) => {
-    console.log('POST /dlc/modificar_vacaciones_totales/:id_prestaciones');
+    console.log('POST /dlc/a/:id_prestaciones');
     const max_prestaciones = request.body.max_prestaciones;
     const min_prestaciones = request.body.min_prestaciones;
     const dias_prestaciones = request.body.dias_prestaciones;

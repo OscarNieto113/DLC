@@ -12,12 +12,12 @@ const Vacaciones = require('../models/vacaciones');
 const User = require('../models/user');
 
 //------------------------Solicitar NG Block--------------------------------
-exports.get_s_ng_block = (request, response, next) => {
+exports.get_solicitar_ng_block = (request, response, next) => {
   const no_empleado = request.session.user_no_empleado;
-    console.log('GET /dlc/s_ng_block');
+    console.log('GET /dlc/solicitar_ng_block');
       Empleado.getBlocksR(no_empleado)
           .then(([rows, fieldData]) => {
-              response.render('s_ng_block', {
+              response.render('solicitar_ng_block', {
                   empleado: rows,
                   success: request.flash("success"),
                   error: request.flash("error")
@@ -29,7 +29,7 @@ exports.get_s_ng_block = (request, response, next) => {
 };
 //
 
-exports.post_s_ng_block = (request, response, next) => {
+exports.post_solicitar_ng_block = (request, response, next) => {
     const no_empleado = request.body.no_empleado;
     const turno_ng_block = request.body.turno_ng_block;
     const descripcion_ng_block = request.body.descripcion_ng_block;
@@ -46,17 +46,19 @@ exports.post_s_ng_block = (request, response, next) => {
         const ng_blocks_restantes = rows[0].ng_blocks_restantes;
         if (turno_ng_block.length == 0 && descripcion_ng_block.length == 0 && fecha_uso_ng_block.length == 0){
           request.flash('error', 'No se recibio ningun dato.');
-          response.redirect('/dlc/s_ng_block');
+          response.redirect('/dlc/solicitar_ng_block');
         }
 
         else if (turno_ng_block.length == 0 || descripcion_ng_block.length == 0 || fecha_uso_ng_block.length == 0){
           request.flash('error', 'Faltan datos por llenar.');
-          response.redirect('/dlc/s_ng_block');
+          response.redirect('/dlc/solicitar_ng_block');
         }
+
         else if (ng_blocks_restantes <= 0){
           request.flash('error', 'No posees más Ng Blocks');
-          response.redirect('/dlc/s_ng_block');
+          response.redirect('/dlc/solicitar_ng_block');
         }
+
         else {
           const ng_block =
               new Ng_Block(
@@ -69,7 +71,7 @@ exports.post_s_ng_block = (request, response, next) => {
           .then(() => {
               console.log("Se guardo la solicitud");
               request.flash('success', 'El NG Block con fecha de uso de ' + fecha_uso_ng_block + ' fue agregado con éxito');
-              response.redirect('/dlc/s_ng_block');
+              response.redirect('/dlc/solicitar_ng_block');
           })
           .catch(err => console.log(err));
         }
@@ -278,46 +280,25 @@ exports.post_delete_ng_block_solicitadas = (request, response, next) => {
     };
 //------------------------Consultar NGblocks solicitadas--------------------------------
 
-
-
-//------------------------ Reportes NPS se va a borrar --------------------------------
-/*
-exports.get_reportes_mensuales = (request, response, next) => {
-    Reportes_mensuales.fetchAll()
-    .then(([rows, fieldData]) => {
-      console.log(rows);
-      response.render('reportes_mensuales', {
-          reportes_mensuales: rows
-      });
-  })
-  .catch(err => {
-      console.log(err);
-  });
-};
-*/
-
-
-//------------------------ Reportes NPS se va a borrar --------------------------------
-
 //------------------------Solicitar Vacaciones--------------------------------
-exports.get_solicitud_vacaciones = (request, response, next) => {
+exports.get_solicitar_vacaciones = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
-    console.log('GET /dlc/solicitud_vacaciones');
+    console.log('GET /dlc/s_vacaciones');
     Empleado
-      .getAreaEmpleado("A4")
+      .getAreaEmpleado(no_empleado)
       .then(([id_area, fieldData]) => {
         //console.log(id_area);
-        //let id = id_area[0].id_area
+        let id = id_area[0].id_area
         //console.log(id);
-        Empleado.fetchEmpleadoArea(1)
+        Empleado.fetchEmpleadoArea(id)
           .then(([rows, fieldData]) => {
             Empleado.getVacacionesR(no_empleado)
               .then(([rows2, fieldData]) => {
-                console.log(rows);
-                console.log(rows2);
-                response.render('solicitud_vacaciones', {
+                response.render('solicitar_vacaciones', {
                   empleadoV: rows2,
                   empleado: rows,
+                  success: request.flash("success"),
+                  error: request.flash("error")
                 });
               })
               .catch(err => {
@@ -333,28 +314,59 @@ exports.get_solicitud_vacaciones = (request, response, next) => {
       });
   };
 
-exports.post_solicitud_vacaciones = (request, response, next) => {
-    console.log('POST /dlc/solicitud_vacaciones');
-    console.log(request.body);
-    const vacaciones =
-        new Vacaciones(
-          request.body.no_empleado,
-          request.body.responsable_ausencia,
-          //request.body.observaciones,
-          request.body.fecha_primer_dia,
-          request.body.fecha_ultimo_dia,
-          request.body.dias_solicitados);
-          //request.body.estatus_vacaciones);
-    vacaciones.save()
-    .then(() => {
-        request.session.info = 'Las vacaciones con fecha de uso de '+ vacaciones.primer_dia + ' fue agregado con éxito';
-        response.setHeader('Set-Cookie',
-         'ultimo_vacaciones='+vacaciones.primer_dia+'; HttpOnly');
-        response.redirect('/dlc');
-    })
-    .catch(err => console.log(err));
-};
+exports.post_solicitar_vacaciones = (request, response, next) => {
+    console.log('POST /dlc/solicitar_vacaciones');
+    const no_empleado = request.session.user_no_empleado;
+    const responsable_ausencia = request.body.responsable_ausencia;
+    const fecha_primer_dia = request.body.fecha_primer_dia;
+    const fecha_ultimo_dia = request.body.fecha_ultimo_dia;
+    const dias_solicitados = request.body.dias_solicitados;
 
+    console.log(no_empleado);
+    console.log(responsable_ausencia);
+    console.log(fecha_primer_dia);
+    console.log(fecha_ultimo_dia);
+    console.log(dias_solicitados);
+
+    Empleado.getVacacionesR(no_empleado)
+      .then(([rows2, fieldData]) => {
+        console.log(rows2[0].dias_vacaciones_restantes);
+        const dias_vacaciones_restantes = rows2[0].dias_vacaciones_restantes;
+
+        if (responsable_ausencia.length == 0 && fecha_primer_dia.length == 0 && fecha_ultimo_dia.length == 0 && dias_solicitados.length == 0){
+          request.flash('error', 'No se recibio ningun dato.');
+          response.redirect('/dlc/s_vacaciones');
+        }
+
+        else if (responsable_ausencia.length == 0 || fecha_primer_dia.length == 0 || fecha_ultimo_dia.length == 0 || dias_solicitados.length == 0){
+          request.flash('error', 'Faltan datos por llenar.');
+          response.redirect('/dlc/s_vacaciones');
+        }
+
+        else if (dias_vacaciones_restantes < dias_solicitados){
+          request.flash('error', 'Solo posees ' + dias_vacaciones_restantes + '. No puedes solicitar más de las que posees');
+          response.redirect('/dlc/s_vacaciones');
+        }
+
+        else {
+          const vacaciones =
+            new Vacaciones(
+              no_empleado,
+              responsable_ausencia,
+              fecha_primer_dia,
+              fecha_ultimo_dia,
+              dias_solicitados,
+            );
+            vacaciones.save()
+            .then(() => {
+              console.log("Se guardo la solicitud");
+              request.flash('success', 'Las vacaciones con fecha de uso de ' + fecha_primer_dia + ', hasta ' + fecha_ultimo_dia + ' con ' + dias_solicitados + ' días solicitados fue agregada con éxito');
+              response.redirect('/dlc/s_vacaciones');
+            })
+            .catch(err => console.log(err));
+          }
+        }).catch((error)=>{console.log(error)});
+  };
 //------------------------Solicitar Vacaciones--------------------------------
 
 //------------------------Aprobar Vacaciones--------------------------------

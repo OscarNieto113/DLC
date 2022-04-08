@@ -3,8 +3,23 @@
     <%- include('includes/sidebar.ejs') %>
       <div class="col py-3">
         <div class="jumbotron jumbotron-fluid">
-
           <div class="container">
+            <% if (success.length != 0) { %>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+              <% } %>
+              <% if (error.length != 0) { %>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻   </strong> <%= error %>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+              <% } %>
             <section class="container">
               <h1 class="pt-4 pb-2">Solicitud de Vacaciones</h1>
               <div style="text-align: right;">
@@ -18,7 +33,7 @@
                     <label for="vacaciones_R1">Vacaciones restantes</label>
                     </div>
                     <div class="col-sm-2">
-                    <input type="text" class="form-control" name="vacaciones_R1" id="vacaciones_R1" value="<%= empleadoV1.ng_blocks_restantes %>" style="width: 30%;" disabled>
+                    <input type="text" class="form-control" name="vacaciones_R1" id="vacaciones_R1" value="<%= empleadoV1.dias_vacaciones_restantes %>" style="width: 30%;" disabled>
                   </div>
                 </div>
               <% } %>
@@ -57,7 +72,6 @@
 
                       <br><br>
                       <!-- DATOS FAKE-->
-                      <input type="hidden" id="no_empleado" name="no_empleado" value="A4">
                       <input type="hidden" id="fecha_ultimo_dia" name="fecha_ultimo_dia">
                       <input type="hidden" id="fecha_primer_dia" name="fecha_primer_dia">
                       <input type="hidden" id="dias_solicitados" name="dias_solicitados">

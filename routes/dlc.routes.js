@@ -17,8 +17,8 @@ const fileStorage = multer.diskStorage({
 });
 
 //Solicitar NG BLOCK
-router.get('/s_ng_block', dlc_controller.get_s_ng_block);
-router.post('/s_ng_block', dlc_controller.post_s_ng_block);
+router.get('/solicitar_ng_block', dlc_controller.get_solicitar_ng_block);
+router.post('/solicitar_ng_block', dlc_controller.post_solicitar_ng_block);
 
 //Aprobar NG BLOCK
 router.get('/a_ng_blocksp/:page', dlc_controller.get_aprobar_ng_blocks_pagination);
@@ -28,8 +28,8 @@ router.post('/a_ng_blocksp/:page/reject', dlc_controller.post_reject_ng_blocks);
 router.get('/a_ng_blocksp/:page/filtrar/:search', dlc_controller.search_ngblock);
 
 //Solicitar Vacaciones
-router.get('/s_vacaciones', dlc_controller.get_solicitud_vacaciones);
-router.post('/s_vacaciones', dlc_controller.post_solicitud_vacaciones);
+router.get('/s_vacaciones', dlc_controller.get_solicitar_vacaciones);
+router.post('/s_vacaciones', dlc_controller.post_solicitar_vacaciones);
 
 //Aprobar Vacaciones
 router.get('/a_vacacionesp/:page', dlc_controller.get_aprobar_vacaciones_pagination);

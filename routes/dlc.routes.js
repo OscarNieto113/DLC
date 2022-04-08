@@ -63,6 +63,8 @@ router.post('/buscar_empleado/:no_empleado/ng_blocks', dlc_controller.post_give_
 //Modificar dias de vacaciones Totales
 router.get('/vacaciones_totales', dlc_controller.get_dias_vacaciones_totales);
 router.post('/vacaciones_totales/:id_prestaciones', dlc_controller.post_dias_vacaciones_totales);
+router.post('/vacaciones_totales/delete/:id_prestaciones', dlc_controller.post_delete_vacaciones_totales);
+router.post('/vacaciones_totales/add', dlc_controller.post_add_vacaciones_totales);
 
 //Ver solicitud de tus vacaciones
 router.get('/profile/vacaciones_solicitadas', dlc_controller.get_vacaciones_solicitadas);

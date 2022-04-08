@@ -475,9 +475,10 @@ exports.get_dias_vacaciones_totales = (request, response, next) => {
     console.log('GET /dlc/vacaciones_totales');
     Prestaciones.fetchAll()
     .then(([rows, fieldData]) => {
-      //console.log(rows);
       response.render('modificar_vacaciones_totales', {
           prestaciones: rows,
+          success: request.flash("success"),
+          error: request.flash("error")
       });
   })
   .catch(err => {
@@ -487,17 +488,79 @@ exports.get_dias_vacaciones_totales = (request, response, next) => {
 
 exports.post_dias_vacaciones_totales = (request, response, next) => {
     console.log('POST /dlc/modificar_vacaciones_totales/:id_prestaciones');
-    console.log(request.body);
+    const max_prestaciones = request.body.max_prestaciones;
+    const min_prestaciones = request.body.min_prestaciones;
+    const dias_prestaciones = request.body.dias_prestaciones;
+    const id_prestaciones = request.body.id_prestaciones;
+
+    console.log(max_prestaciones);
+    console.log(min_prestaciones);
+    console.log(dias_prestaciones);
+    console.log(id_prestaciones);
+
     Prestaciones
       .updatePrestaciones(
-        request.body.max_prestaciones,
-        request.body.min_prestaciones,
-        request.body.dias_prestaciones,
-        request.body.id_prestaciones)
+        max_prestaciones,
+        min_prestaciones,
+        dias_prestaciones,
+        id_prestaciones)
       .then(() => {
+          console.log("Se Actualizaron las prestaciones");
+          request.flash('success', 'Se actualizó con éxito');
           response.redirect('/dlc/vacaciones_totales');
       }).catch(err => console.log(err));
   };
+
+  exports.post_delete_vacaciones_totales = (request, response, next) => {
+      console.log('POST /dlc/vacaciones_totales/delete/:id_prestaciones');
+      const id_prestaciones = request.body.id_prestaciones;
+      console.log(id_prestaciones);
+      Prestaciones
+        .deletePrestaciones(
+          id_prestaciones)
+        .then(() => {
+            console.log("Se elimino una de las prestaciones");
+            request.flash('success', 'Se eliminó la fila con éxito');
+            response.redirect('/dlc/vacaciones_totales');
+        }).catch(err => console.log(err));
+    };
+
+    exports.post_add_vacaciones_totales = (request, response, next) => {
+        console.log('POST /dlc/vacaciones_totales/add');
+        const max_prestaciones = request.body.max_prestaciones;
+        const min_prestaciones = request.body.min_prestaciones;
+        const dias_prestaciones = request.body.dias_prestaciones;
+
+        console.log(max_prestaciones);
+        console.log(min_prestaciones);
+        console.log(dias_prestaciones);
+
+        if (max_prestaciones.length == 0 && min_prestaciones.length == 0 && dias_prestaciones.length == 0){
+          request.flash('error', 'No se recibio ningun dato.');
+          response.redirect('/dlc/vacaciones_totales');
+        }
+
+        else if (max_prestaciones.length == 0 || min_prestaciones.length == 0 || dias_prestaciones.length == 0){
+          request.flash('error', 'Faltan datos por llenar.');
+          response.redirect('/dlc/vacaciones_totales');
+        }
+
+        else {
+          const prestaciones =
+              new Prestaciones(
+                max_prestaciones,
+                min_prestaciones,
+                dias_prestaciones,
+                );
+            prestaciones.save()
+          .then(() => {
+              console.log("Se guardaron las prestaciones");
+              request.flash('success', 'Se agregaron correctamente las actualizaciones');
+              response.redirect('/dlc/vacaciones_totales');
+            })
+            .catch(err => console.log(err));
+          }
+        };
 
 //------------------------Modificar dias de vacaciones totales--------------------------------
 

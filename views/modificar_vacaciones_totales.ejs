@@ -4,6 +4,22 @@
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
+      <% if (success.length != 0) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+        <% if (error.length != 0) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻  </strong> <%= error %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
       <h1><center>Modificar dias de vacaciones por Año </center></h1>
 
 				<table id="vacaciones_totalesbl" class="table">
@@ -11,6 +27,7 @@
 						<th>De:<center> Año laboral</center></th>
 						<th>Hasta:<center> Año laboral</center></th>
 						<th><center>Días de vacaciones</center></th>
+            <th></th>
             <th></th>
 					</tr>
 					<% for (let prestaciones1 of prestaciones) { %>
@@ -22,15 +39,51 @@
 							<td id="col2"><input type="text" name="dias_prestaciones" id="dias_prestaciones" value="<%=prestaciones1.dias_prestaciones%>" class="form-control"/></td>
               <td id="col3"><input type="submit" value="Guardar cambios" class="btn btn-primary"/></td>
               </form>
+              <td id="col4">
+                <form action="/dlc/vacaciones_totales/delete/<%= prestaciones1.id_prestaciones %>" method="POST">
+                  <input type="hidden" id="id_prestaciones" name="id_prestaciones" value="<%= prestaciones1.id_prestaciones %>"/>
+                  <div style="text-align: right;">
+                    <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+                  </div>
+                </form>
+              </td>
 						</tr>
 					<% } %>
 				</table>
 						<div style="text-align: right;">
-
 						</div>
-
-			 	<input type="button" value="Añadir fila" onclick="addRows()" class="btn btn-primary" style="background-color: #86b049"/>
-				<input type="button" value="Eliminar fila" onclick="deleteRows()" class="btn btn-primary" style="background-color: #b8293d"/>
+            <div>
+              <br>
+              <button type="button" class="btn btn-primary" style="background-color: #86b049" data-toggle="modal" data-target="#exampleModal0" data-whatever="@mdo">Añadir fila</button>
+                <div class="modal fade" id="exampleModal0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel0" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel0">Agregar fila a las prestaciones</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="form-group" style="text-align: left;"">
+                            <form action="/dlc/vacaciones_totales/add" method="POST">
+                              <label for="min_prestaciones" class="col-form-label">De Año laboral:</label>
+                              <input type="number" class="form-control" id="min_prestaciones" name="min_prestaciones" autocomplete="off" required><br>
+                              <label for="max_prestaciones" class="col-form-label">Hasta Año laboral:</label>
+                              <input type="number" class="form-control" id="max_prestaciones" name="max_prestaciones" autocomplete="off" required><br>
+                              <label for="dias_prestaciones" class="col-form-label">Días de vacaciones:</label>
+                              <input type="number" class="form-control" id="dias_prestaciones" name="dias_prestaciones" autocomplete="off" required><br>
+                              <input type="submit" value="Enviar" class="btn btn-primary">
+                            </form>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
     </div>
   </div>
 </div>

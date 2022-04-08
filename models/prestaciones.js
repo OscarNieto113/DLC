@@ -2,16 +2,16 @@ const db = require ('../util/database')
 
 module.exports = class Prestaciones {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(id_prestaciones, max_prestaciones, min_prestaciones, dias_prestaciones) {
-        this.id_prestaciones = id_prestaciones;
-        this.max_prestaciones = max_prestaciones;
-        this.min_prestaciones = min_prestaciones;
-        this.dias_prestaciones = dias_prestaciones;
+    constructor(nuevo_max_prestaciones, nuevo_min_prestaciones, nuevo_dias_prestaciones) {
+        this.min_prestaciones = nuevo_min_prestaciones;
+        this.max_prestaciones = nuevo_max_prestaciones;
+        this.dias_prestaciones = nuevo_dias_prestaciones;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto.
     save() {
-        prestaciones.push(this);
+      return db.execute('INSERT INTO prestaciones (min_prestaciones, max_prestaciones, dias_prestaciones) VALUES (?, ?, ?)',
+          [this.min_prestaciones, this.max_prestaciones, this.dias_prestaciones]);
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
@@ -28,6 +28,13 @@ module.exports = class Prestaciones {
 						'min_prestaciones = ?, ' +
             'dias_prestaciones = ? ' +
 					'WHERE id_prestaciones = ? ', [max_prestaciones, min_prestaciones, dias_prestaciones, id_prestaciones]);
+    }
+
+    static deletePrestaciones(id_prestaciones) {
+        return db.execute(
+          'DELETE FROM prestaciones ' +
+            'WHERE ' +
+					'id_prestaciones = ? ', [id_prestaciones]);
     }
 
 

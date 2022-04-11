@@ -1,7 +1,8 @@
   $(document).ready(function () {
       $('#all_dates').datepicker({
+        format: 'dd-mm-yyyy',
         multidate: true,
-        format: 'yyyy-mm-dd',
+        locale: 'es-es',
         container: $('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body",
         todayHighlight: true,
         autoclose: false,
@@ -20,6 +21,7 @@
           var u_dia = sorted_dates[0];
           //var p_dia2 = document.getElementById("p_dia");//.value = longitud;
           //p_dia2.innerHTML = p_dia;
+          console.log(u_dia)
           document.getElementById("fecha_primer_dia").value = u_dia.toISOString().split('T')[0];
       });
 
@@ -32,8 +34,8 @@
           //alguna madre que nos permita apuntar al ultimo día
           var u_dia = sorted_dates[sorted_dates.length-1];
           var date = u_dia;
-          console.log(date.setDate(date.getDate() + 1))
-
+          //console.log(date.setDate(date.getDate() + 1))
+          console.log(u_dia)
           document.getElementById("fecha_ultimo_dia").value = u_dia.toISOString().split('T')[0];
       });
 
@@ -44,7 +46,7 @@
             (dateA, dateB) => new Date(dateA)- new Date(dateB)
           );
           var longitud = sorted_dates.length
-
+          console.log(longitud)
           document.getElementById("dias_solicitados").value = longitud;
       });
 

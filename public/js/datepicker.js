@@ -1,12 +1,22 @@
-$(function() {
-    $('#fecha_uso_ng_block').datepicker({
-      format: 'yyyy-mm-dd',
+$(document).ready(function(){
+     $.fn.datepicker.defaults.language = 'es';
+});
+
+$(document).ready(function(){
+    $('#fecha_ng').datepicker({
+      format: 'dd-mm-yyyy',
       orientation: "bottom left",
       startDate: new Date(),
       daysOfWeekDisabled: [0,6],
       todayHighlight: true,
       autoclose: true
     });
+
+    $('#fecha_ng').on("changeDate", function ng_block () {
+      var f1 = $('#fecha_ng').datepicker('getDate');
+      console.log(f1)
+      document.getElementById("fecha_uso_ng_block").value = f1.toISOString().split('T')[0];
+  });
 });
 
 $(function() {

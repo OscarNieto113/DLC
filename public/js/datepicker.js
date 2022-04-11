@@ -19,25 +19,38 @@ $(document).ready(function(){
   });
 });
 
-$(function() {
-    $('#fecha_nacimiento').datepicker({
-      format: 'yyyy-mm-dd',
+$(document).ready(function(){
+    $('#fecha_n').datepicker({
+      format: 'dd-mm-yyyy',
       orientation: "bottom left",
       todayHighlight: true,
       autoclose: true,
       endDate: new Date()
     });
+
+    $('#fecha_n').on("changeDate", function ng_block () {
+      var f2 = $('#fecha_n').datepicker('getDate');
+      console.log(f2)
+      document.getElementById("fecha_nacimiento").value = f2.toISOString().split('T')[0];
+  });
 });
 
-$(function() {
-    $('#fecha_contratacion').datepicker({
-      format: 'yyyy-mm-dd',
+$(document).ready(function(){
+    $('#fecha_c').datepicker({
+      format: 'dd-mm-yyyy',
       orientation: "bottom left",
       todayHighlight: true,
       autoclose: true,
       endDate: new Date()
     });
+
+    $('#fecha_c').on("changeDate", function ng_block () {
+      var f3 = $('#fecha_c').datepicker('getDate');
+      console.log(f3)
+      document.getElementById("fecha_contratacion").value = f3.toISOString().split('T')[0];
+  });
 });
+
 
 $(function() {
     $('#search_date').datepicker({
@@ -50,16 +63,24 @@ $(function() {
     });
 });
 
-$(function() {
-    $('#fecha_reporte_mensual').datepicker({
-      format: "yyyy-mm-dd",
+$(document).ready(function(){
+    $('#fecha_r').datepicker({
+      format: 'dd-mm-yyyy',
       orientation: "bottom left",
       startView: "months",
       minViewMode: "months",
       todayHighlight: true,
       autoclose: true
     });
+
+    $('#fecha_r').on("changeDate", function ng_block () {
+      var f4 = $('#fecha_r').datepicker('getDate');
+      console.log(f4)
+      document.getElementById("fecha_contratacion").value = f4.toISOString().split('T')[0];
+  });
 });
+
+
 /*
   var currentDate  = new Date(),
       currentDay   = currentDate.getDate() < 10

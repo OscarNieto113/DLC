@@ -15,31 +15,31 @@
 
           <!--Empieza el form -->
           <form action="/users/login" method="POST">
-            <!--<input type="hidden" name="_csrf" value="<= csrfToken >" >-->
-          <div class="form-outline mb-4">
-            <!-- Email input -->
-            <label for="no_empleado" class="form-label" >Número de Empleado</label>
-            <input type="text" id="no_empleado" name= "no_empleado" class="form-control form-control-lg"
-              placeholder="A1" />
-            <!-- Email input -->
-          </div>
-          <div class="form-outline mb-4">
-            <!-- Email input -->
-            <label for="correo_usuario" class="form-label" >Correo Empresarial</label>
-            <input type="text" id="correo_usuario" name= "correo_usuario" class="form-control form-control-lg"
-              placeholder="a01705001@natgas.com.mx">
-            <!-- Email input -->
-          </div>
-          <div class="form-outline mb-3">
-            <!-- Password input -->
-            <label class="form-label" for="contrasenia">Password</label>
-            <input type="password" id="contrasenia" name="contrasenia" class="form-control form-control-lg"
-              placeholder="Enter password" />
-            <!-- Password input -->
-          </div>
-          <div class="text-center text-lg-start mt-4 pt-2">
-            <input type="submit" value="Enviar" class="btn btn-primary">
-          </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+            <div class="form-outline mb-4">
+              <!-- Email input -->
+              <label for="no_empleado" class="form-label" >Número de Empleado</label>
+              <input type="text" id="no_empleado" name= "no_empleado" class="form-control form-control-lg"
+                placeholder="A1" />
+              <!-- Email input -->
+            </div>
+            <div class="form-outline mb-4">
+              <!-- Email input -->
+              <label for="correo_usuario" class="form-label" >Correo Empresarial</label>
+              <input type="text" id="correo_usuario" name= "correo_usuario" class="form-control form-control-lg"
+                placeholder="a01705001@natgas.com.mx">
+              <!-- Email input -->
+            </div>
+            <div class="form-outline mb-3">
+              <!-- Password input -->
+              <label class="form-label" for="contrasenia">Password</label>
+              <input type="password" id="contrasenia" name="contrasenia" class="form-control form-control-lg"
+                placeholder="Enter password" />
+              <!-- Password input -->
+            </div>
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <input type="submit" value="Enviar" class="btn btn-primary">
+            </div>
           </form>
           <!-- Termina form -->
           <div class="d-flex justify-content-between align-items-center">

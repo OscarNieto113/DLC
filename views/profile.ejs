@@ -136,7 +136,7 @@
                         </button>
                     </div>
                 <% } %>
-                
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <a href="/dlc/profile/ngblocks_solicitados">
                 <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/ngblocks_solicitados">Ver solicitudes NG Blocks</button>
@@ -150,6 +150,7 @@
 
 
           <form action="/dlc/buscar_empleado/:no_empleado/vacaciones" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
             <label for="giveVacations">Agregar dias de vacaciones: </label>
             <input type="number" id="giveVacations" name="giveVacations" min="1" max="5" class="btn btn-light" s placeholder="0" required>
             <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
@@ -158,6 +159,7 @@
 
           <br>
           <form action="/dlc/buscar_empleado/:no_empleado/ng_blocks" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
             <label for="giveNgBlocks">Agregar Ng Blocks: </label>
             <input type="number" id="giveNgBlocks" name="giveNgBlocks" min="1" max="5" class="btn btn-light" s placeholder="0" required>
             <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">

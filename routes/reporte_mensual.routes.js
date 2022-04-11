@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const isAuth = require('../util/is-auth.js');
 
 const reporte_mensual_controller = require('../controllers/reporte_mensual_controller');
 
@@ -17,7 +18,7 @@ const fileStorage = multer.diskStorage({
 });
 
 router.post('/post',multer({ storage: fileStorage }).single('imagen_reporte'),reporte_mensual_controller.post_reportes_mensuales);
-router.get('/filtrar/:search', reporte_mensual_controller.search_date);
-router.use('/', reporte_mensual_controller.get_reportes_mensuales);
+router.get('/filtrar/:search', isAuth, reporte_mensual_controller.search_date);
+router.use('/', isAuth, reporte_mensual_controller.get_reportes_mensuales);
 
 module.exports = router;

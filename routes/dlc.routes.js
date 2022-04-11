@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const isAuth = require('../util/is-auth.js');
 
 const dlc_controller = require('../controllers/dlc_controller');
 
@@ -17,70 +18,69 @@ const fileStorage = multer.diskStorage({
 });
 
 //Solicitar NG BLOCK
-router.get('/solicitar_ng_block', dlc_controller.get_solicitar_ng_block);
-router.post('/solicitar_ng_block', dlc_controller.post_solicitar_ng_block);
+router.get('/solicitar_ng_block', isAuth, dlc_controller.get_solicitar_ng_block);
+router.post('/solicitar_ng_block', isAuth, dlc_controller.post_solicitar_ng_block);
 
 //Aprobar NG BLOCK
-router.get('/a_ng_blocksp/:page', dlc_controller.get_aprobar_ng_blocks_pagination);
+router.get('/a_ng_blocksp/:page', isAuth, dlc_controller.get_aprobar_ng_blocks_pagination);
 //router.post('/a_ng_block', dlc_controller.post_a_ng_block);
-router.post('/a_ng_blocksp/:page/aprovee', dlc_controller.post_aprovee_ng_blocks);
-router.post('/a_ng_blocksp/:page/reject', dlc_controller.post_reject_ng_blocks);
-router.get('/a_ng_blocksp/:page/filtrar/:search', dlc_controller.search_ngblock);
+router.post('/a_ng_blocksp/:page/aprovee', isAuth, dlc_controller.post_aprovee_ng_blocks);
+router.post('/a_ng_blocksp/:page/reject', isAuth, dlc_controller.post_reject_ng_blocks);
+router.get('/a_ng_blocksp/:page/filtrar/:search', isAuth, dlc_controller.search_ngblock);
 
 //Solicitar Vacaciones
-router.get('/s_vacaciones', dlc_controller.get_solicitar_vacaciones);
-router.post('/s_vacaciones', dlc_controller.post_solicitar_vacaciones);
+router.get('/s_vacaciones', isAuth, dlc_controller.get_solicitar_vacaciones);
+router.post('/s_vacaciones', isAuth, dlc_controller.post_solicitar_vacaciones);
 
 //Aprobar Vacaciones
-router.get('/a_vacacionesp/:page', dlc_controller.get_aprobar_vacaciones_pagination);
-router.post('/a_vacacionesp/:page/reject', dlc_controller.post_reject_vacaciones);
+router.get('/a_vacacionesp/:page', isAuth, dlc_controller.get_aprobar_vacaciones_pagination);
+router.post('/a_vacacionesp/:page/reject', isAuth, dlc_controller.post_reject_vacaciones);
 //router.post('/a_vacacionesp/:page/reject/:folio', dlc_controller.post_reject_vacaciones);
-router.post('/a_vacacionesp/:page/aprovee', dlc_controller.post_aprovee_vacaciones);
-router.get('/a_vacacionesp/:page/filtrar/:search', dlc_controller.search_vacaciones);
+router.post('/a_vacacionesp/:page/aprovee', isAuth, dlc_controller.post_aprovee_vacaciones);
+router.get('/a_vacacionesp/:page/filtrar/:search', isAuth, dlc_controller.search_vacaciones);
 
 //Registrar Empleado
-router.get('/r_usuario', dlc_controller.get_registrar_empleado);
-router.post('/r_usuario', dlc_controller.post_registrar_empleado);
+router.get('/r_usuario', isAuth, dlc_controller.get_registrar_empleado);
+router.post('/r_usuario', isAuth, dlc_controller.post_registrar_empleado);
 
 //Buscar Empelado
-router.get('/buscar_empleado', dlc_controller.get_buscar_empleado);
-router.get('/s_buscar_empleadop/filtrar/:search', dlc_controller.search_empleado);
-router.get('/buscar_empleado/:no_empleado', dlc_controller.get_perfil_empleado);
+router.get('/buscar_empleado', isAuth, dlc_controller.get_buscar_empleado);
+router.get('/s_buscar_empleadop/filtrar/:search', isAuth, dlc_controller.search_empleado);
+router.get('/buscar_empleado/:no_empleado', isAuth, dlc_controller.get_perfil_empleado);
 //router.post('/buscar_empleado', dlc_controller.post_buscar_empleado);
 
 //Interfaz datos del empleado
-router.get('/profile', dlc_controller.get_profile);
+router.get('/profile', isAuth, dlc_controller.get_profile);
 
 //Dar dias de vacaciones
-router.post('/buscar_empleado/:no_empleado/vacaciones', dlc_controller.post_give_vacations);
+router.post('/buscar_empleado/:no_empleado/vacaciones', isAuth, dlc_controller.post_give_vacations);
 
 //Dar Ng Blocks
-router.post('/buscar_empleado/:no_empleado/ng_blocks', dlc_controller.post_give_ng_blocks);
+router.post('/buscar_empleado/:no_empleado/ng_blocks', isAuth, dlc_controller.post_give_ng_blocks);
 
 //Reporte NPS
 //router.get('/reportes_mensuales', dlc_controller.get_reportes_mensuales);
 
 //Modificar dias de vacaciones Totales
-router.get('/vacaciones_totales', dlc_controller.get_dias_vacaciones_totales);
-router.post('/vacaciones_totales/:id_prestaciones', dlc_controller.post_dias_vacaciones_totales);
-router.post('/vacaciones_totales/delete/:id_prestaciones', dlc_controller.post_delete_vacaciones_totales);
-router.post('/vacaciones_totales/add/aaaaaaa', dlc_controller.post_add_vacaciones_totales);
+router.get('/vacaciones_totales', isAuth, dlc_controller.get_dias_vacaciones_totales);
+router.post('/vacaciones_totales/:id_prestaciones', isAuth, dlc_controller.post_dias_vacaciones_totales);
+router.post('/vacaciones_totales/delete/:id_prestaciones', isAuth, dlc_controller.post_delete_vacaciones_totales);
+router.post('/vacaciones_totales/add/aaaaaaa', isAuth, dlc_controller.post_add_vacaciones_totales);
 
 //Ver solicitud de tus vacaciones
-router.get('/profile/vacaciones_solicitadas', dlc_controller.get_vacaciones_solicitadas);
-router.post('/profile/vacaciones_solicitadas/delete/:folio', dlc_controller.post_delete_vacaciones_solicitadas);
+router.get('/profile/vacaciones_solicitadas', isAuth, dlc_controller.get_vacaciones_solicitadas);
+router.post('/profile/vacaciones_solicitadas/delete/:folio', isAuth, dlc_controller.post_delete_vacaciones_solicitadas);
 
 //Ver solicitud de tus NG Block
-router.get('/profile/ngblocks_solicitados', dlc_controller.get_ngblocks_solicitados);
-router.post('/profile/ngblocks_solicitados/delete/:id_ng_block', dlc_controller.post_delete_ng_block_solicitadas);
+router.get('/profile/ngblocks_solicitados', isAuth, dlc_controller.get_ngblocks_solicitados);
+router.post('/profile/ngblocks_solicitados/delete/:id_ng_block', isAuth, dlc_controller.post_delete_ng_block_solicitadas);
 
 //MAIN INDEX
 //router.post('/objetivo', dlc_controller.post_objetivo);
-router.post('/noticia',multer({ storage: fileStorage }).single('imagen_noticia') ,dlc_controller.post_noticia);
-router.post('/publicacion', multer({ storage: fileStorage }).single('imagen_publicacion'),dlc_controller.post_publicacion);
+router.post('/noticia', isAuth ,multer({ storage: fileStorage }).single('imagen_noticia'), dlc_controller.post_noticia);
+router.post('/publicacion', isAuth , multer({ storage: fileStorage }).single('imagen_publicacion'), dlc_controller.post_publicacion);
 //router.post('/reportes_mensuales/post',multer({ storage: fileStorage }).single('imagen_reporte'),dlc_controller.post_reportes_mensuales);
 
 router.use('/', dlc_controller.listar);
-
 
 module.exports = router;

@@ -63,6 +63,7 @@
             <td>
               <center>
                 <form action="/dlc/a_ng_blocksp/<%=current%>/aprovee" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                   <input type="hidden" id="estatus_ng_block" name="estatus_ng_block" value="Aprobado"/>
                   <input type="hidden" id="id_ng_block" name="id_ng_block" value="<%= ng_block1.id_ng_block %>"/>
                   <input type="hidden" id="no_empleado" name="no_empleado" value="<%= ng_block1.no_empleado %>"/>
@@ -73,6 +74,7 @@
             <td>
               <center>
                 <form action="/dlc/a_ng_blocksp/<%=current%>/reject" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                   <input type="hidden" id="estatus_ng_block" name="estatus_ng_block"value="Rechazado"/>
                   <input type="hidden" id="id_ng_block" name="id_ng_block" value="<%= ng_block1.id_ng_block %>"/>
                   <input type="submit" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d"/>

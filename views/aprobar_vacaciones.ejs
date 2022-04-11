@@ -73,6 +73,7 @@
             <td>
               <center>
                 <form action="/dlc/a_vacacionesp/<%=current%>/aprovee" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Aprobado"/>
                   <input type="hidden" id="dias_solicitados" name="dias_solicitados" value="<%= vacaciones1.dias_solicitados %>"/>
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
@@ -84,6 +85,7 @@
             <td>
               <center>
                 <form action="/dlc/a_vacacionesp/<%=current%>/reject" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                   <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones"value="Rechazado"/>
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
                   <input type="submit" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d"/>

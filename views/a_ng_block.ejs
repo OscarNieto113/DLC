@@ -53,6 +53,7 @@
 
             <td><center>
               <form>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
               <select name="estatus_ng_block<%= ng_block1.id_ng_block %>" class="btn btn-secondary dropdown-toggle" aria-label="Default select example">
                 <option value="" disabled selected>Cambiar estatus</option>
                 <option value="Aprobado">Aprobado</option>

@@ -41,6 +41,7 @@
           <br>
           <!--Empieza form -->
           <form action="/dlc/solicitar_ng_block" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
 
             <div class="row form-group">
                   <label for="fecha_uso_ng_block" class="col-sm-3 col-form-label"><b>Elige la fecha*</b></label>

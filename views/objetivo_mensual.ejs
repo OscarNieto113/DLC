@@ -29,6 +29,7 @@
           <div class="modal-body">
 
             <form action="/dlc/objetivo" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
               <div class="form-group" style="text-align: left;"">
 
                 <!--Dato no permanente se va a borrar -->

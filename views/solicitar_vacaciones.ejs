@@ -62,6 +62,7 @@
                     <br>
                       <!-- Inicia form-->
                       <form action="/dlc/s_vacaciones" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                         <label  for="responsable_ausencia" class="col-form-label"><b>Responsable durante tu ausencia*</b></label>
                         <select name="responsable_ausencia" class="form-select" aria-label="Default select example" required>
                           <option value="" disabled selected>Responsable</option>

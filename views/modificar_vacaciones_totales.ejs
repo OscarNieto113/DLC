@@ -33,6 +33,7 @@
 					<% for (let prestaciones1 of prestaciones) { %>
 						<tr>
               <form action="/dlc/vacaciones_totales/<%=prestaciones1.id_prestaciones%>" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <input type="hidden" name="id_prestaciones" id="id_prestaciones" value="<%=prestaciones1.id_prestaciones%>" class="form-control"/>
 							<td id="col0"><input type="number" name="min_prestaciones" id="min_prestaciones" value="<%=prestaciones1.min_prestaciones%>" autocomplete="off" class="form-control"/></td>
 							<td id="col1"><input type="number" name="max_prestaciones" id="max_prestaciones" value="<%=prestaciones1.max_prestaciones%>" autocomplete="off" class="form-control"/></td>
@@ -41,6 +42,7 @@
               </form>
               <td id="col4">
                 <form action="/dlc/vacaciones_totales/delete/<%= prestaciones1.id_prestaciones %>" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                   <input type="hidden" id="id_prestaciones" name="id_prestaciones" value="<%= prestaciones1.id_prestaciones %>"/>
                   <div style="text-align: right;">
                     <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
@@ -67,6 +69,7 @@
                       <div class="modal-body">
                           <div class="form-group" style="text-align: left;"">
                             <form action="/dlc/vacaciones_totales/add/aaaaaaa" method="POST">
+                              <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                               <label for="min_prestaciones" class="col-form-label">De Año laboral:</label>
                               <input type="number" class="form-control" id="min_prestaciones" name="min_prestaciones" autocomplete="off" required><br>
                               <label for="max_prestaciones" class="col-form-label">Hasta Año laboral:</label>

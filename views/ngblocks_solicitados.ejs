@@ -31,6 +31,7 @@
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
 
               <form action="/dlc/profile/ngblocks_solicitados/delete/<%= ng_block1.id_ng_block %>" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <input type="hidden" id="id_ng_block" name="id_ng_block" value="<%= ng_block1.id_ng_block %>"/>
                 <div style="text-align: right;">
                   <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>

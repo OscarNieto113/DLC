@@ -66,6 +66,7 @@
             <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
             <td><center>
               <form action="/dlc/a_vacaciones" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Aprobado">
                 <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>">
                 <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color:#86B049" disabled="False">
@@ -73,6 +74,7 @@
             </center></td>
             <td><center>
               <form action="/dlc/a_vacaciones" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <input type="hidden" id="estatus_vacaciones" name="estatus_vacaciones" value="Rechazado">
                 <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>">
                 <input type="submit" value="Rechazar" class="btn btn-primary"style="background-color:#B8293D">
@@ -144,13 +146,11 @@
                 '</center></td>' +
                 '<td><center>' + vacaciones.estatus_vacaciones + '</center></td>' +
                 '<td><center>' +
-                  '<form>' +
                   '<select name="estatus_vacaciones'+ vacaciones.folio + '" class="btn btn-secondary dropdown-toggle" aria-label="Default select example">' +
                     '<option value="" disabled selected>Cambiar estatus</option>' +
                     '<option value="Aprobado">Aprobado</option>' +
                     '<option value="Rechazado">Rechazado</option>' +
                   '</select>' +
-                  '</form>' +
                 '</center></td>';
           }
           respuesta += '</tbody>' +

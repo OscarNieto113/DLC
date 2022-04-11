@@ -3,8 +3,6 @@ const bcrypt = require('bcryptjs');
 
 exports.get_login = (request, response, next) => {
     response.render('login', {
-        correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-        info: ''
     });
 };
 
@@ -42,8 +40,6 @@ exports.login = (request, response, next) => {
 
 exports.get_signup = (request, response, next) => {
     response.render('signup', {
-        correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-        info: ''
     });
 };
 

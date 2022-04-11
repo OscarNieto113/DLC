@@ -63,10 +63,8 @@
             </div>
             <div class="modal-body">
                 <div class="form-group" style="text-align: left;"">
-                  <!--Dato no permanente se va a borrar -->
-                  <!--<input type="hidden" id="id_noticia" name="id_noticia" value="5"> -->
-                  <!--Dato no permanente se va a borrar -->
                   <form action="/dlc/noticia" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                   <label for="imagen_noticia" class="col-form-label">Subir imagen:</label>
                   <input type="file" class="form-control" id="imagen_noticia" name="imagen_noticia" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required><br>
                   <input type="submit" value="Enviar" class="btn btn-primary">

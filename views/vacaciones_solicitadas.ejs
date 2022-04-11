@@ -31,6 +31,7 @@
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
 
               <form action="/dlc/profile/vacaciones_solicitadas/delete/<%= vacaciones1.folio %>" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
                 <div style="text-align: right;">
                   <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>

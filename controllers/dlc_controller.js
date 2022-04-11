@@ -8,7 +8,6 @@ const Permiso_informal = require('../models/permiso_informal');
 const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
-//const Reportes_mensuales = require('../models/reportes_mensuales');
 const User = require('../models/user');
 
 //------------------------Solicitar NG Block--------------------------------
@@ -831,24 +830,6 @@ exports.post_publicacion = (request, response, next) => {
         }
 };
 //
-/*
-exports.post_reportes_mensuales = (request, response, next) => {
-    console.log(request.body);
-    console.log(request.file);
-    const reportes_mensuales =
-        new Reportes_mensuales(
-          request.body.titulo_reporte_mensual,
-          request.body.descripcion_reporte_mensual,
-          request.body.fecha_reporte_mensual,
-          request.file.filename);
-    reportes_mensuales.save()
-    //
-    .then(() => {
-        response.redirect('/dlc/reportes_mensuales');
-    })
-    .catch(err => console.log(err));
-};
-*/
 
 exports.listar = (request, response, next) => {
     console.log('Ruta /dlc');

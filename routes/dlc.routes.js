@@ -81,6 +81,6 @@ router.post('/noticia', isAuth ,multer({ storage: fileStorage }).single('imagen_
 router.post('/publicacion', isAuth , multer({ storage: fileStorage }).single('imagen_publicacion'), dlc_controller.post_publicacion);
 //router.post('/reportes_mensuales/post',multer({ storage: fileStorage }).single('imagen_reporte'),dlc_controller.post_reportes_mensuales);
 
-router.use('/', dlc_controller.listar);
+router.use('/', isAuth, dlc_controller.listar);
 
 module.exports = router;

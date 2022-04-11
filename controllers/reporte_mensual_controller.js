@@ -34,7 +34,8 @@ exports.get_reportes_mensuales = (request, response, next) => {
     .then(([rows, fieldData]) => {
       console.log(rows);
       response.render('reportes_mensuales', {
-          reportes_mensuales: rows
+          reportes_mensuales: rows,
+          isLoggedIn: request.session.isLoggedIn === true ? true : false
       });
   })
   .catch(err => {

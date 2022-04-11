@@ -12,7 +12,7 @@ const User = require('../models/user');
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_solicitar_ng_block = (request, response, next) => {
-  const no_empleado = request.session.user_no_empleado;
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/solicitar_ng_block');
     Empleado.getRol(no_empleado)
         .then(([rol, fieldData]) => {
@@ -83,6 +83,7 @@ exports.post_solicitar_ng_block = (request, response, next) => {
 
 //------------------------Aprobar NG Block--------------------------------
 exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
+  const no_empleado = request.session.user_no_empleado;
   console.log('GET /dlc/a_ng_blocksp/:page');
   var perPage = 5;
   var page = request.params.page || 1;
@@ -466,6 +467,7 @@ exports.search_vacaciones = (request, response, next) => {
 
 //------------------------Modificar dias de vacaciones totales--------------------------------
 exports.get_dias_vacaciones_totales = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/vacaciones_totales');
     Empleado.getRol(no_empleado)
         .then(([rol, fieldData]) => {
@@ -562,6 +564,7 @@ exports.post_dias_vacaciones_totales = (request, response, next) => {
 
 //------------------------Registrar empleado--------------------------------
 exports.get_registrar_empleado = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/registrar_empleado');
     Empleado.getRol(no_empleado)
         .then(([rol, fieldData]) => {
@@ -633,7 +636,8 @@ exports.get_profile = (request, response, next) => {
       };
 
 exports.get_perfil_empleado = (request, response, next) => {
-  Empleado.getRol(no_empleado)
+  const no_empleado1 = request.session.user_no_empleado;
+  Empleado.getRol(no_empleado1)
       .then(([rol, fieldData]) => {
       Empleado.fetchEmpleadoAll(request.params.no_empleado)
           .then(([rows, fieldData]) => {

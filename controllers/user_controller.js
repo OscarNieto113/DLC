@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 exports.get_login = (request, response, next) => {
     response.render('login', {
+      isLoggedIn: request.session.isLoggedIn === true ? true : false
     });
 };
 

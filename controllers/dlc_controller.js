@@ -19,7 +19,9 @@ exports.get_solicitar_ng_block = (request, response, next) => {
               response.render('solicitar_ng_block', {
                   empleado: rows,
                   success: request.flash("success"),
-                  error: request.flash("error")
+                  error: request.flash("error"),
+                  isLoggedIn: request.session.isLoggedIn === true ? true : false
+
               });
           })
           .catch(err => {
@@ -98,7 +100,9 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                 current: page,
                 pages: Math.ceil(totalesN / perPage),
                 success: request.flash("success"),
-                error: request.flash("error")
+                error: request.flash("error"),
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+
             });
           })
           .catch(err => {
@@ -190,7 +194,9 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
       response.render('vacaciones_solicitadas', {
           vacaciones: rows,
           success: request.flash("success"),
-          error: request.flash("error")
+          error: request.flash("error"),
+          isLoggedIn: request.session.isLoggedIn === true ? true : false
+
       });
   })
   .catch(err => {
@@ -242,7 +248,9 @@ exports.get_ngblocks_solicitados = (request, response, next) => {
       response.render('ngblocks_solicitados', {
           ng_block: rows,
           success: request.flash("success"),
-          error: request.flash("error")
+          error: request.flash("error"),
+          isLoggedIn: request.session.isLoggedIn === true ? true : false
+
       });
   })
   .catch(err => {
@@ -297,7 +305,9 @@ exports.get_solicitar_vacaciones = (request, response, next) => {
                   empleadoV: rows2,
                   empleado: rows,
                   success: request.flash("success"),
-                  error: request.flash("error")
+                  error: request.flash("error"),
+                  isLoggedIn: request.session.isLoggedIn === true ? true : false
+
                 });
               })
               .catch(err => {
@@ -386,7 +396,9 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
                 current: page,
                 pages: Math.ceil(totalesV / perPage),
                 success: request.flash("success"),
-                error: request.flash("error")
+                error: request.flash("error"),
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+
             });
           })
           .catch(err => {
@@ -477,7 +489,9 @@ exports.get_dias_vacaciones_totales = (request, response, next) => {
       response.render('modificar_vacaciones_totales', {
           prestaciones: rows,
           success: request.flash("success"),
-          error: request.flash("error")
+          error: request.flash("error"),
+          isLoggedIn: request.session.isLoggedIn === true ? true : false
+
       });
   })
   .catch(err => {
@@ -570,7 +584,9 @@ exports.get_registrar_empleado = (request, response, next) => {
       .then(([area, fieldData]) => {
         console.log(area);
         response.render('registrar_empleado', {
-          area: area
+          area: area,
+          isLoggedIn: request.session.isLoggedIn === true ? true : false
+
         });
     })
     .catch(err => {
@@ -625,6 +641,8 @@ exports.get_profile = (request, response, next) => {
                 error: request.flash("error"),
                 success1: request.flash("success1"),
                 error1: request.flash("error1"),
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+
             });
         })
         .catch(err => {
@@ -659,6 +677,8 @@ exports.get_buscar_empleado = (request, response, next) => {
             console.log(rows);
             response.render('buscar_empleado', {
                 empleado: rows,
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+
             });
         })
         .catch(err => {
@@ -841,6 +861,7 @@ exports.listar = (request, response, next) => {
       .then(([rows, fieldData]) => {
         Publicacion.fetchAll()
         .then(([rows2, fieldData]) => {
+          console.log(request.session.isLoggedIn)
           response.render('main', {
             noticia: rows,
             success: request.flash("success"),
@@ -848,9 +869,8 @@ exports.listar = (request, response, next) => {
             publicacion: rows2,
             success1: request.flash("success1"),
             error1: request.flash("error1"),
-            correo_usuario: request.session.correo_usuario ? request.session.correo_usuario : '',
-            ultimo_ng_block: request.cookies.ultimo_ng_block ? request.cookies.ultimo_ng_block : '',
             info: info, //El primer info es la variable del template, el segundo la constante creada arriba
+            isLoggedIn: request.session.isLoggedIn === true ? true : false
           });
       })
       .catch(err => {

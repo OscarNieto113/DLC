@@ -46,7 +46,7 @@ router.post('/r_usuario', isAuth, dlc_controller.post_registrar_empleado);
 //Buscar Empelado
 router.get('/buscar_empleado', isAuth, dlc_controller.get_buscar_empleado);
 router.get('/s_buscar_empleadop/filtrar/:search', isAuth, dlc_controller.search_empleado);
-router.get('/buscar_empleado/:no_empleado', isAuth, dlc_controller.get_perfil_empleado);
+router.get('/buscar_empleado/:no_empleado', dlc_controller.get_perfil_empleado);
 //router.post('/buscar_empleado', dlc_controller.post_buscar_empleado);
 
 //Interfaz datos del empleado

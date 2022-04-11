@@ -75,4 +75,11 @@ module.exports = class Empleado {
         'FROM empleado e ' +
         'WHERE e.no_empleado = ? ' ,[no_empleado]);
     }
+
+    static findOne(no_empleado) {
+        return db.execute(
+          'SELECT no_empleado ' +
+          'FROM empleado ' +
+          'WHERE no_empleado = ?', [no_empleado]);
+    }
 }

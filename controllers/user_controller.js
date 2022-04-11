@@ -1,9 +1,10 @@
 const User = require('../models/user');
+const Empleado = require('../models/empleado');
 const bcrypt = require('bcryptjs');
 
 exports.get_login = (request, response, next) => {
     response.render('login', {
-      isLoggedIn: request.session.isLoggedIn === true ? true : false
+      error: request.flash("error"),
     });
 };
 
@@ -12,11 +13,12 @@ exports.login = (request, response, next) => {
     const email = request.body.correo_usuario;
     User.findOne(email)
         .then(([rows, fielData])=>{
-            //Si no existe el usuario, redirige a la pantalla de login
             if (rows.length < 1) {
-                request.session.error = "El usuario y/o contraseña no coinciden";
+                request.flash('error', 'El usuario y/o contraseña no coinciden');
                 return response.redirect('/users/login');
             }
+
+            else {
 
             const user = new User(rows[0].correo_usuario, rows[0].contrasenia, rows[0].no_empleado);
             bcrypt.compare(request.body.contrasenia, user.contrasenia)
@@ -29,10 +31,13 @@ exports.login = (request, response, next) => {
                             response.redirect('/dlc');
                         });
                     }
+                    request.session.error = "El usuario y/o contraseña son incorrectas";
                     response.redirect('/users/login');
                 }).catch(err => {
+                    request.session.error = "El usuario y/o contraseña son incorrectas";
                     response.redirect('/users/login');
                 });
+            }
         }).catch((error)=>{
             console.log(error)
         });
@@ -41,19 +46,68 @@ exports.login = (request, response, next) => {
 
 exports.get_signup = (request, response, next) => {
     response.render('signup', {
+      success: request.flash("success"),
+      error: request.flash("error"),
     });
 };
 
 exports.post_signup = (request, response, next) => {
-    const user =
-        new User(request.body.correo_usuario, request.body.contrasenia, request.body.no_empleado);
-    user.save()
-        .then(()=>{
-            response.redirect('/users/login');
-        }).catch((error)=>{
-            console.log(error);
-        });
-};
+  const correo_usuario = request.body.correo_usuario;
+  const no_empleado = request.body.no_empleado;
+  const contrasenia = request.body.contrasenia;
+  const contrasenia2 = request.body.contrasenia2;
+
+  Empleado.findOne(no_empleado)
+  .then(([rows2, fieldData]) => {
+    User.findOne(correo_usuario)
+    .then(([rows,fieldData]) => {
+      console.log(rows2[0]);
+
+        if (correo_usuario.length == 0 && no_empleado.length == 0 && contrasenia.length == 0 && contrasenia2.length == 0){
+            request.flash('error','No se recibio ningun dato.');
+            response.redirect('/users/signup');
+        }
+
+        else if (correo_usuario.length == 0 || no_empleado.length == 0 || contrasenia.length == 0 || contrasenia2.length == 0){
+            request.flash('error','Te faltaron campos por llenar.');
+            response.redirect('/users/signup');
+        }
+
+        else if (contrasenia != contrasenia2){
+            request.flash('error','Las contraseñas no coinciden.');
+            response.redirect('/users/signup');
+        }
+
+        else if(rows.length > 0){
+            request.flash('error','El correo ya está en uso.');
+            response.redirect('/users/signup');
+        }
+
+        else if(rows2[0] == undefined){
+            request.flash('error','El numero de empleado que ingresaste no existe.');
+            response.redirect('/users/signup');
+        }
+        else{
+          const nuevo_usuario =
+            new User(
+              correo_usuario,
+              contrasenia,
+              no_empleado
+            );
+            nuevo_usuario.save()
+              .then(() => {
+                console.log("Se guardo la solicitud");
+                request.flash('success', 'Se registro el Usuario con éxito');
+                response.redirect('/users/signup');
+              })
+              .catch(err => console.log(err));
+            }
+          }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }
+
+
+
 
 exports.logout = (request, response, next) => {
     request.session.destroy(() => {

@@ -46,7 +46,7 @@ exports.post_solicitar_ng_block = (request, response, next) => {
         console.log(rows[0].ng_blocks_restantes);
         const ng_blocks_restantes = rows[0].ng_blocks_restantes;
         if (turno_ng_block.length == 0 && descripcion_ng_block.length == 0 && fecha_uso_ng_block.length == 0){
-          request.flash('error', 'No se recibio ningun dato.');
+          request.flash('error', 'No se recibió ningún dato.');
           response.redirect('/dlc/solicitar_ng_block');
         }
 
@@ -157,7 +157,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                     id_ng_block,
                     no_empleado)
                   .then(() => {
-                    console.log("Se aprobo la solicitud");
+                    console.log("Se aprobó la solicitud");
                     request.flash('success', 'El NG Block con folio ' + id_ng_block + ' fue APROBADO con éxito');
                     response.redirect('/dlc/a_ng_blocksp/1');
                   }).catch(err => console.log(err));
@@ -343,7 +343,7 @@ exports.post_solicitar_vacaciones = (request, response, next) => {
         const dias_vacaciones_restantes = rows2[0].dias_vacaciones_restantes;
 
         if (responsable_ausencia == undefined && fecha_primer_dia.length == 0 && fecha_ultimo_dia.length == 0 && dias_solicitados.length == 0){
-          request.flash('error', 'No se recibio ningun dato.');
+          request.flash('error', 'No se recibió ningún dato.');
           response.redirect('/dlc/s_vacaciones');
         }
 
@@ -549,7 +549,7 @@ exports.post_dias_vacaciones_totales = (request, response, next) => {
         console.log(dias_prestaciones);
 
         if (max_prestaciones.length == 0 && min_prestaciones.length == 0 && dias_prestaciones.length == 0){
-          request.flash('error', 'No se recibio ningun dato.');
+          request.flash('error', 'No se recibió ningún dato.');
           response.redirect('/dlc/vacaciones_totales');
         }
 
@@ -699,7 +699,7 @@ exports.post_give_vacations = (request, response, next) => {
     console.log(no_empleado);
 
       if (giveVacations === 0 && no_empleado.length == 0 ){
-        request.flash('error', 'No se recibio ningun dato.');
+        request.flash('error', 'No se recibió ningún dato.');
         response.redirect('/dlc/buscar_empleado/'+ no_empleado);
       }
 
@@ -737,7 +737,7 @@ exports.post_give_ng_blocks = (request, response, next) => {
       console.log(no_empleado);
 
         if (giveNgBlocks === 0 && no_empleado.length == 0 ){
-          request.flash('error', 'No se recibio ningun dato.');
+          request.flash('error', 'No se recibió ningún dato.');
           response.redirect('/dlc/buscar_empleado/'+ no_empleado);
         }
 
@@ -787,7 +787,7 @@ exports.post_noticia = (request, response, next) => {
     console.log(filename);
 
         if (filename.length == undefined){
-          request.flash('error', 'No se recibio ningun archivo.');
+          request.flash('error', 'No se recibió ningún archivo.');
           response.redirect('/dlc');
         }
 
@@ -822,7 +822,7 @@ exports.post_publicacion = (request, response, next) => {
     console.log(filename);
 
         if (titulo_publicacion.length == 0 && descripcion_publicacion.length == 0 && filename.length == undefined){
-          request.flash('error1', 'No se recibio ningun dato.');
+          request.flash('error1', 'No se recibió ningún dato.');
           response.redirect('/dlc');
         }
 

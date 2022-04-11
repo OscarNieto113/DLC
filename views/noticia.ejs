@@ -63,8 +63,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group" style="text-align: left;"">
-                  <form action="/dlc/noticia" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                  <form action="/dlc/noticia/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
                   <label for="imagen_noticia" class="col-form-label">Subir imagen:</label>
                   <input type="file" class="form-control" id="imagen_noticia" name="imagen_noticia" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required><br>
                   <input type="submit" value="Enviar" class="btn btn-primary">

@@ -31,8 +31,7 @@
           </div>
           <div class="modal-body">
 
-            <form action="/dlc/publicacion" method="POST" enctype="multipart/form-data">
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+            <form action="/dlc/publicacion/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
               <div class="form-group" style="text-align: left;"">
 
                 <label for="titulo_publicacion" class="col-form-label">Título de la publicación:</label>

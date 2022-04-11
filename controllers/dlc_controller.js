@@ -660,6 +660,7 @@ exports.get_perfil_empleado = (request, response, next) => {
                 error: request.flash("error"),
                 success1: request.flash("success1"),
                 error1: request.flash("error1"),
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
         .catch(err => {

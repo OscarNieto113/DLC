@@ -8,6 +8,9 @@ Horas despercidiciadas en archivos de reportes mensuales = 5
 Horas desperdiciadas en centrar el carousel de noticias = 2
 
 Horas desperdiciadas en los toast = 10
+
+Veces en las que el cris ha dicho una mafufada en discord = 6
+
 ## Comandos NPM
 
 Para correr el sitio ten encuenta los siguientes puntos:

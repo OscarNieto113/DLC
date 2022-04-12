@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('#fecha_ng').datepicker({
-      format: 'dd-mm-yyyy',
+      format: 'dd/mm/yyyy',
       orientation: "bottom left",
       startDate: new Date(),
       daysOfWeekDisabled: [0,6],
@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('#fecha_n').datepicker({
-      format: 'dd-mm-yyyy',
+      format: 'dd/mm/yyyy',
       orientation: "bottom left",
       todayHighlight: true,
       autoclose: true,
@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('#fecha_c').datepicker({
-      format: 'dd-mm-yyyy',
+      format: 'dd/mm/yyyy',
       orientation: "bottom left",
       todayHighlight: true,
       autoclose: true,
@@ -65,7 +65,7 @@ $(function() {
 
 $(document).ready(function(){
     $('#fecha_r').datepicker({
-      format: 'dd-mm-yyyy',
+      format: 'dd/mm/yyyy',
       orientation: "bottom left",
       startView: "months",
       minViewMode: "months",

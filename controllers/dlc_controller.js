@@ -318,12 +318,16 @@ exports.post_solicitar_vacaciones = (request, response, next) => {
     const fecha_primer_dia = request.body.fecha_primer_dia;
     const fecha_ultimo_dia = request.body.fecha_ultimo_dia;
     const dias_solicitados = request.body.dias_solicitados;
+    const fecha_p2 = request.body.fecha_p2;
+    const fecha_u2 = request.body.fecha_u2;
 
     console.log(no_empleado);
     console.log(responsable_ausencia);
     console.log(fecha_primer_dia);
     console.log(fecha_ultimo_dia);
     console.log(dias_solicitados);
+    console.log(fecha_p2);
+    console.log(fecha_u2);
 
     Empleado.getVacacionesR(no_empleado)
       .then(([rows2, fieldData]) => {
@@ -357,7 +361,7 @@ exports.post_solicitar_vacaciones = (request, response, next) => {
             vacaciones.save()
             .then(() => {
               console.log("Se guardo la solicitud");
-              request.flash('success', 'Las vacaciones con fecha de uso de ' + fecha_primer_dia + ', hasta ' + fecha_ultimo_dia + ' con ' + dias_solicitados + ' días solicitados fue agregada con éxito');
+              request.flash('success', 'Las vacaciones con fecha de uso de ' + fecha_p2 + ', hasta ' + fecha_u2 + ' con ' + dias_solicitados + ' días solicitados fue agregada con éxito');
               response.redirect('/dlc/s_vacaciones');
             })
             .catch(err => console.log(err));

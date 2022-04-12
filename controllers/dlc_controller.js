@@ -12,23 +12,22 @@ const User = require('../models/user');
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_solicitar_ng_block = (request, response, next) => {
-  const no_empleado = request.session.user_no_empleado;
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/solicitar_ng_block');
-      Empleado.getBlocksR(no_empleado)
-          .then(([rows, fieldData]) => {
-              response.render('solicitar_ng_block', {
-                  empleado: rows,
-                  success: request.flash("success"),
-                  error: request.flash("error"),
-                  isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-              });
-          })
-          .catch(err => {
-              console.log(err);
-          });
-};
-//
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        Empleado.getBlocksR(no_empleado)
+            .then(([rows, fieldData]) => {
+                response.render('solicitar_ng_block', {
+                    userRol: rol[0].id_rol,
+                    empleado: rows,
+                    success: request.flash("success"),
+                    error: request.flash("error"),
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+                });
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    };
 
 exports.post_solicitar_ng_block = (request, response, next) => {
     const no_empleado = request.body.no_empleado;
@@ -86,34 +85,30 @@ exports.post_solicitar_ng_block = (request, response, next) => {
 
 //------------------------Aprobar NG Block--------------------------------
 exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
+  const no_empleado = request.session.user_no_empleado;
   console.log('GET /dlc/a_ng_blocksp/:page');
   var perPage = 5;
   var page = request.params.page || 1;
-  Ng_Block
-    .fetchPagination(perPage, ((perPage * page) - perPage))
-    .then(([ng_block, fieldData]) => {
-      Ng_Block
-        .count()
-        .then(([count, fieldData]) => {
-          let totalesN = count[0].num
-          console.log(totalesN)
-            response.render('aprobar_ngblocks', {
-                ng_block: ng_block,
-                current: page,
-                pages: Math.ceil(totalesN / perPage),
-                success: request.flash("success"),
-                error: request.flash("error"),
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-            });
-          })
-          .catch(err => {
-              console.log(err);
-          });
-        })
-        .catch(err => {
-            console.log(err);
-        });
+  Empleado.getRol(no_empleado)
+      .then(([rol, fieldData]) => {
+      Ng_Block.fetchPagination(perPage, ((perPage * page) - perPage))
+        .then(([ng_block, fieldData]) => {
+          Ng_Block.count()
+            .then(([count, fieldData]) => {
+              let totalesN = count[0].num
+              console.log(totalesN)
+                response.render('aprobar_ngblocks', {
+                    userRol: rol[0].id_rol,
+                    ng_block: ng_block,
+                    current: page,
+                    pages: Math.ceil(totalesN / perPage),
+                    success: request.flash("success"),
+                    error: request.flash("error"),
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+                });
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };
 
     exports.post_reject_ng_blocks = (request, response, next) => {
@@ -190,20 +185,20 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
     console.log('GET /dlc/profile/vacaciones_solicitadas');
     console.log(request.params.no_empleado);//
     console.log(request.session.user_no_empleado);//
-    Vacaciones.fetchSome(no_empleado)
-    .then(([rows, fieldData]) => {
-      console.log(rows);
-      response.render('vacaciones_solicitadas', {
-          vacaciones: rows,
-          success: request.flash("success"),
-          error: request.flash("error"),
-          isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-      });
-  })
-  .catch(err => {
-      console.log(err);
-  });
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        Vacaciones.fetchSome(no_empleado)
+        .then(([rows, fieldData]) => {
+          console.log(rows);
+          response.render('vacaciones_solicitadas', {
+              userRol: rol[0].id_rol,
+              vacaciones: rows,
+              success: request.flash("success"),
+              error: request.flash("error"),
+              isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };
 
 
@@ -244,20 +239,20 @@ exports.get_ngblocks_solicitados = (request, response, next) => {
     console.log('GET /dlc/profile/vacaciones_solicitadas');
     console.log(request.params.no_empleado);//
     console.log(request.session.user_no_empleado);//
-    Ng_Block.fetchSome(no_empleado)
-    .then(([rows, fieldData]) => {
-      console.log(rows);
-      response.render('ngblocks_solicitados', {
-          ng_block: rows,
-          success: request.flash("success"),
-          error: request.flash("error"),
-          isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-      });
-  })
-  .catch(err => {
-      console.log(err);
-  });
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        Ng_Block.fetchSome(no_empleado)
+        .then(([rows, fieldData]) => {
+          console.log(rows);
+          response.render('ngblocks_solicitados', {
+              userRol: rol[0].id_rol,
+              ng_block: rows,
+              success: request.flash("success"),
+              error: request.flash("error"),
+              isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };
 
 exports.post_delete_ng_block_solicitadas = (request, response, next) => {
@@ -293,37 +288,28 @@ exports.post_delete_ng_block_solicitadas = (request, response, next) => {
 exports.get_solicitar_vacaciones = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/s_vacaciones');
-    Empleado
-      .getAreaEmpleado(no_empleado)
-      .then(([id_area, fieldData]) => {
-        //console.log(id_area);
-        let id = id_area[0].id_area
-        //console.log(id);
-        Empleado.fetchEmpleadoArea(id)
-          .then(([rows, fieldData]) => {
-            Empleado.getVacacionesR(no_empleado)
-              .then(([rows2, fieldData]) => {
-                response.render('solicitar_vacaciones', {
-                  empleadoV: rows2,
-                  empleado: rows,
-                  success: request.flash("success"),
-                  error: request.flash("error"),
-                  isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-                });
-              })
-              .catch(err => {
-                  console.log(err);
-          });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-      })
-      .catch(err => {
-          console.log(err);
-      });
-  };
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        Empleado.getAreaEmpleado(no_empleado)
+        .then(([id_area, fieldData]) => {
+            let id = id_area[0].id_area
+            Empleado.fetchEmpleadoArea(id)
+            .then(([rows, fieldData]) => {
+                Empleado.getVacacionesR(no_empleado)
+                .then(([rows2, fieldData]) => {
+                    response.render('solicitar_vacaciones', {
+                      userRol: rol[0].id_rol,
+                      empleadoV: rows2,
+                      empleado: rows,
+                      success: request.flash("success"),
+                      error: request.flash("error"),
+                      isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
+                }).catch(err => console.log(err));
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+};
 
 exports.post_solicitar_vacaciones = (request, response, next) => {
     console.log('POST /dlc/solicitar_vacaciones');
@@ -382,35 +368,33 @@ exports.post_solicitar_vacaciones = (request, response, next) => {
 
 //------------------------Aprobar Vacaciones--------------------------------
 exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
+  const no_empleado = request.session.user_no_empleado;
   console.log('GET /dlc/a_vacaciones/:page');
   var perPage = 5;
   var page = request.params.page || 1;
-  Vacaciones
-    .fetchPagination(perPage, ((perPage * page) - perPage))
-    .then(([vacaciones, fieldData]) => {
+  Empleado.getRol(no_empleado)
+      .then(([rol, fieldData]) => {
       Vacaciones
-        .count()
-        .then(([count, fieldData]) => {
-          let totalesV = count[0].num
-          console.log(totalesV)
-            response.render('aprobar_vacaciones', {
-                vacaciones: vacaciones,
-                current: page,
-                pages: Math.ceil(totalesV / perPage),
-                success: request.flash("success"),
-                error: request.flash("error"),
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
+        .fetchPagination(perPage, ((perPage * page) - perPage))
+        .then(([vacaciones, fieldData]) => {
+          Vacaciones.count()
+            .then(([count, fieldData]) => {
+              let totalesV = count[0].num
+              console.log(totalesV)
+                response.render('aprobar_vacaciones', {
+                    vacaciones: vacaciones,
+                    current: page,
+                    pages: Math.ceil(totalesV / perPage),
+                    success: request.flash("success"),
+                    error: request.flash("error"),
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+                });
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+};
 
-            });
-          })
-          .catch(err => {
-              console.log(err);
-          });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    };
+
 
 
 exports.post_reject_vacaciones = (request, response, next) => {
@@ -485,20 +469,21 @@ exports.search_vacaciones = (request, response, next) => {
 
 //------------------------Modificar dias de vacaciones totales--------------------------------
 exports.get_dias_vacaciones_totales = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/vacaciones_totales');
-    Prestaciones.fetchAll()
-    .then(([rows, fieldData]) => {
-      response.render('modificar_vacaciones_totales', {
-          prestaciones: rows,
-          success: request.flash("success"),
-          error: request.flash("error"),
-          isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-      });
-  })
-  .catch(err => {
-      console.log(err);
-  });
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        Prestaciones.fetchAll()
+        .then(([rows, fieldData]) => {
+          response.render('modificar_vacaciones_totales', {
+              userRol: rol[0].id_rol,
+              prestaciones: rows,
+              success: request.flash("success"),
+              error: request.flash("error"),
+              isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };
 
 exports.post_dias_vacaciones_totales = (request, response, next) => {
@@ -581,20 +566,21 @@ exports.post_dias_vacaciones_totales = (request, response, next) => {
 
 //------------------------Registrar empleado--------------------------------
 exports.get_registrar_empleado = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/registrar_empleado');
-    Area.fetchAll()
-      .then(([area, fieldData]) => {
-        console.log(area);
-        response.render('registrar_empleado', {
-          area: area,
-          isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-        });
-    })
-    .catch(err => {
-        console.log(err);
-    });
-};
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        Area.fetchAll()
+          .then(([area, fieldData]) => {
+            console.log(area);
+            response.render('registrar_empleado', {
+                userRol: rol[0].id_rol,
+                area: area,
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+              });
+          }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
+  };
 
 exports.post_registrar_empleado = (request, response, next) => {
     console.log('POST /dlc/registrar_empleado');
@@ -634,41 +620,42 @@ exports.get_profile = (request, response, next) => {
     console.log('Ruta /dlc/:no_empleado');
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
-    Empleado.fetchEmpleadoAll(no_empleado)
-        .then(([rows, fieldData]) => {
-            console.log(rows);
-            response.render('profile', {
-                empleado: rows,
-                success: request.flash("success"),
-                error: request.flash("error"),
-                success1: request.flash("success1"),
-                error1: request.flash("error1"),
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-            });
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        Empleado.fetchEmpleadoAll(no_empleado)
+            .then(([rows, fieldData]) => {
+                console.log(rows);
+                response.render('profile', {
+                    empleado: rows,
+                    success: request.flash("success"),
+                    error: request.flash("error"),
+                    success1: request.flash("success1"),
+                    error1: request.flash("error1"),
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+                  });
+              }).catch(err => console.log(err));
+          }).catch(err => console.log(err));
       };
 
 exports.get_perfil_empleado = (request, response, next) => {
-    Empleado.fetchEmpleadoAll(request.params.no_empleado)
-        .then(([rows, fieldData]) => {
-          console.log(rows)
-            response.render('profile', {
-                empleado: rows,
-                success: request.flash("success"),
-                error: request.flash("error"),
-                success1: request.flash("success1"),
-                error1: request.flash("error1"),
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-            });
-        })
-        .catch(err => {
-            console.log(err);
-          });
-  };
+  const no_empleado1 = request.session.user_no_empleado;
+  Empleado.getRol(no_empleado1)
+      .then(([rol, fieldData]) => {
+      Empleado.fetchEmpleadoAll(request.params.no_empleado)
+          .then(([rows, fieldData]) => {
+            console.log(rows)
+              response.render('profile', {
+                  userRol: rol[0].id_rol,
+                  empleado: rows,
+                  success: request.flash("success"),
+                  error: request.flash("error"),
+                  success1: request.flash("success1"),
+                  error1: request.flash("error1"),
+                  isLoggedIn: request.session.isLoggedIn === true ? true : false
+                });
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    };
 
 //------------------------Consultar informacion personal (perfil)---------------------------------
 
@@ -855,33 +842,33 @@ exports.post_publicacion = (request, response, next) => {
 //
 
 exports.listar = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('Ruta /dlc');
     //
     console.log(request.cookies);
     const info = request.session.info ? request.session.info : '';
     request.session.info = '';
-    Noticia.fetchAll()
-      .then(([rows, fieldData]) => {
-        Publicacion.fetchAll()
-        .then(([rows2, fieldData]) => {
-          console.log(request.session.isLoggedIn)
-          response.render('main', {
-            noticia: rows,
-            success: request.flash("success"),
-            error: request.flash("error"),
-            publicacion: rows2,
-            success1: request.flash("success1"),
-            error1: request.flash("error1"),
-            info: info, //El primer info es la variable del template, el segundo la constante creada arriba
-            isLoggedIn: request.session.isLoggedIn === true ? true : false
-          });
-      })
-      .catch(err => {
-          console.log(err);
-      });
-    })
-    .catch(err => {
-        console.log(err);
-    });
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        console.log(rol[0].id_rol);
+        Noticia.fetchAll()
+          .then(([rows, fieldData]) => {
+            Publicacion.fetchAll()
+            .then(([rows2, fieldData]) => {
+              console.log(request.session.isLoggedIn)
+              response.render('main', {
+                  userRol: rol[0].id_rol,
+                  noticia: rows,
+                  success: request.flash("success"),
+                  error: request.flash("error"),
+                  publicacion: rows2,
+                  success1: request.flash("success1"),
+                  error1: request.flash("error1"),
+                  info: info, //El primer info es la variable del template, el segundo la constante creada arriba
+                  isLoggedIn: request.session.isLoggedIn === true ? true : false
+                });
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };
 //------------------------Main--------------------------------

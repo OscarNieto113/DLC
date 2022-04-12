@@ -5,9 +5,23 @@
   <div class="col py-3">
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
-
+        <% if (success.length != 0) { %>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+          <% } %>
+          <% if (error.length != 0) { %>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻   </strong> <%= error %>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+          <% } %>
         <section class="container">
-        <% if (userRol == 1 || userRol == 2 ) {%>
           <h3 class="pt-4 pb-2">Registrar Usuario</h3><br>
           <div class="col-sm-7">
             <form action="/dlc/r_usuario" method="POST">

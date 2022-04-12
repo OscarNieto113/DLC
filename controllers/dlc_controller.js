@@ -585,6 +585,8 @@ exports.get_registrar_empleado = (request, response, next) => {
                   userRol: rol[0].id_rol,
                   rol: roles,
                   area: area,
+                  success: request.flash("success"),
+                  error: request.flash("error"),
                   isLoggedIn: request.session.isLoggedIn === true ? true : false
                 });
             }).catch(err => console.log(err));

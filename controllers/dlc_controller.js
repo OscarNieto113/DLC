@@ -31,7 +31,7 @@ exports.get_solicitar_ng_block = (request, response, next) => {
     };
 
 exports.post_solicitar_ng_block = (request, response, next) => {
-    const no_empleado = request.body.no_empleado;
+    const no_empleado = request.session.user_no_empleado;
     const turno_ng_block = request.body.turno_ng_block;
     const descripcion_ng_block = request.body.descripcion_ng_block;
     const fecha_uso_ng_block = request.body.fecha_uso_ng_block;
@@ -114,7 +114,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
 
     exports.post_reject_ng_blocks = (request, response, next) => {
         console.log('POST /dlc/a_ng_blocksp/:page/reject');
-        const estatus_ng_block = request.body.estatus_ng_block;
+        const estatus_ng_block = "Rechazado";
         const id_ng_block = request.body.id_ng_block;
 
         console.log(estatus_ng_block);
@@ -132,7 +132,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
 
       exports.post_aprovee_ng_blocks = (request, response, next) => {
           console.log('POST /dlc/a_ng_blocksp/:page/aprovee');
-          const estatus_ng_block = request.body.estatus_ng_block;
+          const estatus_ng_block = "Aprobado";
           const id_ng_block = request.body.id_ng_block;
           const no_empleado = request.body.no_empleado;
 
@@ -141,7 +141,6 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
           console.log(no_empleado);
           Empleado.getBlocksR(no_empleado)
             .then(([rows, fielData])=>{
-              console.log(rows[0].ng_blocks_restantes);
               const ng_blocks_restantes = rows[0].ng_blocks_restantes;
               if (ng_blocks_restantes <= 0){
                 request.flash('error', 'Este Usuario no posee más Ng Blocks');
@@ -406,7 +405,7 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
 
 exports.post_reject_vacaciones = (request, response, next) => {
     console.log('POST /dlc/a_vacacionesp/:page/reject');
-    const estatus_vacaciones = request.body.estatus_vacaciones;
+    const estatus_vacaciones = "Rechazado";
     const folio = request.body.folio;
 
     console.log(estatus_vacaciones);
@@ -424,7 +423,7 @@ exports.post_reject_vacaciones = (request, response, next) => {
 
   exports.post_aprovee_vacaciones = (request, response, next) => {
       console.log('POST /dlc/a_vacacionesp/:page/aprovee');
-      const estatus_vacaciones = request.body.estatus_vacaciones;
+      const estatus_vacaciones = "Aprobado";
       const dias_solicitados = request.body.dias_solicitados;
       const folio = request.body.folio;
       const no_empleado = request.body.no_empleado;
@@ -706,9 +705,12 @@ exports.get_profile = (request, response, next) => {
         .then(([rol, fieldData]) => {
         Empleado.fetchEmpleadoAll(no_empleado)
             .then(([rows, fieldData]) => {
+              Empleado.getRol(no_empleado)
+                  .then(([rol2, fieldData]) => {
                 console.log(rows);
                 response.render('profile', {
                     userRol: rol[0].id_rol,
+                    userRol2: rol2[0].id_rol,
                     no_empleado: request.session.user_no_empleado,
                     empleado: rows,
                     success: request.flash("success"),
@@ -719,7 +721,8 @@ exports.get_profile = (request, response, next) => {
                   });
               }).catch(err => console.log(err));
           }).catch(err => console.log(err));
-      };
+      }).catch(err => console.log(err));
+  };
 
 exports.get_perfil_empleado = (request, response, next) => {
   const no_empleado1 = request.session.user_no_empleado;

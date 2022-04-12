@@ -80,7 +80,7 @@
                                   <label for="fecha_reporte_mensual" class="col-form-label">Mes del Reporte:</label>
                                   <!--Datepicker -->
                                   <div class="input-group date" id="monthpicker">
-                                      <input type="text" id="fecha_reporte_mensual" name="fecha_reporte_mensual" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" required>
+                                      <input type="text" id="fecha_r" name="fecha_r" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
                                       <span class="input-group-append">
                                           <span class="input-group-text bg-white">
                                               <i class="fa fa-calendar"></i>
@@ -95,6 +95,7 @@
                                   <label for="imagen_reporte" class="col-form-label">Imagen del Reporte Mensual:</label>
                                   <input type="file" class="form-control" id="imagen_reporte" name="imagen_reporte" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required>
                                   <br>
+                                  <input type="hidden" id="fecha_reporte_mensual" name="fecha_reporte_mensual">
                                   <input type="submit" value="Enviar" class="btn btn-primary">
                               </form>
                               <!--Form -->

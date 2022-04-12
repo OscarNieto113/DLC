@@ -48,7 +48,7 @@
                       <label for="fecha_nacimiento" class="col-sm-5 col-form-label"><b>Fecha de Nacimiento</b></label>
                       <div class="col-sm-7">
                           <div class="input-group date" id="datepicker">
-                              <input type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" required>
+                              <input type="text" id="fecha_n" name="fecha_n" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
                               <span class="input-group-append">
                                   <span class="input-group-text bg-white">
                                       <i class="fa fa-calendar"></i>
@@ -62,7 +62,7 @@
                         <label for="fecha_contratacion" class="col-sm-5 col-form-label"><b>Fecha de contratación</b></label>
                         <div class="col-sm-7">
                             <div class="input-group date" id="datepicker">
-                                <input type="text" id="fecha_contratacion" name="fecha_contratacion" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" required>
+                                <input type="text" id="fecha_c" name="fecha_c" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
                                 <span class="input-group-append">
                                     <span class="input-group-text bg-white">
                                         <i class="fa fa-calendar"></i>
@@ -73,6 +73,8 @@
                     </div><br>
 
                     <!-- PRUEBA SE VA A BORRAR -->
+                    <input type="hidden" id="fecha_nacimiento" name="fecha_nacimiento">
+                    <input type="hidden" id="fecha_contratacion" name="fecha_contratacion">
                     <input type="hidden" id="ng_blocks_restantes" name="ng_blocks_restantes" value="5">
                     <input type="hidden" id="dias_vacaciones_restantes" name="dias_vacaciones_restantes" value="8">
                     <!-- PRUEBA SE VA A BORRAR -->

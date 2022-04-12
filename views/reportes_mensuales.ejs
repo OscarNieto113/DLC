@@ -56,6 +56,7 @@
                 </div><br><br>
 
                 <!--Agregar Reporte Mensual -->
+                <% if (userRol == 1 || userRol == 2 ) {%>
                   <div style="text-align: right;">
                     <br>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal00" data-whatever="@mdo">Agregar Reporte Mensual</button>
@@ -105,6 +106,7 @@
                         </div>
                       </div>
                     </div>
+                    <% } %>
               </div>
 
               <script>

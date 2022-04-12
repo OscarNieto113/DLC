@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
+<%- include('includes/head.ejs') %>
+<%- include('includes/topbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <!-- Favicon -->
-  <link rel="icon" href="https://storage.googleapis.com/natgas/others/logos/natgas-logo-simple.png" type="image/png">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-  <!-- Bootstrap fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Bootstrap icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-  <link REL=StyleSheet HREF="/css/login.css" TYPE="text/css" MEDIA=screen>
-</head>
-
-<body>
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -106,6 +89,7 @@
                           <input type="email" class="form-control" name="email" id="email" value="<%= empleado1.nombre_area %>" disabled>
                       </div>
                   </div>
+                  <% if (userRol == 1 || userRol == 2 || userRol == 3 || userRol == 4) {%>
                   <div class="form-group">
                     <div class="col-xs-6">
                       <br>
@@ -116,6 +100,7 @@
 
                     </div>
                   </div>
+                  <% } %>
                 </div>
               </div>
               <br><br>
@@ -156,17 +141,18 @@
                 <% } %>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <% if (userRol == 1 || userRol == 2 || userRol == 3 || userRol == 4) {%>
               <a href="/dlc/profile/ngblocks_solicitados">
                 <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/ngblocks_solicitados">Ver solicitudes NG Blocks</button>
               </a>
+              <% } %>
               <a href="/dlc/profile/vacaciones_solicitadas">
                 <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/vacaciones_solicitadas">Ver solicitudes de Vacaciones</button>
               </a>
           </div>
           <br>
 
-
-
+          <% if (userRol == 1 || userRol == 2 ) {%>
           <form action="/dlc/buscar_empleado/:no_empleado/vacaciones" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
             <label for="giveVacations">Agregar dias de vacaciones: </label>
@@ -174,7 +160,9 @@
             <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
             <input type="submit" class="btn btn-primary">
           </form>
+          <% } %>
 
+          <% if (userRol == 1 || userRol == 2 ) {%>
           <br>
           <form action="/dlc/buscar_empleado/:no_empleado/ng_blocks" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
@@ -183,13 +171,16 @@
             <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
             <input type="submit" class="btn btn-primary">
           </form>
+          <% } %>
 
+          <% if (userRol == 1 || userRol == 2 ) {%>
           <div style="text-align: right;">
             <a href="/dlc/buscar_empleado">
               <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
                 href="/dlc/s_vacaciones">Regresar</button>
             </a>
           </div>
+          <% } %>
 
           <div style="text-align: right;">
             <a href="/dlc">
@@ -204,5 +195,4 @@
     </div>
   </div>
 
-  </body>
-</html>
+  <%- include('includes/foot.ejs') %>

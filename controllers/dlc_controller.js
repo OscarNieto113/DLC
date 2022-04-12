@@ -185,6 +185,7 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
     console.log(request.session.user_no_empleado);//
     Empleado.getRol(no_empleado)
         .then(([rol, fieldData]) => {
+
         Vacaciones.fetchSome(no_empleado)
         .then(([rows, fieldData]) => {
           console.log(rows);
@@ -380,6 +381,7 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
               let totalesV = count[0].num
               console.log(totalesV)
                 response.render('aprobar_vacaciones', {
+                    userRol: rol[0].id_rol,
                     vacaciones: vacaciones,
                     current: page,
                     pages: Math.ceil(totalesV / perPage),
@@ -624,6 +626,7 @@ exports.get_profile = (request, response, next) => {
             .then(([rows, fieldData]) => {
                 console.log(rows);
                 response.render('profile', {
+                    userRol: rol[0].id_rol,
                     empleado: rows,
                     success: request.flash("success"),
                     error: request.flash("error"),
@@ -659,20 +662,21 @@ exports.get_perfil_empleado = (request, response, next) => {
 
 //------------------------Buscar empleado (perfil)--------------------------------
 exports.get_buscar_empleado = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
     console.log('Ruta /dlc/search_empleado');
-    Empleado.search()
-        .then(([rows, fieldData]) => {
-            console.log(rows);
-            response.render('buscar_empleado', {
-                empleado: rows,
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-
-            });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-};
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+        Empleado.search()
+            .then(([rows, fieldData]) => {
+                console.log(rows);
+                response.render('buscar_empleado', {
+                    userRol: rol[0].id_rol,
+                    empleado: rows,
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+                  });
+              }).catch(err => console.log(err));
+          }).catch(err => console.log(err));
+      };
 //-------------------------Buscar empleado (perfil)---------------------------------
 
 //------------------------Dar dias de vacaciones (perfil)--------------------------------

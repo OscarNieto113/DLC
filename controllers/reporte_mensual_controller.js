@@ -1,19 +1,22 @@
 const Reportes_mensuales = require('../models/reportes_mensuales');
+const Empleado = require('../models/empleado');
 
 exports.get_reportes_mensuales = (request, response, next) => {
-    Reportes_mensuales.fetchAll()
-    .then(([rows, fieldData]) => {
-      console.log(rows);
-      response.render('reportes_mensuales', {
-          reportes_mensuales: rows,
-          success: request.flash("success"),
-          error: request.flash("error"),
-          isLoggedIn: request.session.isLoggedIn === true ? true : false
-      });
-  })
-  .catch(err => {
-      console.log(err);
-  });
+  const no_empleado = request.session.user_no_empleado;
+  Empleado.getRol(no_empleado)
+      .then(([rol, fieldData]) => {
+      Reportes_mensuales.fetchAll()
+      .then(([rows, fieldData]) => {
+        console.log(rows);
+        response.render('reportes_mensuales', {
+            userRol: rol[0].id_rol,
+            reportes_mensuales: rows,
+            success: request.flash("success"),
+            error: request.flash("error"),
+            isLoggedIn: request.session.isLoggedIn === true ? true : false
+          });
+      }).catch(err => console.log(err));
+  }).catch(err => console.log(err));
 };
 
 exports.post_reportes_mensuales = (request, response, next) => {

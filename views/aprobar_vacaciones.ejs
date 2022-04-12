@@ -41,8 +41,10 @@
             <th scope="col"><center>Dias solicitados</center></th>
             <th scope="col"><center>Información completa</center></th>
             <th scope="col"><center>Estatus actual</center></th>
+            <% if (userRol == 1 || userRol == 3) {%>
             <th scope="col"><center></center></th>
             <th scope="col"><center></center></th>
+            <% } %>
           </tr>
         </thead>
 
@@ -70,6 +72,7 @@
               </center>
             </td>
             <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
+            <% if (userRol == 1 || userRol == 3) {%>
             <td>
               <center>
                 <form action="/dlc/a_vacacionesp/<%=current%>/aprovee" method="POST">
@@ -82,6 +85,8 @@
                 </form>
               </center>
             </td>
+            <% } %>
+            <% if (userRol == 1 || userRol == 3) {%>
             <td>
               <center>
                 <form action="/dlc/a_vacacionesp/<%=current%>/reject" method="POST">
@@ -92,6 +97,7 @@
                 </form>
               </center>
             </td>
+            <% } %>
           </tr>
           <% } %>
         </tbody>

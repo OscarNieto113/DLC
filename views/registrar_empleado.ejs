@@ -36,6 +36,14 @@
                       <% } %>
                   </select><br>
 
+                  <label for="id_rol"><b>Rol </b></label>
+                    <select name="id_rol" class="form-select" aria-label="Default select example" required>
+                      <option value="" disabled selected>Roles</option>
+                        <% for (let rol1 of rol) { %>
+                      <option value="<%=rol1.id_rol%>"><%=rol1.nombre_rol%></option>
+                        <% } %>
+                    </select><br>
+
                 <label for="no_empleado"><b>Número de empleado</b></label>
                 <input type="text" class="form-control" id="no_empleado" name="no_empleado" aria-describedby="emailHelp" placeholder="A01705090" autocomplete="off" required><br>
 

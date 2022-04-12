@@ -153,6 +153,7 @@
           <br>
 
           <% if (userRol == 1 || userRol == 2 ) {%>
+            <% if (empleado1.no_empleado != no_empleado ) {%>
           <form action="/dlc/buscar_empleado/:no_empleado/vacaciones" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
             <label for="giveVacations">Agregar dias de vacaciones: </label>
@@ -160,9 +161,11 @@
             <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
             <input type="submit" class="btn btn-primary">
           </form>
+            <% } %>
           <% } %>
 
           <% if (userRol == 1 || userRol == 2 ) {%>
+            <% if (empleado1.no_empleado != no_empleado ) {%>
           <br>
           <form action="/dlc/buscar_empleado/:no_empleado/ng_blocks" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
@@ -171,6 +174,7 @@
             <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
             <input type="submit" class="btn btn-primary">
           </form>
+          <% } %>
           <% } %>
 
           <% if (userRol == 1 || userRol == 2 ) {%>

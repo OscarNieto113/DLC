@@ -21,8 +21,7 @@ Tabla de roles: https://docs.google.com/spreadsheets/d/10S5QGoQth-aV_NXtuFdHxe4u
 
 ### Pagina PRINCIPAL
 http://localhost:3000/users/login
-correo: A01705004@natgas.com.mx
-contraseña: 1234
+
 
 ## Cosas por hacer
 

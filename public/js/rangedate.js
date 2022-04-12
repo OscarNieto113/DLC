@@ -1,7 +1,7 @@
   $(document).ready(function () {
       $('#all_dates').datepicker({
         multidate: true,
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         container: $('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body",
         todayHighlight: true,
         autoclose: false,

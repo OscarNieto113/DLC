@@ -35,11 +35,13 @@ exports.post_solicitar_ng_block = (request, response, next) => {
     const turno_ng_block = request.body.turno_ng_block;
     const descripcion_ng_block = request.body.descripcion_ng_block;
     const fecha_uso_ng_block = request.body.fecha_uso_ng_block;
+    const fecha_ng = request.body.fecha_ng;
 
     console.log(no_empleado);
     console.log(turno_ng_block);
     console.log(descripcion_ng_block);
     console.log(fecha_uso_ng_block);
+    console.log(fecha_ng);
 
     Empleado.getBlocksR(no_empleado)
       .then(([rows, fielData])=>{
@@ -71,7 +73,7 @@ exports.post_solicitar_ng_block = (request, response, next) => {
           ng_block.save()
           .then(() => {
               console.log("Se guardo la solicitud");
-              request.flash('success', 'El NG Block con fecha de uso de ' + fecha_uso_ng_block + ' fue agregado con éxito');
+              request.flash('success', 'El NG Block con fecha de uso de ' + fecha_ng + ' fue agregado con éxito');
               response.redirect('/dlc/solicitar_ng_block');
           })
           .catch(err => console.log(err));

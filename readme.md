@@ -53,4 +53,4 @@ Veces en las que el oscar le peta algo porque no sabe copiar y pegar = 6
 
 Veces en las que el cris le peta algo porque no sabe copiar y pegar = 7
 
-Veces que el cris se pelió con multi date picker = 4
+Veces que el cris se peleó con multi date picker = 4

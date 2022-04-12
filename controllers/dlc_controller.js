@@ -658,18 +658,23 @@ exports.get_perfil_empleado = (request, response, next) => {
       .then(([rol, fieldData]) => {
       Empleado.fetchEmpleadoAll(request.params.no_empleado)
           .then(([rows, fieldData]) => {
-            console.log(rows)
-              response.render('profile', {
-                  userRol: rol[0].id_rol,
-                  empleado: rows,
-                  success: request.flash("success"),
-                  error: request.flash("error"),
-                  success1: request.flash("success1"),
-                  error1: request.flash("error1"),
-                  isLoggedIn: request.session.isLoggedIn === true ? true : false
+            Empleado.getRol(request.params.no_empleado)
+                .then(([rol2, fieldData]) => {
+                  console.log(rows)
+                    response.render('profile', {
+                      no_empleado: request.session.user_no_empleado,
+                      userRol: rol[0].id_rol,
+                      userRol2: rol2[0].id_rol,
+                      empleado: rows,
+                      success: request.flash("success"),
+                      error: request.flash("error"),
+                      success1: request.flash("success1"),
+                      error1: request.flash("error1"),
+                      isLoggedIn: request.session.isLoggedIn === true ? true : false
                 });
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
     };
 
 //------------------------Consultar informacion personal (perfil)---------------------------------
@@ -685,7 +690,6 @@ exports.get_buscar_empleado = (request, response, next) => {
                 console.log(rows);
                 response.render('buscar_empleado', {
                     userRol: rol[0].id_rol,
-                    no_empleado: request.session.user_no_empleado,
                     empleado: rows,
                     isLoggedIn: request.session.isLoggedIn === true ? true : false
                   });

@@ -90,16 +90,18 @@
                       </div>
                   </div>
                   <% if (userRol == 1 || userRol == 2 || userRol == 3 || userRol == 4) {%>
-                  <div class="form-group">
-                    <div class="col-xs-6">
-                      <br>
-                      <br>
-                      <br>
-                        <label for="ng_blockR"><h4>Ng blocks restantes</h4></label>
-                        <input type="text" class="form-control" name="ng_blockR" id="ng_blockR" value="<%= empleado1.ng_blocks_restantes %>" disabled>
+                    <% if (userRol2 == 1 || userRol2 == 2 || userRol2 == 3 || userRol2 == 4) {%>
+                      <div class="form-group">
+                        <div class="col-xs-6">
+                          <br>
+                          <br>
+                          <br>
+                            <label for="ng_blockR"><h4>Ng blocks restantes</h4></label>
+                            <input type="text" class="form-control" name="ng_blockR" id="ng_blockR" value="<%= empleado1.ng_blocks_restantes %>" disabled>
 
-                    </div>
-                  </div>
+                        </div>
+                      </div>
+                      <% } %>
                   <% } %>
                 </div>
               </div>
@@ -166,33 +168,38 @@
 
           <% if (userRol == 1 || userRol == 2 ) {%>
             <% if (empleado1.no_empleado != no_empleado ) {%>
-          <br>
-          <form action="/dlc/buscar_empleado/:no_empleado/ng_blocks" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-            <label for="giveNgBlocks">Agregar Ng Blocks: </label>
-            <input type="number" id="giveNgBlocks" name="giveNgBlocks" min="1" max="5" class="btn btn-light" s placeholder="0" required>
-            <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
-            <input type="submit" class="btn btn-primary">
-          </form>
+              <% if (userRol2 == 1 || userRol2 == 2 || userRol2 == 3 || userRol2 == 4) {%>
+              <br>
+              <form action="/dlc/buscar_empleado/:no_empleado/ng_blocks" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                <label for="giveNgBlocks">Agregar Ng Blocks: </label>
+                <input type="number" id="giveNgBlocks" name="giveNgBlocks" min="1" max="5" class="btn btn-light" s placeholder="0" required>
+                <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
+                <input type="submit" class="btn btn-primary">
+              </form>
+            <% } %>
           <% } %>
-          <% } %>
+        <% } %>
 
           <% if (userRol == 1 || userRol == 2 ) {%>
-          <div style="text-align: right;">
-            <a href="/dlc/buscar_empleado">
-              <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
-                href="/dlc/s_vacaciones">Regresar</button>
-            </a>
-          </div>
+            <% if (empleado1.no_empleado != no_empleado ) {%>
+              <div style="text-align: right;">
+                <a href="/dlc/buscar_empleado">
+                  <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
+                    href="/dlc/s_vacaciones">Regresar</button>
+                </a>
+              </div>
+              <% } %>
           <% } %>
 
+          <% if (empleado1.no_empleado == no_empleado ) {%>
           <div style="text-align: right;">
             <a href="/dlc">
               <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
                 href="/dlc/s_vacaciones">Regresar</button>
             </a>
           </div>
-
+          <% } %>
         </div>
         <% } %>
       </div>

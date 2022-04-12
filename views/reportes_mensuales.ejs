@@ -46,6 +46,7 @@
                         <div class="card-body">
                           <h5 class="card-title"><%= reportes_mensuales1.titulo_reporte_mensual %></h5>
                           <p class="card-text"><%= reportes_mensuales1.descripcion_reporte_mensual %></p>
+
                           <form action="/reporte_mensual/delete/<%= reportes_mensuales1.id_reportes_mensuales %>" method="POST">
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                             <input type="hidden" id="id_reportes_mensuales" name="id_reportes_mensuales" value="<%= reportes_mensuales1.id_reportes_mensuales %>"/>

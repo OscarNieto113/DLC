@@ -47,7 +47,7 @@ Horas desperdiciadas en centrar el carousel de noticias = 2
 
 Horas desperdiciadas en los toast = 10
 
-Veces en las que el cris ha dicho una mafufada en discord = 6
+Veces en las que el cris ha dicho una mafufada en discord = 7
 
 Veces en las que el oscar le peta algo porque no sabe copiar y pegar = 6
 

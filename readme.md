@@ -25,7 +25,7 @@ http://localhost:3000/users/login
 
 ## Cosas por hacer
 
-2. Reportes Mensuales () /EN PROCESO
+2. Reportes Mensuales () /LISTO
 3. Pulir todo lo relacionado con NG Blocks /LISTO
 4. Busqueda de empleado por AJAX /LISTO
 5. Eliminar solicitudes en estado pendiente / LISTO

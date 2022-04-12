@@ -9,6 +9,7 @@ const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
 const User = require('../models/user');
+const Rol = require('../models/rol');
 
 //------------------------Solicitar NG Block--------------------------------
 exports.get_solicitar_ng_block = (request, response, next) => {
@@ -575,21 +576,25 @@ exports.get_registrar_empleado = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/registrar_empleado');
     Empleado.getRol(no_empleado)
-        .then(([rol, fieldData]) => {
-        Area.fetchAll()
-          .then(([area, fieldData]) => {
-            console.log(area);
-            response.render('registrar_empleado', {
-                userRol: rol[0].id_rol,
-                area: area,
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-              });
-          }).catch(err => console.log(err));
-      }).catch(err => console.log(err));
-  };
+    .then(([rol, fieldData]) => {
+        Rol.fetchAll()
+        .then(([roles, fieldData]) => {
+            Area.fetchAll()
+            .then(([area, fieldData]) => {
+              response.render('registrar_empleado', {
+                  userRol: rol[0].id_rol,
+                  rol: roles,
+                  area: area,
+                  isLoggedIn: request.session.isLoggedIn === true ? true : false
+                });
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+};
 
 exports.post_registrar_empleado = (request, response, next) => {
     console.log('POST /dlc/registrar_empleado');
+
 
     console.log(request.body);
     const empleado =
@@ -604,7 +609,9 @@ exports.post_registrar_empleado = (request, response, next) => {
           request.body.apellido_materno,
           request.body.dias_vacaciones_restantes,
           request.body.genero_empleado,
-          request.body.id_area);
+          request.body.id_area,
+          request.body.id_rol
+        );
     empleado.save()
     .then(() => {
         request.session.info = 'El empleado fue registrado con éxito';
@@ -633,6 +640,7 @@ exports.get_profile = (request, response, next) => {
                 console.log(rows);
                 response.render('profile', {
                     userRol: rol[0].id_rol,
+                    no_empleado: request.session.user_no_empleado,
                     empleado: rows,
                     success: request.flash("success"),
                     error: request.flash("error"),
@@ -671,12 +679,13 @@ exports.get_buscar_empleado = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('Ruta /dlc/search_empleado');
     Empleado.getRol(no_empleado)
-        .then(([rol, fieldData]) => {
+    .then(([rol, fieldData]) => {
         Empleado.search()
             .then(([rows, fieldData]) => {
                 console.log(rows);
                 response.render('buscar_empleado', {
                     userRol: rol[0].id_rol,
+                    no_empleado: request.session.user_no_empleado,
                     empleado: rows,
                     isLoggedIn: request.session.isLoggedIn === true ? true : false
                   });

@@ -635,6 +635,33 @@ exports.post_registrar_empleado = (request, response, next) => {
           request.flash('error', 'Faltan datos por llenar.');
           response.redirect('/dlc/solicitar_ng_block');
     }
+
+    else if (id_rol == 5){
+      const ng_blocks_restantes1 = 0
+      const empleado =
+          new Empleado(
+            no_empleado,
+            ng_blocks_restantes1,
+            fecha_contratacion,
+            fecha_nacimiento,
+            correo_empresarial,
+            nombres_empleados,
+            apellido_paterno,
+            apellido_materno,
+            dias_vacaciones_restantes,
+            genero_empleado,
+            id_area,
+            id_rol
+          );
+      empleado.save()
+      .then(() => {
+          console.log("Se registro correctamente el empleado");
+          request.flash('success', 'El empleado se registro con éxito');
+          response.redirect('/dlc/r_usuario');
+        })
+        .catch(err => console.log(err));
+      }
+
       else {
         const empleado =
             new Empleado(

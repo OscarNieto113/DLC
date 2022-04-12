@@ -21,12 +21,11 @@ Tabla de roles: https://docs.google.com/spreadsheets/d/10S5QGoQth-aV_NXtuFdHxe4u
 
 ### Pagina PRINCIPAL
 http://localhost:3000/users/login
-correo: A01705004@natgas.com.mx
-contraseña: 1234
+
 
 ## Cosas por hacer
 
-2. Reportes Mensuales () /EN PROCESO
+2. Reportes Mensuales () /LISTO
 3. Pulir todo lo relacionado con NG Blocks /LISTO
 4. Busqueda de empleado por AJAX /LISTO
 5. Eliminar solicitudes en estado pendiente / LISTO
@@ -54,4 +53,4 @@ Veces en las que el oscar le peta algo porque no sabe copiar y pegar = 6
 
 Veces en las que el cris le peta algo porque no sabe copiar y pegar = 7
 
-Veces que el cris se pelió con multi date picker = 4
+Veces que el cris se peleó con multi date picker = 4

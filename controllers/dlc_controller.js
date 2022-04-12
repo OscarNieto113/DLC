@@ -934,6 +934,19 @@ exports.post_publicacion = (request, response, next) => {
 };
 //
 
+exports.post_delete_publicacion = (request, response, next) => {
+    console.log('POST /dlc/publicacion/delete/:id_publicacion');
+    const id_publicacion = request.body.id_publicacion;
+
+          Publicacion.deletePublicacion(
+            id_publicacion)
+            .then(() => {
+              console.log("Se elimino el anuncio");
+              request.flash('success', 'El anuncio se eliminó con éxito');
+              response.redirect('/dlc');
+            }).catch(err => console.log(err));
+    };
+
 exports.listar = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('Ruta /dlc');

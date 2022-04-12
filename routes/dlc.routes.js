@@ -79,6 +79,7 @@ router.post('/profile/ngblocks_solicitados/delete/:id_ng_block', isAuth, dlc_con
 //router.post('/objetivo', dlc_controller.post_objetivo);
 router.post('/noticia' , multer({ storage: fileStorage }).single('imagen_noticia'), dlc_controller.post_noticia);
 router.post('/publicacion' , multer({ storage: fileStorage }).single('imagen_publicacion'), dlc_controller.post_publicacion);
+router.post('/publicacion/delete/:id_publicacion', isAuth, dlc_controller.post_delete_publicacion);
 //router.post('/reportes_mensuales/post',multer({ storage: fileStorage }).single('imagen_reporte'),dlc_controller.post_reportes_mensuales);
 
 router.use('/', isAuth, dlc_controller.listar);

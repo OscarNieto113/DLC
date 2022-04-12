@@ -19,19 +19,29 @@ exports.get_reportes_mensuales = (request, response, next) => {
   }).catch(err => console.log(err));
 };
 
+exports.post_delete_reportes_mensuales = (request, response, next) => {
+    console.log('POST /reporte_mensual/delete/:id_reportes_mensuales');
+    const id_reportes_mensuales = request.body.id_reportes_mensuales;
+
+        Reportes_mensuales.deleteReportes(id_reportes_mensuales)
+            .then(() => {
+              console.log("Se elimino el reporte mensual");
+              request.flash('success', 'El reporte mensual se eliminó con éxito');
+              response.redirect('/reporte_mensual');
+            }).catch(err => console.log(err));
+    };
+
 exports.post_reportes_mensuales = (request, response, next) => {
     console.log('POST /reporte_mensual');
     const titulo_reporte_mensual = request.body.titulo_reporte_mensual;
     const descripcion_reporte_mensual = request.body.descripcion_reporte_mensual;
     const fecha_reporte_mensual = request.body.fecha_reporte_mensual;
     const filename = request.file.filename;
-    const fecha_r = request.body.fecha_r;
 
     console.log(titulo_reporte_mensual);
     console.log(descripcion_reporte_mensual);
     console.log(fecha_reporte_mensual);
     console.log(filename);
-    console.log(fecha_r);
 
     if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && filename.length == undefined){
       request.flash('error', 'No se recibió ningún dato.');

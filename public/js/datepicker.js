@@ -64,20 +64,14 @@ $(function() {
 });
 
 $(document).ready(function(){
-    $('#fecha_r').datepicker({
-      format: 'dd/mm/yyyy',
+    $('#fecha_reporte_mensual').datepicker({
+      format: 'yyyy-mm-dd',
       orientation: "bottom left",
       startView: "months",
       minViewMode: "months",
       todayHighlight: true,
       autoclose: true
     });
-
-    $('#fecha_r').on("changeDate", function ng_block () {
-      var f4 = $('#fecha_r').datepicker('getDate');
-      console.log(f4)
-      document.getElementById("fecha_contratacion").value = f4.toISOString().split('T')[0];
-  });
 });
 /*
   var currentDate  = new Date(),

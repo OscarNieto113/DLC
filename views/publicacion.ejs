@@ -70,6 +70,13 @@
             <div class="card-body">
               <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
               <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
+              <form action="/dlc/publicacion/delete/<%= publicacion1.id_publicacion %>" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                <input type="hidden" id="id_publicacion" name="id_publicacion" value="<%= publicacion1.id_publicacion %>"/>
+                <div style="text-align: right;">
+                  <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -80,6 +87,13 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
                   <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
+                  <form action="/dlc/publicacion/delete/<%= publicacion1.id_publicacion %>" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                    <input type="hidden" id="id_publicacion" name="id_publicacion" value="<%= publicacion1.id_publicacion %>"/>
+                    <div style="text-align: right;">
+                      <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+                    </div>
+                  </form>
                 </div>
           </div>
         </div>

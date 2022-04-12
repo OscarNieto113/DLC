@@ -46,6 +46,13 @@
                         <div class="card-body">
                           <h5 class="card-title"><%= reportes_mensuales1.titulo_reporte_mensual %></h5>
                           <p class="card-text"><%= reportes_mensuales1.descripcion_reporte_mensual %></p>
+                          <form action="/reporte_mensual/delete/<%= reportes_mensuales1.id_reportes_mensuales %>" method="POST">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                            <input type="hidden" id="id_reportes_mensuales" name="id_reportes_mensuales" value="<%= reportes_mensuales1.id_reportes_mensuales %>"/>
+                            <div style="text-align: right;">
+                              <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+                            </div>
+                          </form>
                         </div>
                   </div>
                 <% } %>
@@ -80,7 +87,7 @@
                                   <label for="fecha_reporte_mensual" class="col-form-label">Mes del Reporte:</label>
                                   <!--Datepicker -->
                                   <div class="input-group date" id="monthpicker">
-                                      <input type="text" id="fecha_r" name="fecha_r" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
+                                      <input type="text" id="fecha_reporte_mensual" name="fecha_reporte_mensual" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
                                       <span class="input-group-append">
                                           <span class="input-group-text bg-white">
                                               <i class="fa fa-calendar"></i>
@@ -95,7 +102,6 @@
                                   <label for="imagen_reporte" class="col-form-label">Imagen del Reporte Mensual:</label>
                                   <input type="file" class="form-control" id="imagen_reporte" name="imagen_reporte" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required>
                                   <br>
-                                  <input type="hidden" id="fecha_reporte_mensual" name="fecha_reporte_mensual">
                                   <input type="submit" value="Enviar" class="btn btn-primary">
                               </form>
                               <!--Form -->

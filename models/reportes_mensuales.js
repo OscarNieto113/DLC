@@ -27,4 +27,12 @@ module.exports = class Reportes_mensuales {
           'FROM reportes_mensuales ' +
           'WHERE fecha_reporte_mensual LIKE ? ', [search+'%']);
     }
+
+    static deleteReportes(id_reportes_mensuales) {
+        return db.execute(
+          'DELETE FROM reportes_mensuales ' +
+            'WHERE ' +
+          'id_reportes_mensuales = ? ', [id_reportes_mensuales]);
+    }
+
 }

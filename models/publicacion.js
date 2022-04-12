@@ -23,4 +23,11 @@ module.exports = class Publicacion {
         return db.execute('SELECT imagen_publicacion FROM publicacion WHERE id=?', [id_publicacion]);
     }
 
+    static deletePublicacion(id_publicacion) {
+        return db.execute(
+          'DELETE FROM publicacion ' +
+            'WHERE ' +
+          'id_publicacion = ? ', [id_publicacion]);
+    }
+
 }

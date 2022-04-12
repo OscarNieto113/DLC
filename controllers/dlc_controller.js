@@ -594,33 +594,73 @@ exports.get_registrar_empleado = (request, response, next) => {
 
 exports.post_registrar_empleado = (request, response, next) => {
     console.log('POST /dlc/registrar_empleado');
+    const no_empleado = request.body.no_empleado;
+    const ng_blocks_restantes = request.body.ng_blocks_restantes;
+    const fecha_contratacion = request.body.fecha_contratacion;
+    const fecha_nacimiento = request.body.fecha_nacimiento;
+    const correo_empresarial = request.body.correo_empresarial;
+    const nombres_empleados = request.body.nombres_empleados;
+    const apellido_paterno = request.body.apellido_paterno;
+    const apellido_materno = request.body.apellido_materno;
+    const dias_vacaciones_restantes = request.body.dias_vacaciones_restantes;
+    const genero_empleado = request.body.genero_empleado;
+    const id_area = request.body.id_area;
+    const id_rol = request.body.id_rol;
 
+    console.log(no_empleado);
+    console.log(ng_blocks_restantes);
+    console.log(fecha_contratacion);
+    console.log(fecha_nacimiento);
+    console.log(correo_empresarial);
+    console.log(nombres_empleados);
+    console.log(apellido_paterno);
+    console.log(apellido_materno);
+    console.log(dias_vacaciones_restantes);
+    console.log(genero_empleado);
+    console.log(id_area);
+    console.log(id_rol);
 
-    console.log(request.body);
-    const empleado =
-        new Empleado(
-          request.body.no_empleado,
-          request.body.ng_blocks_restantes,
-          request.body.fecha_contratacion,
-          request.body.fecha_nacimiento,
-          request.body.correo_empresarial,
-          request.body.nombres_empleados,
-          request.body.apellido_paterno,
-          request.body.apellido_materno,
-          request.body.dias_vacaciones_restantes,
-          request.body.genero_empleado,
-          request.body.id_area,
-          request.body.id_rol
-        );
-    empleado.save()
-    .then(() => {
-        request.session.info = 'El empleado fue registrado con éxito';
-        response.setHeader('Set-Cookie', 'ultimo_empleado='+empleado.no_empleado+'; HttpOnly');
+    if (no_empleado.length == 0 && ng_blocks_restantes.length == 0 && fecha_contratacion.length == 0 &&
+        fecha_nacimiento.length == 0 && correo_empresarial.length == 0 && nombres_empleados.length == 0 &&
+        apellido_paterno.length == 0 && apellido_materno.length == 0 && dias_vacaciones_restantes.length == 0 &&
+        genero_empleado.length == 0 && id_area.length == 0 && id_rol.length == 0){
+      request.flash('error', 'No se recibió ningún dato.');
+      response.redirect('/dlc/solicitar_ng_block');
+    }
 
-        response.redirect('/dlc');
-    })
-    .catch(err => console.log(err));
-};
+    else if (no_empleado.length == 0 || ng_blocks_restantes.length == 0 || fecha_contratacion.length == 0 ||
+        fecha_nacimiento.length == 0 || correo_empresarial.length == 0 || nombres_empleados.length == 0 ||
+        apellido_paterno.length == 0 || apellido_materno.length == 0 || dias_vacaciones_restantes.length == 0 ||
+        genero_empleado.length == 0 || id_area.length == 0 || id_rol.length == 0){
+          request.flash('error', 'Faltan datos por llenar.');
+          response.redirect('/dlc/solicitar_ng_block');
+    }
+      else {
+        const empleado =
+            new Empleado(
+              no_empleado,
+              ng_blocks_restantes,
+              fecha_contratacion,
+              fecha_nacimiento,
+              correo_empresarial,
+              nombres_empleados,
+              apellido_paterno,
+              apellido_materno,
+              dias_vacaciones_restantes,
+              genero_empleado,
+              id_area,
+              id_rol
+            );
+        empleado.save()
+        .then(() => {
+            console.log("Se registro correctamente el empleado");
+            request.flash('success', 'El empleado se registro con éxito');
+            response.redirect('/dlc/r_usuario');
+          })
+          .catch(err => console.log(err));
+        }
+    };
+
 //------------------------Registrar Usuario--------------------------------
 
 

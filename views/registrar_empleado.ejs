@@ -5,15 +5,17 @@
   <div class="col py-3">
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
+
         <section class="container">
+        <% if (userRol == 1 || userRol == 2 ) {%>
           <h3 class="pt-4 pb-2">Registrar Usuario</h3><br>
           <div class="col-sm-7">
             <form action="/dlc/r_usuario" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
               <div class="form-group">
 
-                <label for="nombres_empleado"><b>Nombre(s)</b></label>
-                <input type="text" class="form-control" id="nombres_empleado" name="nombres_empleado"  placeholder="Eros Giovanni" autocomplete="off" required/><br>
+                <label for="nombres_empleados"><b>Nombre(s)</b></label>
+                <input type="text" class="form-control" id="nombres_empleados" name="nombres_empleados"  placeholder="Eros Giovanni" autocomplete="off" required/><br>
 
                 <label for="apellido_paterno"><b>Apellido Paterno</b></label>
                 <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" placeholder="Guillén" autocomplete="off" required/><br>

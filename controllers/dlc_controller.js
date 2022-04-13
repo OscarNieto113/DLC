@@ -890,6 +890,18 @@ exports.post_noticia = (request, response, next) => {
           });
         }
 };
+
+exports.post_delete_noticia = (request, response, next) => {
+    console.log('POST /dlc/noticia/delete/:id_noticia');
+    const id_noticia = request.body.id_noticia;
+          Noticia.deleteNoticia(
+            id_noticia)
+            .then(() => {
+              console.log("Se elimino la Noticia");
+              request.flash('success', 'La noticia se eliminó con éxito');
+              response.redirect('/dlc');
+            }).catch(err => console.log(err));
+    };
 //
 
 exports.post_publicacion = (request, response, next) => {

@@ -21,4 +21,11 @@ module.exports = class Noticia {
         return db.execute('SELECT imagen_noticia FROM noticia WHERE id=?', [id_noticia]);
     }
 
+    static deleteNoticia(id_noticia) {
+        return db.execute(
+          'DELETE FROM noticia ' +
+            'WHERE ' +
+          'id_noticia = ? ', [id_noticia]);
+    }
+
 }

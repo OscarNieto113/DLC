@@ -34,6 +34,13 @@
   <% if (noticia.length > 0) { %>
     <% for (let noticia1 of noticia) { %>
   <div class="carousel-item">
+    <div style="text-align: center;">
+    <form action="/dlc/noticia/delete/<%= noticia1.id_noticia %>" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+      <input type="hidden" id="id_noticia" name="id_noticia" value="<%= noticia1.id_noticia %>"/>
+        <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+    </form>
+    </div>
     <img class="d-block w-100"  alt="First slide" loading="lazy" src="<%=noticia1.imagen_noticia%>">
   </div>
 

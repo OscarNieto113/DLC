@@ -31,9 +31,8 @@
 .carousel-indicators {
   box-shadow: inset 0 0 20rem rgba(0, 0, 0, 1);
   margin: auto;
-  width: 5vw;
-  height: 2vw;
   border-radius: 25px;
+  width: 40%;
 }
 /*
 #carouselNoticias .carousel-item:before {

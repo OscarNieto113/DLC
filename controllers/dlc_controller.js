@@ -377,24 +377,27 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
   console.log('GET /dlc/a_vacaciones/:page');
   var perPage = 5;
   var page = request.params.page || 1;
-  Empleado.getRol(no_empleado)
+  Area.fetchAll()
+  .then(([area, fieldData]) => {
+      Empleado.getRol(no_empleado)
       .then(([rol, fieldData]) => {
-      Vacaciones
-        .fetchPagination(perPage, ((perPage * page) - perPage))
-        .then(([vacaciones, fieldData]) => {
-          Vacaciones.count()
-            .then(([count, fieldData]) => {
-              let totalesV = count[0].num
-              console.log(totalesV)
-                response.render('aprobar_vacaciones', {
-                    userRol: rol[0].id_rol,
-                    vacaciones: vacaciones,
-                    current: page,
-                    pages: Math.ceil(totalesV / perPage),
-                    success: request.flash("success"),
-                    error: request.flash("error"),
-                    isLoggedIn: request.session.isLoggedIn === true ? true : false
-                });
+          Vacaciones.fetchPagination(perPage, ((perPage * page) - perPage))
+          .then(([vacaciones, fieldData]) => {
+              Vacaciones.count()
+              .then(([count, fieldData]) => {
+                  let totalesV = count[0].num
+                  console.log(totalesV)
+                    response.render('aprobar_vacaciones', {
+                        area: area,
+                        userRol: rol[0].id_rol,
+                        vacaciones: vacaciones,
+                        current: page,
+                        pages: Math.ceil(totalesV / perPage),
+                        success: request.flash("success"),
+                        error: request.flash("error"),
+                        isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
+                }).catch(err => console.log(err));
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     }).catch(err => console.log(err));

@@ -1,0 +1,40 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            How to add a parameter to the URL
+        </title>
+    </head>
+
+    <body style = "text-align:center;">
+
+        <h1 style = "color:green;" >
+            GeeksForGeeks
+        </h1>
+
+        <p id = "GFG_UP" style =
+            "font-size: 15px; font-weight: bold;">
+        </p>
+
+        <button onclick = "GFG_Fun()">
+            Add Parameter
+        </button>
+
+        <p id = "GFG_DOWN" style =
+            "color:green; font-size: 20px; font-weight: bold;">
+        </p>
+
+        <script>
+            var up = document.getElementById('GFG_UP');
+            var url = new URL("https://www.geeksforgeeks.org");
+            up.innerHTML = url;
+            var down = document.getElementById('GFG_DOWN');
+
+            function GFG_Fun() {
+                url.searchParams.append('param_1', 'val_1');
+                down.innerHTML = url;
+            }
+        </script>
+    </body>
+</html> 

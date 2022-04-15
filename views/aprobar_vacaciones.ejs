@@ -1,6 +1,7 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/topbar.ejs') %>
 <%-include('includes/sidebar.ejs') %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -28,17 +29,62 @@
           <i class="bi bi-search"></i>
         </span>
       </div>
-      <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+      <br/>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <label for="estatus_vacaciones"><b>Filtrar por Estatus</b></label>
+            <select name="estatus_v" id="estatus_v" class="form-select" aria-label="Default select example" required>
+              <option value="" disabled selected>Estatus</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Rechazado">Rechazado</option>
+              <option value="Aprobado">Aprobado</option>
+            </select><br>
         </div>
+        <div class="col-sm-3">
+          <label for="estatus_vacaciones"><b>Filtrar por Departamento</b></label>
+            <select name="departamento" id="departamento" class="form-select" aria-label="Default select example" required>
+              <option value="" disabled selected>Departamento</option>
+              <% for (let area1 of area) { %>
+                <option value="<%=area1.id_area%>"><%=area1.nombre_area%></option>
+              <% } %>
+            </select><br>
+            <input type="text" name="estatus" id="estatus" value="">
+            <input type="text" name="departamento1" id="departamento1" value="">
+        </div>
+
+        <a  id="filtro"></a>
+        <center><button type="button" class="btn btn-light">Ver perfil</button></center>
       </div>
-      <br />
+
+      <script type="text/javascript">
+        $('#estatus_v').on('change', function getEstatus() {
+          var estatus = this.value;
+          document.getElementById("estatus").value = estatus;
+          console.log(estatus);
+        });
+
+        $('#departamento').on('change', function getDeparatamento() {
+          var departamento = this.value;
+          document.getElementById("departamento1").value = departamento;
+          console.log(departamento);
+        });
+
+        $('#departamento').change(function(){
+          getEstatus();
+          getDeparatamento();
+
+          var href = `/dlc/a_vacaciones/${estatus}/${departamento}`;
+          console.log(href);
+          $('#filtro').attr('href', href);
+
+        });
+
+
+
+
+
+      </script>
 
       <div id="respuesta_ajax">
         <% if (vacaciones.length > 0) { %>

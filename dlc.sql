@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-04-2022 a las 00:36:45
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.2
+-- Tiempo de generación: 16-04-2022 a las 01:09:21
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -64,6 +64,7 @@ CREATE TABLE `empleado` (
   `apellido_paterno` varchar(130) DEFAULT NULL,
   `apellido_materno` varchar(130) DEFAULT NULL,
   `dias_vacaciones_restantes` int(23) DEFAULT NULL,
+  `dias_vacaciones_especiales` int(2) NOT NULL DEFAULT 0,
   `genero_empleado` varchar(130) DEFAULT NULL,
   `id_area` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL
@@ -73,57 +74,57 @@ CREATE TABLE `empleado` (
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`no_empleado`, `ng_blocks_restantes`, `fecha_contratacion`, `fecha_nacimiento`, `correo_empresarial`, `nombres_empleados`, `apellido_paterno`, `apellido_materno`, `dias_vacaciones_restantes`, `genero_empleado`, `id_area`, `id_rol`) VALUES
-('A1', 5, '2010-08-09', '2021-03-02', 'a01705001@natgas.com.mx', 'Óscar Eduardo', 'Nieto', 'Espitia', 6, 'M', 1, 5),
-('A10', 4, '2015-07-21', '1967-07-18', 'a01705011@natgas.com.mx', 'Adelina', 'Llanos', 'Sanmartín', 23, 'F', 10, 2),
-('A11', 4, '2015-11-24', '1968-12-05', 'a01705012@natgas.com.mx', 'Ciríaco', 'Tejero', 'Gimeno', 1, 'M', 1, 3),
-('A12', 2, '2016-06-29', '1971-12-24', 'a01705013@natgas.com.mx', 'Iris', 'Gomis', 'Batlle', 0, 'F', 2, 4),
-('A13', 2, '2016-08-01', '1975-11-26', 'a01705014@natgas.com.mx', 'Rita', 'Corral', 'Pallarès', 2, 'F', 3, 5),
-('A14', 1, '2016-11-23', '1980-03-20', 'a01705015@natgas.com.mx', 'Amando', 'Roselló', 'Ballester', 5, 'M', 4, 5),
-('A15', 1, '2017-03-12', '1982-05-09', 'a01705016@natgas.com.mx', 'Mayte', 'Canals', 'Carbonell', 9, 'M', 5, 4),
-('A16', 3, '2017-04-22', '1982-09-27', 'a01705017@natgas.com.mx', 'Chelo', 'Coca', 'Mascaró', 18, 'M', 6, 3),
-('A17', 3, '2018-01-31', '2021-03-02', 'a01705018@natgas.com.mx', 'Teresita', 'Castañeda', 'Barba', 12, 'F', 7, 2),
-('A18', 3, '2018-07-15', '1985-06-11', 'a01705019@natgas.com.mx', 'Pascuala', 'Collado', 'Royo', 18, 'F', 8, 1),
-('A19', 5, '2018-09-28', '1993-03-17', 'a01705020@natgas.com.mx', 'Zoraida', 'Criado', 'Zabala', 14, 'F', 9, 1),
-('A2', 4, '2012-02-26', '1945-05-28', 'a01705002@natgas.com.mx', 'Dalila', 'Azcona', 'Garrido', 9, 'F', 2, 4),
-('A20', 4, '2019-08-24', '1996-05-01', 'a01705021@natgas.com.mx', 'Benita', 'Martin', 'Zabala', 9, 'F', 10, 1),
-('A21', 3, '2019-12-03', '1996-05-11', 'a01705022@natgas.com.mx', 'Yolanda', 'Urrutia', 'Bas', 3, 'F', 1, 2),
-('A22', 2, '2020-05-04', '1998-10-31', 'a01705023@natgas.com.mx', 'Dorita', 'Lastra', 'Rosales', 21, 'F', 2, 2),
-('A23', 2, '2020-08-15', '1999-11-16', 'a01705024@natgas.com.mx', 'Perla', 'Alcaraz', 'Sotelo', 3, 'F', 3, 3),
-('A24', 5, '2021-01-10', '2001-02-20', 'a01705025@natgas.com.mx', 'Fidel', 'Girón', 'Román', 5, 'M', 4, 3),
-('A25', 0, '2010-07-05', '2001-03-09', 'a01705026@natgas.com.mx', 'Ligia', 'Alcázar', 'Arribas', 7, 'F', 5, 4),
-('A26', 0, '2010-11-29', '2001-04-30', 'a01705027@natgas.com.mx', 'Ulises', 'Villa', 'Castell', 18, 'M', 6, 4),
-('A27', 0, '2011-04-10', '2003-03-09', 'a01705028@natgas.com.mx', 'Sara', 'Muñoz', 'Amaya', 19, 'F', 7, 5),
-('A28', 1, '2011-04-16', '1943-12-11', 'a01705029@natgas.com.mx', 'Trinidad', 'Calleja', 'Jaén', 2, 'F', 8, 5),
-('A29', 2, '2011-12-31', '1946-04-07', 'a01705030@natgas.com.mx', 'Gervasio', 'Bermúdez', 'Aguiló', 1, 'M', 9, 1),
-('A3', 3, '2012-07-10', '1946-12-15', 'a01705003@natgas.com.mx', 'Perlita', 'Calzada', 'Lladó', 12, 'F', 3, 3),
-('A30', 3, '2021-03-02', '1947-03-10', 'a01705031@natgas.com.mx', 'Salomé', 'Madrid', 'Vega', 22, 'M', 10, 2),
-('A31', 4, '2012-11-22', '1947-05-10', 'a01705032@natgas.com.mx', 'Angelina', 'Romeu', 'Jiménez', 21, 'F', 1, 3),
-('A32', 5, '2012-12-02', '1949-01-18', 'a01705033@natgas.com.mx', 'Yaiza', 'Saldaña', 'Salom', 20, 'F', 2, 4),
-('A33', 0, '2013-06-17', '1951-03-31', 'a01705034@natgas.com.mx', 'Fortunato', 'Arellano', 'Menéndez', 19, 'M', 3, 5),
-('A34', 0, '2013-07-25', '1953-09-19', 'a01705035@natgas.com.mx', 'Alma', 'Marcela', 'Gozo', 18, 'F', 4, 5),
-('A35', 0, '2013-10-25', '1958-06-14', 'a01705036@natgas.com.mx', 'Rosa', 'Melan', 'Ortiz', 17, 'F', 5, 4),
-('A36', 1, '2014-11-13', '1962-09-20', 'a01705037@natgas.com.mx', 'Florinda', 'Blazquez', 'Torrijos', 16, 'F', 6, 3),
-('A37', 5, '2014-12-01', '1964-01-19', 'a01705038@natgas.com.mx', 'Octavia', 'Robledo', 'Caro', 15, 'F', 7, 2),
-('A38', 5, '2015-01-10', '1966-05-28', 'a01705039@natgas.com.mx', 'Luis Ángel', 'Bayón', 'Posada', 14, 'M', 8, 1),
-('A39', 5, '2015-05-03', '1970-07-13', 'a01704040@natgas.com.mx', 'Nazaret', 'Pino', 'Palma', 13, 'M', 9, 1),
-('A4', 2, '2013-07-11', '1950-05-02', 'a01705004@natgas.com.mx', 'América', 'Paz', 'Álvarez', 12, 'F', 4, 1),
-('A40', 3, '2015-09-03', '1973-03-16', 'a01703041@natgas.com.mx', 'Julio', 'Alberto', 'Gil', 12, 'M', 10, 2),
-('A41', 3, '2017-03-06', '1974-04-04', 'a01700089@natgas.com.mx', 'Mónica', 'Hoz', 'Guillén', 11, 'F', 1, 3),
-('A42', 2, '2018-12-30', '1977-11-04', 'a01700090@natgas.com.mx', 'Eros Giovanni', 'Guillén', 'Velazquez', 10, 'F', 2, 5),
-('A43', 1, '2019-08-08', '1977-11-07', 'a01700091@natgas.com.mx', 'Margarita', 'Segovia', 'Solano', 9, 'M', 3, 5),
-('A44', 2, '2019-11-02', '1978-05-12', 'a01700092@natgas.com.mx', 'Ariadna', 'Amores', 'Perelló', 8, 'F', 4, 4),
-('A45', 4, '2019-11-08', '1982-11-20', 'a01700093@natgas.com.mx', 'Eugenio', 'Iglesia', 'Cadenas', 7, 'M', 5, 3),
-('A46', 3, '2019-11-25', '1988-02-29', 'a01700094@natgas.com.mx', 'Macarena', 'Larrea', 'Jimenez', 6, 'F', 6, 2),
-('A47', 1, '2021-03-01', '1993-10-25', 'a01700097@natgas.com.mx', 'Simón Jacobo', 'Cuevas', 'Coronado', 5, 'M', 7, 1),
-('A48', 2, '2020-10-08', '1989-08-07', 'a01700095@natgas.com.mx', 'Dulce', 'Hidalgo', 'Cañizares', 4, 'F', 8, 2),
-('A49', 5, '2021-02-14', '1991-03-01', 'a01700096@natgas.com.mx', 'Yaiza Agustina', 'Suarez', 'Segarra', 3, 'F', 9, 5),
-('A5', 1, '2013-09-15', '1951-09-29', 'a01705005@natgas.com.mx', 'Trinidad', 'Vazquez', 'Mate', 12, 'F', 5, 2),
-('A50', 2, '2021-03-02', '1996-02-16', 'a01700098@natgas.com.mx', 'José Ernesto', 'Mora', 'Anguita', 2, 'M', 10, 3),
-('A6', 0, '2014-02-10', '1958-03-12', 'a01705006@natgas.com.mx', 'Crescencia', 'Botella', 'Sola', 23, 'F', 6, 3),
-('A7', 5, '2014-04-06', '1958-07-31', 'a01705007@natgas.com.mx', 'Antonia', 'Torrijos', 'Robles', 14, 'F', 7, 4),
-('A8', 5, '2014-08-25', '1960-06-05', 'a01705008@natgas.com.mx', 'Natanael', 'Morillo', 'Ramos', 12, 'M', 8, 5),
-('A9', 3, '2015-04-09', '1964-03-20', 'a01705009@natgas.com.mx', 'Rie', 'Takahashi', 'Megu', 13, 'M', 9, 1);
+INSERT INTO `empleado` (`no_empleado`, `ng_blocks_restantes`, `fecha_contratacion`, `fecha_nacimiento`, `correo_empresarial`, `nombres_empleados`, `apellido_paterno`, `apellido_materno`, `dias_vacaciones_restantes`, `dias_vacaciones_especiales`, `genero_empleado`, `id_area`, `id_rol`) VALUES
+('A1', 5, '2010-08-09', '2021-03-02', 'a01705001@natgas.com.mx', 'Óscar Eduardo', 'Nieto', 'Espitia', 6, 0, 'M', 1, 5),
+('A10', 4, '2015-07-21', '1967-07-18', 'a01705011@natgas.com.mx', 'Adelina', 'Llanos', 'Sanmartín', 23, 0, 'F', 10, 2),
+('A11', 4, '2015-11-24', '1968-12-05', 'a01705012@natgas.com.mx', 'Ciríaco', 'Tejero', 'Gimeno', 1, 0, 'M', 1, 3),
+('A12', 2, '2016-06-29', '1971-12-24', 'a01705013@natgas.com.mx', 'Iris', 'Gomis', 'Batlle', 5, 0, 'F', 2, 4),
+('A13', 2, '2016-08-01', '1975-11-26', 'a01705014@natgas.com.mx', 'Rita', 'Corral', 'Pallarès', 2, 0, 'F', 3, 5),
+('A14', 1, '2016-11-23', '1980-03-20', 'a01705015@natgas.com.mx', 'Amando', 'Roselló', 'Ballester', 5, 0, 'M', 4, 5),
+('A15', 1, '2017-03-12', '1982-05-09', 'a01705016@natgas.com.mx', 'Mayte', 'Canals', 'Carbonell', 9, 0, 'M', 5, 4),
+('A16', 3, '2017-04-22', '1982-09-27', 'a01705017@natgas.com.mx', 'Chelo', 'Coca', 'Mascaró', 18, 0, 'M', 6, 3),
+('A17', 3, '2018-01-31', '2021-03-02', 'a01705018@natgas.com.mx', 'Teresita', 'Castañeda', 'Barba', 12, 0, 'F', 7, 2),
+('A18', 3, '2018-07-15', '1985-06-11', 'a01705019@natgas.com.mx', 'Pascuala', 'Collado', 'Royo', 18, 0, 'F', 8, 1),
+('A19', 5, '2018-09-28', '1993-03-17', 'a01705020@natgas.com.mx', 'Zoraida', 'Criado', 'Zabala', 14, 0, 'F', 9, 1),
+('A2', 4, '2012-02-26', '1945-05-28', 'a01705002@natgas.com.mx', 'Dalila', 'Azcona', 'Garrido', 9, 0, 'F', 2, 4),
+('A20', 4, '2019-08-24', '1996-05-01', 'a01705021@natgas.com.mx', 'Benita', 'Martin', 'Zabala', 9, 0, 'F', 10, 1),
+('A21', 3, '2019-12-03', '1996-05-11', 'a01705022@natgas.com.mx', 'Yolanda', 'Urrutia', 'Bas', 3, 0, 'F', 1, 2),
+('A22', 2, '2020-05-04', '1998-10-31', 'a01705023@natgas.com.mx', 'Dorita', 'Lastra', 'Rosales', 21, 0, 'F', 2, 2),
+('A23', 2, '2020-08-15', '1999-11-16', 'a01705024@natgas.com.mx', 'Perla', 'Alcaraz', 'Sotelo', 3, 0, 'F', 3, 3),
+('A24', 5, '2021-01-10', '2001-02-20', 'a01705025@natgas.com.mx', 'Fidel', 'Girón', 'Román', 5, 0, 'M', 4, 3),
+('A25', 0, '2010-07-05', '2001-03-09', 'a01705026@natgas.com.mx', 'Ligia', 'Alcázar', 'Arribas', 7, 0, 'F', 5, 4),
+('A26', 0, '2010-11-29', '2001-04-30', 'a01705027@natgas.com.mx', 'Ulises', 'Villa', 'Castell', 18, 0, 'M', 6, 4),
+('A27', 0, '2011-04-10', '2003-03-09', 'a01705028@natgas.com.mx', 'Sara', 'Muñoz', 'Amaya', 19, 0, 'F', 7, 5),
+('A28', 1, '2011-04-16', '1943-12-11', 'a01705029@natgas.com.mx', 'Trinidad', 'Calleja', 'Jaén', 2, 0, 'F', 8, 5),
+('A29', 2, '2011-12-31', '1946-04-07', 'a01705030@natgas.com.mx', 'Gervasio', 'Bermúdez', 'Aguiló', 1, 0, 'M', 9, 1),
+('A3', 3, '2012-07-10', '1946-12-15', 'a01705003@natgas.com.mx', 'Perlita', 'Calzada', 'Lladó', 12, 0, 'F', 3, 3),
+('A30', 3, '2021-03-02', '1947-03-10', 'a01705031@natgas.com.mx', 'Salomé', 'Madrid', 'Vega', 22, 0, 'M', 10, 2),
+('A31', 4, '2012-11-22', '1947-05-10', 'a01705032@natgas.com.mx', 'Angelina', 'Romeu', 'Jiménez', 21, 0, 'F', 1, 3),
+('A32', 5, '2012-12-02', '1949-01-18', 'a01705033@natgas.com.mx', 'Yaiza', 'Saldaña', 'Salom', 20, 0, 'F', 2, 4),
+('A33', 0, '2013-06-17', '1951-03-31', 'a01705034@natgas.com.mx', 'Fortunato', 'Arellano', 'Menéndez', 19, 0, 'M', 3, 5),
+('A34', 0, '2013-07-25', '1953-09-19', 'a01705035@natgas.com.mx', 'Alma', 'Marcela', 'Gozo', 18, 0, 'F', 4, 5),
+('A35', 0, '2013-10-25', '1958-06-14', 'a01705036@natgas.com.mx', 'Rosa', 'Melan', 'Ortiz', 17, 0, 'F', 5, 4),
+('A36', 1, '2014-11-13', '1962-09-20', 'a01705037@natgas.com.mx', 'Florinda', 'Blazquez', 'Torrijos', 16, 0, 'F', 6, 3),
+('A37', 5, '2014-12-01', '1964-01-19', 'a01705038@natgas.com.mx', 'Octavia', 'Robledo', 'Caro', 15, 0, 'F', 7, 2),
+('A38', 5, '2015-01-10', '1966-05-28', 'a01705039@natgas.com.mx', 'Luis Ángel', 'Bayón', 'Posada', 14, 0, 'M', 8, 1),
+('A39', 5, '2015-05-03', '1970-07-13', 'a01704040@natgas.com.mx', 'Nazaret', 'Pino', 'Palma', 13, 0, 'M', 9, 1),
+('A4', 2, '2013-07-11', '1950-05-02', 'a01705004@natgas.com.mx', 'América', 'Paz', 'Álvarez', 12, 5, 'F', 4, 1),
+('A40', 3, '2015-09-03', '1973-03-16', 'a01703041@natgas.com.mx', 'Julio', 'Alberto', 'Gil', 12, 0, 'M', 10, 2),
+('A41', 3, '2017-03-06', '1974-04-04', 'a01700089@natgas.com.mx', 'Mónica', 'Hoz', 'Guillén', 11, 0, 'F', 1, 3),
+('A42', 2, '2018-12-30', '1977-11-04', 'a01700090@natgas.com.mx', 'Eros Giovanni', 'Guillén', 'Velazquez', 10, 0, 'F', 2, 5),
+('A43', 1, '2019-08-08', '1977-11-07', 'a01700091@natgas.com.mx', 'Margarita', 'Segovia', 'Solano', 9, 0, 'M', 3, 5),
+('A44', 2, '2019-11-02', '1978-05-12', 'a01700092@natgas.com.mx', 'Ariadna', 'Amores', 'Perelló', 8, 0, 'F', 4, 4),
+('A45', 4, '2019-11-08', '1982-11-20', 'a01700093@natgas.com.mx', 'Eugenio', 'Iglesia', 'Cadenas', 7, 0, 'M', 5, 3),
+('A46', 3, '2019-11-25', '1988-02-29', 'a01700094@natgas.com.mx', 'Macarena', 'Larrea', 'Jimenez', 6, 0, 'F', 6, 2),
+('A47', 1, '2021-03-01', '1993-10-25', 'a01700097@natgas.com.mx', 'Simón Jacobo', 'Cuevas', 'Coronado', 5, 0, 'M', 7, 1),
+('A48', 2, '2020-10-08', '1989-08-07', 'a01700095@natgas.com.mx', 'Dulce', 'Hidalgo', 'Cañizares', 4, 0, 'F', 8, 2),
+('A49', 5, '2021-02-14', '1991-03-01', 'a01700096@natgas.com.mx', 'Yaiza Agustina', 'Suarez', 'Segarra', 3, 0, 'F', 9, 5),
+('A5', 1, '2013-09-15', '1951-09-29', 'a01705005@natgas.com.mx', 'Trinidad', 'Vazquez', 'Mate', 12, 5, 'F', 5, 2),
+('A50', 2, '2021-03-02', '1996-02-16', 'a01700098@natgas.com.mx', 'José Ernesto', 'Mora', 'Anguita', 2, 0, 'M', 10, 3),
+('A6', 0, '2014-02-10', '1958-03-12', 'a01705006@natgas.com.mx', 'Crescencia', 'Botella', 'Sola', 23, 5, 'F', 6, 3),
+('A7', 5, '2014-04-06', '1958-07-31', 'a01705007@natgas.com.mx', 'Antonia', 'Torrijos', 'Robles', 14, 5, 'F', 7, 4),
+('A8', 5, '2014-08-25', '1960-06-05', 'a01705008@natgas.com.mx', 'Natanael', 'Morillo', 'Ramos', 12, 5, 'M', 8, 5),
+('A9', 3, '2015-04-09', '1964-03-20', 'a01705009@natgas.com.mx', 'Rie', 'Takahashi', 'Megu', 13, 5, 'M', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -184,10 +185,8 @@ CREATE TABLE `noticia` (
 --
 
 INSERT INTO `noticia` (`id_noticia`, `imagen_noticia`, `fecha_noticia`) VALUES
-(1, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-16'),
 (2, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-17'),
-(3, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-15'),
-(4, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-14');
+(3, 'https://i.ibb.co/9yk4DH7/image.png', '2022-03-15');
 
 -- --------------------------------------------------------
 
@@ -276,8 +275,7 @@ CREATE TABLE `publicacion` (
 INSERT INTO `publicacion` (`id_publicacion`, `titulo_publicacion`, `descripcion_publicacion`, `imagen_publicacion`, `fecha_publicacion`) VALUES
 (1, 'Curso de Inglés', 'Inscribite a los cursos de inglés', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-04-11'),
 (2, 'Limpieza dental', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-04-11'),
-(3, 'Día del padre', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-04-11'),
-(4, 'Trae a tu hijo al trabajo', 'Lorem Ipsum', 'https://art.pixilart.com/thumb/adc680302f5c8a3.png', '2022-04-11');
+(12, 'SDWVBJKCWKERHCF ERBMDNB FSD', 'Lorem ipsum dolor sit amet consectetur adipiscing elit facilisi, potenti vehicula ut eleifend netus felis tempus scelerisque proin, laoreet risus sem egestas hendrerit natoque vestibulum. Per tristique inceptos sapien nostra ornare hendrerit erat etiam, facilisis bibendum blandit placerat venenatis ', '', '2022-04-15');
 
 -- --------------------------------------------------------
 
@@ -313,7 +311,7 @@ INSERT INTO `rol` (`id_rol`, `nombre_rol`) VALUES
 (2, 'RRHH'),
 (3, 'Líder'),
 (4, 'Usuario General'),
-(5, 'Operativos');
+(5, 'Operativo');
 
 -- --------------------------------------------------------
 
@@ -478,7 +476,7 @@ ALTER TABLE `ng_block`
 -- AUTO_INCREMENT de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `permiso_informal`
@@ -496,13 +494,13 @@ ALTER TABLE `prestaciones`
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_publicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `reportes_mensuales`
 --
 ALTER TABLE `reportes_mensuales`
-  MODIFY `id_reportes_mensuales` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reportes_mensuales` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`

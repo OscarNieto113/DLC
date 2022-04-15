@@ -41,36 +41,39 @@
               <br>
 
                 <div class="container-fluid">
-                  <div class="row form-group">
 
 
                     <form>
-                        <label for="turno_ng_block" class="col-sm-3 col-form-label"><b>Elige la fecha*</b></label>
-                        <div class="col-sm-4">
-                            <div class="input-group date" id="datepicker">
-                              <input type="text" id="all_dates" name="all_dates" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required/>
-                              <span class="input-group-append">
-                                    <span class="input-group-text bg-white">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
+                        <div class="row form-group">
+                              <label for="all_dates" class="col-sm-4 col-form-label"><b>Elige la fecha*</b></label>
+                              <div class="col-sm-3">
+                                  <div class="input-group date" id="datepicker">
+                                      <input type="text" id="all_dates" name="all_dates" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
+                                      <span class="input-group-append">
+                                          <span class="input-group-text bg-white">
+                                              <i class="fa fa-calendar"></i>
+                                          </span>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
                       </form>
-                    </div>
                   <div>
                     <br>
                       <!-- Inicia form-->
                       <form action="/dlc/s_vacaciones" method="POST">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-                        <label  for="responsable_ausencia" class="col-form-label"><b>Responsable durante tu ausencia*</b></label>
-                        <select name="responsable_ausencia" class="form-select" aria-label="Default select example" required>
-                          <option value="" disabled selected>Responsable</option>
-                          <% for (let empleado1 of empleado) { %>
-                              <option value="<%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%>"><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></option>
-                          <% } %>
-                        </select>
-
+                        <div class="row form-group">
+                          <label for="responsable_ausencia" class="col-sm-4 col-form-label"><b>Responsable durante tu ausencia*</b></label>
+                          <div class="col-sm-3">
+                            <select name="responsable_ausencia" class="form-select" aria-label="Default select example" required>
+                              <option value="" disabled selected>Responsable</option>
+                              <% for (let empleado1 of empleado) { %>
+                                  <option value="<%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%>"><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></option>
+                              <% } %>
+                            </select>
+                          </div>
+                        </div>
                       <br><br>
                       <!-- DATOS FAKE-->
                       <input type="hidden" id="fecha_ultimo_dia" name="fecha_ultimo_dia">

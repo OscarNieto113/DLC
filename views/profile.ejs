@@ -65,6 +65,15 @@
                           <input type="text" class="form-control" name="vacacionesR" id="vacacionesR" value="<%= empleado1.dias_vacaciones_restantes %>" disabled>
                       </div>
                   </div>
+                  <div class="form-group">
+                      <div class="col-xs-6">
+                        <br>
+                        <br>
+                        <br>
+                          <label for="vacacionesEx"><h4>Días de vacaciones extras</h4></label>
+                          <input type="text" class="form-control" name="vacacionesEx" id="vacacionesEx" value="<%= empleado1.dias_vacaciones_especiales %>" disabled>
+                      </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,6 +112,15 @@
                       </div>
                       <% } %>
                   <% } %>
+                  <div class="form-group">
+                      <div class="col-xs-6">
+                        <br>
+                        <br>
+                        <br>
+                          <label for="rol_u"><h4>Rol</h4></label>
+                          <input type="text" class="form-control" name="rol_u" id="rol_u" value="<%= empleado1.nombre_rol %>" disabled>
+                      </div>
+                  </div>
                 </div>
               </div>
               <br><br>
@@ -191,7 +209,7 @@
             <form action="/dlc/buscar_empleado/:no_empleado/m_rol" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
               <div class="row form-group">
-                <label for="giveVacations">Modificar Rol: </label>
+                <label for="n_rol">Modificar Rol: </label>
                 <div class="col-sm-2">
                   <select name="n_rol" class="form-select" aria-label="Default select example" required>
                     <option value="" disabled selected>Nuevo Rol</option>

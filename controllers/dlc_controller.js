@@ -732,21 +732,25 @@ exports.get_perfil_empleado = (request, response, next) => {
           .then(([rows, fieldData]) => {
             Empleado.getRol(request.params.no_empleado)
                 .then(([rol2, fieldData]) => {
-                  console.log(rows)
-                    response.render('profile', {
-                      no_empleado: request.session.user_no_empleado,
-                      userRol: rol[0].id_rol,
-                      userRol2: rol2[0].id_rol,
-                      empleado: rows,
-                      success: request.flash("success"),
-                      error: request.flash("error"),
-                      success1: request.flash("success1"),
-                      error1: request.flash("error1"),
-                      isLoggedIn: request.session.isLoggedIn === true ? true : false
-                });
+                  Rol.fetchAll()
+                      .then(([rows2, fieldData]) => {
+                        console.log(rows)
+                        response.render('profile', {
+                          no_empleado: request.session.user_no_empleado,
+                          userRol: rol[0].id_rol,
+                          userRol2: rol2[0].id_rol,
+                          empleado: rows,
+                          rol: rows2,
+                          success: request.flash("success"),
+                          error: request.flash("error"),
+                          success1: request.flash("success1"),
+                          error1: request.flash("error1"),
+                          isLoggedIn: request.session.isLoggedIn === true ? true : false
+                        });
+              }).catch(err => console.log(err));
             }).catch(err => console.log(err));
+          }).catch(err => console.log(err));
         }).catch(err => console.log(err));
-      }).catch(err => console.log(err));
     };
 
 //------------------------Consultar informacion personal (perfil)---------------------------------
@@ -844,6 +848,33 @@ exports.post_give_ng_blocks = (request, response, next) => {
         }
   };
 //-------------------------Dar Ng Blocks (perfil)---------------------------------
+
+//------------------------Modificar Rol (perfil)----------------------------------
+exports.post_give_new_rol = (request, response, next) => {
+    console.log('POST /dlc/buscar_empleado/:no_empleado/m_rol');
+    console.log(request.body);
+    const n_rol = request.body.n_rol;
+    const no_empleado = request.body.no_empleado;
+
+    console.log(n_rol);
+    console.log(no_empleado);
+
+      if (n_rol == undefined  ){
+        request.flash('error', 'No se recibió ningún dato.');
+        response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+      }
+
+      else {
+        Rol.modifyRol(n_rol, no_empleado)
+        .then(() => {
+            console.log("Se guardó los cambios");
+            request.flash('success', 'El rol de este empleado fue cambiado con éxito');
+            response.redirect('/dlc/buscar_empleado/'+ no_empleado);
+        })
+        .catch(err => console.log(err));
+      }
+  };
+//------------------------Modificar Rol (perfil)----------------------------------
 
 //-------------------------Buscar Empleado (Ajax)---------------------------------
 exports.search_empleado = (request, response, next) => {

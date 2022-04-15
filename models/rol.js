@@ -16,4 +16,11 @@ module.exports = class rol {
       return db.execute('SELECT * FROM rol');
   }
 
+  static modifyRol(id_rol, no_empleado) {
+      return db.execute(
+        'UPDATE empleado ' +
+          'SET id_rol =  ? ' +
+        'WHERE ' +
+          'no_empleado = ? ', [id_rol, no_empleado]);
+  }
 }

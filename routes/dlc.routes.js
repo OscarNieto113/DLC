@@ -58,6 +58,9 @@ router.post('/buscar_empleado/:no_empleado/vacaciones', isAuth, dlc_controller.p
 //Dar Ng Blocks
 router.post('/buscar_empleado/:no_empleado/ng_blocks', isAuth, dlc_controller.post_give_ng_blocks);
 
+//Modificar el rol del chango
+router.post('/buscar_empleado/:no_empleado/m_rol', isAuth, dlc_controller.post_give_new_rol);
+
 //Reporte NPS
 //router.get('/reportes_mensuales', dlc_controller.get_reportes_mensuales);
 
@@ -79,6 +82,7 @@ router.post('/profile/ngblocks_solicitados/delete/:id_ng_block', isAuth, dlc_con
 //router.post('/objetivo', dlc_controller.post_objetivo);
 router.post('/noticia' , multer({ storage: fileStorage }).single('imagen_noticia'), dlc_controller.post_noticia);
 router.post('/publicacion' , multer({ storage: fileStorage }).single('imagen_publicacion'), dlc_controller.post_publicacion);
+router.post('/publicacion-sin-imagen',isAuth, dlc_controller.post_publicacion_sin_imagen);
 router.post('/publicacion/delete/:id_publicacion', isAuth, dlc_controller.post_delete_publicacion);
 //router.post('/reportes_mensuales/post',multer({ storage: fileStorage }).single('imagen_reporte'),dlc_controller.post_reportes_mensuales);
 router.post('/noticia/delete/:id_noticia', isAuth, dlc_controller.post_delete_noticia);

@@ -17,7 +17,9 @@
         </div>
     <% } %>
     </section>
-<h1 class="display-6">Anuncios</h1>
+<h1 class="display-6" style="text-align: center;"">Anuncios </h1>
+<br>
+<br>
 <% if (userRol == 1 || userRol == 2 ) {%>
   <div style="text-align: right;">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res">Agregar Anuncio</button>
@@ -47,6 +49,42 @@
                   <input type="submit" value="Enviar" class="btn btn-primary">
               </form>
 
+              <div style="text-align: right;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3" data-whatever="@res">Agregar anuncio sin imagen</button>
+                  <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel3">Agregar anuncio sin imagen</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+
+                          <form action="/dlc/publicacion-sin-imagen/?_csrf=<%= csrfToken %>" method="POST" >
+                            <div class="form-group" style="text-align: left;"">
+
+                              <label for="titulo_publicacion" class="col-form-label">Título de la publicación:</label>
+                              <input type="text" class="form-control" id="titulo_publicacion" name="titulo_publicacion" autocomplete="off" >
+
+                              <label for="descripcion_publicacion" class="col-form-label">Descripción de la publicación:</label>
+                              <input type="text" class="form-control" id="descripcion_publicacion" name="descripcion_publicacion" autocomplete="off" >
+
+                              <input type="hidden" class="form-control" id="imagen_publicacion" name="imagen_publicacion" value=""><br>
+
+                              <input type="submit" value="Enviar" class="btn btn-primary">
+                          </form>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -64,24 +102,27 @@
   <% if (publicacion.length > 0) { %>
     <% for (let publicacion1 of publicacion) { %>
       <% if (publicacion1.imagen_publicacion == '') { %>
-        <div class="col-sm-6">
-          <br>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
-              <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
-              <% if (userRol == 1 || userRol == 2 ) {%>
-                <form action="/dlc/publicacion/delete/<%= publicacion1.id_publicacion %>" method="POST">
-                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-                  <input type="hidden" id="id_publicacion" name="id_publicacion" value="<%= publicacion1.id_publicacion %>"/>
-                  <div style="text-align: right;">
-                    <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
-                  </div>
-                </form>
-              <% } %>
+          <div class="col-sm-6">
+            <div class="card" style="width: 100%;">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
+                  <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
+                  <% if (userRol == 1 || userRol == 2 ) {%>
+                    <form action="/dlc/publicacion/delete/<%= publicacion1.id_publicacion %>" method="POST">
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                      <input type="hidden" id="id_publicacion" name="id_publicacion" value="<%= publicacion1.id_publicacion %>"/>
+                      <div style="text-align: right;">
+                        <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+                      </div>
+                    </form>
+                  <% } %>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+
+
         <% } else { %>
           <div class="col-sm-6">
             <div class="card mb-3">

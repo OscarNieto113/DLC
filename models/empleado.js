@@ -33,9 +33,9 @@ module.exports = class Empleado {
 
     static fetchEmpleadoAll(no_empleado) {
         return db.execute(
-            `SELECT e.no_empleado, ng_blocks_restantes, correo_empresarial, nombres_empleados, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, nombre_area, date_format(fecha_contratacion, '%d/%m/%Y') as fecha_contratacion, date_format(fecha_nacimiento, '%d/%m/%Y') as fecha_nacimiento ` +
-            'FROM empleado e, area a ' +
-            'WHERE e.id_area = a.id_area AND e.no_empleado=?', [no_empleado]);
+            `SELECT r.nombre_rol, e.no_empleado, ng_blocks_restantes, correo_empresarial, nombres_empleados, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, nombre_area, date_format(fecha_contratacion, '%d/%m/%Y') as fecha_contratacion, date_format(fecha_nacimiento, '%d/%m/%Y') as fecha_nacimiento, dias_vacaciones_especiales ` +
+            'FROM empleado e, area a, rol r ' +
+            'WHERE r.id_rol = e.id_rol AND e.id_area = a.id_area AND e.no_empleado=?', [no_empleado]);
     }
 
     static fetchEmpleadoArea(id_area) {

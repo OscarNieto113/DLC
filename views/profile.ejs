@@ -65,6 +65,15 @@
                           <input type="text" class="form-control" name="vacacionesR" id="vacacionesR" value="<%= empleado1.dias_vacaciones_restantes %>" disabled>
                       </div>
                   </div>
+                  <div class="form-group">
+                      <div class="col-xs-6">
+                        <br>
+                        <br>
+                        <br>
+                          <label for="vacacionesEx"><h4>Días de vacaciones extras</h4></label>
+                          <input type="text" class="form-control" name="vacacionesEx" id="vacacionesEx" value="<%= empleado1.dias_vacaciones_especiales %>" disabled>
+                      </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,6 +112,15 @@
                       </div>
                       <% } %>
                   <% } %>
+                  <div class="form-group">
+                      <div class="col-xs-6">
+                        <br>
+                        <br>
+                        <br>
+                          <label for="rol_u"><h4>Rol</h4></label>
+                          <input type="text" class="form-control" name="rol_u" id="rol_u" value="<%= empleado1.nombre_rol %>" disabled>
+                      </div>
+                  </div>
                 </div>
               </div>
               <br><br>
@@ -156,17 +174,19 @@
           </div>
           <br>
 
-          <% if (userRol == 1 || userRol == 2 ) {%>
-            <% if (empleado1.no_empleado != no_empleado ) {%>
-          <form action="/dlc/buscar_empleado/:no_empleado/vacaciones" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-            <label for="giveVacations">Agregar dias de vacaciones: </label>
-            <input type="number" id="giveVacations" name="giveVacations" min="1" max="5" class="btn btn-light" s placeholder="0" required>
-            <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
-            <input type="submit" class="btn btn-primary">
-          </form>
+
+            <% if (userRol == 1 || userRol == 2 ) {%>
+              <% if (empleado1.no_empleado != no_empleado ) {%>
+            <form action="/dlc/buscar_empleado/:no_empleado/vacaciones" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+              <label for="giveVacations">Agregar Vacaciones: </label>
+              <input type="number" id="giveVacations" name="giveVacations" min="1" max="5" class="btn btn-light" s placeholder="0" required>
+              <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
+              <input type="submit" class="btn btn-primary" value="Guardar">
+            </form>
+              <% } %>
             <% } %>
-          <% } %>
+
 
           <% if (userRol == 1 || userRol == 2 ) {%>
             <% if (empleado1.no_empleado != no_empleado ) {%>
@@ -177,9 +197,34 @@
                 <label for="giveNgBlocks">Agregar Ng Blocks: </label>
                 <input type="number" id="giveNgBlocks" name="giveNgBlocks" min="1" max="5" class="btn btn-light" s placeholder="0" required>
                 <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
-                <input type="submit" class="btn btn-primary">
+                <input type="submit" class="btn btn-primary" value="Guardar">
               </form>
             <% } %>
+          <% } %>
+        <% } %>
+
+        <% if (userRol == 1 || userRol == 2 ) {%>
+          <% if (empleado1.no_empleado != no_empleado ) {%>
+            <br>
+            <form action="/dlc/buscar_empleado/:no_empleado/m_rol" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+              <div class="row form-group">
+                <label for="n_rol">Modificar Rol: </label>
+                <div class="col-sm-2">
+                  <select name="n_rol" class="form-select" aria-label="Default select example" required>
+                    <option value="" disabled selected>Nuevo Rol</option>
+                    <% for (let rol1 of rol) { %>
+                        <option value="<%=rol1.id_rol%>"><%=rol1.nombre_rol%></option>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="col-sm-1">
+                  <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
+                  <input type="submit" class="btn btn-primary" value="Guardar">
+                </div>
+              </div>
+            </form>
+            <br>
           <% } %>
         <% } %>
 

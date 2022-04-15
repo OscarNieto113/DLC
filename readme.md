@@ -30,9 +30,9 @@ http://localhost:3000/users/login
 4. Busqueda de empleado por AJAX /LISTO
 5. Eliminar solicitudes en estado pendiente / LISTO
 6. Postear con tu no_empleado /LISTO
-7. Registrar Empleado (No jala departamento, agregar rol a la pestaña) / Ya jala departamento, falta roles
+7. Registrar Empleado (No jala departamento, agregar rol a la pestaña) / Ya jala departamento, falta roles (Ya merito)
 8. Agregar Vacaciones y NG Blocks adicionales / LISTO
-9. Modificar Rol desde el perfil (Pa mañana)
+9. Modificar Rol desde el perfil / LISTO
 10. Calcular los dias de vacaciones restantes
 11. Cookies y Toast LISTO
 

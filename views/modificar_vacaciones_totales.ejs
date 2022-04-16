@@ -34,18 +34,26 @@
 					</tr>
 					<% for (let prestaciones1 of prestaciones) { %>
 						<tr>
+              <% if (userRol != 1) {%>
+                <td id="col0"><input type="number" name="min_prestaciones" id="min_prestaciones" value="<%=prestaciones1.min_prestaciones%>" autocomplete="off" class="form-control" disabled/></td>
+  							<td id="col1"><input type="number" name="max_prestaciones" id="max_prestaciones" value="<%=prestaciones1.max_prestaciones%>" autocomplete="off" class="form-control" disabled/></td>
+  							<td id="col2"><input type="number" name="dias_prestaciones" id="dias_prestaciones" value="<%=prestaciones1.dias_prestaciones%>" autocomplete="off" class="form-control" disabled/></td>
+              <% } %>
+
               <% if (userRol == 1) {%>
               <form action="/dlc/vacaciones_totales/<%=prestaciones1.id_prestaciones%>" method="post">
-              <% } %>
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <input type="hidden" name="id_prestaciones" id="id_prestaciones" value="<%=prestaciones1.id_prestaciones%>" class="form-control"/>
 							<td id="col0"><input type="number" name="min_prestaciones" id="min_prestaciones" value="<%=prestaciones1.min_prestaciones%>" autocomplete="off" class="form-control"/></td>
 							<td id="col1"><input type="number" name="max_prestaciones" id="max_prestaciones" value="<%=prestaciones1.max_prestaciones%>" autocomplete="off" class="form-control"/></td>
 							<td id="col2"><input type="number" name="dias_prestaciones" id="dias_prestaciones" value="<%=prestaciones1.dias_prestaciones%>" autocomplete="off" class="form-control"/></td>
+              <% } %>
+              
               <% if (userRol == 1) {%>
               <td id="col3"><input type="submit" value="Guardar cambios" class="btn btn-primary"/></td>
               </form>
               <% } %>
+
               <% if (userRol == 1) {%>
               <td id="col4">
                 <form action="/dlc/vacaciones_totales/delete/<%= prestaciones1.id_prestaciones %>" method="POST">

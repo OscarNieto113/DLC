@@ -472,6 +472,7 @@ exports.post_reject_vacaciones = (request, response, next) => {
         .then(([rows, fielData])=>{
           console.log(rows[0].dias_vacaciones_restantes);
           const dias_vacaciones_restantes = rows[0].dias_vacaciones_restantes;
+
           if (dias_vacaciones_restantes < dias_solicitados){
             request.flash('error', 'Este Usuario no posee días de vacaciones');
             response.redirect('/dlc/a_vacacionesp/1');
@@ -480,19 +481,17 @@ exports.post_reject_vacaciones = (request, response, next) => {
           else {
             Vacaciones
               .aproveeVacations(
-                request.body.estatus_vacaciones,
-                request.body.dias_solicitados,
-                request.body.folio,
-                request.body.no_empleado)
+                estatus_vacaciones,
+                dias_solicitados,
+                folio,
+                no_empleado)
               .then(() => {
                   console.log("Se aprobo la solicitud");
                   request.flash('success', 'La solicitud con folio ' + folio + ' fue APROBADA con éxito');
                   response.redirect('/dlc/a_vacacionesp/1');
               }).catch(err => console.log(err));
             }
-          }).catch((error)=>{
-              console.log(error)
-          });
+          }).catch(err => console.log(err));
         };
 
 exports.search_vacaciones = (request, response, next) => {

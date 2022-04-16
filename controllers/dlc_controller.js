@@ -88,7 +88,7 @@ exports.post_solicitar_ng_block = (request, response, next) => {
 exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
   const no_empleado = request.session.user_no_empleado;
   console.log('GET /dlc/a_ng_blocksp/:page');
-  var perPage = 5;
+  var perPage = 10;
   var page = request.params.page || 1;
   Empleado.getRol(no_empleado)
       .then(([rol, fieldData]) => {

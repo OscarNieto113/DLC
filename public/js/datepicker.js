@@ -6,7 +6,6 @@ $(document).ready(function(){
     $('#fecha_ng').datepicker({
       format: 'dd/mm/yyyy',
       orientation: "bottom left",
-      startDate: new Date(),
       daysOfWeekDisabled: [0,6],
       todayHighlight: true,
       autoclose: true

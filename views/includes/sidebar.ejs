@@ -34,31 +34,29 @@
             </a>
           </li>
 
+          <!-- Solicitud vacaciones -->
+          <li class="nav-item">
+            <a href="/dlc/s_vacaciones" class="nav-link px-0 align-middle ">
+              <i class="fs-4 bi-archive"></i>
+              <span class="ms-1 d-none d-sm-inline">Solicitar Vacaciones</span>
+            </a>
+          </li>
+
           <% if (userRol == 1 || userRol == 2 || userRol == 3) {%>
           <!-- Aprobacion vacaciones -->
           <li class="nav-item">
             <a href="/dlc/a_vacacionesp/1" class="nav-link px-0 align-middle ">
-              <i class="fs-4 bi-calendar"></i>
+              <i class="fs-4 bi-calendar-check-fill"></i>
               <span class="ms-1 d-none d-sm-inline">Aprobar Vacaciones</span>
             </a>
           </li>
           <% } %>
 
-          <!-- Solicitud vacaciones -->
-          <li class="nav-item">
-            <a href="/dlc/s_vacaciones" class="nav-link px-0 align-middle ">
-              <i class="fs-4 bi-calendar"></i>
-              <span class="ms-1 d-none d-sm-inline">Solicitar Vacaciones</span>
-            </a>
-          </li>
-
-
-
           <% if (userRol == 1 || userRol == 2 || userRol == 3 || userRol == 4) {%>
           <!-- Solicitud NG block -->
           <li class="nav-item">
             <a href="/dlc/solicitar_ng_block" class="nav-link px-0">
-              <i class="fs-4 bi-bootstrap"></i>
+              <i class="fs-4 bi-archive"></i>
               <span class="ms-1 d-none d-sm-inline">Solicitar NG Blocks</span>
             </a>
           </li>
@@ -68,7 +66,7 @@
           <!-- Aprobacion NG block -->
           <li class="nav-item">
             <a href="/dlc/a_ng_blocksp/1" class="nav-link px-0">
-              <i class="fs-4 bi-bootstrap"></i>
+              <i class="fs-4 bi-calendar-check-fill"></i>
               <span class="ms-1 d-none d-sm-inline">Aprobar NG Block</span>
             </a>
           </li>

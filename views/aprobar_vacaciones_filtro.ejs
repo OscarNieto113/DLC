@@ -95,6 +95,7 @@
             <td><center><%= vacaciones1.estatus_vacaciones %></center></td>
             <% if (userRol == 1 || userRol == 3) {%>
             <td>
+              <% if (vacaciones1.estatus_vacaciones === "Pendiente") { %>
               <center>
                 <form action="/dlc/a_vacacionesp/<%=current%>/aprovee" method="POST">
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
@@ -104,10 +105,12 @@
                   <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color: #86b049"/>
                 </form>
               </center>
+              <% } %>
             </td>
             <% } %>
             <% if (userRol == 1 || userRol == 3) {%>
             <td>
+              <% if (vacaciones1.estatus_vacaciones === "Pendiente") { %>
               <center>
                 <form action="/dlc/a_vacacionesp/<%=current%>/reject" method="POST">
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
@@ -116,6 +119,7 @@
                 </form>
               </center>
             </td>
+            <% } %>
             <% } %>
           </tr>
           <% } %>
@@ -130,11 +134,8 @@
       <nav aria-label="Paginación solicitudes">
         <ul class="pagination justify-content-center">
           <% if (current == 1) { %>
-          <li class="page-item disabled">
-            <a class="page-link">First</a>
-            </li>
-          <% } else { %>
-          <li class="page-item"><a class ="page-link" href="/dlc/a_vacacionesp/1">First</a></li>
+
+          <% } else {%>
           <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
           <% if (i !== 1) { %>
           <li class="page-item disabled"><a class="page-link">...</a></li>
@@ -145,11 +146,7 @@
           <li><a class="page-link" href="<%=i%>"><%=i%></a></li>
           <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
           <li class="page-item disabled"><a class="page-link">...</a></li>
-          <% } %> <% } %> <% if (current == pages) { %>
-          <li class="page-item disabled"><a class="page-link">Last</a></li>
-          <% } else { %>
-          <li><a class="page-link" href="/dlc/a_vacacionesp/<%= pages %>">Last</a></li>
-          <% } %>
+          <% } %> <% } %>
           <% } %>
           </ul>
       </nav>
@@ -227,10 +224,8 @@
   $('#departamento1').on('change', function getDeparatamento() {
     var departamento = this.value;
     document.getElementById("departamento1").value = departamento;
-    console.log(departamento);
 
     var href = `/dlc/a_vacaciones_filtro/departamento/${departamento}/page/1`;
-    console.log(href);
     $('#filtro').attr('href', href);
   });
 </script>

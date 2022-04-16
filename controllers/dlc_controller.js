@@ -375,7 +375,7 @@ exports.post_solicitar_vacaciones = (request, response, next) => {
 exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
   const no_empleado = request.session.user_no_empleado;
   console.log('GET /dlc/a_vacaciones/:page');
-  var perPage = 5;
+  var perPage = 10;
   var page = request.params.page || 1;
   Area.fetchAll()
   .then(([area, fieldData]) => {
@@ -388,6 +388,38 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
                   let totalesV = count[0].num
                   console.log(totalesV)
                     response.render('aprobar_vacaciones', {
+                        area: area,
+                        userRol: rol[0].id_rol,
+                        vacaciones: vacaciones,
+                        current: page,
+                        pages: Math.ceil(totalesV / perPage),
+                        success: request.flash("success"),
+                        error: request.flash("error"),
+                        isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
+                }).catch(err => console.log(err));
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+};
+
+exports.get_aprobar_vacaciones_filtro = (request, response, next) => {
+  const no_empleado = request.session.user_no_empleado;
+  console.log('GET /dlc/a_vacaciones/departamento/:id_area');
+  var perPage = 10;
+  var page = request.params.page || 1;
+  Area.fetchAll()
+  .then(([area, fieldData]) => {
+      Empleado.getRol(no_empleado)
+      .then(([rol, fieldData]) => {
+          Vacaciones.fetchFiltro(perPage, ((perPage * page) - perPage), request.params.id_area)
+          .then(([vacaciones, fieldData]) => {
+            console.log(vacaciones)
+              Vacaciones.count2(request.params.id_area)
+              .then(([count, fieldData]) => {
+                  let totalesV = count[0].num
+                  console.log(totalesV)
+                    response.render('aprobar_vacaciones_filtro', {
                         area: area,
                         userRol: rol[0].id_rol,
                         vacaciones: vacaciones,

@@ -34,8 +34,8 @@ router.post('/s_vacaciones', isAuth, dlc_controller.post_solicitar_vacaciones);
 
 //Aprobar Vacaciones
 router.get('/a_vacacionesp/:page', isAuth, dlc_controller.get_aprobar_vacaciones_pagination);
+router.get('/a_vacaciones_filtro/departamento/:id_area/page/:page', isAuth, dlc_controller.get_aprobar_vacaciones_filtro);
 router.post('/a_vacacionesp/:page/reject', isAuth, dlc_controller.post_reject_vacaciones);
-//router.post('/a_vacacionesp/:page/reject/:folio', dlc_controller.post_reject_vacaciones);
 router.post('/a_vacacionesp/:page/aprovee', isAuth, dlc_controller.post_aprovee_vacaciones);
 router.get('/a_vacacionesp/:page/filtrar/:search', isAuth, dlc_controller.search_vacaciones);
 

@@ -37,10 +37,10 @@ http://localhost:3000/users/login
 11. Cookies y Toast LISTO
 
 ## Cosas pa el domingo 11:59 pm
-1. Arreglar aprobar vacaciones (lo petó oscar)
-2. Filtro pa ng Blocks
-3. Calcular los dias de vacaciones restantes (opcional)
-4.
+1. Arreglar aprobar vacaciones / LISTO
+2. Filtro pa ng Blocks / LISTO
+3. Calcular los dias de vacaciones restantes /Pendiente
+4. Vacaciones especiales /Pendiente
 
 ## Mafufadas
 Cambios en la base de datos ACTUALIZAR DB

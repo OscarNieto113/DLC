@@ -64,7 +64,7 @@
             <th scope="col"><center>Descripción</center></th>
             <th scope="col"><center>Turno</center></th>
             <th scope="col"><center>Estatus actual</center></th>
-            <% if (userRol == 1) {%>
+            <% if (userRol == 1 || userRol == 2) {%>
             <th scope="col"><center>Departamento</center></th>
             <% } %>
             <% if (userRol == 1 || userRol == 3) {%>
@@ -84,10 +84,10 @@
             <td><center><%= ng_block1.descripcion_ng_block %></center></td>
             <td><center><%= ng_block1.turno_ng_block %></center></td>
             <td><center><%= ng_block1.estatus_ng_block %></center></td>
-            <% if (userRol == 1) {%>
+            <% if (userRol == 1 || userRol == 2) {%>
             <td><center><%= ng_block1.nombre_area %></center></td>
             <% } %>
-            
+
             <% if (userRol == 1 || userRol == 3) {%>
             <td>
               <center>

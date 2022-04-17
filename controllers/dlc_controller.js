@@ -90,15 +90,18 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
   console.log('GET /dlc/a_ng_blocksp/:page');
   var perPage = 10;
   var page = request.params.page || 1;
-  Empleado.getRol(no_empleado)
-      .then(([rol, fieldData]) => {
-      Ng_Block.fetchPagination(perPage, ((perPage * page) - perPage))
-        .then(([ng_block, fieldData]) => {
-          Ng_Block.count()
-            .then(([count, fieldData]) => {
-              let totalesN = count[0].num
-              console.log(totalesN)
-                response.render('aprobar_ngblocks', {
+  Area.fetchAll()
+  .then(([area, fieldData]) => {
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+          Ng_Block.fetchPagination(perPage, ((perPage * page) - perPage))
+          .then(([ng_block, fieldData]) => {
+            Ng_Block.count()
+              .then(([count, fieldData]) => {
+                let totalesN = count[0].num
+                console.log(totalesN)
+                  response.render('aprobar_ngblocks', {
+                    area: area,
                     userRol: rol[0].id_rol,
                     ng_block: ng_block,
                     current: page,
@@ -106,9 +109,41 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                     success: request.flash("success"),
                     error: request.flash("error"),
                     isLoggedIn: request.session.isLoggedIn === true ? true : false
-                });
-            }).catch(err => console.log(err));
+              });
+          }).catch(err => console.log(err));
         }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+};
+
+exports.get_aprobar_ngblocks_filtro = (request, response, next) => {
+  const no_empleado = request.session.user_no_empleado;
+  console.log('GET dlc/a_ngblocks/departamento/:id_area');
+  var perPage = 10;
+  var page = request.params.page || 1;
+  Area.fetchAll()
+  .then(([area, fieldData]) => {
+    Empleado.getRol(no_empleado)
+        .then(([rol, fieldData]) => {
+          Ng_Block.fetchFiltro(perPage, ((perPage * page) - perPage), request.params.id_area)
+          .then(([ng_block, fieldData]) => {
+            Ng_Block.count2(request.params.id_area)
+              .then(([count, fieldData]) => {
+                let totalesN = count[0].num
+                console.log(totalesN)
+                  response.render('aprobar_ngblocks_filtro', {
+                    area: area,
+                    userRol: rol[0].id_rol,
+                    ng_block: ng_block,
+                    current: page,
+                    pages: Math.ceil(totalesN / perPage),
+                    success: request.flash("success"),
+                    error: request.flash("error"),
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+              });
+          }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+      }).catch(err => console.log(err));
     }).catch(err => console.log(err));
 };
 

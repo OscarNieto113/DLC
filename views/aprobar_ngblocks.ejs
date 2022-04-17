@@ -1,7 +1,7 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/topbar.ejs') %>
 <%- include('includes/sidebar.ejs') %>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div class="col py-3">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -23,16 +23,34 @@
         <% } %>
 
       <h1 class="display-4">Aprobar NG Blocks</h1> <br>
+      <div class="row form-group">
 
-      <% if (userRol == 1 || userRol == 2 || userRol == 3) {%>
-      <div class="input-group rounded col-sm-6">
-        <input type="text" name="search_ngblock" id="search_ngblock" class="form-control rounded" placeholder="Buscar Solicitudes Anteriores" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
-        <span class="input-group-text border-0" id="search-addon">
-          <i class="bi bi-search"></i>
-        </span>
+      <% if (userRol == 1 || userRol == 2 ) {%>
+        <label for="estatus_ng_block"><b>Filtrar por Departamento</b></label>
+        <div class="col-sm-3">
+          <select name="departamento1" id="departamento1" class="form-select" aria-label="Default select example" required>
+            <option value="" disabled selected>Departamento</option>
+            <% for (let area1 of area) { %>
+              <option value="<%=area1.id_area%>"><%=area1.nombre_area%></option>
+            <% } %>
+          </select><br>
       </div>
+
+        <div class="col-sm-3">
+          <a id="filtro" href="/dlc/a_ng_blocksp/1">
+          <button type="button" class="btn btn-light">Filtrar</button>
+          </a>
+        </div>
+
+        <div class="input-group rounded col-sm-5">
+          <input type="text" name="search_ngblock" id="search_ngblock" class="form-control rounded" placeholder="Buscar Solicitudes Anteriores" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
+          <span class="input-group-text border-0" id="search-addon">
+            <i class="bi bi-search"></i>
+          </span>
+        </div>
       <% } %>
-      <br />
+    </div>
+
 
 
       <div id="respuesta_ajax">
@@ -46,6 +64,9 @@
             <th scope="col"><center>Descripción</center></th>
             <th scope="col"><center>Turno</center></th>
             <th scope="col"><center>Estatus actual</center></th>
+            <% if (userRol == 1) {%>
+            <th scope="col"><center>Departamento</center></th>
+            <% } %>
             <% if (userRol == 1 || userRol == 3) {%>
             <th scope="col"><center></center></th>
             <th scope="col"><center></center></th>
@@ -63,6 +84,7 @@
             <td><center><%= ng_block1.descripcion_ng_block %></center></td>
             <td><center><%= ng_block1.turno_ng_block %></center></td>
             <td><center><%= ng_block1.estatus_ng_block %></center></td>
+            <td><center><%= ng_block1.nombre_area %></center></td>
 
             <% if (userRol == 1 || userRol == 3) {%>
             <td>
@@ -185,6 +207,18 @@
       });
   };
   document.getElementById('search_ngblock').onkeyup  = accion_asincrona;
+</script>
+
+<script type="text/javascript">
+  $('#departamento1').on('change', function() {
+    var departamento = this.value;
+    document.getElementById("departamento1").value = departamento;
+    console.log(departamento);
+
+    var href = `/dlc/a_ng_blocksp_filtro/departamento/${departamento}/page/1`;
+    console.log(href);
+    $('#filtro').attr('href', href);
+  });
 </script>
 
 <%- include('includes/foot.ejs') %>

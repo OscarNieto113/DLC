@@ -23,7 +23,7 @@ router.post('/solicitar_ng_block', isAuth, dlc_controller.post_solicitar_ng_bloc
 
 //Aprobar NG BLOCK
 router.get('/a_ng_blocksp/:page', isAuth, dlc_controller.get_aprobar_ng_blocks_pagination);
-//router.post('/a_ng_block', dlc_controller.post_a_ng_block);
+router.get('/a_ng_blocksp_filtro/departamento/:id_area/page/:page', isAuth, dlc_controller.get_aprobar_ngblocks_filtro);
 router.post('/a_ng_blocksp/:page/aprovee', isAuth, dlc_controller.post_aprovee_ng_blocks);
 router.post('/a_ng_blocksp/:page/reject', isAuth, dlc_controller.post_reject_ng_blocks);
 router.get('/a_ng_blocksp/:page/filtrar/:search', isAuth, dlc_controller.search_ngblock);

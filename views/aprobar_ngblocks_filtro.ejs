@@ -84,8 +84,10 @@
             <td><center><%= ng_block1.descripcion_ng_block %></center></td>
             <td><center><%= ng_block1.turno_ng_block %></center></td>
             <td><center><%= ng_block1.estatus_ng_block %></center></td>
+            <% if (userRol == 1) {%>
             <td><center><%= ng_block1.nombre_area %></center></td>
-
+            <% } %>
+            
             <% if (userRol == 1 || userRol == 3) {%>
             <td>
               <% if (ng_block1.estatus_ng_block === "Pendiente") { %>

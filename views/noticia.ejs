@@ -22,7 +22,7 @@
   <ol class="carousel-indicators">
     <li data-target="#carouselNoticias" data-slide-to="0" class="active"></li>
   <% if (noticia.length > 0) { var x = 1 %>
-    <% for (let x = 1; x < noticia.length; x++) { %>
+    <% for (let x = 0; x < noticia.length; x++) { %>
       <li data-target="#carouselNoticias" data-slide-to="<% x %>"></li>
     <% } %>
   <% } %>

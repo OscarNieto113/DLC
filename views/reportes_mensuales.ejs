@@ -148,6 +148,10 @@
                                 '</div>' +
                           '</div>';
                         }
+                        respuesta += '</tbody>' +
+                            '</table>' +
+                            '<a href="/reporte_mensual">' +
+                              '<button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23" href="/reporte_mensual">Regresar</button>';
                         document.getElementById('ajax_date').innerHTML = respuesta;
                     }).catch(err => {
                         console.log(err);

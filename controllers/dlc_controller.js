@@ -871,11 +871,16 @@ exports.get_buscar_empleado = (request, response, next) => {
 exports.post_give_vacations = (request, response, next) => {
     console.log('POST /dlc/buscar_empleado/:no_empleado/vacaciones');
     console.log(request.body);
-    const giveVacations = request.body.giveVacations;
+    var giveVacations = request.body.giveVacations;
     const no_empleado = request.body.no_empleado;
 
     console.log(giveVacations);
     console.log(no_empleado);
+
+    Empleado.getVacacionesEspeciales(no_empleado)
+    .then(([rows, fielData])=>{
+      var dias_vacaciones_especiales = rows[0].dias_vacaciones_especiales;
+      const total_dias_vacaciones = dias_vacaciones_especiales + giveVacations;
 
       if (giveVacations === 0 && no_empleado.length == 0 ){
         request.flash('error', 'No se recibió ningún dato.');
@@ -887,7 +892,7 @@ exports.post_give_vacations = (request, response, next) => {
         response.redirect('/dlc/buscar_empleado/'+ no_empleado);
       }
 
-      else if (giveVacations > 5){
+      else if (total_dias_vacaciones > 5){
         request.flash('error', 'Estas agregando más vacaciones de las permitidas por el sistema');
         response.redirect('/dlc/buscar_empleado/'+ no_empleado);
       }
@@ -901,7 +906,8 @@ exports.post_give_vacations = (request, response, next) => {
         })
         .catch(err => console.log(err));
       }
-  };
+  }).catch(err => console.log(err));
+};
 //-------------------------Dar dias de vacaciones (perfil)---------------------------------
 
 //------------------------Dar Ng Blocks (perfil)--------------------------------

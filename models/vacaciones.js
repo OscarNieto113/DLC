@@ -115,7 +115,7 @@ module.exports = class Vacaciones {
     static giveVacations(giveVacations, no_empleado) {
         return db.execute(
           'UPDATE empleado ' +
-            'SET dias_vacaciones_restantes = dias_vacaciones_restantes + ? ' +
+            'SET dias_vacaciones_especiales = dias_vacaciones_especiales + ? ' +
 					'WHERE ' +
             'no_empleado = ? ', [giveVacations, no_empleado]);
     }

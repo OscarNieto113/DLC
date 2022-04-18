@@ -72,7 +72,14 @@ module.exports = class Empleado {
 
     static getVacacionesR(no_empleado) {
       return db.execute(
-        'SELECT dias_vacaciones_restantes ' +
+        'SELECT dias_vacaciones_restantes, dias_vacaciones_especiales ' +
+        'FROM empleado e ' +
+        'WHERE e.no_empleado = ? ' ,[no_empleado]);
+    }
+
+    static getVacacionesEspeciales(no_empleado) {
+      return db.execute(
+        'SELECT dias_vacaciones_especiales ' +
         'FROM empleado e ' +
         'WHERE e.no_empleado = ? ' ,[no_empleado]);
     }

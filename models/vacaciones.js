@@ -83,6 +83,17 @@ module.exports = class Vacaciones {
 						'AND empleado.no_empleado = ? ', [estatus_vacaciones, dias_solicitados, folio, no_empleado]);
     }
 
+    static aproveeVacationsSpecial(estatus_vacaciones, dias_vacaciones_restantes, dias_vacaciones_especiales, folio, no_empleado) {
+        return db.execute(
+          'UPDATE vacaciones, empleado ' +
+          'SET vacaciones.estatus_vacaciones =  ?, ' +
+						'empleado.dias_vacaciones_restantes = ?, ' +
+            'empleado.dias_vacaciones_especiales = ? ' +
+					'WHERE ' +
+						'vacaciones.folio = ? ' +
+						'AND empleado.no_empleado = ? ', [estatus_vacaciones, dias_vacaciones_restantes, dias_vacaciones_especiales, folio, no_empleado]);
+    }
+
     static fetchSearch(search) {
         return db.execute(
           `SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, date_format(v.fecha_primer_dia, '%d/%m/%Y') as fecha_primer_dia, date_format(v.fecha_ultimo_dia, '%d/%m/%Y') as fecha_ultimo_dia, date_format(v.fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, v.no_empleado ` +

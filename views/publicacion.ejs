@@ -17,11 +17,11 @@
         </div>
     <% } %>
     </section>
+  <br>
 <h1 class="display-6" style="text-align: center;"">Anuncios </h1>
 <br>
-<br>
 <% if (userRol == 1 || userRol == 2 ) {%>
-  <div style="text-align: right;">
+  <div style="text-align: center;">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res">Agregar Anuncio</button>
       <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -34,7 +34,7 @@
             </div>
             <div class="modal-body">
 
-              <form action="/dlc/publicacion/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
+              <form id="vehicle-form" name="vehicle-form"action="/dlc/publicacion/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
                 <div class="form-group" style="text-align: left;"">
 
                   <label for="titulo_publicacion" class="col-form-label">Título de la publicación:</label>
@@ -52,48 +52,49 @@
             <div class="modal-footer">
               <div style="text-align: right;">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3" data-whatever="@res">Agregar anuncio sin imagen</button>
-                  <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel3">Agregar anuncio sin imagen</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-
-                          <form action="/dlc/publicacion-sin-imagen/?_csrf=<%= csrfToken %>" method="POST" >
-                            <div class="form-group" style="text-align: left;"">
-
-                              <label for="titulo_publicacion" class="col-form-label">Título de la publicación:</label>
-                              <input type="text" class="form-control" id="titulo_publicacion" name="titulo_publicacion" autocomplete="off" >
-
-                              <label for="descripcion_publicacion" class="col-form-label">Descripción de la publicación:</label>
-                              <input type="text" class="form-control" id="descripcion_publicacion" name="descripcion_publicacion" autocomplete="off" >
-
-                              <input type="hidden" class="form-control" id="imagen_publicacion" name="imagen_publicacion" value=""><br>
-
-                              <input type="submit" value="Enviar" class="btn btn-primary">
-                          </form>
-
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
+      </div>
   </div>
+
+  <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel3">Agregar anuncio sin imagen</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form action="/dlc/publicacion-sin-imagen/?_csrf=<%= csrfToken %>" method="POST" >
+            <div class="form-group" style="text-align: left;"">
+
+              <label for="titulo_publicacion" class="col-form-label">Título de la publicación:</label>
+              <input type="text" class="form-control" id="titulo_publicacion" name="titulo_publicacion" autocomplete="off" >
+
+              <label for="descripcion_publicacion" class="col-form-label">Descripción de la publicación:</label>
+              <input type="text" class="form-control" id="descripcion_publicacion" name="descripcion_publicacion" autocomplete="off" >
+
+              <input type="hidden" class="form-control" id="imagen_publicacion" name="imagen_publicacion" value=""><br>
+
+              <input type="submit" value="Enviar" class="btn btn-primary">
+          </form>
+
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
 <% } %>
 </div>
 <br>
-
+<br>
 <div class="row">
   <br>
   <% if (publicacion.length > 0) { %>

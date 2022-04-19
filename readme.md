@@ -47,7 +47,8 @@ http://localhost:3000/users/login
 2. Reintentar heroku 
 3. Correcciones de usabilidad, colores y tipografía piteros de natgas, poner todo en español porque no saben inglés (que jodidos)
 4. Reportes mensuales (mejoras) 
-5. Calcular los días de vacaciones restantes 
+5. Quitar ajax y poner la busqueda como los filtros de departamento en reportes mensuales
+6. Calcular los días de vacaciones restantes 
 
 ## Mafufadas
 Cambios en la base de datos ACTUALIZAR DB

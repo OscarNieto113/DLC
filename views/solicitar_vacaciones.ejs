@@ -22,22 +22,25 @@
               <% } %>
             <section class="container">
               <h1 class="pt-4 pb-2">Solicitud de Vacaciones</h1>
-              <div style="text-align: right;">
-                <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p>
-              </div>
+              <br>
+              <br>
+              <br>
+              <!-- <div style="text-align: right;"> -->
+                <!-- <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p> -->
+              <!-- </div> -->
               <% for (let empleadoV1 of empleadoV) { %>
                 <div class="row form-group">
-                  <div class="col-sm-8">
-                    </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                     <label for="vacaciones_R1">Vacaciones totales restantes</label>
                     </div>
                     <div class="col-sm-2">
                     <input type="text" class="form-control" name="vacaciones_R1" id="vacaciones_R1" value="<%= empleadoV1.dias_vacaciones_restantes + empleadoV1.dias_vacaciones_especiales%>" style="width: 30%;" disabled>
                   </div>
+                  <div class="col-sm-6">
+                    </div>
                 </div>
               <% } %>
-
+              <br>
               <br>
 
                 <div class="container-fluid">
@@ -45,7 +48,7 @@
 
                     <form>
                         <div class="row form-group">
-                              <label for="all_dates" class="col-sm-4 col-form-label"><b>Elige la fecha*</b></label>
+                              <label for="all_dates" class="col-sm-4 col-form-label"><b>Elige las fechas*</b></label>
                               <div class="col-sm-3">
                                   <div class="input-group date" id="datepicker">
                                       <input type="text" id="all_dates" name="all_dates" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>

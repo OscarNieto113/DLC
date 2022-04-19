@@ -23,54 +23,88 @@
           <% } %>
         <section class="container">
           <h3 class="pt-4 pb-2">Registrar Usuario</h3><br>
-          <div class="col-sm-7">
             <form action="/dlc/r_usuario" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
               <div class="form-group">
 
-                <label for="nombres_empleados"><b>Nombre(s)</b></label>
-                <input type="text" class="form-control" id="nombres_empleados" name="nombres_empleados"  placeholder="Eros Giovanni" autocomplete="off" required/><br>
+                <div class="form-row">
+                  <div class="col-md-5 mb-3">
+                    <label for="nombres_empleados"><b>Nombre(s)</b></label>
+                    <input type="text" class="form-control" id="nombres_empleados" name="nombres_empleados"  placeholder="Eros Giovanni" autocomplete="off" required/><br>
+                  </div>
 
-                <label for="apellido_paterno"><b>Apellido Paterno</b></label>
-                <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" placeholder="Guillén" autocomplete="off" required/><br>
+                  <div class="col-md-3 mb-3">
+                    <label for="apellido_paterno"><b>Apellido Paterno</b></label>
+                    <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" placeholder="Guillén" autocomplete="off" required/><br>
+                  </div>
 
-                <label for="apellido_materno"><b>Apellido Materno</b></label>
-                <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" placeholder="Velázquez" autocomplete="off" required/><br>
+                  <div class="col-md-3 mb-3">
+                    <label for="apellido_materno"><b>Apellido Materno</b></label>
+                    <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" placeholder="Velázquez" autocomplete="off" required/><br>
+                  </div>
 
-                <label for="genero_empleado"><b>Sexo</b></label>
-                  <select name="genero_empleado" class="form-select" aria-label="Default select example" required>
-                    <option value="" disabled selected>Sexo</option>
-                    <option value="H">Hombre</option>
-                    <option value="M">Mujer</option>
-                  </select><br>
+                </div>
+                <br>
 
-                <label for="id_area"><b>Departamento al que pertenece</b></label>
-                  <select name="id_area" class="form-select" aria-label="Default select example" required>
-                    <option value="" disabled selected>Departamento</option>
-                      <% for (let area1 of area) { %>
-                    <option value="<%=area1.id_area%>"><%=area1.nombre_area%></option>
-                      <% } %>
-                  </select><br>
+                <div class="form-row">
+                  <div class="col-md-3 mb-3">
+                    <label for="genero_empleado"><b>Sexo</b></label>
+                      <select name="genero_empleado" class="form-select" aria-label="Default select example" required>
+                        <option value="" disabled selected>Selecciona Sexo</option>
+                        <option value="H">Hombre</option>
+                        <option value="M">Mujer</option>
+                      </select><br>
+                    </div>
 
-                  <label for="id_rol"><b>Rol </b></label>
-                    <select name="id_rol" class="form-select" aria-label="Default select example" required>
-                      <option value="" disabled selected>Roles</option>
-                        <% for (let rol1 of rol) { %>
-                      <option value="<%=rol1.id_rol%>"><%=rol1.nombre_rol%></option>
-                        <% } %>
-                    </select><br>
+                  <div class="col-md-3 mb-3">
+                    <label for="id_area"><b>Departamento al que pertenece</b></label>
+                      <select name="id_area" class="form-select" aria-label="Default select example" required>
+                        <option value="" disabled selected>Selecciona Departamento</option>
+                          <% for (let area1 of area) { %>
+                        <option value="<%=area1.id_area%>"><%=area1.nombre_area%></option>
+                          <% } %>
+                      </select><br>
+                  </div>
 
-                <label for="no_empleado"><b>Número de empleado</b></label>
-                <input type="text" class="form-control" id="no_empleado" name="no_empleado" aria-describedby="emailHelp" placeholder="A01705090" autocomplete="off" required><br>
+                  <div class="col-md-3 mb-3">
+                    <label for="id_ciudad"><b>Ciudad a la que pertenece</b></label>
+                      <select name="id_area" class="form-select" aria-label="Default select example" required>
+                        <option value="" disabled selected>Selecciona Ciudad</option>
+                          <% for (let ciudad1 of ciudad) { %>
+                        <option value="<%=ciudad1.id_ciudad%>"><%=ciudad1.nombre_ciudad%></option>
+                          <% } %>
+                      </select><br>
+                    </div>
 
-                <label for="correo_empresarial"><b>Correo Empresarial</b></label>
-                <input type="email" class="form-control" id="correo_empresarial" name="correo_empresarial" aria-describedby="emailHelp" placeholder="A01703067@natgas.com.mx" autocomplete="off" required><br><br>
+                  <div class="col-md-3 mb-3">
+                    <label for="id_rol"><b>Rol </b></label>
+                      <select name="id_rol" class="form-select" aria-label="Default select example" required>
+                        <option value="" disabled selected>Selecciona Rol</option>
+                          <% for (let rol1 of rol) { %>
+                        <option value="<%=rol1.id_rol%>"><%=rol1.nombre_rol%></option>
+                          <% } %>
+                      </select><br>
+                  </div>
+                </div>
+                <br>
 
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="no_empleado"><b>Número de empleado</b></label>
+                    <input type="text" class="form-control" id="no_empleado" name="no_empleado" aria-describedby="emailHelp" placeholder="A01705090" autocomplete="off" required><br>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="correo_empresarial"><b>Correo Empresarial</b></label>
+                    <input type="email" class="form-control" id="correo_empresarial" name="correo_empresarial" aria-describedby="emailHelp" placeholder="A01703067@natgas.com.mx" autocomplete="off" required><br><br>
+                  </div>
+
+                </div>
 
 
                 <div class="row form-group">
-                      <label for="fecha_nacimiento" class="col-sm-5 col-form-label"><b>Fecha de Nacimiento</b></label>
-                      <div class="col-sm-7">
+                      <label for="fecha_nacimiento" class="col-sm-3 col-form-label"><b>Fecha de Nacimiento</b></label>
+                      <div class="col-sm-4">
                           <div class="input-group date" id="datepicker">
                               <input type="text" id="fecha_n" name="fecha_n" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
                               <span class="input-group-append">
@@ -83,8 +117,8 @@
                   </div><br>
 
                   <div class="row form-group">
-                        <label for="fecha_contratacion" class="col-sm-5 col-form-label"><b>Fecha de contratación</b></label>
-                        <div class="col-sm-7">
+                        <label for="fecha_contratacion" class="col-sm-3 col-form-label"><b>Fecha de contratación</b></label>
+                        <div class="col-sm-4">
                             <div class="input-group date" id="datepicker">
                                 <input type="text" id="fecha_c" name="fecha_c" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
                                 <span class="input-group-append">
@@ -115,7 +149,6 @@
         </div>
       </div>
     </div>
-  </div>
 </body>
 
 <%- include('includes/foot.ejs') %>

@@ -9,6 +9,7 @@ const Prestaciones = require('../models/prestaciones');
 const Publicacion = require('../models/publicacion');
 const Vacaciones = require('../models/vacaciones');
 const User = require('../models/user');
+const Ciudad = require('../models/ciudad');
 const Rol = require('../models/rol');
 
 //------------------------Solicitar NG Block--------------------------------
@@ -673,14 +674,18 @@ exports.get_registrar_empleado = (request, response, next) => {
         .then(([roles, fieldData]) => {
             Area.fetchAll()
             .then(([area, fieldData]) => {
-              response.render('registrar_empleado', {
-                  userRol: rol[0].id_rol,
-                  rol: roles,
-                  area: area,
-                  success: request.flash("success"),
-                  error: request.flash("error"),
-                  isLoggedIn: request.session.isLoggedIn === true ? true : false
-                });
+                Ciudad.fetchAll()
+                .then(([ciudad, fieldData]) => {
+                    response.render('registrar_empleado', {
+                        userRol: rol[0].id_rol,
+                        ciudad: ciudad,
+                        rol: roles,
+                        area: area,
+                        success: request.flash("success"),
+                        error: request.flash("error"),
+                        isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
+                }).catch(err => console.log(err));
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     }).catch(err => console.log(err));
@@ -700,6 +705,7 @@ exports.post_registrar_empleado = (request, response, next) => {
     const genero_empleado = request.body.genero_empleado;
     const id_area = request.body.id_area;
     const id_rol = request.body.id_rol;
+    const id_ciudad = request.body.id_ciudad;
 
     console.log(no_empleado);
     console.log(ng_blocks_restantes);
@@ -713,6 +719,7 @@ exports.post_registrar_empleado = (request, response, next) => {
     console.log(genero_empleado);
     console.log(id_area);
     console.log(id_rol);
+    console.log(id_ciudad);
 
     if (no_empleado.length == 0 && ng_blocks_restantes.length == 0 && fecha_contratacion.length == 0 &&
         fecha_nacimiento.length == 0 && correo_empresarial.length == 0 && nombres_empleados.length == 0 &&
@@ -745,7 +752,8 @@ exports.post_registrar_empleado = (request, response, next) => {
             dias_vacaciones_restantes,
             genero_empleado,
             id_area,
-            id_rol
+            id_rol,
+            id_ciudad
           );
       empleado.save()
       .then(() => {
@@ -770,7 +778,8 @@ exports.post_registrar_empleado = (request, response, next) => {
               dias_vacaciones_restantes,
               genero_empleado,
               id_area,
-              id_rol
+              id_rol,
+              id_ciudad
             );
         empleado.save()
         .then(() => {

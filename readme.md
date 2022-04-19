@@ -42,6 +42,13 @@ http://localhost:3000/users/login
 3. Calcular los dias de vacaciones restantes /Pendiente
 4. Vacaciones especiales /Pendiente
 
+## Cosas pa hoy (que creativo que sos)
+1. Hacer 2 ejercicios más de pedro (cris)
+2. Reintentar heroku 
+3. Correcciones de usabilidad, colores y tipografía piteros de natgas, poner todo en español porque no saben inglés (que jodidos)
+4. Reportes mensuales (mejoras) 
+5. Calcular los días de vacaciones restantes 
+
 ## Mafufadas
 Cambios en la base de datos ACTUALIZAR DB
 

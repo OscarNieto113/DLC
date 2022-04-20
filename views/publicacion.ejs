@@ -22,7 +22,7 @@
 <br>
 <% if (userRol == 1 || userRol == 2 ) {%>
   <div style="text-align: center;">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res">Agregar Anuncio</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res" style="background-color:#43B02A">Agregar Anuncio</button>
       <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -34,7 +34,7 @@
             </div>
             <div class="modal-body">
 
-              <form id="vehicle-form" name="vehicle-form"action="/dlc/publicacion/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
+              <form action="/dlc/publicacion/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
                 <div class="form-group" style="text-align: left;"">
 
                   <label for="titulo_publicacion" class="col-form-label">Título de la publicación:</label>
@@ -45,13 +45,14 @@
 
                   <label for="imagen_publicacion" class="col-form-label">Adjuntar imagen:</label>
                   <input type="file" class="form-control" id="imagen_publicacion" name="imagen_publicacion" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required><br>
-
-                  <input type="submit" value="Enviar" class="btn btn-primary">
+                  <div style="text-align: center;">
+                  <input type="submit" value="Agregar" class="btn btn-primary" style="background-color:#43B02A">
+                  </div>
               </form>
             </div>
             <div class="modal-footer">
               <div style="text-align: right;">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3" data-whatever="@res">Agregar anuncio sin imagen</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3" data-whatever="@res" style="background-color:#43B02A">Agregar anuncio sin imagen</button>
             </div>
           </div>
         </div>
@@ -80,8 +81,9 @@
               <input type="text" class="form-control" id="descripcion_publicacion" name="descripcion_publicacion" autocomplete="off" >
 
               <input type="hidden" class="form-control" id="imagen_publicacion" name="imagen_publicacion" value=""><br>
-
-              <input type="submit" value="Enviar" class="btn btn-primary">
+              <div style="text-align: center;">
+              <input type="submit" value="Agregar" class="btn btn-primary" style="background-color:#43B02A">
+              </div>
           </form>
 
         </div>

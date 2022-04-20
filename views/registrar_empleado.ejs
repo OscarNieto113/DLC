@@ -22,7 +22,7 @@
               </div>
           <% } %>
         <section class="container">
-          <h3 class="pt-4 pb-2">Registrar Usuario</h3><br>
+          <h2 class="pt-4 pb-2">Registrar Usuario</h2><br>
             <form action="/dlc/r_usuario" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
               <div class="form-group">
@@ -137,13 +137,15 @@
                     <input type="hidden" id="dias_vacaciones_restantes" name="dias_vacaciones_restantes" value="8">
                     <!-- PRUEBA SE VA A BORRAR -->
               </div>
-              <input type="submit" value="Enviar" class="btn btn-primary">
+              <div style="text-align: left;">
+                <input type="submit" value="Registrar Empleado" class="btn btn-primary" style="background-color:#43B02A">
+              </div>
               </form>
               <br>
               <div style="text-align: right;">
                 <a href="/dlc/r_usuario">
                   <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
-                    href="/dlc/r_usuario">Cancelar Solicitud</button>
+                    href="/dlc/r_usuario">Cancelar Registro</button>
                 </a>
               </div>
         </div>

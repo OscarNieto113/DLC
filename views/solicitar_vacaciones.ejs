@@ -29,23 +29,20 @@
                 <!-- <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p> -->
               <!-- </div> -->
               <% for (let empleadoV1 of empleadoV) { %>
-                <div class="row form-group">
-                    <div class="col-sm-3">
-                    <label for="vacaciones_R1">Vacaciones totales restantes</label>
-                    </div>
+                <div class="container-fluid">
+                  <div class="row form-group">
+                    <label for="vacaciones_R1" class="col-sm-4 col-form-label">Vacaciones totales restantes</label>
                     <div class="col-sm-2">
                     <input type="text" class="form-control" name="vacaciones_R1" id="vacaciones_R1" value="<%= empleadoV1.dias_vacaciones_restantes + empleadoV1.dias_vacaciones_especiales%>" style="width: 30%;" disabled>
                   </div>
                   <div class="col-sm-6">
                     </div>
                 </div>
+              </div>
               <% } %>
               <br>
               <br>
-
                 <div class="container-fluid">
-
-
                     <form>
                         <div class="row form-group">
                               <label for="all_dates" class="col-sm-4 col-form-label"><b>Elige las fechas*</b></label>
@@ -85,7 +82,7 @@
                       <input type="hidden" id="fecha_p2" name="fecha_p2">
                       <input type="hidden" id="dias_solicitados" name="dias_solicitados">
                       <!-- DATOS FAKE-->
-                      <input type="submit" value="Enviar" class="btn btn-primary">
+                      <input type="submit" value="Solicitar" class="btn btn-primary" style="background-color:#43B02A">
                     </form>
                   </div>
                 </div>

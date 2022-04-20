@@ -66,7 +66,7 @@
   <div style="text-align: center;">
 
     <br>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal0" data-whatever="@mdo">Agregar Imagen al Banner</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal0" data-whatever="@mdo" style="background-color:#43B02A">Agregar Imagen al Banner</button>
       <div class="modal fade" id="exampleModal0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel0" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -81,7 +81,9 @@
                   <form action="/dlc/noticia/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
                   <label for="imagen_noticia" class="col-form-label">Subir imagen:</label>
                   <input type="file" class="form-control" id="imagen_noticia" name="imagen_noticia" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required><br>
-                  <input type="submit" value="Enviar" class="btn btn-primary">
+                  <div style="text-align: center;">
+                    <input type="submit" value="Agregar" class="btn btn-primary" style="background-color:#43B02A">
+                  </div>
                   </form>
 
                 </div>

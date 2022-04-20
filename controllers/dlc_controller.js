@@ -91,29 +91,69 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
   console.log('GET /dlc/a_ng_blocksp/:page');
   var perPage = 10;
   var page = request.params.page || 1;
-  Area.fetchAll()
-  .then(([area, fieldData]) => {
-    Empleado.getRol(no_empleado)
-        .then(([rol, fieldData]) => {
-          Ng_Block.fetchPagination(perPage, ((perPage * page) - perPage))
-          .then(([ng_block, fieldData]) => {
-            Ng_Block.count()
-              .then(([count, fieldData]) => {
-                let totalesN = count[0].num
-                console.log(totalesN)
-                  response.render('aprobar_ngblocks', {
-                    area: area,
-                    userRol: rol[0].id_rol,
-                    ng_block: ng_block,
-                    current: page,
-                    pages: Math.ceil(totalesN / perPage),
-                    success: request.flash("success"),
-                    error: request.flash("error"),
-                    isLoggedIn: request.session.isLoggedIn === true ? true : false
-              });
+
+  Empleado.getRol(no_empleado)
+  .then(([rol, fieldData]) => {
+    console.log(rol[0].id_rol)
+    const userRol = rol[0].id_rol;
+
+    if (userRol === 3 ){
+      Empleado.getDeparatamento(no_empleado)
+      .then(([departamento, fieldData]) => {
+        console.log(departamento[0].id_area)
+        const depar = departamento[0].id_area;
+          Empleado.getCiudad(no_empleado)
+          .then(([ciudad, fieldData]) => {
+            console.log(ciudad[0].id_ciudad)
+            const estado = ciudad[0].id_ciudad;
+            Area.fetchAll()
+            .then(([area, fieldData]) => {
+                  Ng_Block.fetchPagination2(depar, estado, perPage, ((perPage * page) - perPage))
+                  .then(([ng_block, fieldData]) => {
+                    Ng_Block.count2(depar, estado)
+                      .then(([count, fieldData]) => {
+                        let totalesN = count[0].num
+                        console.log(totalesN)
+                          response.render('aprobar_ngblocks', {
+                            area: area,
+                            userRol: rol[0].id_rol,
+                            ng_block: ng_block,
+                            current: page,
+                            pages: Math.ceil(totalesN / perPage),
+                            success: request.flash("success"),
+                            error: request.flash("error"),
+                            isLoggedIn: request.session.isLoggedIn === true ? true : false
+                      });
+                  }).catch(err => console.log(err));
+                }).catch(err => console.log(err));
+              }).catch(err => console.log(err));
+            }).catch(err => console.log(err));
+          }).catch(err => console.log(err));
+    }
+
+    else{
+      Area.fetchAll()
+      .then(([area, fieldData]) => {
+            Ng_Block.fetchPagination(perPage, ((perPage * page) - perPage))
+            .then(([ng_block, fieldData]) => {
+              Ng_Block.count()
+                .then(([count, fieldData]) => {
+                  let totalesN = count[0].num
+                  console.log(totalesN)
+                    response.render('aprobar_ngblocks', {
+                      area: area,
+                      userRol: rol[0].id_rol,
+                      ng_block: ng_block,
+                      current: page,
+                      pages: Math.ceil(totalesN / perPage),
+                      success: request.flash("success"),
+                      error: request.flash("error"),
+                      isLoggedIn: request.session.isLoggedIn === true ? true : false
+                });
+            }).catch(err => console.log(err));
           }).catch(err => console.log(err));
         }).catch(err => console.log(err));
-      }).catch(err => console.log(err));
+      }
     }).catch(err => console.log(err));
 };
 
@@ -415,10 +455,49 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
   console.log('GET /dlc/a_vacaciones/:page');
   var perPage = 10;
   var page = request.params.page || 1;
-  Area.fetchAll()
-  .then(([area, fieldData]) => {
-      Empleado.getRol(no_empleado)
-      .then(([rol, fieldData]) => {
+
+  Empleado.getRol(no_empleado)
+  .then(([rol, fieldData]) => {
+    console.log(rol[0].id_rol)
+    const userRol = rol[0].id_rol;
+
+    if (userRol === 3 ){
+      Empleado.getDeparatamento(no_empleado)
+      .then(([departamento, fieldData]) => {
+        console.log(departamento[0].id_area)
+        const depar = departamento[0].id_area;
+          Empleado.getCiudad(no_empleado)
+          .then(([ciudad, fieldData]) => {
+            console.log(ciudad[0].id_ciudad)
+            const estado = ciudad[0].id_ciudad;
+              Area.fetchAll()
+              .then(([area, fieldData]) => {
+                    Vacaciones.fetchPagination2(depar, estado, perPage, ((perPage * page) - perPage))
+                    .then(([vacaciones, fieldData]) => {
+                        Vacaciones.count3(depar, estado)
+                        .then(([count, fieldData]) => {
+                            let totalesV = count[0].num
+                            console.log(totalesV)
+                              response.render('aprobar_vacaciones', {
+                                  area: area,
+                                  userRol: rol[0].id_rol,
+                                  vacaciones: vacaciones,
+                                  current: page,
+                                  pages: Math.ceil(totalesV / perPage),
+                                  success: request.flash("success"),
+                                  error: request.flash("error"),
+                                  isLoggedIn: request.session.isLoggedIn === true ? true : false
+                              });
+                          }).catch(err => console.log(err));
+                      }).catch(err => console.log(err));
+                  }).catch(err => console.log(err));
+                }).catch(err => console.log(err));
+              }).catch(err => console.log(err));
+  }
+
+  else {
+    Area.fetchAll()
+    .then(([area, fieldData]) => {
           Vacaciones.fetchPagination(perPage, ((perPage * page) - perPage))
           .then(([vacaciones, fieldData]) => {
               Vacaciones.count()
@@ -438,7 +517,9 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
                 }).catch(err => console.log(err));
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
+  }
     }).catch(err => console.log(err));
+
 };
 
 exports.get_aprobar_vacaciones_filtro = (request, response, next) => {

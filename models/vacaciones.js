@@ -127,4 +127,18 @@ module.exports = class Vacaciones {
 					'folio = ? ', [folio]);
     }
 
+    static fetchPagination2(departamento, ciudad, num_solicitudes, num_offset) {
+      return db.execute(
+        `SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, v.dias_solicitados, v.estatus_vacaciones, v.folio, v.responsable_ausencia, v.observaciones, date_format(v.fecha_primer_dia, '%d/%m/%Y') as fecha_primer_dia, date_format(v.fecha_ultimo_dia, '%d/%m/%Y') as fecha_ultimo_dia, date_format(v.fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, v.no_empleado ` +
+        'FROM empleado e, vacaciones v, area a ' +
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones = "Pendiente" AND a.id_area = ? AND e.id_ciudad = ? ' +
+        'LIMIT ? OFFSET ? ', [departamento, ciudad, num_solicitudes, num_offset]);
+    }
+
+    static count3 (id_area, id_ciudad) {
+      return db.query(
+        'SELECT COUNT(folio) as num ' +
+        'FROM empleado e, vacaciones v, area a ' +
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND a.id_area = ? AND e.id_ciudad = ? ', [id_area, id_ciudad]);
+    }
 }

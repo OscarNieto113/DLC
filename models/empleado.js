@@ -98,4 +98,19 @@ module.exports = class Empleado {
         'FROM empleado ' +
         'WHERE no_empleado = ? ' ,[no_empleado]);
     }
+
+    static getDeparatamento(no_empleado) {
+      return db.execute(
+        'SELECT e.id_area ' +
+        'FROM empleado e, area a ' +
+        'WHERE e.id_area = a.id_area AND e.no_empleado = ? ' ,[no_empleado]);
+    }
+
+    static getCiudad(no_empleado) {
+      return db.execute(
+        'SELECT e.id_ciudad ' +
+        'FROM empleado e, ciudad c ' +
+        'WHERE e.id_ciudad = c.id_ciudad AND e.no_empleado = ? ' ,[no_empleado]);
+    }
+
 }

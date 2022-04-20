@@ -165,14 +165,14 @@
                 <% if (userRol2 == 1 || userRol2 == 2 || userRol2 == 3 || userRol2 == 4) {%>
                   <% if (empleado1.no_empleado == no_empleado ) {%>
                   <a href="/dlc/profile/ngblocks_solicitados">
-                    <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/ngblocks_solicitados">Ver solicitudes NG Blocks</button>
+                    <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/ngblocks_solicitados" style="background-color:#43B02A">Ver solicitudes NG Blocks</button>
                   </a>
                   <% } %>
                 <% } %>
               <% } %>
               <% if (empleado1.no_empleado == no_empleado ) {%>
               <a href="/dlc/profile/vacaciones_solicitadas">
-                <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/vacaciones_solicitadas">Ver solicitudes de Vacaciones</button>
+                <button id="boton1" class="btn btn-primary" href="/dlc/d_usuario/vacaciones_solicitadas" style="background-color:#43B02A">Ver solicitudes de Vacaciones</button>
               </a>
               <% } %>
           </div>
@@ -186,7 +186,7 @@
               <label for="giveVacations">Agregar Vacaciones: </label>
               <input type="number" id="giveVacations" name="giveVacations" min="1" max="5" class="btn btn-light" s placeholder="0" required>
               <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
-              <input type="submit" class="btn btn-primary" value="Guardar">
+              <input type="submit" class="btn btn-primary" value="Agregar">
             </form>
               <% } %>
             <% } %>
@@ -201,7 +201,7 @@
                 <label for="giveNgBlocks">Agregar Ng Blocks: </label>
                 <input type="number" id="giveNgBlocks" name="giveNgBlocks" min="1" max="5" class="btn btn-light" s placeholder="0" required>
                 <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
-                <input type="submit" class="btn btn-primary" value="Guardar">
+                <input type="submit" class="btn btn-primary" value="Agregar">
               </form>
             <% } %>
           <% } %>
@@ -224,7 +224,7 @@
                 </div>
                 <div class="col-sm-1">
                   <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>">
-                  <input type="submit" class="btn btn-primary" value="Guardar">
+                  <input type="submit" class="btn btn-primary" value="Modificar">
                 </div>
               </div>
             </form>
@@ -234,11 +234,13 @@
 
           <% if (userRol == 1 || userRol == 2 ) {%>
             <% if (empleado1.no_empleado != no_empleado ) {%>
-              <div style="text-align: right;">
-                <a href="/dlc/buscar_empleado">
-                  <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
-                    href="/dlc/s_vacaciones">Regresar</button>
-                </a>
+              <div class="container">
+                <div style="text-align: right;">
+                  <a href="/dlc/buscar_empleado">
+                    <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
+                      href="/dlc/s_vacaciones">Regresar</button>
+                  </a>
+                </div>
               </div>
               <% } %>
           <% } %>

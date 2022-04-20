@@ -22,7 +22,7 @@
                   </button>
               </div>
           <% } %>
-          <h3 class="pt-4 pb-2">Solicitud de NG Block</h3>
+          <h1 class="pt-4 pb-2">Solicitud de NG Block</h1>
           <br>
           <br>
           <!-- <div style="text-align: right;"> -->
@@ -30,9 +30,7 @@
           <!-- </div> -->
             <% for (let empleado1 of empleado) { %>
               <div class="row form-group">
-                  <div class="col-sm-2">
-                  <label for="ng_blockR1">Ng blocks restantes</label>
-                  </div>
+                  <label for="ng_blockR1" class="col-sm-3 col-form-label">Ng blocks restantes</label>
                   <div class="col-sm-2">
                   <input type="text" class="form-control" name="ng_blockR1" id="ng_blockR1" value="<%= empleado1.ng_blocks_restantes %>" style="width: 30%;" disabled>
                 </div>
@@ -74,10 +72,9 @@
               <br>
               <textarea id="descripcion_ng_block" name="descripcion_ng_block" rows="6" cols="70" required></textarea>
             </div>
-            <br>
             <input type="hidden" id="fecha_uso_ng_block" name="fecha_uso_ng_block">
             <br>
-            <input type="submit" value="Enviar" class="btn btn-primary">
+            <input type="submit" value="Solicitar" class="btn btn-primary" style="background-color:#43B02A">
           </form>
           <!--Termina form -->
           <br><br>

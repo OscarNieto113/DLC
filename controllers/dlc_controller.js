@@ -415,6 +415,8 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
   console.log('GET /dlc/a_vacaciones/:page');
   var perPage = 10;
   var page = request.params.page || 1;
+
+
   Area.fetchAll()
   .then(([area, fieldData]) => {
       Empleado.getRol(no_empleado)

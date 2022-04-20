@@ -98,4 +98,11 @@ module.exports = class Empleado {
         'FROM empleado ' +
         'WHERE no_empleado = ? ' ,[no_empleado]);
     }
+
+    static getAniosLaborados(no_empleado) {
+      return db.execute(
+        'SELECT TIMESTAMPDIFF(YEAR,empleado.fecha_contratacion,CURDATE()) AS edad' +
+        'FROM empleado' +
+        'WHERE empleado.no_empleado = ?' ,[no_empleado]);
+    }
 }

@@ -726,7 +726,7 @@ exports.post_registrar_empleado = (request, response, next) => {
         apellido_paterno.length == 0 && apellido_materno.length == 0 && dias_vacaciones_restantes.length == 0 &&
         genero_empleado.length == 0 && id_area.length == 0 && id_rol.length == 0){
       request.flash('error', 'No se recibió ningún dato.');
-      response.redirect('/dlc/solicitar_ng_block');
+      response.redirect('/dlc/r_usuario');
     }
 
     else if (no_empleado.length == 0 || ng_blocks_restantes.length == 0 || fecha_contratacion.length == 0 ||
@@ -734,7 +734,7 @@ exports.post_registrar_empleado = (request, response, next) => {
         apellido_paterno.length == 0 || apellido_materno.length == 0 || dias_vacaciones_restantes.length == 0 ||
         genero_empleado.length == 0 || id_area.length == 0 || id_rol.length == 0){
           request.flash('error', 'Faltan datos por llenar.');
-          response.redirect('/dlc/solicitar_ng_block');
+          response.redirect('/dlc/r_usuario');
     }
 
     else if (id_rol == 5){
@@ -822,7 +822,7 @@ exports.post_registrar_empleado = (request, response, next) => {
 
       console.log(nombre_ciudad);
 
-          if (nombre_ciudad == ""){
+          if (nombre_ciudad.length == 0){
             request.flash('error', 'No se recibió ningún dato.');
             response.redirect('/dlc/r_usuario');
           }
@@ -834,7 +834,7 @@ exports.post_registrar_empleado = (request, response, next) => {
             ciudad.save()
             .then(() => {
                 console.log("Se guardo la publicacion");
-                request.flash('success', 'El departamento fue agregado con éxito');
+                request.flash('success', 'La ciudad fue agregado con éxito');
                 response.redirect('/dlc/r_usuario');
             })
             .catch((error)=>{

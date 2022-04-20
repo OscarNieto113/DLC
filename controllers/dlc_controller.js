@@ -791,6 +791,58 @@ exports.post_registrar_empleado = (request, response, next) => {
         }
     };
 
+    exports.post_registrar_departamento = (request, response, next) => {
+        console.log('POST /dlc/r_usuario/departamento');
+        const nombre_departamento = request.body.nombre_departamento;
+
+            if (nombre_departamento.length == 0){
+              request.flash('error', 'No se recibió ningún dato.');
+              response.redirect('/dlc/r_usuario');
+            }
+            else {
+              const area =
+                  new Area(
+                    nombre_departamento,
+                    );
+              area.save()
+              .then(() => {
+                  console.log("Se guardo la publicacion");
+                  request.flash('success', 'El departamento fue agregado con éxito');
+                  response.redirect('/dlc/r_usuario');
+              })
+              .catch((error)=>{
+                console.log(error)
+              });
+            }
+    };
+
+    exports.post_registrar_ciudad = (request, response, next) => {
+      console.log('POST /dlc/r_usuario/departamento');
+      const nombre_ciudad = request.body.nombre_ciudad;
+
+      console.log(nombre_ciudad);
+
+          if (nombre_ciudad == ""){
+            request.flash('error', 'No se recibió ningún dato.');
+            response.redirect('/dlc/r_usuario');
+          }
+          else {
+            const ciudad =
+                new Ciudad(
+                  nombre_ciudad,
+                  );
+            ciudad.save()
+            .then(() => {
+                console.log("Se guardo la publicacion");
+                request.flash('success', 'El departamento fue agregado con éxito');
+                response.redirect('/dlc/r_usuario');
+            })
+            .catch((error)=>{
+              console.log(error)
+            });
+          }
+  };
+
 //------------------------Registrar Usuario--------------------------------
 
 

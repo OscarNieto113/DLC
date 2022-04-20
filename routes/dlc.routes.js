@@ -42,6 +42,8 @@ router.get('/a_vacacionesp/:page/filtrar/:search', isAuth, dlc_controller.search
 //Registrar Empleado
 router.get('/r_usuario', isAuth, dlc_controller.get_registrar_empleado);
 router.post('/r_usuario', isAuth, dlc_controller.post_registrar_empleado);
+router.post('/r_usuario/departamento', isAuth, dlc_controller.post_registrar_departamento);
+router.post('/r_usuario/ciudad', isAuth, dlc_controller.post_registrar_ciudad);
 
 //Buscar Empelado
 router.get('/buscar_empleado', isAuth, dlc_controller.get_buscar_empleado);

@@ -57,7 +57,7 @@
                     </div>
 
                   <div class="col-md-3 mb-3">
-                    <label for="id_area"><b>Departamento al que pertenece</b></label>
+                    <label for="id_area"><b>Departamento al que pertenece</b></label>   <button class="w3-button w3-circle" style="background-color: #43B02A!important" type="button" data-toggle="modal" data-target="#exampleModal3" data-whatever="@mdo">+</button>
                       <select name="id_area" class="form-select" aria-label="Default select example" required>
                         <option value="" disabled selected>Selecciona Departamento</option>
                           <% for (let area1 of area) { %>
@@ -67,8 +67,8 @@
                   </div>
 
                   <div class="col-md-3 mb-3">
-                    <label for="id_ciudad"><b>Ciudad a la que pertenece</b></label>
-                      <select name="id_area" class="form-select" aria-label="Default select example" required>
+                    <label for="id_ciudad"><b>Ciudad a la que pertenece</b></label>  <button class="w3-button w3-circle" style="background-color: #43B02A!important" type="button" data-toggle="modal" data-target="#exampleModal4" data-whatever="@mdo">+</button>
+                      <select name="id_ciudad" class="form-select" aria-label="Default select example" required>
                         <option value="" disabled selected>Selecciona Ciudad</option>
                           <% for (let ciudad1 of ciudad) { %>
                         <option value="<%=ciudad1.id_ciudad%>"><%=ciudad1.nombre_ciudad%></option>
@@ -95,7 +95,7 @@
                   </div>
 
                   <div class="col-md-6 mb-3">
-                    <label for="correo_empresarial"><b>Correo Empresarial</b></label>
+                    <label for="correo_empresarial"><b>Correo</b></label>
                     <input type="email" class="form-control" id="correo_empresarial" name="correo_empresarial" aria-describedby="emailHelp" placeholder="A01703067@natgas.com.mx" autocomplete="off" required><br><br>
                   </div>
 
@@ -145,6 +145,57 @@
                   <button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23"
                     href="/dlc/r_usuario">Cancelar Solicitud</button>
                 </a>
+              </div>
+
+
+              <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel3">Agregar Departamento</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" style="text-align: left;"">
+                          <form action="/dlc/r_usuario/departamento/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
+
+                            <label for="nombre_departamento" class="col-form-label">Nombre del departamento:</label>
+                            <input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento" autocomplete="off" required><br>
+                            <input type="submit" value="Enviar" class="btn btn-primary">
+                          </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel4">Agregar Ciudad</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" style="text-align: left;"">
+                          <form action="/dlc/r_usuario/ciudad/?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
+
+                            <label for="nombre_ciudad" class="col-form-label">Nombre de la ciudad:</label>
+                            <input type="text" class="form-control" id="nombre_ciudad" name="nombre_ciudad" autocomplete="off" required><br>
+                            <input type="submit" value="Enviar" class="btn btn-primary">
+                          </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                  </div>
+                </div>
               </div>
         </div>
       </div>

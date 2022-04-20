@@ -101,8 +101,23 @@ module.exports = class Empleado {
 
     static getAniosLaborados(no_empleado) {
       return db.execute(
-        'SELECT TIMESTAMPDIFF(YEAR,empleado.fecha_contratacion,CURDATE()) AS edad' +
-        'FROM empleado' +
+        'SELECT TIMESTAMPDIFF(YEAR,empleado.fecha_contratacion,CURDATE()) AS AniosLaborados ' +
+        'FROM empleado ' +
         'WHERE empleado.no_empleado = ?' ,[no_empleado]);
+    }
+
+    static getDiasSolicitados(no_empleado) {
+      return db.execute(
+        'SELECT dias_solicitados ' +
+        'FROM vacaciones v, empleado e ' +
+        'WHERE v.no_empleado = e.no_empleado AND e.no_empleado = ? AND v.estatus_vacaciones = "Aprobado" AND ' +
+        'v.fecha_solicitud BETWEEN (DATE_SUB(CURDATE(), INTERVAL 2 YEAR)) AND (CURDATE())', [no_empleado]);
+    }
+
+    static updateDiasVacacionesRestantes(dias_vacaciones_restantes, no_empleado) {
+        return db.execute(
+          'UPDATE empleado ' +
+          'SET dias_vacaciones_restantes = ? ' +
+          'WHERE no_empleado = ? ', [dias_vacaciones_restantes, no_empleado]);
     }
 }

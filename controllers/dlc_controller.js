@@ -1196,29 +1196,44 @@ exports.post_delete_publicacion = (request, response, next) => {
 exports.listar = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('Ruta /dlc');
-    //
-    console.log(request.cookies);
-    const info = request.session.info ? request.session.info : '';
-    request.session.info = '';
-    Empleado.getRol(no_empleado)
-        .then(([rol, fieldData]) => {
-        console.log(rol[0].id_rol);
-        Noticia.fetchAll()
-          .then(([rows, fieldData]) => {
-            Publicacion.fetchAll()
-            .then(([rows2, fieldData]) => {
-              console.log(request.session.isLoggedIn)
-              response.render('main', {
-                  userRol: rol[0].id_rol,
-                  noticia: rows,
-                  success: request.flash("success"),
-                  error: request.flash("error"),
-                  publicacion: rows2,
-                  success1: request.flash("success1"),
-                  error1: request.flash("error1"),
-                  info: info, //El primer info es la variable del template, el segundo la constante creada arriba
-                  isLoggedIn: request.session.isLoggedIn === true ? true : false
-                });
+    Empleado.getAniosLaborados(no_empleado)
+    .then(([aniosLaborados, fieldData]) => {
+      var aniosLaborados = aniosLaborados[0].AniosLaborados;
+        Prestaciones.fetchAll()
+        .then(([prestaciones, fieldData]) => {
+          Empleado.getDiasSolicitados(no_empleado)
+          .then(([dias_solicitados, fieldData]) => {
+            Empleado.getRol(no_empleado)
+            .then(([rol, fieldData]) => {
+                Noticia.fetchAll()
+                .then(([rows, fieldData]) => {
+                    Publicacion.fetchAll()
+                    .then(([rows2, fieldData]) => {
+                        for (let i = 0; i < prestaciones.length; i++){
+                           if (aniosLaborados >= prestaciones[i].min_prestaciones && aniosLaborados <= prestaciones[i].max_prestaciones){
+                             var dias_vacaciones_restantes = prestaciones[i].dias_prestaciones
+                             break;
+                          }
+                        }
+                        for (let i = 0; i < dias_solicitados.length; i++){
+                          dias_vacaciones_restantes = dias_vacaciones_restantes - dias_solicitados[i].dias_solicitados;
+                        }
+                        Empleado.updateDiasVacacionesRestantes(dias_vacaciones_restantes, no_empleado)
+                        .then(() => {
+                              response.render('main', {
+                                  userRol: rol[0].id_rol,
+                                  noticia: rows,
+                                  success: request.flash("success"),
+                                  error: request.flash("error"),
+                                  publicacion: rows2,
+                                  success1: request.flash("success1"),
+                                  error1: request.flash("error1"),
+                                  isLoggedIn: request.session.isLoggedIn === true ? true : false
+                                });
+                            }).catch(err => console.log(err));
+                        }).catch(err => console.log(err));
+                    }).catch(err => console.log(err));
+                }).catch(err => console.log(err));
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     }).catch(err => console.log(err));

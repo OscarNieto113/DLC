@@ -52,7 +52,9 @@
         <thead>
           <tr>
             <th scope="col"><center>Nombre</center></th>
+            <% if (userRol == 1 || userRol == 2) {%>
             <th scope="col"><center>Departamento</center></th>
+            <% } %>
             <th scope="col"><center>Responsable</center></th>
             <th scope="col"><center>Dias solicitados</center></th>
             <th scope="col"><center>Información completa</center></th>

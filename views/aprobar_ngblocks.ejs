@@ -59,13 +59,12 @@
           <tr>
             <th scope="col"><center>Nombre</center></th>
             <th scope="col"><center>Fecha de uso</center></th>
-            <th scope="col"><center>Fecha en la que se solicitó</center></th>
             <th scope="col"><center>Descripción</center></th>
             <th scope="col"><center>Turno</center></th>
-            <th scope="col"><center>Estatus actual</center></th>
             <% if (userRol == 1 || userRol == 2) {%>
             <th scope="col"><center>Departamento</center></th>
             <% } %>
+            <th scope="col"><center>Estatus actual</center></th>
             <% if (userRol == 1 || userRol == 3) {%>
             <th scope="col"><center></center></th>
             <th scope="col"><center></center></th>
@@ -79,14 +78,13 @@
           <tr>
             <td><center><%=ng_block1.nombres_empleados%> <%=ng_block1.apellido_paterno%> <%=ng_block1.apellido_materno%></center></td>
             <td><center><%= ng_block1.fecha_uso_ng_block %></center></td>
-            <td><center><%= ng_block1.fecha_solicitud_ng_block %></center></td>
             <td><center><%= ng_block1.descripcion_ng_block %></center></td>
             <td><center><%= ng_block1.turno_ng_block %></center></td>
-            <td><center><%= ng_block1.estatus_ng_block %></center></td>
+
             <% if (userRol == 1 || userRol == 2) {%>
             <td><center><%= ng_block1.nombre_area %></center></td>
             <% } %>
-
+            <td><center><%= ng_block1.estatus_ng_block %></center></td>
             <% if (userRol == 1 || userRol == 3) {%>
             <td>
               <center>

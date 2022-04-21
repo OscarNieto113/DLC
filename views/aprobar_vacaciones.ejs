@@ -57,7 +57,9 @@
         <thead>
           <tr>
             <th scope="col"><center>Nombre</center></th>
+            <% if (userRol == 1 || userRol == 2) {%>
             <th scope="col"><center>Departamento</center></th>
+            <% } %>
             <th scope="col"><center>Responsable</center></th>
             <th scope="col"><center>Dias solicitados</center></th>
             <th scope="col"><center>Información completa</center></th>
@@ -74,7 +76,9 @@
             <% for (let vacaciones1 of vacaciones) { %>
           <tr>
             <td><center><%=vacaciones1.nombres_empleados%> <%=vacaciones1.apellido_paterno%> <%=vacaciones1.apellido_materno%></center></td>
+            <% if (userRol == 1 || userRol == 2) {%>
             <td><center><%=vacaciones1.nombre_area%></center></td>
+            <% } %>
             <td><center><%= vacaciones1.responsable_ausencia %></center></td>
             <td><center><%= vacaciones1.dias_solicitados %></center></td>
             <td>

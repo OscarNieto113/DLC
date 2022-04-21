@@ -72,14 +72,20 @@ exports.post_reportes_mensuales = (request, response, next) => {
 
 };
 
-exports.search_date = (request, response, next) => {
-    console.log(request.params.search);
-    Reportes_mensuales.fetchSearch(request.params.search)
+exports.filtrar_fecha = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
+    Empleado.getRol(no_empleado)
+    .then(([rol, fieldData]) => {
+        Reportes_mensuales.fetchSearch(request.params.fecha)
         .then(([rows, fieldData]) => {
-            console.log(rows);
-            response.status(200).json(rows);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+          console.log(rows);
+          response.render('reportes_mensuales', {
+              userRol: rol[0].id_rol,
+              reportes_mensuales: rows,
+              success: request.flash("success"),
+              error: request.flash("error"),
+              isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 };

@@ -18,7 +18,7 @@ const fileStorage = multer.diskStorage({
 });
 
 router.post('/post',isAuth, multer({ storage: fileStorage }).single('imagen_reporte'),reporte_mensual_controller.post_reportes_mensuales);
-router.get('/filtrar/:search', isAuth, reporte_mensual_controller.search_date);
+router.get('/filtrar/:fecha', isAuth, reporte_mensual_controller.filtrar_fecha);
 router.post('/delete/:id_reportes_mensuales', isAuth, reporte_mensual_controller.post_delete_reportes_mensuales);
 
 router.use('/', isAuth, reporte_mensual_controller.get_reportes_mensuales);

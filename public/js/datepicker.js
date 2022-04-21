@@ -60,7 +60,7 @@ $(function() {
       todayHighlight: true,
       autoclose: true
     });
-});
+  });
 
 $(document).ready(function(){
     $('#fecha_reporte_mensual').datepicker({
@@ -82,6 +82,6 @@ $(document).ready(function(){
                    : (currentDate.getMonth() + 1);
     document.getElementById("date").innerHTML = currentDay + '-' + currentMonth + '-' + currentDate.getFullYear();*/
 
-var current = new Date();
-var current2 = current.toLocaleDateString("en-AU");
-document.getElementById("date").innerHTML= current2//.toISOString().split('T')[0];
+//var current = new Date();
+//var current2 = current.toLocaleDateString("en-AU");
+//document.getElementById("date").innerHTML= current2//.toISOString().split('T')[0];

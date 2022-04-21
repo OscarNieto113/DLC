@@ -22,9 +22,10 @@
             </div>
         <% } %>
       <h1 class="display-4">Aprobar vacaciones</h1> <br>
-      <div class="row form-group">
+
 
       <% if (userRol == 1 || userRol == 2) {%>
+        <div class="row form-group">
             <label for="estatus_vacaciones"><b>Filtrar por Departamento</b></label>
             <div class="col-sm-3">
               <select name="departamento1" id="departamento1" class="form-select" aria-label="Default select example" required>
@@ -39,15 +40,9 @@
             <button type="button" class="btn btn-light">Filtrar</button>
             </a>
           </div>
-
-          <div class="input-group rounded col-sm-5">
-            <input type="text" name="search_vacaciones" id="search_vacaciones" class="form-control rounded" placeholder="Buscar Solicitudes Anteriores" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
-            <span class="input-group-text border-0" id="search-addon">
-              <i class="bi bi-search"></i>
-            </span>
-          </div>
+        </div>
         <% } %>
-      </div>
+
 
 
 
@@ -157,71 +152,6 @@
     </div>
   </div>
 </div>
-
-
-
-<script>
-  const accion_asincrona = () => {
-      const v_estatus = document.getElementById('search_vacaciones').value;
-      console.log(v_estatus);
-      //El token de protección CSRF
-      //const csrf = document.getElementById('_csrf').value;
-      //función que manda la petición asíncrona
-      fetch('/dlc/a_vacacionesp/:page/filtrar/'+v_estatus, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-              //'csrf-token': csrf
-          }
-          //body: JSON.stringify(data)
-      }).then(result => {
-          return result.json(); //Regresa otra promesa
-      }).then(data => {
-          //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
-          console.log(data);
-          let respuesta =
-          '<table class="table">' +
-            '<thead>' +
-              '<tr>' +
-                '<th scope="col"><center>Nombre</center></th>' +
-                '<th scope="col"><center>Departamento</center></th>' +
-                '<th scope="col"><center>Responsable</center></th>' +
-                '<th scope="col"><center>Dias solicitados</center></th>' +
-                '<th scope="col"><center>Información completa</center></th>' +
-                '<th scope="col"><center>Estatus</center></th>' +
-              '</tr>' +
-            '</thead>' +
-            '<tbody>';
-          for(let vacaciones of data) {
-              respuesta +=
-                '<tr>' +
-                '<td><center>' + vacaciones.nombres_empleados + ' ' + vacaciones.apellido_paterno + ' ' + vacaciones.apellido_materno + '</center></td>' +
-                '<td><center>' + vacaciones.nombre_area + '</center></td>' +
-                '<td><center>' + vacaciones.responsable_ausencia + '</center></td>' +
-                '<td><center>' + vacaciones.dias_solicitados + '</center></td>' +
-                '<td><center>' +
-                  '<span class="hovertext" data-hover="' +
-                  'Folio: ' + vacaciones.folio +
-                  ' No. Empleado: ' + vacaciones.no_empleado +
-                  ' Fecha inicial: ' + vacaciones.fecha_primer_dia +
-                  ' Fecha final: ' + vacaciones.fecha_ultimo_dia +
-                  ' Fecha de la solicitud: ' + vacaciones.fecha_solicitud + ' " > vacaciones' +
-                  '</span>' +
-                '</center></td>' +
-                '<td><center>' + vacaciones.estatus_vacaciones + '</center></td>' +
-                '<tr>';
-          }
-          respuesta += '</tbody>' +
-              '</table>' +
-              '<a href="/dlc/a_vacacionesp/1">' +
-                '<button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23" href="/dlc/s_vacaciones">Regresar</button>';
-          document.getElementById('respuesta_ajax').innerHTML = respuesta;
-      }).catch(err => {
-          console.log(err);
-      });
-  };
-  document.getElementById('search_vacaciones').onkeyup  = accion_asincrona;
-</script>
 
 <script type="text/javascript">
   $('#departamento1').on('change', function getDeparatamento() {

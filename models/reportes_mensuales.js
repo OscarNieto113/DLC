@@ -18,7 +18,7 @@ module.exports = class Reportes_mensuales {
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT * FROM reportes_mensuales');
+        return db.execute('SELECT * FROM reportes_mensuales WHERE fecha_reporte_mensual BETWEEN (DATE_SUB(CURDATE(), INTERVAL 2 MONTH)) AND (CURDATE()) ');
     }
 
     static fetchSearch(search) {

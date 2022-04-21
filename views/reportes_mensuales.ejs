@@ -31,7 +31,8 @@
                         <div class="col-sm-3">
 
                           <div class="input-group date" id="datepicker">
-                              <input type="text" id="search_date" name="search_date" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                              <input type="text" id="search_d" name="search_d" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                              <input type="hidden" id="search_date" name="search_date">
                               <span class="input-group-append">
                                   <span class="input-group-text bg-white">
                                       <i class="fa fa-calendar"></i>
@@ -42,7 +43,7 @@
 
                         <div class="col-sm-2">
                           <a id="filtro2" href="/resporte_mensual">
-                            <button type="button" class="btn btn-light">Filtrar</button>
+                            <button type="button" class="btn btn-light" style="background-color:#888B8D">Filtrar</button>
                           </a>
                         </div>
                       </div>
@@ -101,7 +102,8 @@
                                   <label for="fecha_reporte_mensual" class="col-form-label">Mes del Reporte:</label>
                                   <!--Datepicker -->
                                   <div class="input-group date" id="monthpicker">
-                                      <input type="text" id="fecha_reporte_mensual" name="fecha_reporte_mensual" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
+                                      <input type="text" id="fecha_reporte_m" name="fecha_reporte_m" class="form-control" autocomplete="off" placeholder="DD-MM-YYYY" required>
+                                      <input type="hidden" id="fecha_reporte_mensual" name="fecha_reporte_mensual">
                                       <span class="input-group-append">
                                           <span class="input-group-text bg-white">
                                               <i class="fa fa-calendar"></i>
@@ -135,14 +137,26 @@
               </div>
 
 <script type="text/javascript">
-  $('#search_date').on('changeDate', function getFecha() {
-    var fecha = this.value;
-    document.getElementById("search_date").value = fecha;
-    console.log(fecha);
+  $(function() {
+      $('#search_d').datepicker({
+        format: "mm-yyyy",
+        orientation: "bottom left",
+        startView: "months",
+        minViewMode: "months",
+        todayHighlight: true,
+        autoclose: true
+      });
+      $('#search_d').on("changeDate", function search () {
+        var f1 = $('#search_d').datepicker('getDate');
+        console.log(f1)
+        document.getElementById("search_date").value = f1.toISOString().split('T')[0];
+        var f2 = f1.toISOString().split('-01T')[0];
+        console.log(f2);
+        var href = `/reporte_mensual/filtrar/${f2}`;
+        $('#filtro2').attr('href', href);
+      });
+  });
 
-    var href = `/reporte_mensual/filtrar/${fecha}`;
-    $('#filtro2').attr('href', href);
-    });
 </script>
 
 <%- include('includes/foot.ejs') %>

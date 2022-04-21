@@ -51,26 +51,21 @@ $(document).ready(function(){
 });
 
 
-$(function() {
-    $('#search_date').datepicker({
-      format: "yyyy-mm",
-      orientation: "bottom left",
-      startView: "months",
-      minViewMode: "months",
-      todayHighlight: true,
-      autoclose: true
-    });
-  });
-
 $(document).ready(function(){
-    $('#fecha_reporte_mensual').datepicker({
-      format: 'yyyy-mm-dd',
+    $('#fecha_reporte_m').datepicker({
+      format: 'dd/mm/yyyy',
       orientation: "bottom left",
       startView: "months",
       minViewMode: "months",
       todayHighlight: true,
       autoclose: true
     });
+
+    $('#fecha_reporte_m').on("changeDate", function ng_block () {
+      var f1 = $('#fecha_reporte_m').datepicker('getDate');
+      console.log(f1)
+      document.getElementById("fecha_reporte_mensual").value = f1.toISOString().split('T')[0];
+  });
 });
 /*
   var currentDate  = new Date(),

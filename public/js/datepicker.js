@@ -69,7 +69,7 @@ $(document).ready(function(){
 });
 
 $(function() {
-    $('#mes_busqueda').datepicker({
+    $('#mensual').datepicker({
       format: 'yyyy-mm',
       orientation: "bottom left",
       startView: "months",
@@ -78,15 +78,30 @@ $(function() {
       autoclose: true
     });
 
+});
 
-    //$('#mes_busqueda').on("changeDate", function a1 () {
-      //var f1 = $('#mes_busqueda').datepicker('getDate');
-      //console.log(f1);
-      //document.getElementById("mes_busqueda_sql").value = f1.toISOString().split('T')[0];
-      //var f2 = f1.toISOString().split('-01T')[0];
-      //console.log(f2);
-      //var href = `/reporte_mensual/filtrar/${f2}`;
-      //$('#filtro2').attr('href', href);
+$(function() {
+    $('#semestral').datepicker({
+      format: 'yyyy-mm',
+      orientation: "bottom left",
+      startView: "months",
+      minViewMode: "months",
+      todayHighlight: true,
+      autoclose: true
+    });
+
+});
+
+$(function() {
+    $('#anual').datepicker({
+      format: 'yyyy-mm',
+      orientation: "bottom left",
+      startView: "months",
+      minViewMode: "months",
+      todayHighlight: true,
+      autoclose: true
+    });
+
 });
 /*
   var currentDate  = new Date(),

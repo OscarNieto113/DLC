@@ -22,9 +22,11 @@
               <p class="card-text"><center><b>Número de empleado: </b><%=empleado1.no_empleado%></center></p>
               <p class="card-text"><center><b>Departamento: </b><%=empleado1.nombre_area%></center></p>
               <p class="card-text"><center><b>Correo empresarial: </b><%=empleado1.correo_empresarial%></center></p>
+              <% if (userRol == 1 || userRol == 2) {%>
               <a href="/dlc/buscar_empleado/<%=empleado1.no_empleado%>">
               <center><button type="button" class="btn btn-light">Ver perfil</button></center>
               </a>
+              <% } %>
             </div>
           </div>
         <% } %>

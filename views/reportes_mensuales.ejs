@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="col-sm-4">
-                          <a id="filtro2" href="/resporte_mensual">
+                          <a id="filtro2" href="/reporte_mensual">
                             <button type="button" class="btn btn-light" style="background-color:#888B8D">Filtrar</button>
                           </a>
                         </div>
@@ -68,7 +68,6 @@
                                 </div>
                                 <div class="modal-body">
 
-                                  <form action="/dlc/publicacion/?_csrf=<%= csrfToken %>" method="POST">
                                     <div class="form-group" style="text-align: left;"">
 
                                       <label for="titulo_publicacion" class="col-form-label">Título del reporte:</label>
@@ -77,38 +76,53 @@
                                       <br>
                                       <label for="titulo_publicacion" class="col-form-label">Tipo:</label>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Mensual" id="Mensual" value="Male" checked/>
+                                        <input class="form-check-input" type="radio" name="Mensual" id="Mensual" value="radio1"/>
                                         <label class="form-check-label" for="exampleRadios3">
                                           Mensual
                                         </label>
+                                        <div class="input-group date" id="datepicker">
+                                            <input type="text" id="mes_busqueda" name="for_radio1[]" class="radio1" autocomplete="off" placeholder="YYYY-MM-DD" disabled="true">
+                                            <span class="input-group-append">
+                                                <span class="input-group-text bg-white">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </span>
+                                        </div>
                                       </div>
+
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Mensual" id="Semestral" value="Male" />
+                                        <input class="form-check-input" type="radio" name="Mensual" id="Semestral" value="radio2" />
                                         <label class="form-check-label" for="exampleRadios3">
                                           Semestral (Probablemente no se implemente)
                                         </label>
+                                        <div class="input-group date" id="datepicker">
+                                            <input type="text" id="mes_busqueda" name="for_radio2[]" class="radio2" autocomplete="off" placeholder="YYYY-MM-DD" disabled="true">
+                                            <span class="input-group-append">
+                                                <span class="input-group-text bg-white">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </span>
+                                        </div>
                                       </div>
                                       <div class="form-check disabled">
-                                        <input class="form-check-input" type="radio" name="Mensual" id="Anual" value="Male" />
+                                        <input class="form-check-input" type="radio" name="Mensual" id="Anual" value="radio3" />
                                         <label class="form-check-label" for="exampleRadios3">
                                           Anual
                                         </label>
+                                        <div class="input-group date" id="datepicker">
+                                            <input type="text" id="mes_busqueda" name="for_radio3[]" class="radio3" autocomplete="off" placeholder="YYYY-MM-DD" disabled="true">
+                                            <span class="input-group-append">
+                                                <span class="input-group-text bg-white">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </span>
+                                        </div>
                                       </div>
-                                      <a id="date1"></a>
-                                      <br>
-
-
-                                      <label for="imagen_publicacion" class="col-form-label">Adjuntar imagen:</label>
-                                      <input type="file" class="form-control" id="imagen_publicacion" name="imagen_publicacion" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required><br>
-                                      <div style="text-align: center;">
-                                      <input type="submit" value="Agregar" class="btn btn-primary" style="background-color:#43B02A">
                                       </div>
-                                  </form>
+                                      </div>
+
                                 </div>
                                 <div class="modal-footer">
-                                  <div style="text-align: right;">
-                                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal113" data-whatever="@res" style="background-color:#43B02A">Agregar anuncio sin imagen</button>
-                                </div>
                               </div>
                             </div>
                           </div>
@@ -139,13 +153,14 @@
                   </div>
                 <% } %>
               <% } else { %>
-              <h1>No hay Reportes Mensuales de este mes.</h1>
+                <div class="container">
+                  <h1>No hay Reportes Mensuales de este mes.</h1>
+                </div>
               <% } %>
-                </div><br><br>
+                <br><br>
 
                 <div style="text-align: center;">
                 <!--Agregar Reporte Mensual -->
-                <% if (userRol == 1 || userRol == 2 ) {%>
                       <div class="modal fade" id="exampleModal00" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel00" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
@@ -195,9 +210,6 @@
                       </div>
 
                       <!--Modal Generar Reporte Mensual -->
-
-
-                    <% } %>
               </div>
               </div>
               </div>
@@ -224,18 +236,26 @@
       });
   });
 
-  $('#Mensual').on("change", function search () {
-    document.getElementById('date1').innerHTML = '<ol><li>html1 data</li></ol>';
 
-  });
-  $('#Semestral').on("change", function search () {
-    document.getElementById('date1').innerHTML = '<ol><li>html2 data</li></ol>';
+  $(document).ready(function(){
+  $('input[type=radio][name=Mensual]').click(function(){
+      var related_class=$(this).val();
+      $('.'+related_class).prop('disabled',false);
 
+      $('input[type=radio][name=Mensual]').not(':checked').each(function(){
+          var other_class=$(this).val();
+          $('.'+other_class).prop('disabled',true);
+      });
   });
-  $('#Anual').on("change", function search () {
-    document.getElementById('date1').innerHTML = '<ol><li>html3 data</li></ol>';
+  });
+  //$('#Semestral').on("change", function search () {
+    //document.getElementById('date1').innerHTML = '';
 
-  });
+  //});
+  //$('#Anual').on("change", function search () {
+    //document.getElementById('date1').innerHTML = '';
+
+  //});
 </script>
 
 

@@ -59,7 +59,7 @@
           let respuesta = '';
           for(let empleado of data) {
               respuesta +=
-              '<div class="card text-white bg-dark mb-3" style="max-width: 18rem">' +
+              '<div class="card text-white bg-dark mb-3" style="max-width: 20rem">' +
                 '<div class="card-header"><center>' + empleado.nombres_empleados + ' ' + empleado.apellido_paterno + ' ' + empleado.apellido_materno + '</center></div>' +
                 '<div class="card-body">' +
                   '<p class="card-text"><center><b>Número de empleado: </b>' + empleado.no_empleado + '</center></p>' +
@@ -71,8 +71,8 @@
                 '</div>' +
               '</div>'
           }
-          respuesta += '<a href="/dlc/buscar_empleado">' +
-                '<button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23" href="/dlc/buscar_empleado">Regresar</button>';
+          respuesta += '<div style="text-align: left;"><a href="/dlc/buscar_empleado">' +
+                '<button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23" href="/dlc/buscar_empleado">Regresar</button></div>';
           document.getElementById('respuesta_ajax').innerHTML = respuesta;
 
       }).catch(err => {

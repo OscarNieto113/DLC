@@ -89,3 +89,21 @@ exports.filtrar_fecha = (request, response, next) => {
         }).catch(err => console.log(err));
     }).catch(err => console.log(err));
 };
+
+exports.get_generar_reporte = (request, response, next) => {
+    const no_empleado = request.session.user_no_empleado;
+    Empleado.getRol(no_empleado)
+    .then(([rol, fieldData]) => {
+        Reportes_mensuales.fetchSearch(request.params.fecha)
+        .then(([rows, fieldData]) => {
+          console.log(rows);
+          response.render('reportes_mensuales', {
+              userRol: rol[0].id_rol,
+              reportes_mensuales: rows,
+              success: request.flash("success"),
+              error: request.flash("error"),
+              isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+};

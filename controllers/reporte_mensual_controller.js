@@ -92,12 +92,17 @@ exports.filtrar_fecha = (request, response, next) => {
 
 exports.get_generar_reporte = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
+    const titulo_reporte = request.params.titulo;
     Empleado.getRol(no_empleado)
     .then(([rol, fieldData]) => {
+
+
+
+
         Reportes_mensuales.fetchSearch(request.params.fecha)
         .then(([rows, fieldData]) => {
           console.log(rows);
-          response.render('reportes_mensuales', {
+          response.render('generar_reporte', {
               userRol: rol[0].id_rol,
               reportes_mensuales: rows,
               success: request.flash("success"),

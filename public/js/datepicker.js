@@ -94,10 +94,10 @@ $(function() {
 
 $(function() {
     $('#anual').datepicker({
-      format: 'yyyy-mm',
+      format: 'yyyy',
       orientation: "bottom left",
-      startView: "months",
-      minViewMode: "months",
+      startView: "years",
+      minViewMode: "years",
       todayHighlight: true,
       autoclose: true
     });

@@ -70,11 +70,10 @@
 
                                     <div class="form-group" style="text-align: left;"">
 
-                                      <label for="titulo_publicacion" class="col-form-label">Título del reporte:</label>
+                                      <label for="titulo_publicacion" class="col-form-label"><b>Título del reporte:</b></label>
                                       <input type="text" class="form-control" id="titulo_publicacion" name="titulo_publicacion" autocomplete="off" required>
 
-                                      <br>
-                                      <label for="titulo_publicacion" class="col-form-label">Tipo:</label>
+                                      <label for="titulo_publicacion" class="col-form-label"><b>Fecha:</b></label>
                                       <div class="form-check">
                                         <input class="form-check-input" type="radio" name="Mensual" id="Mensual" value="radio1"/>
                                         <label class="form-check-label" for="exampleRadios3">
@@ -118,9 +117,30 @@
                                             </span>
                                         </div>
                                       </div>
+                                        <label for="responsable_ausencia" class="col-sm-4 col-form-label"><b>Tipo de Reporte</b></label>
+                                        <select name="responsable_ausencia" class="form-select" aria-label="Default select example" required>
+                                          <option value="" disabled selected>Selecciona el tipo de Reporte</option>
+                                          <option value="vacaciones">Reporte de Vacaciones</option>
+                                          <option value="ng_blocks">Reporte de Ng Blocks</option>
+                                        </select>
                                       </div>
-                                      </div>
+                                      <fieldset>
+                                        <label for="responsable_ausencia"><b>Escoge el/los esatatus del reporte</b></label>
 
+                                          <div>
+                                            <input type="checkbox" id="pendientes" name="pendientes" value="Pendiente">
+                                            <label for="coding">Pendientes</label>
+                                          </div>
+                                          <div>
+                                            <input type="checkbox" id="rechazados" name="rechazados" value="Rechazado">
+                                            <label for="music">Rechazados</label>
+                                          </div>
+                                          <div>
+                                            <input type="checkbox" id="aprobados" name="aprobados" value="Aprobado">
+                                            <label for="coding">Aprobados</label>
+                                          </div>
+                                        </fieldset>
+                                        </div>
                                 </div>
                                 <div class="modal-footer">
                               </div>

@@ -67,6 +67,10 @@ Veces en las que el oscar le peta algo porque no sabe copiar y pegar = 8
 
 Veces en las que el cris le peta algo porque no sabe copiar y pegar = 7
 
+Veces en las que el cris le peta algo porque no sabe leer = 6
+
+Veces en las que el oscar le peta algo porque no sabe leer = 4
+
 Veces que el cris se peleó con multi date picker = 4
 
 ## Biblia de errores

@@ -93,22 +93,77 @@ exports.filtrar_fecha = (request, response, next) => {
 exports.get_generar_reporte = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     const titulo_reporte = request.params.titulo;
+    const fecha_radio = request.params.fechaRadio;
+    const fecha = request.params.fecha;
+    const tabla = request.params.tabla;
+    const estatus = request.params.estatus;
+
+    console.log(titulo_reporte);
+    console.log(fecha_radio);
+    console.log(fecha);
+    console.log(tabla);
+    console.log(estatus);
+
+    switch (tabla) {
+      case "vacaciones":
+        var columna = "fecha_solicitud";
+        var columna_estatus = "estatus_vacaciones";
+        break;
+      case "ng_block":
+        var columna = "fecha_solicitud_ng_block";
+        var columna_estatus = "estatus_ng_block";
+        break;
+    }
+
     Empleado.getRol(no_empleado)
     .then(([rol, fieldData]) => {
+        if (titulo_reporte.length == 0 && fecha_radio.length == 0 && fecha.length == 0 && tabla.length == 0 && estatus.length == 0){
+          request.flash('error', 'No se recibió ningún dato.');
+          response.redirect('/reporte_mensual');
+        }
 
+        else if (titulo_reporte.length == 0 || fecha_radio.length == 0 || fecha.length == 0 || tabla.length == 0 || estatus.length == 0){
+          request.flash('error', 'Faltan datos por llenar.');
+          response.redirect('/reporte_mensual');
+        }
 
+        else {
+          switch (fecha_radio) {
+            //Mensual
+            case "radio1":
+                console.log(columna);
+                console.log(columna_estatus);
+                Reportes_mensuales.generarReporteMensual(columna, columna_estatus, tabla, fecha, estatus)
+                .then(([rows, fieldData]) => {
+                  console.log(rows);
+                  response.render('generar_reporte', {
+                      userRol: rol[0].id_rol,
+                      data: rows,
+                      titulo: titulo_reporte,
+                      isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
+                }).catch(err => console.log(err));
+              break;
 
+            //Semestral
+            case "radio2":
 
-        Reportes_mensuales.fetchSearch(request.params.fecha)
-        .then(([rows, fieldData]) => {
-          console.log(rows);
-          response.render('generar_reporte', {
-              userRol: rol[0].id_rol,
-              reportes_mensuales: rows,
-              success: request.flash("success"),
-              error: request.flash("error"),
-              isLoggedIn: request.session.isLoggedIn === true ? true : false
-            });
-        }).catch(err => console.log(err));
+              break;
+
+            //Anual
+            case "radio3":
+                Reportes_mensuales.generarReporteAnual(columna, columna_estatus, tabla, fecha, estatus)
+                .then(([rows, fieldData]) => {
+                  console.log(rows);
+                  response.render('generar_reporte', {
+                      userRol: rol[0].id_rol,
+                      data: rows,
+                      titulo: titulo_reporte,
+                      isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
+                }).catch(err => console.log(err));
+              break;
+          }
+        }
     }).catch(err => console.log(err));
 };

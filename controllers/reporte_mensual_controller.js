@@ -98,11 +98,11 @@ exports.get_generar_reporte = (request, response, next) => {
     const tabla = request.params.tabla;
     const estatus = request.params.estatus;
 
-    console.log(titulo_reporte);
-    console.log(fecha_radio);
-    console.log(fecha);
-    console.log(tabla);
-    console.log(estatus);
+    //console.log(titulo_reporte);
+    //console.log(fecha_radio);
+    //console.log(fecha);
+    //console.log(tabla);
+    //console.log(estatus);
 
     switch (tabla) {
       case "vacaciones":
@@ -133,6 +133,9 @@ exports.get_generar_reporte = (request, response, next) => {
             case "radio1":
                 console.log(columna);
                 console.log(columna_estatus);
+                console.log(tabla);
+                console.log(fecha);
+                console.log(estatus);
                 Reportes_mensuales.generarReporteMensual(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
                   console.log(rows);

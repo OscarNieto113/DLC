@@ -68,41 +68,6 @@ $(document).ready(function(){
   });
 });
 
-$(function() {
-    $('#mensual').datepicker({
-      format: 'yyyy-mm',
-      orientation: "bottom left",
-      startView: "months",
-      minViewMode: "months",
-      todayHighlight: true,
-      autoclose: true
-    });
-
-});
-
-$(function() {
-    $('#semestral').datepicker({
-      format: 'yyyy-mm',
-      orientation: "bottom left",
-      startView: "months",
-      minViewMode: "months",
-      todayHighlight: true,
-      autoclose: true
-    });
-
-});
-
-$(function() {
-    $('#anual').datepicker({
-      format: 'yyyy',
-      orientation: "bottom left",
-      startView: "years",
-      minViewMode: "years",
-      todayHighlight: true,
-      autoclose: true
-    });
-
-});
 /*
   var currentDate  = new Date(),
       currentDay   = currentDate.getDate() < 10

@@ -117,34 +117,44 @@
                                             </span>
                                         </div>
                                       </div>
-                                        <label for="responsable_ausencia" class="col-sm-4 col-form-label"><b>Tipo de Reporte</b></label>
-                                        <select name="responsable_ausencia" class="form-select" aria-label="Default select example" required>
-                                          <option value="" disabled selected>Selecciona el tipo de Reporte</option>
-                                          <option value="vacaciones">Reporte de Vacaciones</option>
-                                          <option value="ng_blocks">Reporte de Ng Blocks</option>
-                                        </select>
-                                      </div>
-                                      <fieldset>
-                                        <label for="responsable_ausencia"><b>Escoge el/los esatatus del reporte</b></label>
 
-                                          <div>
-                                            <input type="checkbox" id="pendientes" name="pendientes" value="0">
-                                            <label for="coding">Pendientes</label>
-                                          </div>
-                                          <div>
-                                            <input type="checkbox" id="rechazados" name="rechazados" value="0">
-                                            <label for="music">Rechazados</label>
-                                          </div>
-                                          <div>
-                                            <input type="checkbox" id="aprobados" name="aprobados" value="0">
-                                            <label for="coding">Aprobados</label>
-                                          </div>
-                                        </fieldset>
-                                        <div class="col-sm-4">
-                                          <a id="filtro2" href="/generar_reporte/Prueba/radio1/2022-04/vacaciones/1/0/0">
-                                            <button type="button" class="btn btn-light" style="background-color:#888B8D">Filtrar</button>
-                                          </a>
+                                      <input type="hidden" id="fecha2" name="fecha2">
+
+                                      <label for="tipo_reporte" class="col-sm-4 col-form-label"><b>Tipo de Reporte</b></label>
+                                      <select name="tipo_reporte" id="tipo_reporte" class="form-select" aria-label="Default select example" required>
+                                        <option value="" disabled selected>Selecciona el tipo de Reporte</option>
+                                        <option value="vacaciones">Reporte de Vacaciones</option>
+                                        <option value="ng_blocks">Reporte de Ng Blocks</option>
+                                      </select>
+
+                                        <label for="titulo_publicacion" class="col-form-label"><b>Escoge el estatus del reporte:</b></label>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="estatus" id="pendientes" value="Pendiente"/>
+                                          <label class="form-check-label" for="exampleRadios3">
+                                            Pendiente
+                                          </label>
                                         </div>
+
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="estatus" id="aprobados" value="Aprobado" />
+                                          <label class="form-check-label" for="exampleRadios3">
+                                            Aprobado
+                                          </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                          <input class="form-check-input" type="radio" name="estatus" id="rechazados" value="Rechazado" />
+                                          <label class="form-check-label" for="exampleRadios3">
+                                            Rechazado
+                                          </label>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                          <a id="filtro3" href="/generar_reporte/Prueba/radio1/2022-04/vacaciones/1/0/0"></a>
+                                            <button type="button" name="boton23" id="boton23" class="btn btn-light" style="background-color:#888B8D">Filtrar</button>
+
+                                        </div>
+
+                                      </div>
                                         </div>
                                 </div>
                                 <div class="modal-footer">
@@ -242,6 +252,11 @@
 
 
 <script type="text/javascript">
+
+  $(document).ready(function(){
+       $.fn.datepicker.defaults.language = 'es';
+  });
+
   $(function() {
       $('#search_d').datepicker({
         format: "mm-yyyy",
@@ -260,6 +275,7 @@
         var href = `/reporte_mensual/filtrar/${f2}`;
         $('#filtro2').attr('href', href);
       });
+
   });
 
 
@@ -274,14 +290,86 @@
       });
   });
   });
-  //$('#Semestral').on("change", function search () {
-    //document.getElementById('date1').innerHTML = '';
 
-  //});
-  //$('#Anual').on("change", function search () {
-    //document.getElementById('date1').innerHTML = '';
+  $(function() {
+      $('#mensual').datepicker({
+        format: 'yyyy-mm',
+        orientation: "bottom left",
+        startView: "months",
+        minViewMode: "months",
+        todayHighlight: true,
+        autoclose: true
+      });
+      /*
+      $('#mensual').on("changeDate", function search1 () {
+        var f1 = $('#mensual').datepicker('getDate');
+        console.log(f1)
+        var f2 = f1.toISOString().split('-01T')[0];
+        console.log(f2);
+        document.getElementById("fecha2").value = f2;
+        var x = document.getElementById("fecha2").value;
+        console.log('a');
+        console.log(x);
+      });
+      */
+  });
 
-  //});
+  $(function() {
+      $('#semestral').datepicker({
+        format: 'yyyy-mm',
+        orientation: "bottom left",
+        startView: "months",
+        minViewMode: "months",
+        todayHighlight: true,
+        autoclose: true
+      });
+
+  });
+
+  $(function() {
+      $('#anual').datepicker({
+        format: 'yyyy',
+        orientation: "bottom left",
+        startView: "years",
+        minViewMode: "years",
+        todayHighlight: true,
+        autoclose: true
+      });
+
+  });
+
+/*
+  $('#tipo_reporte').on('change', function getTipoReporte() {
+    var t_reporte = this.value;
+    console.log(t_reporte);
+
+    var href = `/reporte_mensual/filtrar/${t_reporte}`;
+    console.log(href);
+    $('#filtro3').attr('href', href);
+  });
+*/
+
+/*
+  $("input[name='estatus']").on('change', function getEstatus() {
+    var estatu = this.value;
+    console.log(estatu);
+
+    var href = `/reporte_mensual/filtrar/${estatu}`;
+    console.log(href);
+    $('#filtro3').attr('href', href);
+  });
+*/
+$(document).ready(function() {
+  $('#boton23').click(function() {
+    var x = document.getElementById("mensual").value;
+    console.log(x);
+    var y = document.getElementById("tipo_reporte").value;
+    console.log(y);
+    var z = document.getElementsByName("estatus")[0].value;
+    console.log(z);
+  });
+});
+
 </script>
 
 

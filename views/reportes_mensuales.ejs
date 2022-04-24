@@ -70,17 +70,18 @@
 
                                     <div class="form-group" style="text-align: left;"">
 
-                                      <label for="titulo_publicacion" class="col-form-label"><b>Título del reporte:</b></label>
-                                      <input type="text" class="form-control" id="titulo_publicacion" name="titulo_publicacion" autocomplete="off" required>
+                                      <label for="titulo_r2" class="col-form-label"><b>Título del reporte:</b></label>
+                                      <input type="text" class="form-control" id="titulo_r2" name="titulo_r2" autocomplete="off" required>
 
                                       <label for="titulo_publicacion" class="col-form-label"><b>Fecha:</b></label>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Mensual" id="Mensual" value="radio1"/>
+                                        <input class="form-check-input" type="radio" name="Mensual" id="Mensual" value="radio1" />
                                         <label class="form-check-label" for="exampleRadios3">
                                           Mensual
                                         </label>
                                         <div class="input-group date" id="datepicker">
                                             <input type="text" id="mensual" name="for_radio1[]" class="radio1" autocomplete="off" placeholder="YYYY-MM" disabled="true">
+                                            <input type="hidden" id="valor_radio1" name="for_radio1[]" class="radio1" value="radio1" disabled="true">
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
                                                     <i class="fa fa-calendar"></i>
@@ -96,6 +97,7 @@
                                         </label>
                                         <div class="input-group date" id="datepicker">
                                             <input type="text" id="semestral" name="for_radio2[]" class="radio2" autocomplete="off" placeholder="YYYY-MM" disabled="true">
+                                            <input type="hidden" id="valor_radio2" name="for_radio2[]" class="radio2" value="radio2" disabled="true">
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
                                                     <i class="fa fa-calendar"></i>
@@ -110,6 +112,7 @@
                                         </label>
                                         <div class="input-group date" id="datepicker">
                                             <input type="text" id="anual" name="for_radio3[]" class="radio3" autocomplete="off" placeholder="YYYY" disabled="true">
+                                            <input type="hidden" id="valor_radio3" name="for_radio3[]" class="radio3" value="radio3" disabled="true">
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
                                                     <i class="fa fa-calendar"></i>
@@ -118,34 +121,35 @@
                                         </div>
                                       </div>
 
-                                      <input type="hidden" id="fecha2" name="fecha2">
-
                                       <label for="tipo_reporte" class="col-sm-4 col-form-label"><b>Tipo de Reporte</b></label>
                                       <select name="tipo_reporte" id="tipo_reporte" class="form-select" aria-label="Default select example" required>
                                         <option value="" disabled selected>Selecciona el tipo de Reporte</option>
                                         <option value="vacaciones">Reporte de Vacaciones</option>
-                                        <option value="ng_blocks">Reporte de Ng Blocks</option>
+                                        <option value="ng_block">Reporte de Ng Blocks</option>
                                       </select>
 
                                         <label for="titulo_publicacion" class="col-form-label"><b>Escoge el estatus del reporte:</b></label>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="estatus" id="pendientes" value="Pendiente"/>
+                                          <input class="form-check-input" type="radio" name="estatus" id="pendientes" value="radio4" />
                                           <label class="form-check-label" for="exampleRadios3">
                                             Pendiente
                                           </label>
+                                          <input type="hidden" id="pendientes_real" name="for_radio4[]" class="radio4" value="Pendiente" disabled="true">
                                         </div>
 
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="estatus" id="aprobados" value="Aprobado" />
+                                          <input class="form-check-input" type="radio" name="estatus" id="aprobados" value="radio5" />
                                           <label class="form-check-label" for="exampleRadios3">
                                             Aprobado
                                           </label>
+                                          <input type="hidden" id="aprobados_real" name="for_radio5[]" class="radio5" value="Aprobado" disabled="true">
                                         </div>
                                         <div class="form-check disabled">
-                                          <input class="form-check-input" type="radio" name="estatus" id="rechazados" value="Rechazado" />
+                                          <input class="form-check-input" type="radio" name="estatus" id="rechazados" value="radio6" />
                                           <label class="form-check-label" for="exampleRadios3">
                                             Rechazado
                                           </label>
+                                          <input type="hidden" id="rechazados_real" name="for_radio6[]" class="radio6" value="Rechazado" disabled="true">
                                         </div>
 
                                         <div class="col-sm-4">
@@ -278,13 +282,26 @@
 
   });
 
-
   $(document).ready(function(){
   $('input[type=radio][name=Mensual]').click(function(){
       var related_class=$(this).val();
       $('.'+related_class).prop('disabled',false);
+      $('.'+related_class).prop('required',true);
 
       $('input[type=radio][name=Mensual]').not(':checked').each(function(){
+          var other_class=$(this).val();
+          $('.'+other_class).prop('disabled',true);
+          $('.'+other_class).prop('value',"")
+      });
+  });
+  });
+
+  $(document).ready(function(){
+  $('input[type=radio][name=estatus]').click(function(){
+      var related_class=$(this).val();
+      $('.'+related_class).prop('disabled',false);
+
+      $('input[type=radio][name=estatus]').not(':checked').each(function(){
           var other_class=$(this).val();
           $('.'+other_class).prop('disabled',true);
       });
@@ -361,12 +378,171 @@
 */
 $(document).ready(function() {
   $('#boton23').click(function() {
-    var x = document.getElementById("mensual").value;
-    console.log(x);
-    var y = document.getElementById("tipo_reporte").value;
-    console.log(y);
-    var z = document.getElementsByName("estatus")[0].value;
-    console.log(z);
+    var picker1 = document.getElementById("mensual").value;
+    var picker2 = document.getElementById("semestral").value;
+    var picker3 = document.getElementById("anual").value;
+
+    //console.log(picker1);
+    //console.log(picker2);
+    //console.log(picker3);
+
+    var disable1 = document.getElementById("pendientes_real").disabled;
+    var disable2 = document.getElementById("aprobados_real").disabled;
+    var disable3 = document.getElementById("rechazados_real").disabled;
+
+    //console.log(disable1);
+    //console.log(disable2);
+    //console.log(disable3);
+
+    /*
+    var valor_r1 = document.getElementById("valor_radio1").disabled;
+    var valor_r2 = document.getElementById("valor_radio2").disabled;
+    var valor_r3 = document.getElementById("valor_radio3").disabled;
+
+    console.log(valor_r1);
+    console.log(valor_r2);
+    console.log(valor_r3);
+    */
+    if (picker1.length != 0){
+      if (disable1 == false){
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Mensual").value;
+        console.log(b);
+        var c = document.getElementById("mensual").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("pendientes_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+
+      else if (disable2 == false){
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Mensual").value;
+        console.log(b);
+        var c = document.getElementById("mensual").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("aprobados_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+
+      else{
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Mensual").value;
+        console.log(b);
+        var c = document.getElementById("mensual").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("rechazados_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+    }
+
+    else if (picker2.length != 0){
+      if (disable1 == false){
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Semestral").value;
+        console.log(b);
+        var c = document.getElementById("semestral").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("pendientes_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+
+      else if (disable2 == false){
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Semestral").value;
+        console.log(b);
+        var c = document.getElementById("semestral").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("aprobados_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+
+      else{
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Semestral").value;
+        console.log(b);
+        var c = document.getElementById("semestral").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("rechazados_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+    }
+
+    else{
+      if (disable1 == false){
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Anual").value;
+        console.log(b);
+        var c = document.getElementById("anual").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("pendientes_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+
+      else if (disable2 == false){
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Anual").value;
+        console.log(b);
+        var c = document.getElementById("anual").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("aprobados_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+
+      else{
+        var a = document.getElementById("titulo_r2").value;
+        console.log(a);
+        var b = document.getElementById("Anual").value;
+        console.log(b);
+        var c = document.getElementById("anual").value;
+        console.log(c);
+        var d = document.getElementById("tipo_reporte").value;
+        console.log(d);
+        var e = document.getElementById("rechazados_real").value;
+        console.log(e);
+        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        $('#filtro3').attr('href', href);
+      }
+    }
   });
 });
 

@@ -39,25 +39,11 @@ module.exports = class Reportes_mensuales {
         return db.query(' SELECT ?? FROM ?? WHERE ?? = ? AND (?? LIKE ?)', [columna, tabla, columna_estatus, estatus, columna, fecha+'%']);
     }
 
-
-
-
-
-
-
-
-
     static generarReporteAnual(columna, columna_estatus, tabla, fecha, estatus) {
-      return db.execute(
-        'SELECT ? ' +
-        'FROM ? ' +
-        'WHERE ? = ? AND (? LIKE ? )', [columna, tabla, columna_estatus, estatus, columna, fecha+'%']);
-  }
-    static generarSemestral(search) {
-        return db.execute(
-          `SELECT id_reportes_mensuales, titulo_reporte_mensual, descripcion_reporte_mensual, imagen_reporte, date_format(fecha_reporte_mensual, '%d/%m/%Y') as fecha_reporte_mensual ` +
-          'FROM reportes_mensuales ' +
-          'WHERE fecha_reporte_mensual LIKE ? ', [search+'%']);
+        return db.query(' SELECT ?? FROM ?? WHERE ?? = ? AND (?? LIKE ?)', [columna, tabla, columna_estatus, estatus, columna, fecha+'%']);
     }
 
+    static generarReporteSemestral(columna, columna_estatus, tabla, fecha, estatus) {
+        return db.query(' SELECT ?? FROM ?? WHERE ?? = ? AND (?? BETWEEN (DATE_ADD((?), INTERVAL 5 MONTH ) AND (?))', [columna, tabla, columna_estatus, estatus, columna, fecha, fecha]);
+    }
 }

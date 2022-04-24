@@ -131,11 +131,6 @@ exports.get_generar_reporte = (request, response, next) => {
           switch (fecha_radio) {
             //Mensual
             case "radio1":
-                console.log(columna);
-                console.log(columna_estatus);
-                console.log(tabla);
-                console.log(fecha);
-                console.log(estatus);
                 Reportes_mensuales.generarReporteMensual(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
                   console.log(rows);
@@ -150,7 +145,16 @@ exports.get_generar_reporte = (request, response, next) => {
 
             //Semestral
             case "radio2":
-
+                Reportes_mensuales.generarReporteSemestral(columna, columna_estatus, tabla, fecha, estatus)
+                .then(([rows, fieldData]) => {
+                  console.log(rows);
+                  response.render('generar_reporte', {
+                      userRol: rol[0].id_rol,
+                      data: rows,
+                      titulo: titulo_reporte,
+                      isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
+                }).catch(err => console.log(err));
               break;
 
             //Anual

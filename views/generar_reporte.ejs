@@ -1,6 +1,24 @@
 <%- include('includes/head.ejs') %>
+    <script src="/js/chartjs.js"></script>
     <%- include('includes/topbar.ejs') %>
         <%- include('includes/sidebar.ejs') %>
-        
+        <div class="col py-3"3
+          <div height class="container">
+            <a href="#"><%= titulo %></a>
+            <canvas id="myChart" width="400" height="200"></canvas>
+            <a id="download"
+                    download="ChartImage.jpg"
+                    href=""
+                    class="btn btn-primary float-right bg-flat-color-1"
+                    title="Descargar Gráfico">
+
+                    <!-- Download Icon -->
+             <i class="fa fa-download"></i>
+             </a>
+            </div>
+          </div>
+
+<script src="/js/downloadchart.js"></script>
+<script src="/js/generategraph.js"></script>
 
 <%- include('includes/foot.ejs') %>

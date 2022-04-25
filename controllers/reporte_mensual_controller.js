@@ -34,6 +34,30 @@ function getCoincidences(a, b){
   return coincidences;
 }
 
+function getCoincidences2(a, b){
+  //console.log(a);
+  //console.log(b);
+
+  var coincidences2 = [];
+  for (var i = 0; i < a.length; i++) {
+      // we want to know if a[i] is found in b
+      var numberOfCoincidences2 = 0;
+      for (var j = 0; j < b.length; j++) {
+        let prueba1 = a[i].toISOString().split('-01T')[0];
+        let prueba2 = b[j].toISOString().slice(0,-17);
+        console.log(prueba1);
+        console.log(prueba2);
+          if (prueba1 == prueba2) {
+              // we have found a[i] in b, so we can stop searching
+              numberOfCoincidences2 += 1;
+          }
+      }
+      coincidences2.push(numberOfCoincidences2);
+  }
+  console.log(coincidences2);
+  return coincidences2;
+}
+
 
 exports.get_reportes_mensuales = (request, response, next) => {
   const no_empleado = request.session.user_no_empleado;
@@ -215,17 +239,33 @@ exports.get_generar_reporte = (request, response, next) => {
 
             //Anual
             case "radio3":
-                Reportes_mensuales.generarReporteAnual(columna, columna_estatus, tabla, fecha, estatus)
+                Reportes_mensuales.generarReporteMensual(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
+                  let real_meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                  var dt = fecha;
+                  dt = new Date(dt, 00, 01);
+                  //console.log(dt);
+                  let meses = [];
+                  var mes = new Date (dt.setMonth(dt.getMonth()));
+                  meses.push(mes);
+                  //console.log(meses);
+                  for (var i = 0; i < 11; i++) {
+                    var mes = new Date (dt.setMonth(dt.getMonth()+1));
+                    meses.push(mes);
+                  }
+                  //console.log(meses);
                   let dates= [];
                   for (let data of rows){
                       dates.push(data.fecha);
                   }
-                  let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+                  let coincidences2 = [];
+                  coincidences2 = getCoincidences2(meses, dates);
+
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
-                      days: months,
-                      data: dates,
+                      data: coincidences2,
+                      days: real_meses,
                       titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
                     });

@@ -18,6 +18,7 @@
           );
           //funcion que ordene arreglo
           var p_dia = sorted_dates[0];
+          console.log(the_dates);
           document.getElementById("fecha_primer_dia").value = p_dia.toISOString().split('T')[0];
       });
 
@@ -58,7 +59,7 @@
                 day: "numeric"
             };
           var pr_dia2 = pr_dia.toLocaleDateString(undefined, options);
-          console.log(pr_dia2)
+          //console.log(pr_dia2)
           document.getElementById("fecha_p2").value = pr_dia2;
       });
 
@@ -76,7 +77,7 @@
                 day: "numeric"
             };
           var ul_dia2 = ul_dia.toLocaleDateString(undefined, options);
-          console.log(ul_dia2)
+          //console.log(ul_dia2)
           document.getElementById("fecha_u2").value = ul_dia2;
       });
 

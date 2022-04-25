@@ -90,7 +90,7 @@ exports.filtrar_fecha = (request, response, next) => {
     }).catch(err => console.log(err));
 };
 
-exports.get_generar_reporte = (request, response, next) => {
+exports.get_generar_reporte = async(request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     const titulo_reporte = request.params.titulo;
     const fecha_radio = request.params.fechaRadio;
@@ -115,7 +115,7 @@ exports.get_generar_reporte = (request, response, next) => {
         break;
     }
 
-    Empleado.getRol(no_empleado)
+    Empleado.getRol (no_empleado)
     .then(([rol, fieldData]) => {
         if (titulo_reporte.length == 0 && fecha_radio.length == 0 && fecha.length == 0 && tabla.length == 0 && estatus.length == 0){
           request.flash('error', 'No se recibió ningún dato.');
@@ -133,10 +133,22 @@ exports.get_generar_reporte = (request, response, next) => {
             case "radio1":
                 Reportes_mensuales.generarReporteMensual(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
-                  console.log(rows);
+                  var dt = fecha;
+                  dt = new Date(dt);
+                  daysInMonth = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
+                  let days = [];
+                  for (let i = 1; i <= daysInMonth; i++){
+                    days.push(i);
+                  }
+                  let dates= [];
+                  for (let data of rows){
+                      dates.push(data.fecha);
+                  }
+                  console.log(titulo_reporte);
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
-                      data: rows,
+                      data: dates,
+                      days: days,
                       titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
                     });

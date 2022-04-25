@@ -8,7 +8,7 @@ async function setup() {
       data: {
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
           datasets: [{
-              label: data.tittle,
+              label: 'a',
               data: [12, 19, 3, 5, 2, 3],
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
@@ -40,6 +40,7 @@ async function setup() {
 }
 
 async function getData() {
-  const tittle = await this.titulo;
+  const tittle = await this.data;
+  console.log(tittle);
   return {tittle};
 }

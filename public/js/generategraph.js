@@ -1,8 +1,11 @@
-let a = "<%=days[3] %>"
+let estado = [];
+    "<% for(let i = 0; i < estados.length; i++){ %>"
+            estado.push("<%= estados[i] %>");
+    "<% } %>"
 
 
 
-  console.log(a);
+  console.log(estado);
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChart = new Chart(ctx, {
       type: 'bar',

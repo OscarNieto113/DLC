@@ -1,6 +1,40 @@
 const Reportes_mensuales = require('../models/reportes_mensuales');
 const Empleado = require('../models/empleado');
 
+function getAllDaysInMonth(year, month) {
+  const date = new Date(year, month, 1);
+  const dates = [];
+  while (date.getMonth() === month) {
+    dates.push(new Date(date));
+    date.setDate(date.getDate() + 1);
+  }
+
+  return dates;
+}
+
+function getCoincidences(a, b){
+  //console.log(a);
+  //console.log(b);
+
+  var coincidences = [];
+  for (var i = 0; i < a.length; i++) {
+      // we want to know if a[i] is found in b
+      var numberOfCoincidences = 0;
+      for (var j = 0; j < b.length; j++) {
+        let prueba1 = a[i].toISOString().split('T')[0];
+        let prueba2 = b[j].toISOString().split('T')[0];
+          if (prueba1 == prueba2) {
+              // we have found a[i] in b, so we can stop searching
+              numberOfCoincidences += 1;
+          }
+      }
+      coincidences.push(numberOfCoincidences);
+  }
+  console.log(coincidences);
+  return coincidences;
+}
+
+
 exports.get_reportes_mensuales = (request, response, next) => {
   const no_empleado = request.session.user_no_empleado;
   Empleado.getRol(no_empleado)
@@ -90,7 +124,7 @@ exports.filtrar_fecha = (request, response, next) => {
     }).catch(err => console.log(err));
 };
 
-exports.get_generar_reporte = async(request, response, next) => {
+exports.get_generar_reporte = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     const titulo_reporte = request.params.titulo;
     const fecha_radio = request.params.fechaRadio;
@@ -144,11 +178,20 @@ exports.get_generar_reporte = async(request, response, next) => {
                   for (let data of rows){
                       dates.push(data.fecha);
                   }
-                  let estados = [0, 0, 0, 0, 0, 0, 0];
+                  var dt = new Date();
+                  var month = dt.getMonth();
+                  var year = dt.getFullYear();
+                  daysInMonth = new Date(year, month, 0).getDate();
+
+                  let a = getAllDaysInMonth(year, month);
+
+
+                  let coincidences = [];
+                  coincidences = getCoincidences(a, dates);
+
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
-                      estados: estados,
-                      data: dates,
+                      data: coincidences,
                       days: days,
                       titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -174,10 +217,15 @@ exports.get_generar_reporte = async(request, response, next) => {
             case "radio3":
                 Reportes_mensuales.generarReporteAnual(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
-                  console.log(rows);
+                  let dates= [];
+                  for (let data of rows){
+                      dates.push(data.fecha);
+                  }
+                  let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
-                      data: rows,
+                      days: months,
+                      data: dates,
                       titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
                     });

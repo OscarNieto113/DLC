@@ -144,9 +144,10 @@ exports.get_generar_reporte = async(request, response, next) => {
                   for (let data of rows){
                       dates.push(data.fecha);
                   }
-                  console.log(titulo_reporte);
+                  let estados = [0, 0, 0, 0, 0, 0, 0];
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
+                      estados: estados,
                       data: dates,
                       days: days,
                       titulo: titulo_reporte,

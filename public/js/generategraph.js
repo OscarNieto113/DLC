@@ -1,14 +1,15 @@
-window.addEventListener('load', setup);
+let a = "<%=days[3] %>"
 
-async function setup() {
+
+
+  console.log(a);
   const ctx = document.getElementById('myChart').getContext('2d');
-  const data = await getData();
   const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
           datasets: [{
-              label: 'a',
+              label: "<%=days[13] %>",
               data: [12, 19, 3, 5, 2, 3],
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
@@ -37,10 +38,3 @@ async function setup() {
           }
       }
   });
-}
-
-async function getData() {
-  const tittle = await this.data;
-  console.log(tittle);
-  return {tittle};
-}

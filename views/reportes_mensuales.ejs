@@ -22,6 +22,7 @@
                         </div>
                     <% } %>
                     </section>
+
                   <h1 class="display-4"><center>Reportes Mensuales</center></h1>
                   <br><br>
                   <!--Dropdown menu -->
@@ -31,7 +32,7 @@
                         <div class="col-sm-3">
 
                           <div class="input-group date" id="datepicker">
-                              <input type="text" id="search_d" name="search_d" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                              <input type="text" id="search_d" name="search_d" class="form-control" autocomplete="off" placeholder="MM-YYYY">
                               <input type="hidden" id="search_date" name="search_date">
                               <span class="input-group-append">
                                   <span class="input-group-text bg-white">
@@ -68,16 +69,15 @@
                                 </div>
                                 <div class="modal-body">
 
-                                  <div class="container" style="display:none;" id="myAlert">
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="myAlert2">
-                                      <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻   </strong> Te faltaron datos por llenar
-                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
-                                          <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                  </div>
                                     <div class="form-group" style="text-align: left;"">
-
+                                      <div class="container" style="display:none;" id="myAlert">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="myAlert2">
+                                          <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻   </strong> Te faltaron datos por llenar
+                                          <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                      </div>
                                       <label for="titulo_r2" class="col-form-label"><b>Título del reporte:</b></label>
                                       <input type="text" class="form-control" id="titulo_r2" name="titulo_r2" autocomplete="off" required>
 
@@ -88,7 +88,7 @@
                                           Mensual
                                         </label>
                                         <div class="input-group date" id="datepicker">
-                                            <input type="text" id="mensual" name="for_radio1[]" class="radio1" autocomplete="off" placeholder="YYYY-MM" disabled="true">
+                                            <input type="text" id="mensual" name="for_radio1[]" class="radio1" autocomplete="off" placeholder="MM-YYYY" disabled="true">
                                             <input type="hidden" id="secreto_mensual" name="secreto_mensual">
                                             <input type="hidden" id="valor_radio1" name="for_radio1[]" class="radio1" value="radio1" disabled="true">
                                             <span class="input-group-append">
@@ -105,7 +105,7 @@
                                           Semestral (Probablemente no se implemente)
                                         </label>
                                         <div class="input-group date" id="datepicker">
-                                            <input type="text" id="semestral" name="for_radio2[]" class="radio2" autocomplete="off" placeholder="YYYY-MM" disabled="true">
+                                            <input type="text" id="semestral" name="for_radio2[]" class="radio2" autocomplete="off" placeholder="DD-MM-YYYY" disabled="true">
                                             <input type="hidden" id="secreto_semestral" name="secreto_semestral">
                                             <input type="hidden" id="valor_radio2" name="for_radio2[]" class="radio2" value="radio2" disabled="true">
                                             <span class="input-group-append">
@@ -163,9 +163,9 @@
                                         </div>
 
                                         <div class="col-sm-4">
-                                          <a id="filtro3"  href="">
-                                            <button type="button" name="boton23" id="boton23"  class="btn btn-light" style="background-color:#888B8D">Generar</button></a>
-                                            <!-- onclick="showAlert();" -->
+                                          <a id="filtro3">
+                                            <button type="button" name="boton23" id="boton23" class="btn btn-light" style="background-color:#888B8D">Generar</button></a>
+
                                         </div>
 
                                       </div>
@@ -266,11 +266,8 @@
 
 
 <script type="text/javascript">
-function showAlert(){
-  if($("#myAlert").find("div#myAlert2").length==0){
-    $("#myAlert").append("<div class='alert alert-success alert-dismissable' id='myAlert2'> <button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button> Success! message sent successfully.</div>");
-  }
-    $("#myAlert").css("display", "");
+  function showAlert(){
+      $("#myAlert").css("display", "");
   }
 
   $(document).ready(function(){
@@ -447,7 +444,7 @@ $(document).ready(function() {
         $('#filtro3').attr('href', href);
       }
       else{
-
+        $("#myAlert").css("display", "");
       }
     }
 
@@ -497,7 +494,7 @@ $(document).ready(function() {
         $('#filtro3').attr('href', href);
       }
       else{
-
+        $("#myAlert").css("display", "");
       }
     }
 
@@ -547,11 +544,11 @@ $(document).ready(function() {
         $('#filtro3').attr('href', href);
       }
       else{
-
+        $("#myAlert").css("display", "");
       }
     }
     else{
-
+      $("#myAlert").css("display", "");
     }
 
   });

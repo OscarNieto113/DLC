@@ -8,53 +8,65 @@ function getAllDaysInMonth(year, month) {
     dates.push(new Date(date));
     date.setDate(date.getDate() + 1);
   }
-
   return dates;
 }
 
-function getCoincidences(a, b){
-  //console.log(a);
-  //console.log(b);
+function getSemestralMonths(date){
+  let months = [];
+  if (date.endsWith("-01-01")){
+    months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'];
+  }
+  else {
+    months = ['Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  }
+  return months;
+}
 
+function getArrayDateMonths(date, limit){
+  let months = [];
+  var dt = date;
+  dt = new Date(dt);
+  var month = new Date (dt.setMonth(dt.getMonth()));
+  months.push(month);
+  for (var i = 0; i < limit; i++) {
+    var month = new Date (dt.setMonth(dt.getMonth()+1));
+    months.push(month);
+  }
+  return months;
+}
+
+function getCoincidences(a, b){
   var coincidences = [];
   for (var i = 0; i < a.length; i++) {
-      // we want to know if a[i] is found in b
       var numberOfCoincidences = 0;
       for (var j = 0; j < b.length; j++) {
         let prueba1 = a[i].toISOString().split('T')[0];
         let prueba2 = b[j].toISOString().split('T')[0];
           if (prueba1 == prueba2) {
-              // we have found a[i] in b, so we can stop searching
               numberOfCoincidences += 1;
           }
       }
       coincidences.push(numberOfCoincidences);
   }
-  console.log(coincidences);
   return coincidences;
 }
 
-function getCoincidences2(a, b){
-  //console.log(a);
-  //console.log(b);
 
+function getCoincidences2(a, b){
   var coincidences2 = [];
   for (var i = 0; i < a.length; i++) {
-      // we want to know if a[i] is found in b
       var numberOfCoincidences2 = 0;
       for (var j = 0; j < b.length; j++) {
-        let prueba1 = a[i].toISOString().split('-01T')[0];
+        let prueba1 = a[i].toISOString().slice(0,-17);
+        //console.log(prueba1);
         let prueba2 = b[j].toISOString().slice(0,-17);
-        console.log(prueba1);
-        console.log(prueba2);
+        //console.log(prueba2);
           if (prueba1 == prueba2) {
-              // we have found a[i] in b, so we can stop searching
               numberOfCoincidences2 += 1;
           }
       }
       coincidences2.push(numberOfCoincidences2);
   }
-  console.log(coincidences2);
   return coincidences2;
 }
 
@@ -156,12 +168,6 @@ exports.get_generar_reporte = (request, response, next) => {
     const tabla = request.params.tabla;
     const estatus = request.params.estatus;
 
-    //console.log(titulo_reporte);
-    //console.log(fecha_radio);
-    //console.log(fecha);
-    //console.log(tabla);
-    //console.log(estatus);
-
     switch (tabla) {
       case "vacaciones":
         var columna = "fecha_solicitud";
@@ -209,7 +215,6 @@ exports.get_generar_reporte = (request, response, next) => {
 
                   let a = getAllDaysInMonth(year, month);
 
-
                   let coincidences = [];
                   coincidences = getCoincidences(a, dates);
 
@@ -227,10 +232,18 @@ exports.get_generar_reporte = (request, response, next) => {
             case "radio2":
                 Reportes_mensuales.generarReporteSemestral(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
-                  console.log(rows);
+                  let months = getSemestralMonths(fecha);
+                  let arrayMonths = getArrayDateMonths(fecha, 5);
+                  let dates= [];
+                  for (let data of rows){
+                      dates.push(data.fecha);
+                  }
+                  let coincidences2 = [];
+                  coincidences2 = getCoincidences2(arrayMonths, dates);
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
-                      data: rows,
+                      data: coincidences2,
+                      days: months,
                       titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
                     });
@@ -242,26 +255,14 @@ exports.get_generar_reporte = (request, response, next) => {
                 Reportes_mensuales.generarReporteMensual(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
                   let real_meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-                  var dt = fecha;
-                  dt = new Date(dt, 00, 01);
-                  //console.log(dt);
-                  let meses = [];
-                  var mes = new Date (dt.setMonth(dt.getMonth()));
-                  meses.push(mes);
-                  //console.log(meses);
-                  for (var i = 0; i < 11; i++) {
-                    var mes = new Date (dt.setMonth(dt.getMonth()+1));
-                    meses.push(mes);
-                  }
-                  //console.log(meses);
+                  let arrayMonths = getArrayDateMonths(fecha, 11);
                   let dates= [];
                   for (let data of rows){
                       dates.push(data.fecha);
                   }
-
                   let coincidences2 = [];
-                  coincidences2 = getCoincidences2(meses, dates);
-
+                  coincidences2 = getCoincidences2(arrayMonths, dates);
+                  console.log(coincidences2);
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
                       data: coincidences2,

@@ -1,5 +1,6 @@
 <%- include('includes/head.ejs') %>
     <script src="/js/chartjs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.2/dist/patternomaly.min.js"></script>
     <%- include('includes/topbar.ejs') %>
         <%- include('includes/sidebar.ejs') %>
         <div class="col py-3"3
@@ -28,15 +29,15 @@
             <% } %>
             ],
             datasets: [{
-                label: "<%=titulo %>",
+                label: "Cantidad de solicitudes",
                 data: [<%=data %>],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    pattern.draw("diagonal-right-left", 'rgba(255, 99, 132, 0.2)'),
+                    pattern.draw("diagonal-right-left", 'rgba(54, 162, 235, 0.2)'),
+                    pattern.draw("diagonal-right-left", 'rgba(255, 206, 86, 0.2)'),
+                    pattern.draw("diagonal-right-left", 'rgba(75, 192, 192, 0.2)'),
+                    pattern.draw("diagonal-right-left", 'rgba(153, 102, 255, 0.2)'),
+                    pattern.draw("diagonal-right-left", 'rgba(255, 159, 64, 0.2)')
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -51,9 +52,12 @@
         },
         options: {
             scales: {
-                y: {
-                    beginAtZero: true
-                }
+              //y: {beginAtZero: true},
+              yAxes: {title: {display: true, text: "Solicitudes de <%= tabla%>", font: {size: 15}},ticks: {precision: 0}},
+              xAxes: {title: {display: true, text: "<%= xLabel%>", font: {size: 15}},ticks: {precision: 0}}
+            },
+            plugins: {
+                title: {display: true, text: "<%= tittle%>", font: {size: 22}}
             }
         }
     });

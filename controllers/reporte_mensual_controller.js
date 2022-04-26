@@ -1,6 +1,8 @@
 const Reportes_mensuales = require('../models/reportes_mensuales');
 const Empleado = require('../models/empleado');
 
+const real_meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
 function getAllDaysInMonth(year, month) {
   const date = new Date(year, month, 1);
   const dates = [];
@@ -9,6 +11,14 @@ function getAllDaysInMonth(year, month) {
     date.setDate(date.getDate() + 1);
   }
   return dates;
+}
+
+getLongMonthName = function(date) {
+    return real_meses[date.getMonth()+1];
+}
+
+getShortMonthName = function(date) {
+    return real_meses[date.getMonth()].substring(0, 3);
 }
 
 function getSemestralMonths(date){
@@ -216,11 +226,17 @@ exports.get_generar_reporte = (request, response, next) => {
                   let a = getAllDaysInMonth(year, month);
 
                   let coincidences = [];
+                  let xLabel = "Días del mes de " + getLongMonthName(new Date(fecha));
+                  let tittle = "Solicitudes de " + tabla + " de " + getLongMonthName(new Date(fecha)) + " con estatus " + estatus;
                   coincidences = getCoincidences(a, dates);
 
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
                       data: coincidences,
+                      tabla: tabla,
+                      estatus: estatus,
+                      xLabel: xLabel,
+                      tittle: tittle,
                       days: days,
                       titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -239,10 +255,16 @@ exports.get_generar_reporte = (request, response, next) => {
                       dates.push(data.fecha);
                   }
                   let coincidences2 = [];
+                  let xLabel = "Meses del año " + fecha.slice(0,-6);
+                  let tittle = "Solicitudes de " + tabla + " de " + fecha.slice(0,-6) + " con estatus " + estatus;
                   coincidences2 = getCoincidences2(arrayMonths, dates);
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
                       data: coincidences2,
+                      tabla: tabla,
+                      estatus: estatus,
+                      tittle: tittle,
+                      xLabel: xLabel,
                       days: months,
                       titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -254,7 +276,7 @@ exports.get_generar_reporte = (request, response, next) => {
             case "radio3":
                 Reportes_mensuales.generarReporteMensual(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
-                  let real_meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
                   let arrayMonths = getArrayDateMonths(fecha, 11);
                   let dates= [];
                   for (let data of rows){
@@ -262,10 +284,15 @@ exports.get_generar_reporte = (request, response, next) => {
                   }
                   let coincidences2 = [];
                   coincidences2 = getCoincidences2(arrayMonths, dates);
-                  console.log(coincidences2);
+                  let xLabel = "Meses del año " + fecha;
+                  let tittle = "Solicitudes de " + tabla + " de " + fecha + " con estatus " + estatus;
                   response.render('generar_reporte', {
                       userRol: rol[0].id_rol,
                       data: coincidences2,
+                      tabla: tabla,
+                      estatus: estatus,
+                      tittle: tittle,
+                      xLabel: xLabel,
                       days: real_meses,
                       titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false

@@ -44,6 +44,6 @@ module.exports = class Reportes_mensuales {
     }
 
     static generarReporteSemestral(columna, columna_estatus, tabla, fecha, estatus) {
-        return db.query(' SELECT ?? AS fecha FROM ?? WHERE ?? = ? AND (?? BETWEEN (DATE_ADD((?), INTERVAL 5 MONTH ) AND (?))', [columna, tabla, columna_estatus, estatus, columna, fecha, fecha]);
+        return db.query(' SELECT ?? AS fecha FROM ?? WHERE ?? = ? AND (?? BETWEEN (?) AND (DATE_ADD(?, INTERVAL 5 MONTH)))', [columna, tabla, columna_estatus, estatus, columna, fecha, fecha]);
     }
 }

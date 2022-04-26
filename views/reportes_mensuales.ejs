@@ -342,7 +342,7 @@ function showAlert(){
   $(function() {
     var monthsToDisable = ['02', '03', '04', '05', '06', '08', '09', '10', '11', '12'];
       $('#semestral').datepicker({
-        format: 'mm/yyyy',
+        format: 'dd/mm/yyyy',
         orientation: "bottom left",
         startView: "months",
         minViewMode: "months",
@@ -354,9 +354,9 @@ function showAlert(){
         }
       });
 
-      $('#mensual').on("changeDate", function search () {
-        var f1 = $('#mensual').datepicker('getDate');
-        document.getElementById("secreto_semestral").value = f1.toISOString().split('-01T')[0];
+      $('#semestral').on("changeDate", function search () {
+        var f1 = $('#semestral').datepicker('getDate');
+        document.getElementById("secreto_semestral").value = f1.toISOString().split('T')[0];
       });
 
   });

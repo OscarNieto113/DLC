@@ -23,32 +23,17 @@ Tabla de roles: https://docs.google.com/spreadsheets/d/10S5QGoQth-aV_NXtuFdHxe4u
 http://localhost:3000/users/login
 
 
-## Cosas por hacer
+## Cosas por hacer pa mañana (que creativo que sos)
+1. Actividad Integradora de Pedro (No es de esta materia pero pa evitar que se olvide)
+2. Alerts de error pa generar reportes
+3. Login más decente
+4. El despliegue si se es posible
+5. Iniciar los video tutoriales
+6. Presentación Final
+7. Documento Final con corrección de errores o agregación de valor
+8. Anotarse pa la última compentencia (jueves o viernes)
+9. Un antojito de media noche, siono mi buen oscar?
 
-2. Reportes Mensuales () /LISTO
-3. Pulir todo lo relacionado con NG Blocks /LISTO
-4. Busqueda de empleado por AJAX /LISTO
-5. Eliminar solicitudes en estado pendiente / LISTO
-6. Postear con tu no_empleado /LISTO
-7. Registrar Empleado (No jala departamento, agregar rol a la pestaña) / Ya jala departamento, falta roles (Ya merito)
-8. Agregar Vacaciones y NG Blocks adicionales / LISTO
-9. Modificar Rol desde el perfil / LISTO
-10. Calcular los dias de vacaciones restantes
-11. Cookies y Toast LISTO
-
-## Cosas pa el domingo 11:59 pm
-1. Arreglar aprobar vacaciones / LISTO
-2. Filtro pa ng Blocks / LISTO
-3. Calcular los dias de vacaciones restantes /Pendiente
-4. Vacaciones especiales /Listo
-
-## Cosas pa hoy (que creativo que sos)
-1. Hacer 2 ejercicios más de pedro (cris)
-2. Reintentar heroku
-3. Correcciones de usabilidad, colores y tipografía piteros de natgas, poner todo en español porque no saben inglés (que jodidos)
-4. Reportes mensuales (mejoras)
-5. Quitar ajax y poner la busqueda como los filtros de departamento en reportes mensuales
-6. Calcular los días de vacaciones restantes
 
 ## Mafufadas
 Cambios en la base de datos ACTUALIZAR DB

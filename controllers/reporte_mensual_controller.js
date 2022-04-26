@@ -172,7 +172,6 @@ exports.filtrar_fecha = (request, response, next) => {
 
 exports.get_generar_reporte = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
-    const titulo_reporte = request.params.titulo;
     const fecha_radio = request.params.fechaRadio;
     const fecha = request.params.fecha;
     const tabla = request.params.tabla;
@@ -191,12 +190,12 @@ exports.get_generar_reporte = (request, response, next) => {
 
     Empleado.getRol (no_empleado)
     .then(([rol, fieldData]) => {
-        if (titulo_reporte.length == 0 && fecha_radio.length == 0 && fecha.length == 0 && tabla.length == 0 && estatus.length == 0){
+        if (fecha_radio.length == 0 && fecha.length == 0 && tabla.length == 0 && estatus.length == 0){
           request.flash('error', 'No se recibió ningún dato.');
           response.redirect('/reporte_mensual');
         }
 
-        else if (titulo_reporte.length == 0 || fecha_radio.length == 0 || fecha.length == 0 || tabla.length == 0 || estatus.length == 0){
+        else if (fecha_radio.length == 0 || fecha.length == 0 || tabla.length == 0 || estatus.length == 0){
           request.flash('error', 'Faltan datos por llenar.');
 
         }
@@ -238,7 +237,6 @@ exports.get_generar_reporte = (request, response, next) => {
                       xLabel: xLabel,
                       tittle: tittle,
                       days: days,
-                      titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
                     });
                 }).catch(err => console.log(err));
@@ -266,7 +264,6 @@ exports.get_generar_reporte = (request, response, next) => {
                       tittle: tittle,
                       xLabel: xLabel,
                       days: months,
-                      titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
                     });
                 }).catch(err => console.log(err));
@@ -294,7 +291,6 @@ exports.get_generar_reporte = (request, response, next) => {
                       tittle: tittle,
                       xLabel: xLabel,
                       days: real_meses,
-                      titulo: titulo_reporte,
                       isLoggedIn: request.session.isLoggedIn === true ? true : false
                     });
                 }).catch(err => console.log(err));

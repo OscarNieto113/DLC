@@ -78,8 +78,6 @@
                                           </button>
                                         </div>
                                       </div>
-                                      <label for="titulo_r2" class="col-form-label"><b>Título del reporte:</b></label>
-                                      <input type="text" class="form-control" id="titulo_r2" name="titulo_r2" autocomplete="off" required>
 
                                       <label for="titulo_publicacion" class="col-form-label"><b>Fecha:</b></label>
                                       <div class="form-check">
@@ -400,8 +398,6 @@ $(document).ready(function() {
     */
     if (picker1.length != 0){
       if (disable1 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Mensual").value;
         console.log(b);
         var c = document.getElementById("secreto_mensual").value;
@@ -410,13 +406,11 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("pendientes_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
 
       else if (disable2 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Mensual").value;
         console.log(b);
         var c = document.getElementById("secreto_mensual").value;
@@ -425,13 +419,11 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("aprobados_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
 
       else if (disable3 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Mensual").value;
         console.log(b);
         var c = document.getElementById("secreto_mensual").value;
@@ -440,7 +432,7 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("rechazados_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
       else{
@@ -450,8 +442,6 @@ $(document).ready(function() {
 
     else if (picker2.length != 0){
       if (disable1 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Semestral").value;
         console.log(b);
         var c = document.getElementById("secreto_semestral").value;
@@ -460,13 +450,11 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("pendientes_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
 
       else if (disable2 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Semestral").value;
         console.log(b);
         var c = document.getElementById("secreto_semestral").value;
@@ -475,13 +463,11 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("aprobados_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
 
       else if (disable3 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Semestral").value;
         console.log(b);
         var c = document.getElementById("secreto_semestral").value;
@@ -490,7 +476,7 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("rechazados_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
       else{
@@ -500,8 +486,6 @@ $(document).ready(function() {
 
     else if (picker3.length != 0){
       if (disable1 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Anual").value;
         console.log(b);
         var c = document.getElementById("anual").value;
@@ -510,13 +494,11 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("pendientes_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
 
       else if (disable2 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Anual").value;
         console.log(b);
         var c = document.getElementById("anual").value;
@@ -525,13 +507,11 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("aprobados_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
 
       else if (disable3 == false){
-        var a = document.getElementById("titulo_r2").value;
-        console.log(a);
         var b = document.getElementById("Anual").value;
         console.log(b);
         var c = document.getElementById("anual").value;
@@ -540,7 +520,7 @@ $(document).ready(function() {
         console.log(d);
         var e = document.getElementById("rechazados_real").value;
         console.log(e);
-        var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
+        var href = `reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
       else{

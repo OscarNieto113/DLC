@@ -18,7 +18,7 @@
           );
           //funcion que ordene arreglo
           var p_dia = sorted_dates[0];
-          console.log(the_dates);
+          //console.log(the_dates);
           document.getElementById("fecha_primer_dia").value = p_dia.toISOString().split('T')[0];
       });
 

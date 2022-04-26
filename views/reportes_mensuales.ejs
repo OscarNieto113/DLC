@@ -68,6 +68,14 @@
                                 </div>
                                 <div class="modal-body">
 
+                                  <div class="container" style="display:none;" id="myAlert">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="myAlert2">
+                                      <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻   </strong> Te faltaron datos por llenar
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                  </div>
                                     <div class="form-group" style="text-align: left;"">
 
                                       <label for="titulo_r2" class="col-form-label"><b>Título del reporte:</b></label>
@@ -81,6 +89,7 @@
                                         </label>
                                         <div class="input-group date" id="datepicker">
                                             <input type="text" id="mensual" name="for_radio1[]" class="radio1" autocomplete="off" placeholder="YYYY-MM" disabled="true">
+                                            <input type="hidden" id="secreto_mensual" name="secreto_mensual">
                                             <input type="hidden" id="valor_radio1" name="for_radio1[]" class="radio1" value="radio1" disabled="true">
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
@@ -97,6 +106,7 @@
                                         </label>
                                         <div class="input-group date" id="datepicker">
                                             <input type="text" id="semestral" name="for_radio2[]" class="radio2" autocomplete="off" placeholder="YYYY-MM" disabled="true">
+                                            <input type="hidden" id="secreto_semestral" name="secreto_semestral">
                                             <input type="hidden" id="valor_radio2" name="for_radio2[]" class="radio2" value="radio2" disabled="true">
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
@@ -153,8 +163,9 @@
                                         </div>
 
                                         <div class="col-sm-4">
-                                          <a id="filtro3"  href="reporte_mensual/generar_reporte/Prueba/radio3/2022/vacaciones/Pendiente">
-                                            <button type="button" name="boton23" id="boton23" class="btn btn-light" style="background-color:#888B8D">Filtrar</button></a>
+                                          <a id="filtro3"  href="">
+                                            <button type="button" name="boton23" id="boton23"  class="btn btn-light" style="background-color:#888B8D">Generar</button></a>
+                                            <!-- onclick="showAlert();" -->
                                         </div>
 
                                       </div>
@@ -255,6 +266,12 @@
 
 
 <script type="text/javascript">
+function showAlert(){
+  if($("#myAlert").find("div#myAlert2").length==0){
+    $("#myAlert").append("<div class='alert alert-success alert-dismissable' id='myAlert2'> <button type='button' class='close' data-dismiss='alert'  aria-hidden='true'>&times;</button> Success! message sent successfully.</div>");
+  }
+    $("#myAlert").css("display", "");
+  }
 
   $(document).ready(function(){
        $.fn.datepicker.defaults.language = 'es';
@@ -309,35 +326,37 @@
 
   $(function() {
       $('#mensual').datepicker({
-        format: 'yyyy-mm',
+        format: 'mm/yyyy',
         orientation: "bottom left",
         startView: "months",
         minViewMode: "months",
         todayHighlight: true,
         autoclose: true
       });
-      /*
-      $('#mensual').on("changeDate", function search1 () {
+      $('#mensual').on("changeDate", function search () {
         var f1 = $('#mensual').datepicker('getDate');
-        console.log(f1)
-        var f2 = f1.toISOString().split('-01T')[0];
-        console.log(f2);
-        document.getElementById("fecha2").value = f2;
-        var x = document.getElementById("fecha2").value;
-        console.log('a');
-        console.log(x);
+        document.getElementById("secreto_mensual").value = f1.toISOString().split('-01T')[0];
       });
-      */
   });
 
   $(function() {
+    var monthsToDisable = ['02', '03', '04', '05', '06', '08', '09', '10', '11', '12'];
       $('#semestral').datepicker({
-        format: 'yyyy-mm',
+        format: 'mm/yyyy',
         orientation: "bottom left",
         startView: "months",
         minViewMode: "months",
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        beforeShowMonth: function(date) {
+          var formattedDate = moment(date).format('MM');
+          return $.inArray(formattedDate, monthsToDisable) < 0;
+        }
+      });
+
+      $('#mensual').on("changeDate", function search () {
+        var f1 = $('#mensual').datepicker('getDate');
+        document.getElementById("secreto_semestral").value = f1.toISOString().split('-01T')[0];
       });
 
   });
@@ -354,27 +373,7 @@
 
   });
 
-/*
-  $('#tipo_reporte').on('change', function getTipoReporte() {
-    var t_reporte = this.value;
-    console.log(t_reporte);
 
-    var href = `/reporte_mensual/filtrar/${t_reporte}`;
-    console.log(href);
-    $('#filtro3').attr('href', href);
-  });
-*/
-
-/*
-  $("input[name='estatus']").on('change', function getEstatus() {
-    var estatu = this.value;
-    console.log(estatu);
-
-    var href = `/reporte_mensual/filtrar/${estatu}`;
-    console.log(href);
-    $('#filtro3').attr('href', href);
-  });
-*/
 $(document).ready(function() {
   $('#boton23').click(function() {
     var picker1 = document.getElementById("mensual").value;
@@ -408,7 +407,7 @@ $(document).ready(function() {
         console.log(a);
         var b = document.getElementById("Mensual").value;
         console.log(b);
-        var c = document.getElementById("mensual").value;
+        var c = document.getElementById("secreto_mensual").value;
         console.log(c);
         var d = document.getElementById("tipo_reporte").value;
         console.log(d);
@@ -423,7 +422,7 @@ $(document).ready(function() {
         console.log(a);
         var b = document.getElementById("Mensual").value;
         console.log(b);
-        var c = document.getElementById("mensual").value;
+        var c = document.getElementById("secreto_mensual").value;
         console.log(c);
         var d = document.getElementById("tipo_reporte").value;
         console.log(d);
@@ -433,12 +432,12 @@ $(document).ready(function() {
         $('#filtro3').attr('href', href);
       }
 
-      else{
+      else if (disable3 == false){
         var a = document.getElementById("titulo_r2").value;
         console.log(a);
         var b = document.getElementById("Mensual").value;
         console.log(b);
-        var c = document.getElementById("mensual").value;
+        var c = document.getElementById("secreto_mensual").value;
         console.log(c);
         var d = document.getElementById("tipo_reporte").value;
         console.log(d);
@@ -446,6 +445,9 @@ $(document).ready(function() {
         console.log(e);
         var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
+      }
+      else{
+
       }
     }
 
@@ -455,7 +457,7 @@ $(document).ready(function() {
         console.log(a);
         var b = document.getElementById("Semestral").value;
         console.log(b);
-        var c = document.getElementById("semestral").value;
+        var c = document.getElementById("secreto_semestral").value;
         console.log(c);
         var d = document.getElementById("tipo_reporte").value;
         console.log(d);
@@ -470,7 +472,7 @@ $(document).ready(function() {
         console.log(a);
         var b = document.getElementById("Semestral").value;
         console.log(b);
-        var c = document.getElementById("semestral").value;
+        var c = document.getElementById("secreto_semestral").value;
         console.log(c);
         var d = document.getElementById("tipo_reporte").value;
         console.log(d);
@@ -480,12 +482,12 @@ $(document).ready(function() {
         $('#filtro3').attr('href', href);
       }
 
-      else{
+      else if (disable3 == false){
         var a = document.getElementById("titulo_r2").value;
         console.log(a);
         var b = document.getElementById("Semestral").value;
         console.log(b);
-        var c = document.getElementById("semestral").value;
+        var c = document.getElementById("secreto_semestral").value;
         console.log(c);
         var d = document.getElementById("tipo_reporte").value;
         console.log(d);
@@ -494,9 +496,12 @@ $(document).ready(function() {
         var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
+      else{
+
+      }
     }
 
-    else{
+    else if (picker3.length != 0){
       if (disable1 == false){
         var a = document.getElementById("titulo_r2").value;
         console.log(a);
@@ -524,10 +529,10 @@ $(document).ready(function() {
         var e = document.getElementById("aprobados_real").value;
         console.log(e);
         var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
-        //$('#filtro3').attr('href', href);
+        $('#filtro3').attr('href', href);
       }
 
-      else{
+      else if (disable3 == false){
         var a = document.getElementById("titulo_r2").value;
         console.log(a);
         var b = document.getElementById("Anual").value;
@@ -541,7 +546,14 @@ $(document).ready(function() {
         var href = `reporte_mensual/generar_reporte/${a}/${b}/${c}/${d}/${e}`;
         $('#filtro3').attr('href', href);
       }
+      else{
+
+      }
     }
+    else{
+
+    }
+
   });
 });
 

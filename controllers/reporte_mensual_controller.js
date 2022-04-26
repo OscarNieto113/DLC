@@ -198,7 +198,7 @@ exports.get_generar_reporte = (request, response, next) => {
 
         else if (titulo_reporte.length == 0 || fecha_radio.length == 0 || fecha.length == 0 || tabla.length == 0 || estatus.length == 0){
           request.flash('error', 'Faltan datos por llenar.');
-          response.redirect('/reporte_mensual');
+
         }
 
         else {

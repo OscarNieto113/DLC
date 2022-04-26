@@ -135,37 +135,32 @@ exports.post_registrar_empleado = (request, response, next) => {
         }
     };
 
-    exports.post_registrar_departamento = (request, response, next) => {
-        console.log('POST /dlc/r_usuario/departamento');
-        const nombre_departamento = request.body.nombre_departamento;
-
-            if (nombre_departamento.length == 0){
-              request.flash('error', 'No se recibió ningún dato.');
-              response.redirect('/dlc/r_usuario');
-            }
-            else {
-              const area =
-                  new Area(
-                    nombre_departamento,
-                    );
+exports.post_registrar_departamento = (request, response, next) => {
+    console.log('POST /dlc/r_usuario/departamento');
+    const nombre_departamento = request.body.nombre_departamento;
+        if (nombre_departamento.length == 0){
+          request.flash('error', 'No se recibió ningún dato.');
+          response.redirect('/dlc/r_usuario');
+        }
+        else {
+            const area =
+            new Area(
+              nombre_departamento);
               area.save()
-              .then(() => {
-                  console.log("Se guardo la publicacion");
-                  request.flash('success', 'El departamento fue agregado con éxito');
-                  response.redirect('/dlc/r_usuario');
-              })
-              .catch((error)=>{
-                console.log(error)
-              });
-            }
-    };
+            .then(() => {
+                console.log("Se guardo la publicacion");
+                request.flash('success', 'El departamento fue agregado con éxito');
+                response.redirect('/dlc/r_usuario');
+            })
+        .catch((error)=>{console.log(error)});
+    }
+};
 
+//------------------------Registrar Ciudad---------------------------------
     exports.post_registrar_ciudad = (request, response, next) => {
       console.log('POST /dlc/r_usuario/departamento');
       const nombre_ciudad = request.body.nombre_ciudad;
-
       console.log(nombre_ciudad);
-
           if (nombre_ciudad.length == 0){
             request.flash('error', 'No se recibió ningún dato.');
             response.redirect('/dlc/r_usuario');
@@ -177,17 +172,13 @@ exports.post_registrar_empleado = (request, response, next) => {
                   );
             ciudad.save()
             .then(() => {
-                console.log("Se guardo la publicacion");
+                console.log("Se guardo la ciudad");
                 request.flash('success', 'La ciudad fue agregado con éxito');
                 response.redirect('/dlc/r_usuario');
             })
-            .catch((error)=>{
-              console.log(error)
-            });
+            .catch((error)=>{console.log(error)});
           }
   };
-//------------------------Registrar Usuario--------------------------------
-
 
 //------------------------Consultar informacion personal (perfil)--------------------------------
 exports.get_profile = (request, response, next) => {
@@ -221,6 +212,7 @@ exports.get_profile = (request, response, next) => {
       }).catch(err => console.log(err));
   };
 
+//------------------------Consultar el perfil de otro empleado---------------------------------
 exports.get_perfil_empleado = (request, response, next) => {
   const no_empleado1 = request.session.user_no_empleado;
   Empleado.getRol(no_empleado1)
@@ -249,8 +241,6 @@ exports.get_perfil_empleado = (request, response, next) => {
           }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     };
-//------------------------Consultar informacion personal (perfil)---------------------------------
-
 
 //------------------------Buscar empleado (perfil)--------------------------------
 exports.get_buscar_empleado = (request, response, next) => {
@@ -269,8 +259,6 @@ exports.get_buscar_empleado = (request, response, next) => {
               }).catch(err => console.log(err));
           }).catch(err => console.log(err));
       };
-//-------------------------Buscar empleado (perfil)---------------------------------
-
 
 //------------------------Modificar Rol (perfil)----------------------------------
 exports.post_give_new_rol = (request, response, next) => {
@@ -297,8 +285,6 @@ exports.post_give_new_rol = (request, response, next) => {
         .catch(err => console.log(err));
       }
   };
-//------------------------Modificar Rol (perfil)----------------------------------
-
 
 //-------------------------Buscar Empleado (Ajax)---------------------------------
 exports.search_empleado = (request, response, next) => {
@@ -312,8 +298,6 @@ exports.search_empleado = (request, response, next) => {
             console.log(err);
         });
 };
-//-------------------------Buscar Empleado (Ajax)---------------------------------
-
 
 //------------------------Main--------------------------------
 exports.listar = (request, response, next) => {

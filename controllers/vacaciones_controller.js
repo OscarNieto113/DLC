@@ -10,11 +10,11 @@ exports.get_solicitar_vacaciones = (request, response, next) => {
     .then(([rol, fieldData]) => {
         Empleado.getAreaEmpleado(no_empleado)
         .then(([id_area, fieldData]) => {
+        let id = id_area[0].id_area;
             Empleado.fetchEmpleadoArea(id)
             .then(([rows, fieldData]) => {
                 Empleado.getVacacionesR(no_empleado)
                 .then(([vacacionesR, fielData])=>{
-                      let id = id_area[0].id_area;
                       response.render('solicitar_vacaciones', {
                           userRol: rol[0].id_rol,
                           empleadoV: vacacionesR,

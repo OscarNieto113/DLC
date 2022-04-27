@@ -25,9 +25,6 @@
           <h1 class="pt-4 pb-2">Solicitud de NG Block</h1>
           <br>
           <br>
-          <!-- <div style="text-align: right;"> -->
-            <!-- <br><p>Fecha en la que se realizó la solicitud: <span id='date'></span>.</p> -->
-          <!-- </div> -->
             <% for (let empleado1 of empleado) { %>
               <div class="row form-group">
                   <label for="ng_blockR1" class="col-sm-3 col-form-label">Ng blocks restantes</label>
@@ -74,13 +71,13 @@
             </div>
             <input type="hidden" id="fecha_uso_ng_block" name="fecha_uso_ng_block">
             <br>
-            <input type="submit" value="Solicitar" class="btn btn-primary" style="background-color:#43B02A">
+            <input type="submit" value="Solicitar" class="btn btn-success">
           </form>
           <!--Termina form -->
           <br><br>
           <div style="text-align: center;">
             <a href="/dlc/solicitar_ng_block">
-              <button id="boton1" class="btn btn-primary" onclick="" style= "background-color:#0a0a23" href="/dlc/solicitar_ng_block">Cancelar Solicitud</button>
+              <button id="boton1" class="btn btn-dark" onclick="" href="/dlc/solicitar_ng_block">Cancelar Solicitud</button>
             </a>
           </div>
       </section>

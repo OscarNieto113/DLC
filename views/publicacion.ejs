@@ -19,10 +19,12 @@
     </section>
   <br>
 <h1 class="display-6" style="text-align: center;"">Anuncios </h1>
+<div style="text-align: right;">
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res">Agregar Anuncio</button>
+</div>
 <br>
 <% if (userRol == 1 || userRol == 2 ) {%>
   <div style="text-align: center;">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res" style="background-color:#43B02A">Agregar Anuncio</button>
       <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -53,12 +55,12 @@
             <div class="modal-footer">
               <div style="text-align: right;">
                 <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3" data-whatever="@res" style="background-color:#43B02A">Agregar anuncio sin imagen</button>
-            </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </div>
+</div>
 
   <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
     <div class="modal-dialog" role="document">

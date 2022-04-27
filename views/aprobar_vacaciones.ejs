@@ -36,7 +36,7 @@
           </div>
           <div class="col-sm-3">
             <a id="filtro" href="/dlc/a_vacacionesp/1">
-            <button type="button" class="btn btn-light" style="background-color:#888B8D">Filtrar</button>
+            <button type="button" class="btn btn-info">Filtrar</button>
             </a>
           </div>
       <% } %>
@@ -105,7 +105,7 @@
                   <input type="hidden" id="dias_solicitados" name="dias_solicitados" value="<%= vacaciones1.dias_solicitados %>"/>
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
                   <input type="hidden" id="no_empleado" name="no_empleado" value="<%= vacaciones1.no_empleado %>"/>
-                  <input type="submit" value="Aprobar" class="btn btn-primary" style="background-color:#43B02A"/>
+                  <input type="submit" value="Aprobar" class="btn btn-success"/>
                 </form>
               </center>
             </td>
@@ -116,7 +116,7 @@
                 <form action="/dlc/a_vacacionesp/<%=current%>/reject" method="POST">
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                   <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
-                  <input type="submit" value="Rechazar" class="btn btn-primary" style="background-color: #b8293d"/>
+                  <input type="submit" value="Rechazar" class="btn btn-danger"/>
                 </form>
               </center>
             </td>
@@ -218,7 +218,7 @@
           respuesta += '</tbody>' +
               '</table>' +
               '<a href="/dlc/a_vacacionesp/1">' +
-                '<button id="boton1" class="btn btn-primary" onclick="" style="background-color:#0a0a23" href="/dlc/s_vacaciones">Regresar</button>';
+                '<button id="boton1" class="btn btn-link" onclick="" href="/dlc/s_vacaciones">Regresar</button>';
           document.getElementById('respuesta_ajax').innerHTML = respuesta;
       }).catch(err => {
           console.log(err);

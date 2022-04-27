@@ -16,6 +16,10 @@ $(document).ready(function(){
       console.log(f1)
       document.getElementById("fecha_uso_ng_block").value = f1.toISOString().split('T')[0];
   });
+
+    $('.fa fa-calendar').on('click', function() {
+      $('#fecha_ng').datepicker('open');
+  });
 });
 
 $(document).ready(function(){

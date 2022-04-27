@@ -6,7 +6,7 @@
     <!-- Column -->
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
       <!-- Container for tabs -->
-      <div class="sticky-top flex-column align-items-center align-items-sm-start px-3 pt-1 text-white">
+      <div class="sticky-top flex-column align-items-center align-items-sm-start px-1 pt-1 text-white">
         <!-- Nav tabs -->
         <ul class="navigation nav-pills flex-column mb-sm-auto mb-0 mt-5 align-items-center align-items-sm-start" id="menu">
           <!-- Home button -->
@@ -14,7 +14,7 @@
           </li>
 
           <li class="highlight">
-            <a href="/dlc" class="nav-link align-middle px-3">
+            <a href="/dlc" class="nav-link align-middle px-1">
               <i class="fs-4 bi-house" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Home</span>
             </a>
@@ -23,7 +23,7 @@
           <% if (userRol == 1 || userRol == 2 || userRol == 3 || userRol == 4 || userRol == 5) {%>
           <!-- Perfil -->
           <li>
-            <a href="/dlc/profile" class="nav-link align-middle px-3">
+            <a href="/dlc/profile" class="nav-link align-middle px-1">
               <i class="fs-4 bi bi-person-badge-fill" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Perfil</span>
             </a>
@@ -32,7 +32,7 @@
 
           <!-- Reportes menu -->
           <li class="nav-item">
-            <a href="/reporte_mensual" class="nav-link align-middle px-3">
+            <a href="/reporte_mensual" class="nav-link align-middle px-1">
               <i class="fs-4 bi-graph-up" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Reportes Mensuales</span>
             </a>
@@ -40,7 +40,7 @@
 
           <!-- Solicitud vacaciones -->
           <li class="nav-item">
-            <a href="/dlc/s_vacaciones" class="nav-link align-middle px-3 ">
+            <a href="/dlc/s_vacaciones" class="nav-link align-middle px-1 ">
               <i class="fs-4 bi-archive" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Solicitar Vacaciones</span>
             </a>
@@ -49,7 +49,7 @@
           <% if (userRol == 1 || userRol == 2 || userRol == 3) {%>
           <!-- Aprobacion vacaciones -->
           <li class="nav-item">
-            <a href="/dlc/a_vacacionesp/1" class="nav-link align-middle px-3 ">
+            <a href="/dlc/a_vacacionesp/1" class="nav-link align-middle px-1 ">
               <i class="fs-4 bi-calendar-check-fill" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Aprobar Vacaciones</span>
             </a>
@@ -59,7 +59,7 @@
           <% if (userRol == 1 || userRol == 2 || userRol == 3 || userRol == 4) {%>
           <!-- Solicitud NG block -->
           <li class="nav-item">
-            <a href="/dlc/solicitar_ng_block" class="nav-link align-middle px-3">
+            <a href="/dlc/solicitar_ng_block" class="nav-link align-middle px-1">
               <i class="fs-4 bi-archive" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Solicitar NG Blocks</span>
             </a>
@@ -69,7 +69,7 @@
           <% if (userRol == 1 || userRol == 2 || userRol == 3) {%>
           <!-- Aprobacion NG block -->
           <li class="nav-item">
-            <a href="/dlc/a_ng_blocksp/1" class="nav-link align-middle px-3">
+            <a href="/dlc/a_ng_blocksp/1" class="nav-link align-middle px-1">
               <i class="fs-4 bi-calendar-check-fill" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Aprobar NG Block</span>
             </a>
@@ -79,7 +79,7 @@
           <% if (userRol == 1 || userRol == 2) {%>
           <!-- Registrar Usuario -->
           <li class="nav-item">
-            <a href="/dlc/r_usuario" class="nav-link align-middle px-3">
+            <a href="/dlc/r_usuario" class="nav-link align-middle px-1">
               <i class="fs-4 bi bi-person-plus-fill" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Registrar Empleado</span>
             </a>
@@ -89,7 +89,7 @@
           <% if (userRol == 1 || userRol == 2 || userRol == 3) {%>
           <!-- Buscar Empleado -->
           <li class="nav-item">
-            <a href="/dlc/buscar_empleado" class="nav-link align-middle px-3">
+            <a href="/dlc/buscar_empleado" class="nav-link align-middle px-1">
               <i class="fs-4 bi bi-person-fill" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Buscar Empleado</span>
             </a>
@@ -99,7 +99,7 @@
           <% if (userRol == 1) {%>
           <!-- Modificar Vacaciones Totales -->
           <li class="nav-item">
-            <a href="/dlc/vacaciones_totales" class="nav-link align-middle px-3">
+            <a href="/dlc/vacaciones_totales" class="nav-link align-middle px-1">
               <i class="fs-4 bi bi-calendar-range" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Modificar prestaciones</span>
             </a>
@@ -108,7 +108,7 @@
 
           <% if (userRol == 2 || userRol == 3 || userRol == 4 || userRol == 5) {%>
           <li class="nav-item">
-            <a href="/dlc/vacaciones_totales" class="nav-link align-middle px-3">
+            <a href="/dlc/vacaciones_totales" class="nav-link align-middle px-1">
               <i class="fs-4 bi bi-calendar-range" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Prestaciones de vacaciones</span>
             </a>
@@ -117,7 +117,7 @@
 
           <!-- Submenu con links -->
           <li>
-            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link align-middle px-3">
+            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link align-middle px-1">
               <i class="fs-4 bi bi-link" style="color: #002b49"></i>
               <span class="ms-1 d-none d-sm-inline" style="color: #002b49">Links</span> </a>
             <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">

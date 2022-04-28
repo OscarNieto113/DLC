@@ -376,142 +376,139 @@ $(document).ready(function() {
     //console.log(disable1);
     //console.log(disable2);
     //console.log(disable3);
+    var tipo_r = document.getElementById("tipo_reporte").value;
 
-    /*
-    var valor_r1 = document.getElementById("valor_radio1").disabled;
-    var valor_r2 = document.getElementById("valor_radio2").disabled;
-    var valor_r3 = document.getElementById("valor_radio3").disabled;
+    if (tipo_r.length != 0){
+      if (picker1.length != 0){
+        if (disable1 == false){
+          var b = document.getElementById("Mensual").value;
+          console.log(b);
+          var c = document.getElementById("secreto_mensual").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("pendientes_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
 
-    console.log(valor_r1);
-    console.log(valor_r2);
-    console.log(valor_r3);
-    */
-    if (picker1.length != 0){
-      if (disable1 == false){
-        var b = document.getElementById("Mensual").value;
-        console.log(b);
-        var c = document.getElementById("secreto_mensual").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("pendientes_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
+        else if (disable2 == false){
+          var b = document.getElementById("Mensual").value;
+          console.log(b);
+          var c = document.getElementById("secreto_mensual").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("aprobados_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
+
+        else if (disable3 == false){
+          var b = document.getElementById("Mensual").value;
+          console.log(b);
+          var c = document.getElementById("secreto_mensual").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("rechazados_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
+        else{
+          $("#myAlert").css("display", "");
+        }
       }
 
-      else if (disable2 == false){
-        var b = document.getElementById("Mensual").value;
-        console.log(b);
-        var c = document.getElementById("secreto_mensual").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("aprobados_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
+      else if (picker2.length != 0){
+        if (disable1 == false){
+          var b = document.getElementById("Semestral").value;
+          console.log(b);
+          var c = document.getElementById("secreto_semestral").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("pendientes_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
+
+        else if (disable2 == false){
+          var b = document.getElementById("Semestral").value;
+          console.log(b);
+          var c = document.getElementById("secreto_semestral").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("aprobados_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
+
+        else if (disable3 == false){
+          var b = document.getElementById("Semestral").value;
+          console.log(b);
+          var c = document.getElementById("secreto_semestral").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("rechazados_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
+        else{
+          $("#myAlert").css("display", "");
+        }
       }
 
-      else if (disable3 == false){
-        var b = document.getElementById("Mensual").value;
-        console.log(b);
-        var c = document.getElementById("secreto_mensual").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("rechazados_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
-      }
-      else{
-        $("#myAlert").css("display", "");
-      }
-    }
+      else if (picker3.length != 0){
+        if (disable1 == false){
+          var b = document.getElementById("Anual").value;
+          console.log(b);
+          var c = document.getElementById("anual").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("pendientes_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
 
-    else if (picker2.length != 0){
-      if (disable1 == false){
-        var b = document.getElementById("Semestral").value;
-        console.log(b);
-        var c = document.getElementById("secreto_semestral").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("pendientes_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
-      }
+        else if (disable2 == false){
+          var b = document.getElementById("Anual").value;
+          console.log(b);
+          var c = document.getElementById("anual").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("aprobados_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
 
-      else if (disable2 == false){
-        var b = document.getElementById("Semestral").value;
-        console.log(b);
-        var c = document.getElementById("secreto_semestral").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("aprobados_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
-      }
-
-      else if (disable3 == false){
-        var b = document.getElementById("Semestral").value;
-        console.log(b);
-        var c = document.getElementById("secreto_semestral").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("rechazados_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
-      }
-      else{
-        $("#myAlert").css("display", "");
-      }
-    }
-
-    else if (picker3.length != 0){
-      if (disable1 == false){
-        var b = document.getElementById("Anual").value;
-        console.log(b);
-        var c = document.getElementById("anual").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("pendientes_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
-      }
-
-      else if (disable2 == false){
-        var b = document.getElementById("Anual").value;
-        console.log(b);
-        var c = document.getElementById("anual").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("aprobados_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
-      }
-
-      else if (disable3 == false){
-        var b = document.getElementById("Anual").value;
-        console.log(b);
-        var c = document.getElementById("anual").value;
-        console.log(c);
-        var d = document.getElementById("tipo_reporte").value;
-        console.log(d);
-        var e = document.getElementById("rechazados_real").value;
-        console.log(e);
-        var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
-        $('#filtro3').attr('href', href);
+        else if (disable3 == false){
+          var b = document.getElementById("Anual").value;
+          console.log(b);
+          var c = document.getElementById("anual").value;
+          console.log(c);
+          var d = document.getElementById("tipo_reporte").value;
+          console.log(d);
+          var e = document.getElementById("rechazados_real").value;
+          console.log(e);
+          var href = `/reporte_mensual/generar_reporte/${b}/${c}/${d}/${e}`;
+          $('#filtro3').attr('href', href);
+        }
+        else{
+          $("#myAlert").css("display", "");
+        }
       }
       else{
         $("#myAlert").css("display", "");

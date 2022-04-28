@@ -29,7 +29,6 @@
         <% for (let ng_block1 of ng_block) { %>
           <% if (ng_block1.estatus_ng_block === "Pendiente") { %>
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-
               <form action="/dlc/profile/ngblocks_solicitados/delete/<%= ng_block1.id_ng_block %>" method="POST">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <input type="hidden" id="id_ng_block" name="id_ng_block" value="<%= ng_block1.id_ng_block %>"/>
@@ -44,23 +43,22 @@
           <% } else { %>
             <div class="card">
           <% } %>
-          <div class="card-header"><%= ng_block1.estatus_ng_block %></div>
+            <div class="card-header"><%=  ng_block1.estatus_ng_block %></div>
             <div class="card-body">
               <p class="card-text"><b>Fecha de uso: </b><%= ng_block1.fecha_uso_ng_block%></p>
               <p class="card-text"><b>Descripción: </b><%= ng_block1.descripcion_ng_block %></p>
               <p class="card-text"><b>Fecha en la que se solicitó: </b><%= ng_block1.fecha_solicitud_ng_block %></p>
               <p class="card-text"><b>Estatus de la solicitud: </b><%= ng_block1.estatus_ng_block %></p>
             </div>
-          </div><br><br>
+            </div>
+          </div<br><br>
         <% } %>
+      <% } else { %>
+        <h2 class="display-4"><center>No has solicitado ng blocks</center></h2>
       <% } %>
-
-    </div><br><br>
-
+    </div>
   </div>
-
 </div>
-
 </body>
 
 <%- include('includes/foot.ejs') %>

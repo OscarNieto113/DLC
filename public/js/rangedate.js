@@ -1,3 +1,7 @@
+$(document).ready(function(){
+     $.fn.datepicker.defaults.language = 'es';
+});
+
   $(document).ready(function () {
       $('#all_dates').datepicker({
         multidate: true,

@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
   <link REL=StyleSheet HREF="/css/login.css" TYPE="text/css" MEDIA=screen>
+  <link REL=StyleSheet HREF="/css/login_signup.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body style="font-family: gilroy extrabold">
 
@@ -24,66 +25,73 @@
     <a class="navbar-brand p-2" href="/dlc">
       <img src="https://storage.googleapis.com/natgas/others/logos/natgas-logo-horizontal-blanco.png"></a>
     <div class="navbar-nav">
-
     </div>
   </header>
 
-<section class="vh-100">
-  <div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <% if (error.length != 0) { %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻  </strong> <%= error %>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+  <section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+          <% if (error.length != 0) { %>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻  </strong> <%= error %>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+          <% } %>
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body p-md-5 mx-md-4">
+
+                  <div class="text-center">
+                    <img class="img-fluid pb-5" src="/img/natgas.png" style="width: 185px;" alt="logo" >
+
+                  </div>
+
+                  <form action="/users/login" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                    <p>Correo</p>
+
+                    <div class="form-outline mb-4">
+                      <input type="email" id="correo_usuario" name= "correo_usuario" class="form-control"
+                        placeholder="a123456@natgas.com.mx" />
+                    </div>
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example22">Constraseña</label>
+                      <input type="password" id="contrasenia" name="contrasenia" class="form-control" />
+                    </div>
+                    <div class="text-center text-lg-start mt-4 pt-2 " style="">
+                      <input type="submit" value="Login" class="btn btn-success">
+                    </div>
+                    <br>
+                    </form>
+
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                      <p class="mb-0 me-2">¿No tienes una cuenta?</p>
+                      <a href="/users/signup">
+                      <button type="button" class="btn btn-outline-secondary">Registrarse</button>
+                    </a>
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4"></h4>
+                  <p class="small mb-0">
+                  </p>
+                </div>
+              </div>
             </div>
-        <% } %>
-          <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-
-            <p class="lead fw-normal mb-0 me-3">Login</p>
           </div>
-
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0"></p>
-          </div>
-
-
-          <!--Empieza el form -->
-          <form action="/users/login" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-          <div class="form-outline mb-4">
-            <!-- Email input -->
-            <label for="correo_usuario" class="form-label" >Correo</label>
-            <input type="text" id="correo_usuario" name= "correo_usuario" class="form-control form-control-lg"
-              placeholder="a123456@natgas.com.mx" />
-            <!-- Email input -->
-          </div>
-          <div class="form-outline mb-3">
-            <!-- Password input -->
-            <label class="form-label" for="contrasenia">Constraseña</label>
-            <input type="password" id="contrasenia" name="contrasenia" class="form-control form-control-lg"
-              placeholder="Contraseña" />
-            <!-- Password input -->
-          </div>
-          <div class="text-left text-lg-start mt-4 pt-2">
-            <input type="submit" value="Entrar" class="btn btn-primary" style="background-color:#43B02A">
-          </div>
-          </form>
-          <!-- Termina form -->
-          <div style="text-align: right;">
-          <a href="/users/signup">
-            <button class="btn btn-primary" onclick="" style="background-color:#002b49"
-              href="/users/signup">Registrarse</button>
         </div>
       </div>
     </div>
-  </div>
-</section>
-</body>
+  </section>
 
+</body>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
 </html>

@@ -431,7 +431,7 @@ exports.post_give_vacations = (request, response, next) => {
 exports.get_vacaciones_solicitadas = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/profile/vacaciones_solicitadas');
-    var perPage = 10;
+    var perPage = 9;
     var page = request.params.page || 1;
 
     Empleado.getRol(no_empleado)

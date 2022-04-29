@@ -1,7 +1,5 @@
 runtime: nodejs
-
 env: flex
-
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: 1

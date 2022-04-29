@@ -34,6 +34,14 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-10">
+          <% if (success.length != 0) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <% } %>
           <% if (error.length != 0) { %>
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                   <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻  </strong> <%= error %>
@@ -62,24 +70,24 @@
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                       <p>Número de Empleado</p>
                       <div class="form-outline mb-4">
-                        <input type="email" id="no_empleado" name= "no_empleado" class="form-control"
+                        <input type="text" id="no_empleado" name= "no_empleado" class="form-control" autocomplete="off"
                           placeholder="A52" />
                       </div>
 
                       <p>Correo</p>
                       <div class="form-outline mb-4">
-                        <input type="email" id="correo_usuario" name= "correo_usuario" class="form-control"
+                        <input type="email" id="correo_usuario" name= "correo_usuario" class="form-control"autocomplete="off"
                           placeholder="a123456@natgas.com.mx" />
                       </div>
 
                       <p>Contraseña</p>
                       <div class="form-outline mb-4">
-                        <input type="email" id="contrasenia" name= "contrasenia" class="form-control"/>
+                        <input type="password" id="contrasenia" name= "contrasenia" class="form-control" autocomplete="off"/>
                       </div>
 
                       <p>Confirma contraseña</p>
                       <div class="form-outline mb-4">
-                        <input type="email" id="contrasenia2" name= "contrasenia2" class="form-control"
+                        <input type="password" id="contrasenia2" name= "contrasenia2" class="form-control" autocomplete="off"
                           />
                       </div>
                     <div class="text-center text-lg-start mt-3 pt-2 " style="">

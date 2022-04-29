@@ -4,6 +4,7 @@
 
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
+            <div class="col-sm-9">
             <% if (success.length != 0) { %>
                   <div class="alert alert-success alert-dismissible fade show" role="alert">
                       <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
@@ -20,6 +21,7 @@
                       </button>
                   </div>
               <% } %>
+              </div>
             <section class="container">
               <h1 class="pt-4 pb-2">Solicitud de Vacaciones</h1>
               <br>
@@ -97,5 +99,5 @@
           </div>
         </div>
       <script src="/js/rangedate.js"></script>
-      
+
       <%- include('includes/foot.ejs') %>

@@ -87,8 +87,10 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
         if (userRol === 3 ){
             Empleado.getDeparatamento(no_empleado)
             .then(([departamento, fieldData]) => {
+              const depar = departamento[0].id_area;
                 Empleado.getCiudad(no_empleado)
                 .then(([ciudad, fieldData]) => {
+                  const estado = ciudad[0].id_ciudad;
                     Area.fetchAll()
                     .then(([area, fieldData]) => {
                         Ng_Block.fetchPagination2(depar, estado, perPage, ((perPage * page) - perPage))

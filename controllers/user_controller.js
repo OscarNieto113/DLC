@@ -64,7 +64,7 @@ exports.post_signup = (request, response, next) => {
       console.log(rows2[0]);
 
         if (correo_usuario.length == 0 && no_empleado.length == 0 && contrasenia.length == 0 && contrasenia2.length == 0){
-            request.flash('error','No se recibio ningun dato.');
+            request.flash('error','No se recibió ningún dato.');
             response.redirect('/users/signup');
         }
 
@@ -84,7 +84,7 @@ exports.post_signup = (request, response, next) => {
         }
 
         else if(rows2[0] == undefined){
-            request.flash('error','El numero de empleado que ingresaste no existe.');
+            request.flash('error','El número de empleado que ingresaste no existe.');
             response.redirect('/users/signup');
         }
         else{
@@ -97,7 +97,7 @@ exports.post_signup = (request, response, next) => {
             nuevo_usuario.save()
               .then(() => {
                 console.log("Se guardo la solicitud");
-                request.flash('success', 'Se registro el Usuario con éxito');
+                request.flash('success', 'Se registró el usuario con éxito');
                 response.redirect('/users/signup');
               })
               .catch(err => console.log(err));

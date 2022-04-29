@@ -48,8 +48,10 @@ app.use('/reporte_mensual', rutas_reporte_mensual);
 app.use('/users', rutas_users);
 
 //Middleware
-app.listen(3000);
+//app.listen(3000);
 
 //PORT gcloud
-//const PORT = process.env.PORT || 8080;
-//app.listen(8080);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, _ =>{
+  console.log('OwO ${PORT}');
+});

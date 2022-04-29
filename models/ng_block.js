@@ -30,7 +30,7 @@ module.exports = class Ng_Block {
           'WHERE id_ng_block = ? ', [estatus_ng_block, id_ng_block]);
     }
 
-    static fetchSome(no_empleado) {
+    static fetchSome(no_empleado, num_solicitudes, num_offset) {
         return db.execute(
           `SELECT turno_ng_block, descripcion_ng_block, date_format(fecha_uso_ng_block, '%d/%m/%Y') as fecha_uso_ng_block, estatus_ng_block, ng.no_empleado, id_ng_block, date_format(fecha_solicitud_ng_block, '%d/%m/%Y') as fecha_solicitud_ng_block ` +
           'FROM empleado e, ng_block ng ' +
@@ -40,7 +40,9 @@ module.exports = class Ng_Block {
         return db.execute(
           'UPDATE ng_block ' +
           'SET estatus_ng_block = ? ' +
-          'WHERE id_ng_block = ? ', [estatus_ng_block, id_ng_block]);
+          'WHERE id_ng_block = ? ' +
+          'ORDER BY fecha_solicitud DESC ' +
+          'LIMIT ? OFFSET ?', [no_empleado, num_solicitudes, num_offset]);
     }
 
     static aproveeNGBlock(estatus_ng_block, id_ng_block, no_empleado) {
@@ -130,6 +132,13 @@ module.exports = class Ng_Block {
         'SELECT COUNT(id_ng_block) as num ' +
         'FROM empleado e, ng_block n, area a ' +
         'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND a.id_area = ? AND e.id_ciudad = ? ', [id_area, id_ciudad]);
+    }
+
+    static count4 (no_empleado) {
+      return db.query(
+        'SELECT COUNT(id_ng_block) as num ' +
+        'FROM ng_block n ' +
+        'WHERE n.no_empleado = ? ', [no_empleado]);
     }
 
 }

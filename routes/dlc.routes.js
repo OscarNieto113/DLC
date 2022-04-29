@@ -27,7 +27,7 @@ router.post('/a_ng_blocksp/:page/aprovee', isAuth, ng_block_controller.post_apro
 router.post('/a_ng_blocksp/:page/reject', isAuth, ng_block_controller.post_reject_ng_blocks);
 router.get('/a_ng_blocksp/:page/filtrar/:search', isAuth, ng_block_controller.search_ngblock);
 router.post('/buscar_empleado/:no_empleado/ng_blocks', isAuth, ng_block_controller.post_give_ng_blocks);
-router.get('/profile/ngblocks_solicitados', isAuth, ng_block_controller.get_ngblocks_solicitados);
+router.get('/profile/ngblocks_solicitados/:page', isAuth, ng_block_controller.get_ngblocks_solicitados);
 router.post('/profile/ngblocks_solicitados/delete/:id_ng_block', isAuth, ng_block_controller.post_delete_ng_block_solicitadas);
 
 //Vacaciones
@@ -43,7 +43,7 @@ router.get('/vacaciones_totales', isAuth, vacaciones_controller.get_dias_vacacio
 router.post('/vacaciones_totales/:id_prestaciones', isAuth, vacaciones_controller.post_dias_vacaciones_totales);
 router.post('/vacaciones_totales/delete/:id_prestaciones', isAuth, vacaciones_controller.post_delete_vacaciones_totales);
 router.post('/vacaciones_totales/add/aaaaaaa', isAuth, vacaciones_controller.post_add_vacaciones_totales);
-router.get('/profile/vacaciones_solicitadas', isAuth, vacaciones_controller.get_vacaciones_solicitadas);
+router.get('/profile/vacaciones_solicitadas/:page', isAuth, vacaciones_controller.get_vacaciones_solicitadas);
 router.post('/profile/vacaciones_solicitadas/delete/:folio', isAuth, vacaciones_controller.post_delete_vacaciones_solicitadas);
 
 

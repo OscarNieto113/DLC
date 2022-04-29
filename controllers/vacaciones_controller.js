@@ -431,17 +431,26 @@ exports.post_give_vacations = (request, response, next) => {
 exports.get_vacaciones_solicitadas = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/profile/vacaciones_solicitadas');
+    var perPage = 10;
+    var page = request.params.page || 1;
+
     Empleado.getRol(no_empleado)
     .then(([rol, fieldData]) => {
-        Vacaciones.fetchSome(no_empleado)
+        Vacaciones.fetchSome(no_empleado, perPage, ((perPage * page) - perPage))
         .then(([rows, fieldData]) => {
-            response.render('vacaciones_solicitadas', {
-                userRol: rol[0].id_rol,
-                vacaciones: rows,
-                success: request.flash("success"),
-                error: request.flash("error"),
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-            });
+            Vacaciones.count4(no_empleado)
+            .then(([count, fieldData]) => {
+                let totalesN = count[0].num;
+                response.render('vacaciones_solicitadas', {
+                    userRol: rol[0].id_rol,
+                    vacaciones: rows,
+                    current: page,
+                    pages: Math.ceil(totalesN / perPage),
+                    success: request.flash("success"),
+                    error: request.flash("error"),
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+                  });
+            }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     }).catch(err => console.log(err));
 };

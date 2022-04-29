@@ -122,7 +122,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                 .then(([ng_block, fieldData]) => {
                     Ng_Block.count()
                     .then(([count, fieldData]) => {
-                        let totalesN = count[0].num
+                        let totalesN = count[0].num;
                         response.render('aprobar_ngblocks', {
                             area: area,
                             userRol: rol[0].id_rol,
@@ -234,17 +234,26 @@ exports.search_ngblock = (request, response, next) => {
 exports.get_ngblocks_solicitados = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
     console.log('GET /dlc/profile/vacaciones_solicitadas');
+    var perPage = 10;
+    var page = request.params.page || 1;
+
     Empleado.getRol(no_empleado)
     .then(([rol, fieldData]) => {
-        Ng_Block.fetchSome(no_empleado)
+        Ng_Block.fetchSome(no_empleado, perPage, ((perPage * page) - perPage))
         .then(([rows, fieldData]) => {
-            response.render('ngblocks_solicitados', {
-                userRol: rol[0].id_rol,
-                ng_block: rows,
-                success: request.flash("success"),
-                error: request.flash("error"),
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-            });
+            Ng_Block.count4(no_empleado)
+            .then(([count, fieldData]) => {
+                let totalesN = count[0].num;
+                response.render('ngblocks_solicitados', {
+                    userRol: rol[0].id_rol,
+                    ng_block: rows,
+                    current: page,
+                    pages: Math.ceil(totalesN / perPage),
+                    success: request.flash("success"),
+                    error: request.flash("error"),
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+                });
+            }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     }).catch(err => console.log(err));
 };

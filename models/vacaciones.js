@@ -59,11 +59,13 @@ module.exports = class Vacaciones {
         'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND v.estatus_vacaciones = "Pendiente"');
     }
 
-    static fetchSome(no_empleado) {
+    static fetchSome(no_empleado, num_solicitudes, num_offset) {
         return db.execute(
           `SELECT date_format(fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, date_format(fecha_primer_dia, '%d/%m/%Y') as fecha_primer_dia, date_format(fecha_ultimo_dia, '%d/%m/%Y') as fecha_ultimo_dia, dias_solicitados, responsable_ausencia, observaciones, estatus_vacaciones, folio ` +
           'FROM empleado e, vacaciones v ' +
-          'WHERE e.no_empleado = v.no_empleado AND v.no_empleado=?', [no_empleado]);
+          'WHERE e.no_empleado = v.no_empleado AND v.no_empleado=? ' +
+          'ORDER BY fecha_solicitud DESC ' +
+          'LIMIT ? OFFSET ?', [no_empleado, num_solicitudes, num_offset]);
     }
 
     static rejectVacations(estatus_vacaciones, folio) {
@@ -140,5 +142,12 @@ module.exports = class Vacaciones {
         'SELECT COUNT(folio) as num ' +
         'FROM empleado e, vacaciones v, area a ' +
         'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND a.id_area = ? AND e.id_ciudad = ? ', [id_area, id_ciudad]);
+    }
+
+    static count4 (no_empleado) {
+      return db.query(
+        'SELECT COUNT(folio) as num ' +
+        'FROM vacaciones v ' +
+        'WHERE v.no_empleado = ? ', [no_empleado]);
     }
 }

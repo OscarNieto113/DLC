@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MemoryStore = require('memorystore')(session)
 //const bootstrap = require('bootstrap');
 //const bootstrap_icons = require('bootstrap-icons');
 const rutas_dlc = require('./routes/dlc.routes');
@@ -28,9 +29,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
+    saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
     secret: 'lakdsjalkdjalaksdjald',
     resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió
-    saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
 }));
 
 app.use(csrfProtection);

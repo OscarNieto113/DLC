@@ -1,4 +1,4 @@
-runtime: nodejs14
+runtime: nodejs12
 #env: flex
 #automatic_scaling:
   #min_idle_instances: automatic

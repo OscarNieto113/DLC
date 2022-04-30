@@ -4,7 +4,7 @@
   "description": "Web app for natgas",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodem app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

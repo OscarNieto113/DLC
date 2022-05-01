@@ -4,37 +4,35 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const memoryStore = require('memorystore')(session);
 const multer = require('multer');
-//const bootstrap = require('bootstrap');
-//const bootstrap_icons = require('bootstrap-icons');
-
 const rutas_dlc = require('./routes/dlc.routes');
 const rutas_reporte_mensual = require('./routes/reporte_mensual.routes');
 const rutas_users = require('./routes/user.routes');
 const uploadImage = require('./helpers/helpers');
-
 const csrf = require('csurf');
 const csrfProtection = csrf();
-
 const flash = require('connect-flash');
-
-
 const path = require('path');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 //Prueba
-const multerMid = multer({
-  storage: multer.memoryStorage(),
-  limits: {
-    // no larger than 5mb.
-    fileSize: 5 * 1024 * 1024,
-  },
+const multerMid = multer.diskStorage({
   filename: (request, file, callback) => {
         callback(null, new Date().getTime()+ '-' + file.originalname);
-    },
+    }
 });
 
-app.use(multerMid.single('imagen_noticia'));
+app.use(multer({ storage: multer.memoryStorage() }).single('imagen_noticia'));
+//app.use(multerMid.single('imagen_noticia'));
 app.use(bodyParser.urlencoded({extended: false}));
 
 //ruta
@@ -63,19 +61,6 @@ app.use((err, req, res, next) => {
 })
 //
 
-
-app.set('view engine', 'ejs');
-app.set('views', 'views');
-
-app.use(express.static(path.join(__dirname, 'public')));
-// NO BORRES UPLOADS PINCHE OSCAR XD
-app.use(express.static(path.join(__dirname, 'uploads')));
-
-
-
-
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
     saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
@@ -93,7 +78,7 @@ app.use((request, response, next) => {
     next();
 });
 
-//rutas url
+
 app.use(flash());
 
 app.use('/dlc', rutas_dlc);

@@ -6,7 +6,7 @@ exports.post_noticia = (request, response, next) => {
     const filename = request.file.filename;
 
     console.log(filename);
-    if (filename.length == undefined){
+    if (filename == undefined){
         request.flash('error', 'No se recibió ningún archivo.');
         response.redirect('/dlc');
     }

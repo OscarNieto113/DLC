@@ -5,7 +5,7 @@ const serviceKey = path.join(__dirname, './dlc-itesm-3a1ee82f7fb0.json')
 const { Storage } = Cloud
 const storage = new Storage({
   keyFilename: serviceKey,
-  projectId: 'your project id',
+  projectId: 'dlc-itesm',
 })
 
 module.exports = storage

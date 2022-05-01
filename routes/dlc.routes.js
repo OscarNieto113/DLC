@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const isAuth = require('../util/is-auth.js');
 
 const dlc_controller = require('../controllers/dlc_controller');
@@ -7,6 +8,12 @@ const noticia_controller = require('../controllers/noticia_controller');
 const publicacion_controller = require('../controllers/publicacion_controller');
 const ng_block_controller = require('../controllers/ng_block_controller');
 const vacaciones_controller = require('../controllers/vacaciones_controller');
+
+const multerMid = multer.diskStorage({
+  filename: (request, file, callback) => {
+        callback(null, new Date().getTime()+ '-' + file.originalname);
+    }
+});
 
 //NG BLOCK
 router.get('/solicitar_ng_block', isAuth, ng_block_controller.get_solicitar_ng_block);
@@ -55,11 +62,11 @@ router.get('/profile', isAuth, dlc_controller.get_profile);
 router.post('/buscar_empleado/:no_empleado/m_rol', isAuth, dlc_controller.post_give_new_rol);
 
 //Noticia
-router.post('/noticia', noticia_controller.post_noticia);
+router.post('/noticia', multer({ storage: multer.memoryStorage() }).single('imagen_noticia'), noticia_controller.post_noticia);
 router.post('/noticia/delete/:id_noticia', isAuth, noticia_controller.post_delete_noticia);
 
 //Publicacion
-router.post('/publicacion', publicacion_controller.post_publicacion);
+router.post('/publicacion', multer({ storage: multer.memoryStorage() }).single('imagen_publicacion'), publicacion_controller.post_publicacion);
 router.post('/publicacion-sin-imagen',isAuth, publicacion_controller.post_publicacion_sin_imagen);
 router.post('/publicacion/delete/:id_publicacion', isAuth, publicacion_controller.post_delete_publicacion);
 

@@ -25,41 +25,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Prueba
-const multerMid = multer.diskStorage({
-  filename: (request, file, callback) => {
-        callback(null, new Date().getTime()+ '-' + file.originalname);
-    }
-});
 
-app.use(multer({ storage: multer.memoryStorage() }).single('imagen_noticia'));
-//app.use(multerMid.single('imagen_noticia'));
+
+//app.use(multer({ storage: multer.memoryStorage() }).single('imagen_noticia'));
 app.use(bodyParser.urlencoded({extended: false}));
-
-//ruta
-app.post('/uploads', async (req, res, next) => {
-  try {
-    const myFile = req.file
-    const imageUrl = await uploadImage(myFile)
-
-    res
-      .status(200)
-      .json({
-        message: "Upload was successful",
-        data: imageUrl
-      })
-  } catch (error) {
-    next(error)
-  }
-})
-
-app.use((err, req, res, next) => {
-  res.status(500).json({
-    error: err,
-    message: 'Internal server error!',
-  })
-  next()
-})
-//
 
 app.use(cookieParser());
 app.use(session({

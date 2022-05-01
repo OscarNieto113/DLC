@@ -1,5 +1,6 @@
 const Reportes_mensuales = require('../models/reportes_mensuales');
 const Empleado = require('../models/empleado');
+const uploadImage = require('../helpers/helpers');
 
 const real_meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -111,24 +112,25 @@ exports.post_delete_reportes_mensuales = (request, response, next) => {
             }).catch(err => console.log(err));
     };
 
-exports.post_reportes_mensuales = (request, response, next) => {
+exports.post_reportes_mensuales = async (request, response, next) => {
     console.log('POST /reporte_mensual');
     const titulo_reporte_mensual = request.body.titulo_reporte_mensual;
     const descripcion_reporte_mensual = request.body.descripcion_reporte_mensual;
     const fecha_reporte_mensual = request.body.fecha_reporte_mensual;
-    const filename = request.file.filename;
+    const filename = request.file;
+    const imageUrl = await uploadImage(filename);
 
     console.log(titulo_reporte_mensual);
     console.log(descripcion_reporte_mensual);
     console.log(fecha_reporte_mensual);
-    console.log(filename);
+    console.log(imageUrl);
 
-    if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && filename.length == undefined){
+    if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && !filename){
       request.flash('error', 'No se recibió ningún dato.');
       response.redirect('/dlc');
     }
 
-    else if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && filename.length == undefined){
+    else if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && !filename){
       request.flash('error', 'Faltan datos por llenar.');
       response.redirect('/dlc');
     }
@@ -139,7 +141,7 @@ exports.post_reportes_mensuales = (request, response, next) => {
             titulo_reporte_mensual,
             descripcion_reporte_mensual,
             fecha_reporte_mensual,
-            filename);
+            imageUrl);
       reportes_mensuales.save()
       //
       .then(() => {

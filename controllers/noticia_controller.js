@@ -1,13 +1,11 @@
 const Noticia = require('../models/noticia');
 const uploadImage = require('../helpers/helpers');
 //------------------------POST Subir una noticia--------------------------------
-exports.post_noticia =async (request, response, next) => {
+exports.post_noticia = async (request, response, next) => {
     console.log('POST /dlc/noticia');
     const filename = request.file;
     const imageUrl = await uploadImage(filename);
 
-    console.log(filename);
-    console.log(imageUrl);
     if (!filename){
         request.flash('error', 'No se recibió ningún archivo.');
         response.redirect('/dlc');

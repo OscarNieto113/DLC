@@ -10,6 +10,7 @@ const ng_block_controller = require('../controllers/ng_block_controller');
 const vacaciones_controller = require('../controllers/vacaciones_controller');
 
 const fileStorage = multer.diskStorage({
+    storage: multer.memoryStorage(),
     destination: (request, file, callback) => {
         callback(null, 'uploads');
     },
@@ -65,11 +66,11 @@ router.get('/profile', isAuth, dlc_controller.get_profile);
 router.post('/buscar_empleado/:no_empleado/m_rol', isAuth, dlc_controller.post_give_new_rol);
 
 //Noticia
-router.post('/noticia' , multer({ storage: fileStorage }).single('imagen_noticia'), noticia_controller.post_noticia);
+router.post('/noticia' , multer({ storage: multer.memoryStorage() }).single('imagen_noticia'), noticia_controller.post_noticia);
 router.post('/noticia/delete/:id_noticia', isAuth, noticia_controller.post_delete_noticia);
 
 //Publicacion
-router.post('/publicacion' , multer({ storage: fileStorage }).single('imagen_publicacion'), publicacion_controller.post_publicacion);
+router.post('/publicacion' , multer({ storage: multer.memoryStorage() }).single('imagen_publicacion'), publicacion_controller.post_publicacion);
 router.post('/publicacion-sin-imagen',isAuth, publicacion_controller.post_publicacion_sin_imagen);
 router.post('/publicacion/delete/:id_publicacion', isAuth, publicacion_controller.post_delete_publicacion);
 

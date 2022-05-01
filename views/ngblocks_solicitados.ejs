@@ -63,7 +63,7 @@
       <ul class="pagination justify-content-center">
         <% if (current == 1) { %>
         <li class="page-item disabled">
-          <a class="page-link">First</a>
+          <a class="page-link">Primero</a>
           </li>
         <% } else { %>
         <li class="page-item"><a class ="page-link" href="/dlc/profile/ngblocks_solicitados/1">Primero</a></li>
@@ -78,7 +78,7 @@
         <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
         <li class="page-item disabled"><a class="page-link">...</a></li>
         <% } %> <% } %> <% if (current == pages) { %>
-        <li class="page-item disabled"><a class="page-link">Last</a></li>
+        <li class="page-item disabled"><a class="page-link">Último</a></li>
         <% } else { %>
         <li><a class="page-link" href="/dlc/profile/ngblocks_solicitados/<%= pages %>">Último</a></li>
         <% } %>

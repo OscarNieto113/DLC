@@ -11,7 +11,7 @@ exports.get_solicitar_vacaciones = (request, response, next) => {
         Empleado.getAreaEmpleado(no_empleado)
         .then(([id_area, fieldData]) => {
         let id = id_area[0].id_area;
-            Empleado.fetchEmpleadoArea(id)
+            Empleado.fetchEmpleadoArea(id, no_empleado)
             .then(([rows, fieldData]) => {
                 Empleado.getVacacionesR(no_empleado)
                 .then(([vacacionesR, fielData])=>{
@@ -112,9 +112,9 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
             const estado = ciudad[0].id_ciudad;
               Area.fetchAll()
               .then(([area, fieldData]) => {
-                    Vacaciones.fetchPagination2(depar, estado, perPage, ((perPage * page) - perPage))
+                    Vacaciones.fetchPagination2(depar, estado, no_empleado, perPage, ((perPage * page) - perPage))
                     .then(([vacaciones, fieldData]) => {
-                        Vacaciones.count3(depar, estado)
+                        Vacaciones.count3(depar, estado, no_empleado)
                         .then(([count, fieldData]) => {
                             let totalesV = count[0].num
                             console.log(totalesV)
@@ -138,9 +138,9 @@ exports.get_aprobar_vacaciones_pagination = (request, response, next) => {
   else {
     Area.fetchAll()
     .then(([area, fieldData]) => {
-          Vacaciones.fetchPagination(perPage, ((perPage * page) - perPage))
+          Vacaciones.fetchPagination(no_empleado, perPage, ((perPage * page) - perPage))
           .then(([vacaciones, fieldData]) => {
-              Vacaciones.count()
+              Vacaciones.count(no_empleado)
               .then(([count, fieldData]) => {
                   let totalesV = count[0].num
                   console.log(totalesV)

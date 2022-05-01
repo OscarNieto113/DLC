@@ -39,11 +39,11 @@ module.exports = class Empleado {
             'WHERE r.id_rol = e.id_rol AND e.id_area = a.id_area AND e.no_empleado=?', [no_empleado]);
     }
 
-    static fetchEmpleadoArea(id_area) {
+    static fetchEmpleadoArea(id_area, no_empleado) {
       return db.execute(
         'SELECT a.id_area, e.nombres_empleados, e.apellido_paterno, e.apellido_materno ' +
         'FROM empleado e, area a ' +
-        'WHERE a.id_area = e.id_area AND e.id_area = ? ' ,[id_area]);
+        'WHERE a.id_area = e.id_area AND e.id_area = ? AND e.no_empleado != ?' ,[id_area, no_empleado]);
     }
 
     static getAreaEmpleado(no_empleado) {

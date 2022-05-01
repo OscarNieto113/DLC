@@ -93,9 +93,9 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                   const estado = ciudad[0].id_ciudad;
                     Area.fetchAll()
                     .then(([area, fieldData]) => {
-                        Ng_Block.fetchPagination2(depar, estado, perPage, ((perPage * page) - perPage))
+                        Ng_Block.fetchPagination2(depar, estado, no_empleado, perPage, ((perPage * page) - perPage))
                         .then(([ng_block, fieldData]) => {
-                            Ng_Block.count2(depar, estado)
+                            Ng_Block.count3(depar, estado, empleado)
                             .then(([count, fieldData]) => {
                                 const depar = departamento[0].id_area;
                                 const estado = ciudad[0].id_ciudad;
@@ -120,9 +120,9 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
         else{
             Area.fetchAll()
             .then(([area, fieldData]) => {
-                Ng_Block.fetchPagination(perPage, ((perPage * page) - perPage))
+                Ng_Block.fetchPagination(no_empleado, perPage, ((perPage * page) - perPage))
                 .then(([ng_block, fieldData]) => {
-                    Ng_Block.count()
+                    Ng_Block.count(no_empleado)
                     .then(([count, fieldData]) => {
                         let totalesN = count[0].num;
                         response.render('aprobar_ngblocks', {

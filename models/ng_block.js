@@ -67,12 +67,12 @@ module.exports = class Ng_Block {
             'no_empleado = ? ', [giveNgBlocks, no_empleado]);
     }
 
-    static fetchPagination(num_solicitudes, num_offset) {
+    static fetchPagination(no_empleado, num_solicitudes, num_offset) {
       return db.execute(
         `SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, n.estatus_ng_block, date_format(n.fecha_uso_ng_block, '%d/%m/%Y') as fecha_uso_ng_block, date_format(n.fecha_solicitud_ng_block, '%d/%m/%Y') as fecha_solicitud_ng_block, n.descripcion_ng_block, n.turno_ng_block, n.id_ng_block, n.no_empleado ` +
         'FROM empleado e, ng_block n, area a ' +
-        'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente" ' +
-        'LIMIT ? OFFSET ? ', [num_solicitudes, num_offset]);
+        'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente" AND e.no_empleado != ? ' +
+        'LIMIT ? OFFSET ? ', [no_empleado, num_solicitudes, num_offset]);
     }
 
     static fetchFiltro(num_solicitudes, num_offset, id_area) {
@@ -91,11 +91,11 @@ module.exports = class Ng_Block {
         'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND a.id_area = ? ', [id_area]);
     }
 
-    static count () {
+    static count (no_empleado) {
       return db.query(
         'SELECT COUNT(id_ng_block) as num ' +
         'FROM empleado e, ng_block n, area a ' +
-        'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente"');
+        'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente" AND e.no_empleado != ? ', [no_empleado]);
     }
 
     static fetchSearch(search) {
@@ -119,19 +119,19 @@ module.exports = class Ng_Block {
           'WHERE e.no_empleado = n.no_empleado AND n.no_empleado = ? AND n.id_ng_block = ?', [no_empleado, id_ng_block]);
     }
 
-    static fetchPagination2(departamento, ciudad, num_solicitudes, num_offset) {
+    static fetchPagination2(departamento, ciudad, no_empleado, num_solicitudes, num_offset) {
       return db.execute(
         `SELECT e.nombres_empleados, e.apellido_paterno, e.apellido_materno, a.nombre_area, n.estatus_ng_block, date_format(n.fecha_uso_ng_block, '%d/%m/%Y') as fecha_uso_ng_block, date_format(n.fecha_solicitud_ng_block, '%d/%m/%Y') as fecha_solicitud_ng_block, n.descripcion_ng_block, n.turno_ng_block, n.id_ng_block, n.no_empleado ` +
         'FROM empleado e, ng_block n, area a ' +
-        'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente"  AND a.id_area = ? AND e.id_ciudad = ? ' +
-        'LIMIT ? OFFSET ? ', [departamento, ciudad, num_solicitudes, num_offset]);
+        'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente"  AND a.id_area = ? AND e.id_ciudad = ? AND e.no_empleado != ? ' +
+        'LIMIT ? OFFSET ? ', [departamento, ciudad, no_empleado, num_solicitudes, num_offset]);
     }
 
-    static count3 (id_area, id_ciudad) {
+    static count3 (id_area, id_ciudad, no_empleado) {
       return db.query(
         'SELECT COUNT(id_ng_block) as num ' +
         'FROM empleado e, ng_block n, area a ' +
-        'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND a.id_area = ? AND e.id_ciudad = ? ', [id_area, id_ciudad]);
+        'WHERE e.no_empleado = n.no_empleado AND a.id_area = e.id_area AND a.id_area = ? AND e.id_ciudad = ? AND e.no_empleado != ? ', [id_area, id_ciudad, no_empleado]);
     }
 
     static count4 (no_empleado) {

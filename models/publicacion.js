@@ -10,7 +10,7 @@ module.exports = class Publicacion {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto.
     save() {
-      return db.execute('INSERT INTO publicacion (titulo_publicacion, descripcion_publicacion, imagen_publicacion) VALUES (?, ?, ?)',
+      return db.execute('INSERT INTO publicacion (titulo_publicacion, descripcion_publicacion, imagen_publicacion, fecha_publicacion) VALUES (?, ?, ?, curdate())',
           [this.titulo_publicacion, this.descripcion_publicacion, this.imagen_publicacion]);
     }
 

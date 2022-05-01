@@ -15,7 +15,7 @@ module.exports = class Vacaciones {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto.
     save() {
-      return db.execute('INSERT INTO vacaciones (no_empleado, responsable_ausencia, fecha_primer_dia, fecha_ultimo_dia, dias_solicitados) VALUES (?, ?, ?, ?, ?)',
+      return db.execute('INSERT INTO vacaciones (no_empleado, responsable_ausencia, fecha_primer_dia, fecha_ultimo_dia, dias_solicitados, fecha_solicitud) VALUES (?, ?, ?, ?, ?, curdate())',
           [this.no_empleado, this.responsable_ausencia, this.fecha_primer_dia, this.fecha_ultimo_dia, this.dias_solicitados]);
     }
 

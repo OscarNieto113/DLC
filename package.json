@@ -32,11 +32,12 @@
     "cookie-parser": "^1.4.6",
     "csurf": "^1.11.0",
     "dotenv": "^16.0.0",
-    "mysql2": "^2.3.3",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
-    "multer": "^1.4.4"
+    "memorystore": "^1.6.7",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "mysql2": "^2.3.3",

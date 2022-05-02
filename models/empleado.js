@@ -28,7 +28,7 @@ module.exports = class Empleado {
     static search() {
         return db.execute('SELECT a.nombre_area, e.no_empleado, e.nombres_empleados, e.apellido_paterno, e.apellido_materno, correo_empresarial ' +
         'FROM empleado e, area a ' +
-        'WHERE a.id_area = e.id_area ' +
+        'WHERE a.id_area = e.id_area AND e.activo = 1 ' +
         'LIMIT 15 ' );
     }
 
@@ -36,7 +36,7 @@ module.exports = class Empleado {
         return db.execute(
             `SELECT r.nombre_rol, e.no_empleado, ng_blocks_restantes, correo_empresarial, nombres_empleados, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, nombre_area, date_format(fecha_contratacion, '%d/%m/%Y') as fecha_contratacion, date_format(fecha_nacimiento, '%d/%m/%Y') as fecha_nacimiento, dias_vacaciones_especiales ` +
             'FROM empleado e, area a, rol r ' +
-            'WHERE r.id_rol = e.id_rol AND e.id_area = a.id_area AND e.no_empleado=?', [no_empleado]);
+            'WHERE r.id_rol = e.id_rol AND e.activo = TRUE AND e.id_area = a.id_area AND e.no_empleado=?', [no_empleado]);
     }
 
     static fetchEmpleadoArea(id_area, no_empleado) {
@@ -61,7 +61,7 @@ module.exports = class Empleado {
         return db.execute(
           'SELECT a.nombre_area, e.no_empleado, e.nombres_empleados, e.apellido_paterno, e.apellido_materno, correo_empresarial '+
           'FROM empleado e, area a ' +
-          'WHERE a.id_area = e.id_area AND (a.nombre_area LIKE ? OR e.no_empleado LIKE ? OR e.nombres_empleados LIKE ?)', ['%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
+          'WHERE a.id_area = e.id_area AND e.activo = 1 AND (a.nombre_area LIKE ? OR e.no_empleado LIKE ? OR e.nombres_empleados LIKE ?) ', ['%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
     }
 
     static getBlocksR(no_empleado) {
@@ -133,5 +133,9 @@ module.exports = class Empleado {
         'SELECT e.id_ciudad ' +
         'FROM empleado e, ciudad c ' +
         'WHERE e.id_ciudad = c.id_ciudad AND e.no_empleado = ? ' ,[no_empleado]);
+    }
+
+    static eliminarEmpleado(no_empleado) {
+      return db.execute('UPDATE empleado SET activo = 0 WHERE no_empleado= ?;', [no_empleado]);
     }
 }

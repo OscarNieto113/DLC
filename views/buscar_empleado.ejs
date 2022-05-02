@@ -11,21 +11,38 @@
           <i class="bi bi-search"></i>
         </span>
       </div> <br><br>
-
+      <% if (success.length != 0) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+        <% if (error.length != 0) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>┻━┻ ︵ヽ(`▭´)ﾉ︵﻿ ┻━┻   </strong> <%= error %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
       <div class="card-columns">
         <div id="respuesta_ajax">
       <% if (empleado.length > 0) { %>
         <% for (let empleado1 of empleado) { %>
           <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-            <div style="color: #098B90;" class="card-header"><center><b><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></center></b></div>
+            <div class="card-header"><center><b><%=empleado1.nombres_empleados%> <%=empleado1.apellido_paterno%> <%=empleado1.apellido_materno%></b></center></div>
             <div class="card-body">
               <p class="card-text"><center><b>Número de empleado: </b><%=empleado1.no_empleado%></center></p>
               <p class="card-text"><center><b>Departamento: </b><%=empleado1.nombre_area%></center></p>
-              <p class="card-text"><center><b>Correo empresarial: </b><%=empleado1.correo_empresarial%></center></p>
+              <p class="card-text"><center><b>Correo: </b><%=empleado1.correo_empresarial%></center></p>
               <% if (userRol == 1 || userRol == 2) {%>
-              <a href="/dlc/buscar_empleado/<%=empleado1.no_empleado%>">
-              <center><button type="button" class="btn btn-light">Ver perfil</button></center>
-              </a>
+                <div class="container">
+                  <a href="/dlc/buscar_empleado/<%=empleado1.no_empleado%>">
+                    <center><button type="button" class="btn btn-light">Ver perfil</button></center>
+                  </a>
+                </div>
               <% } %>
             </div>
           </div>
@@ -66,7 +83,7 @@
                 '<div class="card-body">' +
                   '<p class="card-text"><center><b>Número de empleado: </b>' + empleado.no_empleado + '</center></p>' +
                   '<p class="card-text"><center><b>Departamento: </b>' + empleado.nombre_area + '</center></p>' +
-                  '<p class="card-text"><center><b>Correo empresarial: </b>' + empleado.correo_empresarial + '</center></p>' +
+                  '<p class="card-text"><center><b>Correo: </b>' + empleado.correo_empresarial + '</center></p>' +
                   '<a href="/dlc/buscar_empleado/' + empleado.no_empleado + '">' +
                   '<center><button type="button" class="btn btn-light">Ver perfil</button></center>' +
                   '</a>' +

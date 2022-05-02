@@ -57,6 +57,7 @@ router.post('/r_usuario/ciudad', isAuth, dlc_controller.post_registrar_ciudad);
 router.get('/buscar_empleado', isAuth, dlc_controller.get_buscar_empleado);
 router.get('/s_buscar_empleadop/filtrar/:search', isAuth, dlc_controller.search_empleado);
 router.get('/buscar_empleado/:no_empleado', dlc_controller.get_perfil_empleado);
+router.post('/buscar_empleado/delete/:no_empleado', isAuth, dlc_controller.post_delete_empleado);
 
 //Interfaz datos del empleado
 router.get('/profile', isAuth, dlc_controller.get_profile);

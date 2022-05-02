@@ -252,6 +252,8 @@ exports.get_buscar_empleado = (request, response, next) => {
             .then(([rows, fieldData]) => {
                 console.log(rows);
                 response.render('buscar_empleado', {
+                    success: request.flash("success"),
+                    error: request.flash("error"),
                     userRol: rol[0].id_rol,
                     empleado: rows,
                     isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -343,6 +345,18 @@ exports.listar = (request, response, next) => {
                 }).catch(err => console.log(err));
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+};
+
+//------------------------Borrar Empleado----------------------------------
+exports.post_delete_empleado = (request, response, next) => {
+    console.log('POST /dlc/buscar_empleado/delete/:no_empleado');
+    const no_empleado = request.params.no_empleado;
+    Empleado.eliminarEmpleado(no_empleado)
+    .then(() => {
+        console.log("Se elimino el empleado");
+        request.flash('success', 'El empleado se eliminó con éxito');
+        response.redirect('/dlc/buscar_empleado');
     }).catch(err => console.log(err));
 };
 //------------------------Main--------------------------------

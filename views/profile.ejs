@@ -232,6 +232,18 @@
           <% } %>
         <% } %>
 
+        <% if (userRol == 1 || userRol == 2 ) {%>
+          <% if (empleado1.no_empleado != no_empleado ) {%>
+        <div style="text-align: right;">
+          <form action="/dlc/buscar_empleado/delete/<%= empleado1.no_empleado %>" method="POST" onsubmit="return submitForm(this);">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+            <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>"/>
+            <button value="submit" class="btn btn-danger">Eliminar Empleado</button>
+          </form>
+        </div>
+        <% } %>
+      <% } %>
+
           <% if (userRol == 1 || userRol == 2 ) {%>
             <% if (empleado1.no_empleado != no_empleado ) {%>
               <div class="container">
@@ -258,5 +270,11 @@
       </div>
     </div>
   </div>
+
+<script>
+  function submitForm() {
+    return confirm('¿Realmente quieres eliminar al empleado?');
+  }
+</script>
 
   <%- include('includes/foot.ejs') %>

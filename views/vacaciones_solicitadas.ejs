@@ -32,7 +32,7 @@
         <% for (let vacaciones1 of vacaciones) { %>
           <% if (vacaciones1.estatus_vacaciones === "Pendiente") { %>
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                  <form action="/dlc/profile/vacaciones_solicitadas/delete/<%= vacaciones1.folio %>" method="POST">
+                  <form action="/dlc/profile/vacaciones_solicitadas/delete/<%= vacaciones1.folio %>" method="POST" onsubmit="return submitForm(this);">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                     <input type="hidden" id="folio" name="folio" value="<%= vacaciones1.folio %>"/>
                     <div style="text-align: right;">
@@ -91,5 +91,11 @@
   </div>
 </div>
 </body>
+
+<script>
+  function submitForm() {
+    return confirm('¿Realmente quieres eliminar está solicitud de vacaciones?');
+  }
+</script>
 
 <%- include('includes/foot.ejs') %>

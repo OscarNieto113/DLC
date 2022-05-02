@@ -32,7 +32,7 @@
         <% for (let ng_block1 of ng_block) { %>
           <% if (ng_block1.estatus_ng_block === "Pendiente") { %>
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-              <form action="/dlc/profile/ngblocks_solicitados/delete/<%= ng_block1.id_ng_block %>" method="POST">
+              <form action="/dlc/profile/ngblocks_solicitados/delete/<%= ng_block1.id_ng_block %>" method="POST" onsubmit="return submitForm(this);">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <input type="hidden" id="id_ng_block" name="id_ng_block" value="<%= ng_block1.id_ng_block %>"/>
                 <div style="text-align: right;">
@@ -88,5 +88,11 @@
   </div>
 </div>
 </body>
+
+<script>
+  function submitForm() {
+    return confirm('¿Realmente quieres eliminar está solicitud de ng block?');
+  }
+</script>
 
 <%- include('includes/foot.ejs') %>

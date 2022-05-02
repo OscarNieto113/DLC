@@ -34,7 +34,7 @@
   <div class="carousel-item">
     <% if (userRol == 1 || userRol == 2 ) {%>
       <div style="text-align: center;">
-        <form action="/dlc/noticia/delete/<%= noticia1.id_noticia %>" method="POST">
+        <form action="/dlc/noticia/delete/<%= noticia1.id_noticia %>" method="POST" onsubmit="return submitForm(this);">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
           <input type="hidden" id="id_noticia" name="id_noticia" value="<%= noticia1.id_noticia %>"/>
           <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
@@ -89,3 +89,9 @@
       </div>
   </div>
   <% } %>
+
+  <script>
+    function submitForm() {
+      return confirm('¿Realmente quieres eliminar al empleado?');
+    }
+  </script>

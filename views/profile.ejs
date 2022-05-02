@@ -14,7 +14,20 @@
       		<div class="col-sm-3">
             <div class="text-center">
               <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-            </div><br>
+              <br>
+              <br>
+              <% if (userRol == 1 || userRol == 2 ) {%>
+                <% if (empleado1.no_empleado != no_empleado ) {%>
+              <div style="text-align: center;">
+                <form action="/dlc/buscar_empleado/delete/<%= empleado1.no_empleado %>" method="POST" onsubmit="return submitForm(this);">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                  <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>"/>
+                  <button value="submit" class="btn btn-danger">Eliminar Empleado</button>
+                </form>
+              </div>
+              <% } %>
+            <% } %>
+            </div>
           </div>
         	<div class="col-sm-6">
               <div class="tab-content">
@@ -231,18 +244,6 @@
             <br>
           <% } %>
         <% } %>
-
-        <% if (userRol == 1 || userRol == 2 ) {%>
-          <% if (empleado1.no_empleado != no_empleado ) {%>
-        <div style="text-align: right;">
-          <form action="/dlc/buscar_empleado/delete/<%= empleado1.no_empleado %>" method="POST" onsubmit="return submitForm(this);">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-            <input type="hidden" id="no_empleado" name="no_empleado" value="<%= empleado1.no_empleado %>"/>
-            <button value="submit" class="btn btn-danger">Eliminar Empleado</button>
-          </form>
-        </div>
-        <% } %>
-      <% } %>
 
           <% if (userRol == 1 || userRol == 2 ) {%>
             <% if (empleado1.no_empleado != no_empleado ) {%>

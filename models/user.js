@@ -33,4 +33,17 @@ module.exports = class User {
         return db.execute('SELECT * FROM usuario ORDER BY nombre ASC');
     }
 
+    static findOneEmpleado(no_empleado) {
+        return db.execute(
+          'SELECT no_empleado ' +
+          'FROM empleado ' +
+          'WHERE no_empleado = ?', [no_empleado]);
+    }
+
+    static getToken(no_empleado) {
+        return db.execute(
+          'SELECT token ' +
+          'FROM empleado ' +
+          'WHERE no_empleado = ?', [no_empleado]);
+    }
 }

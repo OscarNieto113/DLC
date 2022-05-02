@@ -7,7 +7,6 @@ const Prestaciones = require('../models/prestaciones');
 const Ciudad = require('../models/ciudad');
 const Rol = require('../models/rol');
 
-
 //------------------------Registrar empleado--------------------------------
 exports.get_registrar_empleado = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
@@ -50,6 +49,7 @@ exports.post_registrar_empleado = (request, response, next) => {
     const id_area = request.body.id_area;
     const id_rol = request.body.id_rol;
     const id_ciudad = request.body.id_ciudad;
+    const token = request.body.fecha_nacimiento;
 
     console.log(no_empleado);
     console.log(ng_blocks_restantes);
@@ -97,7 +97,8 @@ exports.post_registrar_empleado = (request, response, next) => {
             genero_empleado,
             id_area,
             id_rol,
-            id_ciudad
+            id_ciudad,
+            token
           );
       empleado.save()
       .then(() => {

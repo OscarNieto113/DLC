@@ -12,7 +12,7 @@ Para correr el sitio ten encuenta los siguientes puntos:
 
 ##Deploy
 En el caso de querer hacer deploy utilizar el manual de instalación
-
+https://dlc-itesm.uc.r.appspot.com/users/login
 
 ## Roles
 1. Operativos: Usuario:"a01705008@natgas.com.mx"  Contraseña: 123
@@ -24,7 +24,7 @@ En el caso de querer hacer deploy utilizar el manual de instalación
 Tabla de roles: https://docs.google.com/spreadsheets/d/10S5QGoQth-aV_NXtuFdHxe4uJmzCtd5cPu5Sc3W9R-4/edit#gid=0
 
 ### Pagina PRINCIPAL
-http://localhost:3000/users/login
+http://localhost:8080/users/login
 
 
 ## Cosas por hacer pa mañana (que creativo que sos)

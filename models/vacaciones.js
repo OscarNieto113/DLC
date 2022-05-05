@@ -141,7 +141,7 @@ module.exports = class Vacaciones {
       return db.query(
         'SELECT COUNT(folio) as num ' +
         'FROM empleado e, vacaciones v, area a ' +
-        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND a.id_area = ? AND e.id_ciudad = ? AND e.no_empleado != ? ', [id_area, id_ciudad, no_empleado]);
+        'WHERE e.no_empleado = v.no_empleado AND a.id_area = e.id_area AND n.estatus_ng_block = "Pendiente" AND a.id_area = ? AND e.id_ciudad = ? AND e.no_empleado != ? ', [id_area, id_ciudad, no_empleado]);
     }
 
     static count4 (no_empleado) {
@@ -149,5 +149,13 @@ module.exports = class Vacaciones {
         'SELECT COUNT(folio) as num ' +
         'FROM vacaciones v ' +
         'WHERE v.no_empleado = ? ', [no_empleado]);
+    }
+
+    static downloadVacations(fecha) {
+        return db.execute(
+            'SELECT e.no_empleado, e.nombres_empleados, e.apellido_paterno, e.apellido_materno, e.dias_vacaciones_restantes, a.nombre_area, c.nombre_ciudad, v.folio, v.responsable_ausencia, v.fecha_primer_dia, v.fecha_ultimo_dia, v.fecha_solicitud, v.dias_solicitados, v.estatus_vacaciones ' +
+            'FROM empleado e, vacaciones v, area a, ciudad c ' +
+            'WHERE e.no_empleado = v.no_empleado AND e.id_area = a.id_area AND e.id_ciudad = c.id_ciudad AND ' +
+            '(v.fecha_solicitud LIKE ? )', [fecha+'%']);
     }
 }

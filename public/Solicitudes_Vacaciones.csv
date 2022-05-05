@@ -1,0 +1,32 @@
+no_empleado,nombres_empleados,apellido_paterno,apellido_materno,dias_vacaciones_restantes,nombre_area,nombre_ciudad,folio,responsable_ausencia,fecha_primer_dia,fecha_ultimo_dia,fecha_solicitud,dias_solicitados,estatus_vacaciones
+A1,Óscar Eduardo,Nieto,Espitia,8,Marketing operaciones,Querétaro,21,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-01T06:00:00.000Z,1,Aprobado
+A11,Ciríaco,Tejero,Gimeno,1,Marketing operaciones,Querétaro,31,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-05T06:00:00.000Z,1,Aprobado
+A21,Yolanda,Urrutia,Bas,3,Marketing operaciones,Querétaro,41,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-25T06:00:00.000Z,1,Aprobado
+A12,Iris,Gomis,Batlle,5,Marketing Comercial,Querétaro,32,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-11T06:00:00.000Z,1,Aprobado
+A2,Dalila,Azcona,Garrido,9,Marketing Comercial,Querétaro,22,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-01T06:00:00.000Z,1,Aprobado
+A22,Dorita,Lastra,Rosales,21,Marketing Comercial,Querétaro,42,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-25T06:00:00.000Z,1,Rechazado
+A13,Rita,Corral,Pallarès,3,Infraestructura,Querétaro,33,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-11T06:00:00.000Z,1,Aprobado
+A13,Rita,Corral,Pallarès,3,Infraestructura,Querétaro,243,Iris Gomis Batlle,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-12T06:00:00.000Z,1,Pendiente
+A23,Perla,Alcaraz,Sotelo,3,Infraestructura,Querétaro,43,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-25T06:00:00.000Z,1,Aprobado
+A14,Amando,Roselló,Ballester,5,Optimización e Inteligencia,Querétaro,34,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-13T06:00:00.000Z,1,Aprobado
+A14,Amando,Roselló,Ballester,5,Optimización e Inteligencia,Querétaro,244,Rita Corral Pallarès,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-12T06:00:00.000Z,1,Pendiente
+A24,Fidel,Girón,Román,5,Optimización e Inteligencia,Querétaro,44,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-26T06:00:00.000Z,1,Rechazado
+A15,Mayte,Canals,Carbonell,9,Impúlsate,Querétaro,35,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-19T06:00:00.000Z,1,Aprobado
+A15,Mayte,Canals,Carbonell,9,Impúlsate,Querétaro,245,Rita Corral Pallarès,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-12T06:00:00.000Z,1,Pendiente
+A25,Ligia,Alcázar,Arribas,7,Impúlsate,Querétaro,45,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-26T06:00:00.000Z,1,Aprobado
+A16,Chelo,Coca,Mascaró,18,Dirección Regulatorios,Querétaro,36,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-19T06:00:00.000Z,1,Rechazado
+A16,Chelo,Coca,Mascaró,18,Dirección Regulatorios,Querétaro,246,Rita Corral Pallarès,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-12T06:00:00.000Z,1,Pendiente
+A26,Ulises,Villa,Castell,18,Dirección Regulatorios,Querétaro,46,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-27T06:00:00.000Z,1,Aprobado
+A17,Teresita,Castañeda,Barba,12,Asuntos Regulatorios,Querétaro,37,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-20T06:00:00.000Z,1,Rechazado
+A27,Sara,Muñoz,Amaya,19,Asuntos Regulatorios,Querétaro,47,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-27T06:00:00.000Z,1,Aprobado
+A7,Antonia,Torrijos,Robles,16,Asuntos Regulatorios,Querétaro,27,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-03T06:00:00.000Z,1,Aprobado
+A18,Pascuala,Collado,Royo,18,Recursos Humanos,Querétaro,38,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-22T06:00:00.000Z,1,Aprobado
+A28,Trinidad,Calleja,Jaén,2,Recursos Humanos,Querétaro,48,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-28T06:00:00.000Z,1,Aprobado
+A8,Natanael,Morillo,Ramos,16,Recursos Humanos,Querétaro,28,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-03T06:00:00.000Z,1,Rechazado
+A19,Zoraida,Criado,Zabala,14,Proyectos Estratégicos,Querétaro,39,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-25T06:00:00.000Z,1,Aprobado
+A29,Gervasio,Bermúdez,Aguiló,1,Proyectos Estratégicos,Querétaro,49,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-28T06:00:00.000Z,1,Rechazado
+A9,Rie,Takahashi,Megu,13,Proyectos Estratégicos,Querétaro,29,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-04T06:00:00.000Z,1,Aprobado
+A10,Adelina,Llanos,Sanmartín,0,NatDev,Querétaro,30,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-05T06:00:00.000Z,1,Aprobado
+A10,Adelina,Llanos,Sanmartín,0,NatDev,Querétaro,220,Ciríaco Tejero Gimeno,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-03T06:00:00.000Z,1,Pendiente
+A20,Benita,Martin,Zabala,8,NatDev,Querétaro,40,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-25T06:00:00.000Z,1,Aprobado
+A30,Salomé,Madrid,Vega,22,NatDev,Querétaro,50,Dalila Azcona Garrido,2022-04-05T05:00:00.000Z,2022-04-08T05:00:00.000Z,2022-01-29T06:00:00.000Z,1,Aprobado

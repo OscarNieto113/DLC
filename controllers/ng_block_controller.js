@@ -95,7 +95,7 @@ exports.get_aprobar_ng_blocks_pagination = (request, response, next) => {
                     .then(([area, fieldData]) => {
                         Ng_Block.fetchPagination2(depar, estado, no_empleado, perPage, ((perPage * page) - perPage))
                         .then(([ng_block, fieldData]) => {
-                            Ng_Block.count3(depar, estado, empleado)
+                            Ng_Block.count3(depar, estado, no_empleado)
                             .then(([count, fieldData]) => {
                                 const depar = departamento[0].id_area;
                                 const estado = ciudad[0].id_ciudad;
@@ -178,7 +178,7 @@ exports.post_reject_ng_blocks = (request, response, next) => {
     console.log('POST /dlc/a_ng_blocksp/:page/reject');
     const estatus_ng_block = "Rechazado";
     const id_ng_block = request.body.id_ng_block;
-
+    console.log(id_ng_block);
     Ng_Block.rejectNGBlock(
         estatus_ng_block,
         id_ng_block)
@@ -271,7 +271,7 @@ exports.post_delete_ng_block_solicitadas = (request, response, next) => {
 
         if (estatus_ng_block == 'Aprobado' || estatus_ng_block == 'Rechazado'){
             request.flash('error', 'No puedes eliminar una solicitud de Ng Block que esté en estatus Aprobado o Rechazado');
-            response.redirect('/dlc/profile/ngblocks_solicitados');
+            response.redirect('/dlc/profile/ngblocks_solicitados/1');
         }
 
         else {
@@ -280,7 +280,7 @@ exports.post_delete_ng_block_solicitadas = (request, response, next) => {
             .then(() => {
                 console.log("Se elimino la solicitud");
                 request.flash('success', 'La solicitud de Ng Blocks se eliminó con éxito');
-                response.redirect('/dlc/profile/ngblocks_solicitados');
+                response.redirect('/dlc/profile/ngblocks_solicitados/1');
             }).catch(err => console.log(err));
         }
     }).catch((error)=>{console.log(error)});

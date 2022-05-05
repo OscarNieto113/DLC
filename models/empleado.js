@@ -1,9 +1,10 @@
 const db = require ('../util/database')
+const bcrypt = require('bcryptjs');
 
 module.exports = class Empleado {
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nuevo_no_empleado, nuevo_ng_blocks_restantes, nuevo_fecha_contratacion, nuevo_fecha_nacimiento, nuevo_correo_empresarial, nuevo_nombres_empleados, nuevo_apellido_paterno, nuevo_apellido_materno, nuevo_dias_vacaciones_restantes, nuevo_genero_empleado, nuevo_id_area, nuevo_id_rol, nuevo_id_ciudad) {
+    constructor(nuevo_no_empleado, nuevo_ng_blocks_restantes, nuevo_fecha_contratacion, nuevo_fecha_nacimiento, nuevo_correo_empresarial, nuevo_nombres_empleados, nuevo_apellido_paterno, nuevo_apellido_materno, nuevo_dias_vacaciones_restantes, nuevo_genero_empleado, nuevo_id_area, nuevo_id_rol, nuevo_id_ciudad, nuevo_token) {
         this.no_empleado = nuevo_no_empleado;
         this.ng_blocks_restantes = nuevo_ng_blocks_restantes;
         this.fecha_contratacion = nuevo_fecha_contratacion;
@@ -17,12 +18,17 @@ module.exports = class Empleado {
         this.id_area = nuevo_id_area;
         this.id_rol = nuevo_id_rol;
         this.id_ciudad = nuevo_id_ciudad;
+        this.token = nuevo_token;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto.
     save() {
-      return db.execute('INSERT INTO empleado (no_empleado, ng_blocks_restantes, fecha_contratacion, fecha_nacimiento, correo_empresarial, nombres_empleados, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, id_area, id_rol, id_ciudad) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-          [this.no_empleado, this.ng_blocks_restantes, this.fecha_contratacion, this.fecha_nacimiento, this.correo_empresarial, this.nombres_empleados, this.apellido_paterno, this.apellido_materno, this.dias_vacaciones_restantes, this.genero_empleado, this.id_area, this.id_rol, this.id_ciudad]);
+      return bcrypt.hash(this.fecha_nacimiento, 12)
+      .then((token_cifrado)=>{
+          return db.execute(
+              'INSERT INTO empleado (no_empleado, ng_blocks_restantes, fecha_contratacion, fecha_nacimiento, correo_empresarial, nombres_empleados, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, id_area, id_rol, id_ciudad, token) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+              [this.no_empleado, this.ng_blocks_restantes, this.fecha_contratacion, this.fecha_nacimiento, this.correo_empresarial, this.nombres_empleados, this.apellido_paterno, this.apellido_materno, this.dias_vacaciones_restantes, this.genero_empleado, this.id_area, this.id_rol, this.id_ciudad, token_cifrado]);
+        }).catch((error)=>{console.log(error);});
     }
 
     static search() {
@@ -36,14 +42,14 @@ module.exports = class Empleado {
         return db.execute(
             `SELECT r.nombre_rol, e.no_empleado, ng_blocks_restantes, correo_empresarial, nombres_empleados, apellido_paterno, apellido_materno, dias_vacaciones_restantes, genero_empleado, nombre_area, date_format(fecha_contratacion, '%d/%m/%Y') as fecha_contratacion, date_format(fecha_nacimiento, '%d/%m/%Y') as fecha_nacimiento, dias_vacaciones_especiales ` +
             'FROM empleado e, area a, rol r ' +
-            'WHERE r.id_rol = e.id_rol AND e.activo = TRUE AND e.id_area = a.id_area AND e.no_empleado=?', [no_empleado]);
+            'WHERE r.id_rol = e.id_rol AND e.activo = 1 AND e.id_area = a.id_area AND e.no_empleado=?', [no_empleado]);
     }
 
     static fetchEmpleadoArea(id_area, no_empleado) {
       return db.execute(
         'SELECT a.id_area, e.nombres_empleados, e.apellido_paterno, e.apellido_materno ' +
         'FROM empleado e, area a ' +
-        'WHERE a.id_area = e.id_area AND e.id_area = ? AND e.no_empleado != ?' ,[id_area, no_empleado]);
+        'WHERE a.id_area = e.id_area AND e.id_area = ? AND e.no_empleado != ? ' ,[id_area, no_empleado]);
     }
 
     static getAreaEmpleado(no_empleado) {
@@ -61,7 +67,7 @@ module.exports = class Empleado {
         return db.execute(
           'SELECT a.nombre_area, e.no_empleado, e.nombres_empleados, e.apellido_paterno, e.apellido_materno, correo_empresarial '+
           'FROM empleado e, area a ' +
-          'WHERE a.id_area = e.id_area AND e.activo = 1 AND (a.nombre_area LIKE ? OR e.no_empleado LIKE ? OR e.nombres_empleados LIKE ?) ', ['%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
+          'WHERE a.id_area = e.id_area AND e.activo = 1 AND (a.nombre_area LIKE ? OR e.no_empleado LIKE ? OR e.nombres_empleados LIKE ?)', ['%'+search+'%', '%'+search+'%', '%'+search+'%', ]);
     }
 
     static getBlocksR(no_empleado) {

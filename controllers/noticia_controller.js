@@ -1,12 +1,12 @@
 const Noticia = require('../models/noticia');
-
+const uploadImage = require('../helpers/helpers');
 //------------------------POST Subir una noticia--------------------------------
-exports.post_noticia = (request, response, next) => {
+exports.post_noticia = async (request, response, next) => {
     console.log('POST /dlc/noticia');
-    const filename = request.file.filename;
+    const filename = request.file;
+    const imageUrl = await uploadImage(filename);
 
-    console.log(filename);
-    if (filename.length == undefined){
+    if (!filename){
         request.flash('error', 'No se recibió ningún archivo.');
         response.redirect('/dlc');
     }
@@ -14,7 +14,7 @@ exports.post_noticia = (request, response, next) => {
     else {
         const noticia =
             new Noticia(
-            filename);
+            imageUrl);
 
         noticia.save()
         .then(() => {

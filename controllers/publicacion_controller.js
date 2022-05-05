@@ -1,23 +1,25 @@
 const Publicacion = require('../models/publicacion');
+const uploadImage = require('../helpers/helpers');
 
 //------------------------POST Subir una publicacion--------------------------------
-exports.post_publicacion = (request, response, next) => {
+exports.post_publicacion = async (request, response, next) => {
     console.log('POST /dlc/publicacion');
 
     const titulo_publicacion = request.body.titulo_publicacion;
     const descripcion_publicacion = request.body.descripcion_publicacion;
-    const filename = request.file.filename;
+    const filename = request.file;
+    const imageUrl = await uploadImage(filename);
 
     console.log(titulo_publicacion);
     console.log(descripcion_publicacion);
-    console.log(filename);
+    console.log(imageUrl);
 
-    if (titulo_publicacion.length == 0 && descripcion_publicacion.length == 0 && filename.length == undefined){
+    if (titulo_publicacion.length == 0 && descripcion_publicacion.length == 0 && !filename){
         request.flash('error1', 'No se recibió ningún dato.');
         response.redirect('/dlc');
     }
 
-    else if (titulo_publicacion.length == 0 || descripcion_publicacion.length == 0 || filename.length == undefined){
+    else if (titulo_publicacion.length == 0 || descripcion_publicacion.length == 0 || !filename){
         request.flash('error1', 'Faltan datos por llenar.');
         response.redirect('/dlc');
     }
@@ -27,7 +29,7 @@ exports.post_publicacion = (request, response, next) => {
             new Publicacion(
             titulo_publicacion,
             descripcion_publicacion,
-            filename,
+            imageUrl,
         );
 
         publicacion.save()
@@ -81,7 +83,7 @@ exports.post_publicacion_sin_imagen = (request, response, next) => {
 //------------------------DELETE publicacion--------------------------------
 exports.post_delete_publicacion = (request, response, next) => {
     console.log('POST /dlc/publicacion/delete/:id_publicacion');
-    const id_publicacion = request.body.id_publicacion;
+    const id_publicacion = request.params.id_publicacion;
     Publicacion.deletePublicacion(id_publicacion)
     .then(() => {
         console.log("Se elimino el anuncio");

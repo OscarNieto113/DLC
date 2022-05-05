@@ -2,18 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const MemoryStore = require('memorystore')(session)
-//const bootstrap = require('bootstrap');
-//const bootstrap_icons = require('bootstrap-icons');
+const memoryStore = require('memorystore')(session);
+const multer = require('multer');
 const rutas_dlc = require('./routes/dlc.routes');
 const rutas_reporte_mensual = require('./routes/reporte_mensual.routes');
 const rutas_users = require('./routes/user.routes');
+const uploadImage = require('./helpers/helpers');
 const csrf = require('csurf');
 const csrfProtection = csrf();
-
 const flash = require('connect-flash');
-
-
 const path = require('path');
 
 const app = express();
@@ -22,15 +19,21 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, 'public')));
-// NO BORRES UPLOADS PINCHE OSCAR XD
 app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+//Prueba
+
+
+//app.use(multer({ storage: multer.memoryStorage() }).single('imagen_noticia'));
+app.use(bodyParser.urlencoded({extended: false}));
+
 app.use(cookieParser());
 app.use(session({
     saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
-    store: new MemoryStore({
+    store: new memoryStore({
       checkPeriod: 86400000 // prune expired entries every 24h
     }),
     secret: 'lakdsjalkdjalaksdjald',
@@ -44,7 +47,7 @@ app.use((request, response, next) => {
     next();
 });
 
-//rutas url
+
 app.use(flash());
 
 app.use('/dlc', rutas_dlc);

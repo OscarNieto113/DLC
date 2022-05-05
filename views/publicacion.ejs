@@ -24,7 +24,6 @@
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2" data-whatever="@res">Agregar Anuncio</button>
   </div>
 <% } %>
-<br>
 <% if (userRol == 1 || userRol == 2 ) {%>
   <div style="text-align: center;">
       <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -48,6 +47,7 @@
                   <input type="text" class="form-control" id="descripcion_publicacion" name="descripcion_publicacion" autocomplete="off" required>
 
                   <label for="imagen_publicacion" class="col-form-label">Adjuntar imagen:</label>
+
                   <input type="file" class="form-control" id="imagen_publicacion" name="imagen_publicacion" autocomplete="off" accept="image/png, image/gif, image/jpeg, image/jpg" required><br>
                   <div style="text-align: center;">
                   <input type="submit" value="Agregar" class="btn btn-primary" style="background-color:#43B02A">
@@ -100,7 +100,6 @@
 <% } %>
 </div>
 <br>
-<br>
 <div class="row">
   <br>
   <% if (publicacion.length > 0) { %>
@@ -114,8 +113,9 @@
                   <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
                   <% if (userRol == 1 || userRol == 2 ) {%>
                     <form action="/dlc/publicacion/delete/<%= publicacion1.id_publicacion %>" method="POST" onsubmit="return submitForm(this);">
-                      <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                       <input type="hidden" id="id_publicacion" name="id_publicacion" value="<%= publicacion1.id_publicacion %>" />
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                      <input type="hidden" id="id_publicacion" name="id_publicacion" value="<%= publicacion1.id_publicacion %>"/>
                       <div style="text-align: right;">
                         <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
                       </div>
@@ -135,7 +135,7 @@
                   <h5 class="card-title"><%= publicacion1.titulo_publicacion %></h5>
                   <p class="card-text"><%= publicacion1.descripcion_publicacion %></p>
                   <% if (userRol == 1 || userRol == 2 ) {%>
-                    <form action="/dlc/publicacion/delete/<%= publicacion1.id_publicacion %>" method="POST">
+                    <form action="/dlc/publicacion/delete/<%= publicacion1.id_publicacion %>" method="POST" onsubmit="return submitForm(this);">
                       <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                       <input type="hidden" id="id_publicacion" name="id_publicacion" value="<%= publicacion1.id_publicacion %>"/>
                       <div style="text-align: right;">

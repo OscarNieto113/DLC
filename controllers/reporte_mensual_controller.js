@@ -1,5 +1,6 @@
 const Reportes_mensuales = require('../models/reportes_mensuales');
 const Empleado = require('../models/empleado');
+const uploadImage = require('../helpers/helpers');
 
 const real_meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -14,7 +15,7 @@ function getAllDaysInMonth(year, month) {
 }
 
 getLongMonthName = function(date) {
-    return real_meses[date.getMonth()+1];
+    return real_meses[date.getMonth()];
 }
 
 getShortMonthName = function(date) {
@@ -111,24 +112,25 @@ exports.post_delete_reportes_mensuales = (request, response, next) => {
             }).catch(err => console.log(err));
     };
 
-exports.post_reportes_mensuales = (request, response, next) => {
+exports.post_reportes_mensuales = async (request, response, next) => {
     console.log('POST /reporte_mensual');
     const titulo_reporte_mensual = request.body.titulo_reporte_mensual;
     const descripcion_reporte_mensual = request.body.descripcion_reporte_mensual;
     const fecha_reporte_mensual = request.body.fecha_reporte_mensual;
-    const filename = request.file.filename;
+    const filename = request.file;
+    const imageUrl = await uploadImage(filename);
 
     console.log(titulo_reporte_mensual);
     console.log(descripcion_reporte_mensual);
     console.log(fecha_reporte_mensual);
-    console.log(filename);
+    console.log(imageUrl);
 
-    if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && filename.length == undefined){
+    if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && !filename){
       request.flash('error', 'No se recibió ningún dato.');
       response.redirect('/dlc');
     }
 
-    else if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && filename.length == undefined){
+    else if (titulo_reporte_mensual.length == 0 && descripcion_reporte_mensual.length == 0 && fecha_reporte_mensual.length == 0 && !filename){
       request.flash('error', 'Faltan datos por llenar.');
       response.redirect('/dlc');
     }
@@ -139,7 +141,7 @@ exports.post_reportes_mensuales = (request, response, next) => {
             titulo_reporte_mensual,
             descripcion_reporte_mensual,
             fecha_reporte_mensual,
-            filename);
+            imageUrl);
       reportes_mensuales.save()
       //
       .then(() => {
@@ -207,8 +209,14 @@ exports.get_generar_reporte = (request, response, next) => {
                 Reportes_mensuales.generarReporteMensual(columna, columna_estatus, tabla, fecha, estatus)
                 .then(([rows, fieldData]) => {
                   var dt = fecha;
-                  dt = new Date(dt);
-                  daysInMonth = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
+                  var cut_month = dt.slice(5);
+                  var cut_year = dt.slice(0, -3);
+                  //console.log(p);
+                  //console.log(prueba);
+                  var cut_fecha = new Date(cut_year, cut_month-1, 01);
+                  //console.log(cpp);
+                  //dt = new Date(dt);
+                  daysInMonth = new Date(cut_fecha.getFullYear(), cut_fecha.getMonth(), 0).getDate();
                   let days = [];
                   for (let i = 1; i <= daysInMonth; i++){
                     days.push(i);
@@ -217,16 +225,18 @@ exports.get_generar_reporte = (request, response, next) => {
                   for (let data of rows){
                       dates.push(data.fecha);
                   }
-                  var dt = new Date();
-                  var month = dt.getMonth();
-                  var year = dt.getFullYear();
-                  daysInMonth = new Date(year, month, 0).getDate();
+                  //var dt = new Date();
+                  var month = cut_fecha.getMonth();
+                  console.log(month);
+                  var year = cut_fecha.getFullYear();
+                  console.log(year);
+                  //daysInMonth = new Date(year, month, 0).getDate();
 
                   let a = getAllDaysInMonth(year, month);
 
                   let coincidences = [];
-                  let xLabel = "Días del mes de " + getLongMonthName(new Date(fecha));
-                  let tittle = "Solicitudes de " + tabla + " de " + getLongMonthName(new Date(fecha)) + " con estatus " + estatus;
+                  let xLabel = "Días del mes de " + getLongMonthName(new Date(cut_fecha));
+                  let tittle = "Solicitudes de " + tabla + " de " + getLongMonthName(new Date(cut_fecha)) + " con estatus " + estatus;
                   coincidences = getCoincidences(a, dates);
 
                   response.render('generar_reporte', {

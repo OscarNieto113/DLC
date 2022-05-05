@@ -22,8 +22,8 @@
             </div>
         <% } %>
       <h1 class="display-4">Aprobar vacaciones</h1> <br>
-      <div class="row form-group">
 
+      <div class="row form-group">
       <% if (userRol == 1 || userRol == 2) {%>
             <label for="estatus_vacaciones"><b>Filtrar por Departamento</b></label>
             <div class="col-sm-3">
@@ -39,7 +39,7 @@
             <button type="button" class="btn btn-info">Filtrar</button>
             </a>
           </div>
-      <% } %>
+
           <!-- <div class="input-group rounded col-sm-5">
             <input type="text" name="search_vacaciones" id="search_vacaciones" class="form-control rounded" placeholder="Buscar Solicitudes Anteriores" aria-label="Buscar Solicitudes Anteriores" aria-describedby="search-addon"/>
              <span class="input-group-text border-0" id="search-addon">
@@ -47,7 +47,28 @@
             </span>
         </div> -->
 
-      </div>
+        <div class="col-sm-3">
+        <form action="/dlc/a_vacacionesp/download/?_csrf=<%= csrfToken %>" method="POST">
+
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+
+            <div class="input-group date" id="datepicker">
+                <input type="text" id="search_d" name="search_d" class="form-control" autocomplete="off" placeholder="MM-YYYY">
+                <input type="hidden" id="search_date" name="search_date">
+                <span class="input-group-append">
+                    <span class="input-group-text bg-white">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <input type="submit" value="Descargar" class="btn btn-success"/>
+          </div>
+          </form>
+          <% } %>
+        </div>
+
 
 
 
@@ -83,8 +104,9 @@
             <td><center><%= vacaciones1.dias_solicitados %></center></td>
             <td>
               <center>
+                <i class="bi bi-info-circle-fill"></i>
                 <span
-                  class="hovertext"
+                  class="hovertext" style="color:blue;"
                   data-hover="
               Folio: <%= vacaciones1.folio %>
               No. Empleado: <%= vacaciones1.no_empleado %>
@@ -135,10 +157,10 @@
         <ul class="pagination justify-content-center">
           <% if (current == 1) { %>
           <li class="page-item disabled">
-            <a class="page-link">Primero</a>
+            <a class="page-link">Primera</a>
             </li>
           <% } else { %>
-          <li class="page-item"><a class ="page-link" href="/dlc/a_vacacionesp/1">Primero</a></li>
+          <li class="page-item"><a class ="page-link" href="/dlc/a_vacacionesp/1">Primera</a></li>
           <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
           <% if (i !== 1) { %>
           <li class="page-item disabled"><a class="page-link">...</a></li>
@@ -150,19 +172,49 @@
           <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
           <li class="page-item disabled"><a class="page-link">...</a></li>
           <% } %> <% } %> <% if (current == pages) { %>
-          <li class="page-item disabled"><a class="page-link">Último</a></li>
+          <li class="page-item disabled"><a class="page-link">Última</a></li>
           <% } else { %>
-          <li><a class="page-link" href="/dlc/a_vacacionesp/<%= pages %>">Último</a></li>
+          <li><a class="page-link" href="/dlc/a_vacacionesp/<%= pages %>">Última</a></li>
           <% } %>
           <% } %>
           </ul>
       </nav>
       </div>
+
     </div>
   </div>
 </div>
 
+<script type="text/javascript">
+  function showAlert(){
+      $("#myAlert").css("display", "");
+  }
 
+  $(document).ready(function(){
+       $.fn.datepicker.defaults.language = 'es';
+  });
+
+  $(function() {
+      $('#search_d').datepicker({
+        format: "mm-yyyy",
+        orientation: "bottom left",
+        startView: "months",
+        minViewMode: "months",
+        todayHighlight: true,
+        autoclose: true
+      });
+      $('#search_d').on("changeDate", function search () {
+        var f1 = $('#search_d').datepicker('getDate');
+        console.log(f1)
+        document.getElementById("search_date").value = f1.toISOString().split('T')[0];
+        var f2 = f1.toISOString().split('-01T')[0];
+        console.log(f2);
+        var href = `/reporte_mensual/filtrar/${f2}`;
+        $('#filtro2').attr('href', href);
+      });
+
+  });
+</script>
 
 <script>
   const accion_asincrona = () => {

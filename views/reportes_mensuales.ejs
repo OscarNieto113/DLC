@@ -95,7 +95,7 @@
                                       <div class="form-check">
                                         <input class="form-check-input" type="radio" name="Mensual" id="Semestral" value="radio2" />
                                         <label class="form-check-label" for="exampleRadios3">
-                                          Semestral (Probablemente no se implemente)
+                                          Semestral
                                         </label>
                                         <div class="input-group date" id="datepicker">
                                             <input type="text" id="semestral" name="for_radio2[]" class="radio2" autocomplete="off" placeholder="DD-MM-YYYY" disabled="true" hidden="true">
@@ -176,7 +176,7 @@
                               <h5 class="card-title"><%= reportes_mensuales1.titulo_reporte_mensual %></h5>
                               <p class="card-text"><%= reportes_mensuales1.descripcion_reporte_mensual %></p>
                               <% if (userRol == 1 || userRol == 2 ) {%>
-                                <form action="/reporte_mensual/delete/<%= reportes_mensuales1.id_reportes_mensuales %>" method="POST" onsubmit="return submitForm(this);" >
+                                <form action="/reporte_mensual/delete/<%= reportes_mensuales1.id_reportes_mensuales %>" method="POST" onsubmit="return submitForm(this);">
                                   <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                                   <input type="hidden" id="id_reportes_mensuales" name="id_reportes_mensuales" value="<%= reportes_mensuales1.id_reportes_mensuales %>"/>
                                   <div style="text-align: right;">
@@ -272,7 +272,8 @@
         startView: "months",
         minViewMode: "months",
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        endDate: new Date()
       });
       $('#search_d').on("changeDate", function search () {
         var f1 = $('#search_d').datepicker('getDate');

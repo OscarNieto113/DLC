@@ -33,7 +33,7 @@
   <section class="h-100 gradient-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-xl-10">
+        <div class="col-xl-12">
           <% if (success.length != 0) { %>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>(っ◔◡◔)っ ❤ </strong> <%= success %>
@@ -68,10 +68,21 @@
 
                   <form action="/users/signup" method="POST">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-                      <p>Número de Empleado</p>
-                      <div class="form-outline mb-4">
-                        <input type="text" id="no_empleado" name= "no_empleado" class="form-control" autocomplete="off"
+                    <div class="form-row">
+                      <div class="col-md-6">
+                        <p>Número de Empleado</p>
+                        <div class="form-outline mb-4">
+                          <input type="text" id="no_empleado" name= "no_empleado" class="form-control" autocomplete="off"
                           placeholder="A52" />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <p>Token</p>
+                        <div class="form-outline mb-4">
+                          <input type="text" id="token" name= "token" class="form-control"autocomplete="off"/>
+                      </div>
+                      </div>
                       </div>
 
                       <p>Correo</p>
@@ -80,15 +91,21 @@
                           placeholder="a123456@natgas.com.mx" />
                       </div>
 
-                      <p>Contraseña</p>
-                      <div class="form-outline mb-4">
-                        <input type="password" id="contrasenia" name= "contrasenia" class="form-control" autocomplete="off"/>
-                      </div>
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <p>Contraseña</p>
+                          <div class="form-outline mb-4">
+                            <input type="password" id="contrasenia" name= "contrasenia" class="form-control" autocomplete="off"/>
+                          </div>
+                        </div>
 
-                      <p>Confirma contraseña</p>
-                      <div class="form-outline mb-4">
-                        <input type="password" id="contrasenia2" name= "contrasenia2" class="form-control" autocomplete="off"
-                          />
+                        <div class="col-md-6">
+                          <p>Confirma contraseña</p>
+                          <div class="form-outline mb-4">
+                            <input type="password" id="contrasenia2" name= "contrasenia2" class="form-control" autocomplete="off"
+                              />
+                          </div>
+                        </div>
                       </div>
                     <div class="text-center text-lg-start mt-3 pt-2 " style="">
                       <input type="submit" value="Registrarse" class="btn btn-success">
@@ -97,7 +114,7 @@
                     </form>
 
                     <div class="d-flex align-items-center justify-content-center pb-1">
-                      <br><br>
+                      <br>
                       <br>
                       <a href="/users/login">Regresar al Login
                     </a>

@@ -2,6 +2,8 @@ const Empleado = require('../models/empleado');
 const Vacaciones = require('../models/vacaciones');
 const Prestaciones = require('../models/prestaciones');
 const Area = require('../models/area');
+const fastcsv = require('fast-csv');
+const fs = require('fs');
 //------------------------GET Solicitar Vacaciones--------------------------------
 exports.get_solicitar_vacaciones = (request, response, next) => {
     const no_empleado = request.session.user_no_empleado;
@@ -459,6 +461,7 @@ exports.get_vacaciones_solicitadas = (request, response, next) => {
 exports.post_delete_vacaciones_solicitadas = (request, response, next) => {
     console.log('POST /dlc/vacaciones_solicitadas/delete/:folio');
     const folio = request.body.folio;
+    console.log(folio);
     const no_empleado = request.session.user_no_empleado;
     Vacaciones.getEstatus(no_empleado, folio)
     .then(([rows, fielData])=>{
@@ -466,7 +469,7 @@ exports.post_delete_vacaciones_solicitadas = (request, response, next) => {
 
         if (estatus_vacaciones == 'Aprobado' || estatus_vacaciones == 'Rechazado'){
             request.flash('error', 'No puedes eliminar una solicitud de Vacaciones que esté en estatus Aprobado o Rechazado');
-            response.redirect('/dlc/profile/vacaciones_solicitadas');
+            response.redirect('/dlc/profile/vacaciones_solicitadas/1');
         }
 
         else {
@@ -475,8 +478,42 @@ exports.post_delete_vacaciones_solicitadas = (request, response, next) => {
             .then(() => {
                 console.log("Se elimino la solicitud");
                 request.flash('success', 'La solicitud de vacaciones se eliminó con éxito');
-                response.redirect('/dlc/profile/vacaciones_solicitadas');
+                response.redirect('/dlc/profile/vacaciones_solicitadas/1');
             }).catch(err => console.log(err));
         }
     }).catch((error)=>{console.log(error)});
 };
+
+exports.get_download_vacations = (request, response, next) => {
+    console.log('GET /dlc/vacaciones_solicitadas/download');
+    const range_date = request.body.search_date;
+    console.log(range_date.slice(0,-3));
+    if (range_date.length == 0 ){
+      request.flash('error', 'No seleccionaste ninguna fecha.');
+      response.redirect('/dlc/a_vacacionesp/1');
+    }
+
+    else {
+        Vacaciones.downloadVacations(range_date.slice(0,-3))
+        .then(async ([rows, fielData])=>{
+            const data = JSON.parse(JSON.stringify(rows));
+            var ws = fs.createWriteStream('public/Solicitudes_Vacaciones.csv');
+
+            await fastcsv
+              .write(data, {headers:true})
+              .on('finish', function() {
+                console.log(rows.length);
+
+
+            }).pipe(ws);
+            return response.download(`${__dirname}/../public/Solicitudes_Vacaciones.csv`);
+        }).catch(err => console.log(err));
+    }
+    //response.download(file);
+};
+
+
+exports.download = (request, response, next) => {
+    const file = `${__dirname}/../public/Solicitudes_Vacaciones.csv`;
+    response.download(file);
+}

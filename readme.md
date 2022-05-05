@@ -8,6 +8,7 @@ Para correr el sitio ten encuenta los siguientes puntos:
 3. Asegurarse que las variables de entorno apunten a el xamp (Actualmente la base de datos está hosteada en Always data)
 4. De preferencia correrlo en la consola de PowerShell
 5. Correr el programa: npm start
+6. En localhost no se pueden subir imagenes ya que aqui no estan las credenciales para subir imagenes (las debes agregar en la carpeta config)
 
 ##Deploy
 En el caso de querer hacer deploy utilizar el manual de instalación
